@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Suhas Beemineni | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: white;
+}
+
+/* ===== HERO ===== */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(56,189,248,0.25), transparent 60%);
+  filter: blur(40px);
+  animation: floatGlow 6s ease-in-out infinite;
+}
+
+@keyframes floatGlow {
+  0%,100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.1); }
+}
+
+.hero-content {
+  z-index: 2;
+  animation: fadeUp 1.2s ease-out;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(56,189,248,0.15);
+  border: 1px solid rgba(56,189,248,0.4);
+  color: #38bdf8;
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 56px;
+  margin-top: 20px;
+}
+
+.typing {
+  margin-top: 10px;
+  color: #38bdf8;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #38bdf8;
+  width: 0;
+  animation: typing 3s steps(60,end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.subtitle {
+  margin-top: 15px;
+  color: #94a3b8;
+  max-width: 600px;
+}
+
+.buttons {
+  margin-top: 25px;
+}
+
+.btn {
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 5px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.primary {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.secondary {
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+}
+
+/* ===== SECTIONS ===== */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+h2 {
+  color: #38bdf8;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+p, li {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+ul {
+  padding-left: 18px;
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="badge">🚀 Open to Remote Internships</div>
+
+    <h1>Suhas Beemineni</h1>
+
+    <p class="typing">
+      High School Student • Web Content • Digital Systems • Intern Ready
+    </p>
+
+    <p class="subtitle">
+      I build clean, structured digital experiences and enjoy learning real-world web workflows.
+    </p>
+
+    <div class="buttons">
+      <a href="#projects" class="btn primary">View Projects</a>
+      <a href="#contact" class="btn secondary">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>ABOUT</h2>
+      <p>
+        Motivated student interested in web content, structured systems,
+        and digital workflows. Focused on learning modern web technologies.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>SKILLS</h2>
+      <ul>
+        <li>HTML / CSS</li>
+        <li>Content Organization</li>
+        <li>Microsoft Office</li>
+        <li>Attention to Detail</li>
+        <li>Remote Collaboration</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>EXPERIENCE</h2>
+      <p><b>StemE – Game Design Team Member</b></p>
+      <ul>
+        <li>Built interactive game components</li>
+        <li>Worked in a team environment</li>
+        <li>Managed individual tasks independently</li>
+      </ul>
+
+      <br>
+
+      <p><b>Community Volunteer</b></p>
+      <ul>
+        <li>Supported cultural outreach programs</li>
+        <li>Assisted Telugu language classes</li>
+      </ul>
+    </div>
+
+    <div class="card" id="projects">
+      <h2>PROJECTS</h2>
+      <ul>
+        <li>Responsive Portfolio Website</li>
+        <li>HTML/CSS UI Practice Pages</li>
+        <li>School Digital Assignments</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>GOAL</h2>
+      <p>
+        To gain real-world experience in web content management,
+        digital workflows, and remote internships.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>AVAILABILITY</h2>
+      <p>
+        Open to remote internships and entry-level digital roles.
+        Quick learner and detail-focused.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="card" id="contact" style="margin-top:20px;">
+    <h2>CONTACT</h2>
+    <p>Email: <b>suhas.aug20@gmail.com</b></p>
+    <p>Location: California, USA</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Suhas Beemineni • Built for internship applications
+</footer>
+
+</body>
+</html>
