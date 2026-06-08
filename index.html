@@ -43,90 +43,200 @@ body {
   position: relative;
 }
 
-/* Dynamic scroll-triggered blobs */
-body::before {
-  content: '';
+/* ===== DYNAMIC BACKGROUND BLOBS ===== */
+.blob-container {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  filter: blur(40px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* HOME SECTION - Orange & Blue */
+.blob-home-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at 30% 50%, rgba(255, 122, 61, 0.25) 0%, transparent 70%);
+  top: -200px;
+  right: -150px;
+  border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
+  animation: float-blob-1 8s ease-in-out infinite;
+}
+
+.blob-home-2 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle at 30% 50%, rgba(255, 122, 61, 0.15) 0%, transparent 50%);
-  top: -100px;
-  right: -100px;
-  border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-  animation: blob-animation 15s infinite;
-  pointer-events: none;
-  z-index: 0;
-  transition: all 0.6s ease;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle at 70% 80%, rgba(74, 144, 255, 0.12) 0%, transparent 50%);
-  bottom: -50px;
+  background: radial-gradient(circle at 70% 80%, rgba(74, 144, 255, 0.2) 0%, transparent 70%);
+  bottom: -100px;
   left: -100px;
   border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  animation: blob-animation 20s infinite reverse;
-  pointer-events: none;
-  z-index: 0;
-  transition: all 0.6s ease;
+  animation: float-blob-2 10s ease-in-out infinite;
 }
 
-@keyframes blob-animation {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  33% {
-    transform: translate(30px, -50px) rotate(120deg);
-  }
-  66% {
-    transform: translate(-20px, 20px) rotate(240deg);
-  }
+/* ABOUT SECTION - Orange dominant */
+.blob-about-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at 40% 50%, rgba(255, 122, 61, 0.35) 0%, transparent 70%);
+  top: -300px;
+  left: -200px;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: float-blob-3 12s ease-in-out infinite;
 }
 
-/* Scroll-triggered secondary blobs */
-.scroll-blob {
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+.blob-about-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 122, 61, 0.15) 0%, transparent 70%);
+  top: 50%;
+  right: -150px;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: float-blob-4 9s ease-in-out infinite;
 }
 
-.scroll-blob.active {
-  opacity: 1;
+/* EDUCATION SECTION - Blue dominant */
+.blob-edu-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle at 50% 50%, rgba(74, 144, 255, 0.3) 0%, transparent 70%);
+  bottom: -200px;
+  right: -150px;
+  border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%;
+  animation: float-blob-5 11s ease-in-out infinite;
 }
 
-.scroll-blob-1 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle at 40% 60%, rgba(45, 212, 191, 0.1) 0%, transparent 50%);
-  top: 150%;
-  right: 10%;
-  border-radius: 35% 65% 42% 58% / 68% 45% 55% 32%;
-  animation: blob-animation 18s infinite;
+.blob-edu-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle at 30% 70%, rgba(74, 144, 255, 0.2) 0%, transparent 70%);
+  top: 10%;
+  left: -100px;
+  border-radius: 70% 30% 46% 54% / 30% 30% 70% 70%;
+  animation: float-blob-1 13s ease-in-out infinite;
 }
 
-.scroll-blob-2 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle at 60% 40%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
-  bottom: 20%;
-  left: 15%;
-  border-radius: 72% 28% 66% 34% / 44% 62% 38% 56%;
-  animation: blob-animation 22s infinite reverse;
+/* SKILLS SECTION - Purple dominant */
+.blob-skills-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at 60% 40%, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  top: -200px;
+  right: -200px;
+  border-radius: 35% 65% 68% 32% / 61% 25% 75% 39%;
+  animation: float-blob-2 10s ease-in-out infinite;
 }
 
-.scroll-blob-3 {
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 122, 61, 0.08) 0%, transparent 50%);
-  top: 250%;
-  left: 5%;
+.blob-skills-2 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  border-radius: 20% 80% 30% 70% / 70% 20% 80% 30%;
+  animation: float-blob-4 12s ease-in-out infinite;
+}
+
+/* EXPERIENCE SECTION - Green/Teal dominant */
+.blob-exp-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at 40% 60%, rgba(45, 212, 191, 0.25) 0%, transparent 70%);
+  top: -150px;
+  left: -250px;
+  border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+  animation: float-blob-3 14s ease-in-out infinite;
+}
+
+.blob-exp-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle at 70% 70%, rgba(45, 212, 191, 0.15) 0%, transparent 70%);
+  bottom: -100px;
+  right: -150px;
+  border-radius: 60% 40% 30% 70% / 70% 60% 30% 40%;
+  animation: float-blob-5 11s ease-in-out infinite;
+}
+
+/* PROJECTS SECTION - Orange & Purple */
+.blob-projects-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 122, 61, 0.3) 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
   border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-  animation: blob-animation 16s infinite;
+  animation: float-blob-1 9s ease-in-out infinite;
+}
+
+.blob-projects-2 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle at 30% 40%, rgba(168, 85, 247, 0.25) 0%, transparent 70%);
+  bottom: -100px;
+  left: -150px;
+  border-radius: 70% 30% 46% 54% / 30% 30% 70% 70%;
+  animation: float-blob-2 11s ease-in-out infinite;
+}
+
+/* CONTACT SECTION - Purple & Blue */
+.blob-contact-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at 40% 50%, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  top: -100px;
+  left: -200px;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: float-blob-4 13s ease-in-out infinite;
+}
+
+.blob-contact-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at 70% 70%, rgba(74, 144, 255, 0.25) 0%, transparent 70%);
+  bottom: -200px;
+  right: -150px;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: float-blob-5 12s ease-in-out infinite;
+}
+
+@keyframes float-blob-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(40px, -60px) rotate(120deg); }
+  66% { transform: translate(-40px, 30px) rotate(240deg); }
+}
+
+@keyframes float-blob-2 {
+  0%, 100% { transform: translate(0, 0) rotate(180deg); }
+  33% { transform: translate(-50px, 40px) rotate(300deg); }
+  66% { transform: translate(50px, -50px) rotate(60deg); }
+}
+
+@keyframes float-blob-3 {
+  0%, 100% { transform: translate(0, 0) rotate(45deg); }
+  33% { transform: translate(60px, -40px) rotate(165deg); }
+  66% { transform: translate(-60px, 20px) rotate(285deg); }
+}
+
+@keyframes float-blob-4 {
+  0%, 100% { transform: translate(0, 0) rotate(90deg); }
+  33% { transform: translate(-40px, 60px) rotate(210deg); }
+  66% { transform: translate(40px, -40px) rotate(330deg); }
+}
+
+@keyframes float-blob-5 {
+  0%, 100% { transform: translate(0, 0) rotate(270deg); }
+  33% { transform: translate(50px, -30px) rotate(30deg); }
+  66% { transform: translate(-50px, 40px) rotate(150deg); }
 }
 
 /* ===== NAVIGATION ===== */
@@ -911,10 +1021,36 @@ footer {
 
 <body>
 
-<!-- Scroll-triggered background blobs -->
-<div class="scroll-blob scroll-blob-1"></div>
-<div class="scroll-blob scroll-blob-2"></div>
-<div class="scroll-blob scroll-blob-3"></div>
+<!-- Dynamic Background Blob Container -->
+<div class="blob-container" id="blobContainer">
+  <!-- HOME BLOBS -->
+  <div class="blob blob-home-1"></div>
+  <div class="blob blob-home-2"></div>
+  
+  <!-- ABOUT BLOBS -->
+  <div class="blob blob-about-1"></div>
+  <div class="blob blob-about-2"></div>
+  
+  <!-- EDUCATION BLOBS -->
+  <div class="blob blob-edu-1"></div>
+  <div class="blob blob-edu-2"></div>
+  
+  <!-- SKILLS BLOBS -->
+  <div class="blob blob-skills-1"></div>
+  <div class="blob blob-skills-2"></div>
+  
+  <!-- EXPERIENCE BLOBS -->
+  <div class="blob blob-exp-1"></div>
+  <div class="blob blob-exp-2"></div>
+  
+  <!-- PROJECTS BLOBS -->
+  <div class="blob blob-projects-1"></div>
+  <div class="blob blob-projects-2"></div>
+  
+  <!-- CONTACT BLOBS -->
+  <div class="blob blob-contact-1"></div>
+  <div class="blob blob-contact-2"></div>
+</div>
 
 <!-- Navigation -->
 <nav>
@@ -1231,7 +1367,7 @@ footer {
   <div class="social-icons">
     <a href="#" class="social-icon" title="GitHub">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 . 405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
       </svg>
     </a>
     <a href="#" class="social-icon" title="LinkedIn">
@@ -1249,31 +1385,49 @@ footer {
 </footer>
 
 <script>
-// ===== SCROLL-TRIGGERED BACKGROUND BLOBS =====
-function activateScrollBlobs() {
-  const blobs = document.querySelectorAll('.scroll-blob');
-  
+// ===== SECTION-SPECIFIC BLOB ANIMATION =====
+const sections = [
+  { id: 'home', blobs: ['blob-home-1', 'blob-home-2'] },
+  { id: 'about', blobs: ['blob-about-1', 'blob-about-2'] },
+  { id: 'education', blobs: ['blob-edu-1', 'blob-edu-2'] },
+  { id: 'skills', blobs: ['blob-skills-1', 'blob-skills-2'] },
+  { id: 'experience', blobs: ['blob-exp-1', 'blob-exp-2'] },
+  { id: 'projects', blobs: ['blob-projects-1', 'blob-projects-2'] },
+  { id: 'contact', blobs: ['blob-contact-1', 'blob-contact-2'] }
+];
+
+function setupBlobAnimation() {
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '100px'
+  };
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      const sectionElement = entry.target;
+      const sectionId = sectionElement.id || sectionElement.parentElement.id;
+      
+      const section = sections.find(s => s.id === sectionId);
+      if (!section) return;
+
+      const blobElements = section.blobs.map(className => 
+        document.querySelector(`.${className}`)
+      );
+
       if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+        blobElements.forEach(blob => {
+          if (blob) blob.style.opacity = '1';
+        });
+      } else {
+        blobElements.forEach(blob => {
+          if (blob) blob.style.opacity = '0';
+        });
       }
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '100px'
-  });
+  }, observerOptions);
 
-  blobs.forEach(blob => observer.observe(blob));
-
-  // Parallax effect on scroll
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    blobs.forEach((blob, index) => {
-      const speed = 0.3 + (index * 0.1);
-      blob.style.transform = `translateY(${scrollY * speed}px)`;
-    });
-  });
+  // Observe all sections
+  document.querySelectorAll('section').forEach(section => observer.observe(section));
 }
 
 // ===== CONTACT FORM WITH EMAIL INTEGRATION =====
@@ -1287,13 +1441,10 @@ async function handleContactForm(e) {
   const email = document.getElementById('email').value;
   const message = document.getElementById('message').value;
 
-  // Show loading state
   statusDiv.textContent = 'Sending...';
   statusDiv.className = 'form-status success';
 
   try {
-    // Send to Formspree (free email service) or your backend
-    // Replace with your Formspree endpoint or your own email service
     const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
       method: 'POST',
       headers: {
@@ -1321,7 +1472,6 @@ async function handleContactForm(e) {
     console.error('Form error:', error);
   }
 
-  // Clear status after 5 seconds
   setTimeout(() => {
     statusDiv.className = 'form-status';
   }, 5000);
@@ -1329,15 +1479,13 @@ async function handleContactForm(e) {
 
 // ===== INITIALIZE =====
 document.addEventListener('DOMContentLoaded', () => {
-  activateScrollBlobs();
+  setupBlobAnimation();
   
-  // Attach form handler
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', handleContactForm);
   }
 
-  // Mobile menu toggle
   const mobileMenu = document.getElementById('mobileMenu');
   const navMenu = document.getElementById('navMenu');
   if (mobileMenu) {
