@@ -25,9 +25,9 @@ html{scroll-behavior:smooth}
 ::selection{background:var(--accent);color:#F7F3EC}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:1.05rem;line-height:1.65;min-height:100dvh;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 5% 0%,var(--accent-soft),transparent 55%),radial-gradient(ellipse 50% 40% at 95% 10%,var(--warm-soft),transparent 50%),linear-gradient(180deg,var(--bg),var(--bg-deep))}
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 20%,transparent 75%)}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 20%,transparent 75%)}
 .float-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.5;will-change:transform}
+.orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.45;will-change:transform}
 .orb-1{width:320px;height:320px;background:rgba(61,90,76,.18);top:8%;left:-5%}
 .orb-2{width:260px;height:260px;background:rgba(180,140,90,.2);top:45%;right:-8%}
 .orb-3{width:200px;height:200px;background:rgba(61,90,76,.12);bottom:15%;left:20%}
@@ -35,12 +35,12 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .page{position:relative;z-index:1}
 a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-.site-nav{position:sticky;top:0;z-index:30;height:4rem;backdrop-filter:blur(12px);background:rgba(247,243,236,.88);border-bottom:1px solid transparent;transition:border-color .3s}
+.site-nav{position:sticky;top:0;z-index:30;height:4rem;backdrop-filter:blur(12px);background:rgba(247,243,236,.88);border-bottom:1px solid transparent}
 .site-nav.is-scrolled{border-bottom-color:var(--line)}
 .nav-inner{max-width:var(--max);height:100%;margin:0 auto;padding:0 var(--space);display:flex;align-items:center;justify-content:space-between}
 .nav-brand{font-family:var(--font-display);font-weight:600;font-size:1.1rem;text-decoration:none}
 .nav-links{display:flex;gap:1.25rem;list-style:none}
-.nav-links a{text-decoration:none;color:var(--ink-soft);font-size:.92rem;font-weight:500;transition:color .2s}
+.nav-links a{text-decoration:none;color:var(--ink-soft);font-size:.92rem;font-weight:500}
 .nav-links a:hover{color:var(--accent)}
 .nav-cta{color:var(--accent)!important;font-weight:600!important}
 .nav-toggle{display:none;border:1px solid var(--line);background:transparent;width:2.5rem;height:2.5rem;border-radius:var(--radius);cursor:pointer}
@@ -48,7 +48,6 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
 .hero{position:relative;max-width:var(--max);margin:0 auto;padding:clamp(2rem,6vh,3.5rem) var(--space) clamp(3rem,8vh,5rem);min-height:calc(100dvh - 4rem);display:grid;grid-template-columns:1fr minmax(220px,.85fr);gap:clamp(1.5rem,4vw,3rem);align-items:center}
 #heroCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
 .hero-grid{position:relative;z-index:2;display:contents}
-.hero-copy{will-change:transform,opacity}
 .hero-name{font-family:var(--font-display);font-size:clamp(2.6rem,7.5vw,4.75rem);font-weight:700;letter-spacing:-.04em;line-height:1.02;margin-bottom:.85rem}
 .hero-line{font-family:var(--font-display);font-size:clamp(1.15rem,2.5vw,1.55rem);font-weight:500;color:var(--accent);margin-bottom:.75rem}
 .hero-support{color:var(--ink-soft);max-width:32rem;margin-bottom:1.5rem}
@@ -62,32 +61,37 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
 .hero-photo-ring{position:absolute;inset:-12px;border:2px dashed rgba(61,90,76,.25);border-radius:1.1rem;animation:spinSlow 20s linear infinite}
 .hero-photo-ring-2{inset:-24px;border-color:rgba(180,140,90,.2);animation-direction:reverse;animation-duration:28s}
 @keyframes spinSlow{to{transform:rotate(360deg)}}
-.hero-photo{width:100%;max-width:340px;margin:0 auto;display:block;border-radius:1rem;border:3px solid var(--bg-card);box-shadow:0 24px 60px rgba(28,25,23,.14);object-fit:cover;aspect-ratio:4/5;transform-style:preserve-3d;transition:transform .4s var(--ease)}
+.hero-photo{width:100%;max-width:340px;margin:0 auto;display:block;border-radius:1rem;border:3px solid var(--bg-card);box-shadow:0 24px 60px rgba(28,25,23,.14);object-fit:cover;aspect-ratio:4/5;transition:transform .4s var(--ease)}
 .open-badge{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);background:#057642;color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.35rem .85rem;border-radius:999px;animation:pulse 2.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(5,118,66,.35)}50%{box-shadow:0 0 0 8px rgba(5,118,66,0)}}
 
-/* 3D scroll stage */
-.scroll-stage{position:relative;height:220vh;margin:0}
+/* Scroll 3D stages */
+.scroll-stage{position:relative;height:200vh;margin:0}
+.scroll-stage--tall{height:240vh}
+.scroll-stage--mid{height:180vh}
 .scroll-stage-inner{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-#scrollCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.scroll-stage canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .scroll-stage-content{position:relative;z-index:2;text-align:center;max-width:640px;padding:var(--space);pointer-events:none}
-.scroll-stage-content h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.04em;margin-bottom:.75rem;color:var(--ink)}
-.scroll-stage-content p{color:var(--ink-soft);font-size:1.1rem}
+.scroll-stage-content h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.04em;margin-bottom:.75rem}
+.scroll-stage-content p{color:var(--ink-soft);font-size:1.08rem}
 .scroll-stage-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:1.25rem}
-.scroll-stage-tags span{font-size:.82rem;font-weight:600;padding:.35rem .75rem;border-radius:999px;background:rgba(247,243,236,.85);border:1px solid var(--line);color:var(--accent);backdrop-filter:blur(8px)}
+.scroll-stage-tags span{font-size:.82rem;font-weight:600;padding:.35rem .75rem;border-radius:999px;background:rgba(247,243,236,.88);border:1px solid var(--line);color:var(--accent);backdrop-filter:blur(8px)}
+.scroll-stage-link{pointer-events:auto;display:inline-block;margin-top:1.25rem;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1.5px solid var(--accent)}
+
+/* Mini 3D embeds in work */
+.work-3d{width:100%;height:100%;min-height:160px;border-radius:var(--radius);border:1px solid var(--line);background:var(--bg-deep);overflow:hidden}
+.work-3d canvas{width:100%!important;height:100%!important;display:block}
 
 .stats-strip{max-width:var(--max);margin:0 auto;padding:0 var(--space) 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.stat-card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem 1rem;text-align:center;transition:transform .3s var(--ease),box-shadow .3s;transform-style:preserve-3d}
-.stat-card:hover{transform:translateY(-6px) rotateX(4deg);box-shadow:0 16px 40px rgba(28,25,23,.1)}
+.stat-card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem 1rem;text-align:center;transition:transform .3s var(--ease),box-shadow .3s}
+.stat-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(28,25,23,.1)}
 .stat-num{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;color:var(--accent)}
 .stat-label{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:.2rem}
 
 .section{max-width:var(--max);margin:0 auto;padding:clamp(3.5rem,8vw,6rem) var(--space)}
 .section-title{font-family:var(--font-display);font-size:clamp(1.75rem,4vw,2.5rem);font-weight:600;letter-spacing:-.03em;margin-bottom:.65rem}
 .section-lede{color:var(--muted);max-width:36rem;margin-bottom:2rem;font-size:1.02rem}
-.reveal{opacity:0;transform:translateY(1.5rem)}
-
-.info-panel{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem;overflow:hidden;transform-style:preserve-3d;transition:transform .4s var(--ease),box-shadow .4s}
+.info-panel{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem;transition:transform .4s var(--ease),box-shadow .4s}
 .info-panel:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(28,25,23,.08)}
 .info-panel h3{font-family:var(--font-display);font-size:1.1rem;font-weight:600;margin-bottom:1rem;color:var(--accent)}
 .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2rem}
@@ -108,23 +112,16 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
 .radar-svg{width:100%;max-width:220px;height:auto;display:block;margin:0 auto}
 .radar-ring{fill:none;stroke:var(--line);stroke-width:1}
 .radar-axis{stroke:var(--line);stroke-width:1;opacity:.6}
-.radar-area{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2;transform-origin:center}
+.radar-area{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
 
-/* Visual break band */
 .visual-band{position:relative;padding:clamp(4rem,10vw,7rem) var(--space);overflow:hidden;background:linear-gradient(135deg,var(--bg-deep),var(--bg-card));border-block:1px solid var(--line)}
 .visual-band-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .orbit-card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1rem;text-align:center;position:relative;overflow:hidden}
-.orbit-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--accent-soft),transparent 70%);opacity:0;transition:opacity .4s}
-.orbit-card:hover::before{opacity:1}
-.orbit-icon{width:56px;height:56px;margin:0 auto .75rem;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:1.1rem;color:var(--accent);animation:floatIcon 4s ease-in-out infinite}
-.orbit-card:nth-child(2) .orbit-icon{animation-delay:.5s}
-.orbit-card:nth-child(3) .orbit-icon{animation-delay:1s}
-.orbit-card:nth-child(4) .orbit-icon{animation-delay:1.5s}
+.orbit-icon{width:56px;height:56px;margin:0 auto .75rem;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;color:var(--accent);animation:floatIcon 4s ease-in-out infinite}
 @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .orbit-card h4{font-family:var(--font-display);font-size:1rem;font-weight:600;margin-bottom:.25rem}
 .orbit-card p{font-size:.82rem;color:var(--muted)}
 
-/* Donut infographic row */
 .donut-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
 .donut-item{text-align:center}
 .donut-svg{width:120px;height:120px;margin:0 auto .65rem;transform:rotate(-90deg)}
@@ -134,11 +131,10 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
 .donut-label{font-family:var(--font-display);font-weight:600;font-size:.95rem}
 .donut-sub{font-size:.8rem;color:var(--muted)}
 
-.work-featured{display:grid;grid-template-columns:1fr 280px;gap:2rem;padding-bottom:2rem;border-bottom:1px solid var(--line);margin-bottom:.5rem}
-.tilt-card{transform-style:preserve-3d;transition:transform .15s ease-out}
-.work-thumb{width:100%;border-radius:var(--radius);border:1px solid var(--line);background:var(--bg-deep);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.work-featured{display:grid;grid-template-columns:1fr 300px;gap:2rem;padding-bottom:2rem;border-bottom:1px solid var(--line);margin-bottom:.5rem}
+.tilt-card{transition:transform .15s ease-out}
 .work-list{list-style:none}
-.work-item{display:grid;grid-template-columns:100px 1fr auto;gap:1.25rem;padding:1.35rem 0;border-bottom:1px solid var(--line);align-items:center}
+.work-item{display:grid;grid-template-columns:140px 1fr auto;gap:1.25rem;padding:1.35rem 0;border-bottom:1px solid var(--line);align-items:center}
 .work-item h3{font-family:var(--font-display);font-size:1.25rem;font-weight:600;margin-bottom:.25rem}
 .work-item p{color:var(--muted);font-size:.95rem;margin-bottom:.5rem}
 .work-links{display:flex;gap:.85rem;flex-wrap:wrap}
@@ -172,7 +168,7 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
 
 .contact{margin-top:2rem;padding:0}
 .contact-inner{max-width:var(--max);margin:0 auto;padding:clamp(3rem,7vw,5rem) var(--space);background:var(--accent);color:#F7F3EC;border-radius:var(--radius) var(--radius) 0 0;position:relative;overflow:hidden}
-.contact-inner::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,255,255,.08),transparent 50%),radial-gradient(circle at 80% 20%,rgba(180,140,90,.15),transparent 40%);pointer-events:none}
+.contact-inner::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(255,255,255,.08),transparent 50%);pointer-events:none}
 .contact-inner>*{position:relative;z-index:1}
 .contact-inner .section-title{color:#F7F3EC}
 .contact-inner .section-lede{color:rgba(247,243,236,.82)}
@@ -190,9 +186,10 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
   .hero-photo-wrap{order:-1;max-width:260px;margin:0 auto}
   .stats-strip{grid-template-columns:repeat(2,1fr)}
   .info-grid,.mission-grid,.work-featured,.skills-bento,.highlights-grid,.about-layout,.donut-row,.visual-band-inner{grid-template-columns:1fr}
-  .work-item{grid-template-columns:80px 1fr}
-  .work-meta{text-align:left;grid-column:2}
-  .scroll-stage{height:160vh}
+  .work-item{grid-template-columns:1fr}
+  .work-meta{text-align:left}
+  .scroll-stage,.scroll-stage--tall,.scroll-stage--mid{height:140vh}
+  .work-3d{min-height:200px}
 }
 @media(max-width:640px){
   .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
@@ -201,12 +198,10 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
   .nav-links li{border-top:1px solid var(--line)}
   .nav-links a{display:block;padding:.75rem 0}
   .cta-row{flex-direction:column}.btn{width:100%;justify-content:center}
-  .bar-row{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .marquee-track,.hero-photo-ring,.open-badge,.orbit-icon{animation:none!important}
-  .reveal{opacity:1!important;transform:none!important}
 }
 </style>
 </head>
@@ -262,25 +257,18 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
     <div class="stat-card gs-stat"><div class="stat-num" data-count="3">0</div><div class="stat-label">Competition wins</div></div>
   </div>
 
-  <section class="scroll-stage" id="scrollStage" aria-label="3D aerospace visualization">
+  <!-- 3D STAGE 1: Aerospace / AegisLand -->
+  <section class="scroll-stage scroll-stage--tall" data-scene="uav" aria-label="3D aerospace visualization">
     <div class="scroll-stage-inner">
-      <canvas id="scrollCanvas" aria-hidden="true"></canvas>
-      <div class="scroll-stage-content" id="scrollStageContent">
+      <canvas aria-hidden="true"></canvas>
+      <div class="scroll-stage-content">
         <h2>Where AI meets the sky</h2>
-        <p>UAV autonomy, safety-critical perception, and simulation-first research. Scroll to explore.</p>
-        <div class="scroll-stage-tags">
-          <span>AegisLand</span><span>Autonomy</span><span>Monte Carlo</span><span>Uncertainty</span>
-        </div>
+        <p>AegisLand: confidence-aware UAV landing safety under degraded perception.</p>
+        <div class="scroll-stage-tags"><span>Autonomy</span><span>Monte Carlo</span><span>Uncertainty</span></div>
+        <a class="scroll-stage-link" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener">Open AegisLand ↗</a>
       </div>
     </div>
   </section>
-
-  <div class="tech-marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Python</span><span>JavaScript</span><span>AI Evaluation</span><span>UAV Autonomy</span><span>Blender</span><span>Three.js</span><span>Simulation</span><span>CAD</span><span>Research</span>
-      <span>Python</span><span>JavaScript</span><span>AI Evaluation</span><span>UAV Autonomy</span><span>Blender</span><span>Three.js</span><span>Simulation</span><span>CAD</span><span>Research</span>
-    </div>
-  </div>
 
   <main>
     <section class="section" id="about">
@@ -292,27 +280,17 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
         <div class="about-copy gs-about">
           <p>I'm a student at <strong>River Islands High School</strong>, taking college coursework and building at the intersection of <strong>AI systems, aerospace, autonomy, CAD, and product engineering</strong>.</p>
           <p>I care about: Does it work reliably? Can I measure it? What happens when assumptions fail?</p>
-          <div class="process-flow" aria-label="How I work">
-            <span>cool idea</span><span class="arrow">→</span><span>prototype</span><span class="arrow">→</span>
-            <span>test</span><span class="arrow">→</span><span>real data</span><span class="arrow">→</span><span>improve</span>
-          </div>
+          <div class="process-flow"><span>cool idea</span><span class="arrow">→</span><span>prototype</span><span class="arrow">→</span><span>test</span><span class="arrow">→</span><span>real data</span><span class="arrow">→</span><span>improve</span></div>
         </div>
       </div>
       <div class="mission-grid gs-mission">
-        <div class="info-panel tilt-card">
-          <h3>Mission control</h3>
-          <div class="terminal" id="missionTerminal"></div>
-        </div>
-        <div class="info-panel tilt-card">
-          <h3>Focus areas</h3>
+        <div class="info-panel tilt-card"><h3>Mission control</h3><div class="terminal" id="missionTerminal"></div></div>
+        <div class="info-panel tilt-card"><h3>Focus areas</h3>
           <svg class="radar-svg" viewBox="0 0 200 200" aria-label="Skill focus radar">
             <polygon class="radar-ring" points="100,20 173,65 173,135 100,180 27,135 27,65"/>
-            <polygon class="radar-ring" points="100,45 151,75 151,125 100,155 49,125 49,75"/>
-            <line class="radar-axis" x1="100" y1="100" x2="100" y2="20"/><line class="radar-axis" x1="100" y1="100" x2="173" y2="65"/>
             <polygon class="radar-area" id="radarArea" points="100,35 160,72 155,130 100,165 45,125 40,70"/>
             <text x="100" y="14" text-anchor="middle" font-size="9" fill="#78716C">AI</text>
             <text x="178" y="68" font-size="9" fill="#78716C">Aero</text>
-            <text x="178" y="142" font-size="9" fill="#78716C">Research</text>
             <text x="100" y="196" text-anchor="middle" font-size="9" fill="#78716C">CAD</text>
           </svg>
         </div>
@@ -323,92 +301,149 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
         <div class="donut-item"><svg class="donut-svg" viewBox="0 0 120 120"><circle class="donut-bg" cx="60" cy="60" r="50"/><circle class="donut-fill" cx="60" cy="60" r="50" data-offset="63"/></svg><div class="donut-label">Research</div><div class="donut-sub">Active now</div></div>
       </div>
     </section>
+  </main>
 
-    <div class="visual-band">
-      <div class="visual-band-inner gs-orbit">
-        <div class="orbit-card"><div class="orbit-icon">AI</div><h4>Evaluation</h4><p>When models should abstain</p></div>
-        <div class="orbit-card"><div class="orbit-icon">UAV</div><h4>Autonomy</h4><p>Safety-critical landing</p></div>
-        <div class="orbit-card"><div class="orbit-icon">3D</div><h4>Design</h4><p>Blender &amp; CAD</p></div>
-        <div class="orbit-card"><div class="orbit-icon">++</div><h4>Ship</h4><p>200+ user products</p></div>
+  <!-- 3D STAGE 2: AI abstention / AbstainBench -->
+  <section class="scroll-stage scroll-stage--mid" data-scene="neural" aria-label="3D neural abstention visualization">
+    <div class="scroll-stage-inner">
+      <canvas aria-hidden="true"></canvas>
+      <div class="scroll-stage-content">
+        <h2>When models should stay quiet</h2>
+        <p>AbstainBench studies answer vs. abstain decisions: accuracy, hallucinations, and false silence.</p>
+        <div class="scroll-stage-tags"><span>WebLLM</span><span>Evaluation</span><span>Reliability</span></div>
+        <a class="scroll-stage-link" href="https://github.com/suhaslord/AbstainBench" target="_blank" rel="noopener">Open AbstainBench ↗</a>
       </div>
     </div>
+  </section>
 
-    <section class="section" id="work">
-      <h2 class="section-title gs-title">Selected work</h2>
-      <p class="section-lede gs-lede">Research, products, and living instruments with repos and live demos.</p>
-      <article class="work-featured gs-work">
-        <div>
-          <h3 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;margin-bottom:.5rem">AegisLand</h3>
-          <p style="color:var(--muted);font-size:.88rem;margin-bottom:.75rem">Python · Autonomy · Research</p>
-          <p style="color:var(--ink-soft);margin-bottom:1rem">Confidence-aware UAV landing safety research under degraded perception.</p>
-          <div class="work-links"><a href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener">GitHub ↗</a></div>
-        </div>
-        <div class="work-thumb tilt-card"><svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#EFE8DC"/><path d="M40 100 L100 40 L160 100" fill="none" stroke="#3D5A4C" stroke-width="2"/><circle cx="100" cy="55" r="8" fill="#3D5A4C"/></svg></div>
-      </article>
-      <ul class="work-list">
-        <li class="work-item gs-work-item"><div class="work-thumb tilt-card" style="aspect-ratio:1"><svg viewBox="0 0 100 100"><rect fill="#EFE8DC" width="100" height="100"/><text x="50" y="55" text-anchor="middle" font-size="28" fill="#3D5A4C">?</text></svg></div><div><h3>AbstainBench</h3><p>Local-first LLM abstention benchmark.</p><div class="work-links"><a href="https://github.com/suhaslord/AbstainBench" target="_blank" rel="noopener">GitHub ↗</a></div></div><span class="work-meta">AI Eval</span></li>
-        <li class="work-item gs-work-item"><div class="work-thumb tilt-card" style="aspect-ratio:1"><svg viewBox="0 0 100 100"><rect fill="#EFE8DC" width="100" height="100"/><circle cx="50" cy="50" r="30" fill="none" stroke="#3D5A4C" stroke-width="3"/><text x="50" y="58" text-anchor="middle" font-size="22" fill="#3D5A4C" font-weight="bold">#1</text></svg></div><div><h3>TennisRank AI</h3><p>Mobile-first ranking platform with Supabase.</p><div class="work-links"><a href="https://tennisrank-ai.vercel.app" target="_blank" rel="noopener">Live ↗</a><a href="https://github.com/suhaslord/tennisrank-ai" target="_blank" rel="noopener">GitHub ↗</a></div></div><span class="work-meta">JS</span></li>
-        <li class="work-item gs-work-item"><div class="work-thumb tilt-card" style="aspect-ratio:1"><svg viewBox="0 0 100 100"><rect fill="#EFE8DC" width="100" height="100"/><circle cx="50" cy="50" r="18" fill="#3D5A4C" opacity=".35"/><circle cx="50" cy="50" r="8" fill="#B48C5A"/></svg></div><div><h3>ECHO / FIELD</h3><p>Generative browser instrument.</p><div class="work-links"><a href="https://suhaslord.github.io/ECHO-FIELD/" target="_blank" rel="noopener">Live ↗</a><a href="https://github.com/suhaslord/ECHO-FIELD" target="_blank" rel="noopener">GitHub ↗</a></div></div><span class="work-meta">Canvas</span></li>
-      </ul>
-    </section>
+  <div class="tech-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Python</span><span>JavaScript</span><span>AI Evaluation</span><span>UAV Autonomy</span><span>Blender</span><span>Three.js</span><span>Simulation</span><span>CAD</span><span>Research</span>
+      <span>Python</span><span>JavaScript</span><span>AI Evaluation</span><span>UAV Autonomy</span><span>Blender</span><span>Three.js</span><span>Simulation</span><span>CAD</span><span>Research</span>
+    </div>
+  </div>
 
-    <section class="section" id="experience">
-      <h2 class="section-title gs-title">Where I've been building</h2>
-      <p class="section-lede gs-lede">Internships and team work across product, AI, and design.</p>
-      <div class="timeline" id="timeline">
-        <div class="timeline-line-fill" id="timelineFill"></div>
-        <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">Software Development Intern</h3><p class="exp-org">OpenStage Gym</p><p class="exp-desc">Production AI and product engineering for OpenStage/Seagulls.</p></div>
-        <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">AI Research &amp; Development Intern</h3><p class="exp-org">Cruze</p><p class="exp-desc">Early-stage AI/software research and product problem solving.</p></div>
-        <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">Growth Intern</h3><p class="exp-org">Exovista</p><p class="exp-desc">Startup growth, experimentation, and product execution.</p></div>
-        <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">Game Design Team Member</h3><p class="exp-org">StemE</p><p class="exp-desc">Interactive game features and technical design.</p></div>
-        <div class="exp-item gs-exp"><span class="exp-year">Now</span><h3 class="exp-role">Student · College coursework</h3><p class="exp-org">River Islands HS · Delta College</p><p class="exp-desc">College-level CS plus systems, simulation, and research.</p></div>
+  <div class="visual-band">
+    <div class="visual-band-inner gs-orbit">
+      <div class="orbit-card"><div class="orbit-icon">AI</div><h4>Evaluation</h4><p>When models should abstain</p></div>
+      <div class="orbit-card"><div class="orbit-icon">UAV</div><h4>Autonomy</h4><p>Safety-critical landing</p></div>
+      <div class="orbit-card"><div class="orbit-icon">3D</div><h4>Design</h4><p>Blender &amp; CAD</p></div>
+      <div class="orbit-card"><div class="orbit-icon">++</div><h4>Ship</h4><p>200+ user products</p></div>
+    </div>
+  </div>
+
+  <section class="section" id="work">
+    <h2 class="section-title gs-title">Selected work</h2>
+    <p class="section-lede gs-lede">Research, products, and living instruments with repos and live demos.</p>
+    <article class="work-featured gs-work">
+      <div>
+        <h3 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;margin-bottom:.5rem">AegisLand</h3>
+        <p style="color:var(--muted);font-size:.88rem;margin-bottom:.75rem">Python · Autonomy · Research</p>
+        <p style="color:var(--ink-soft);margin-bottom:1rem">Confidence-aware UAV landing safety research under degraded perception.</p>
+        <div class="work-links"><a href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener">GitHub ↗</a></div>
       </div>
-    </section>
+      <div class="work-3d" data-mini="uav" aria-hidden="true"></div>
+    </article>
+    <ul class="work-list">
+      <li class="work-item gs-work-item">
+        <div class="work-3d" data-mini="neural" aria-hidden="true"></div>
+        <div><h3>AbstainBench</h3><p>Local-first LLM abstention benchmark.</p><div class="work-links"><a href="https://github.com/suhaslord/AbstainBench" target="_blank" rel="noopener">GitHub ↗</a></div></div>
+        <span class="work-meta">AI Eval</span>
+      </li>
+      <li class="work-item gs-work-item">
+        <div class="work-3d" data-mini="rank" aria-hidden="true"></div>
+        <div><h3>TennisRank AI</h3><p>Mobile-first ranking platform with Supabase.</p><div class="work-links"><a href="https://tennisrank-ai.vercel.app" target="_blank" rel="noopener">Live ↗</a><a href="https://github.com/suhaslord/tennisrank-ai" target="_blank" rel="noopener">GitHub ↗</a></div></div>
+        <span class="work-meta">JS</span>
+      </li>
+      <li class="work-item gs-work-item">
+        <div class="work-3d" data-mini="field" aria-hidden="true"></div>
+        <div><h3>ECHO / FIELD</h3><p>Generative browser instrument.</p><div class="work-links"><a href="https://suhaslord.github.io/ECHO-FIELD/" target="_blank" rel="noopener">Live ↗</a><a href="https://github.com/suhaslord/ECHO-FIELD" target="_blank" rel="noopener">GitHub ↗</a></div></div>
+        <span class="work-meta">Canvas</span>
+      </li>
+    </ul>
+  </section>
 
-    <section class="section" id="skills">
-      <h2 class="section-title gs-title">Tools and depth</h2>
-      <p class="section-lede gs-lede">Learned in service of shipping and measuring real work.</p>
-      <div class="info-grid">
-        <div class="info-panel tilt-card gs-panel"><h3>Proficiency</h3>
-          <div class="bar-row"><span>Python</span><div class="bar-track"><div class="bar-fill" data-width="88"></div></div><span class="bar-val">88%</span></div>
-          <div class="bar-row"><span>JavaScript</span><div class="bar-track"><div class="bar-fill" data-width="78"></div></div><span class="bar-val">78%</span></div>
-          <div class="bar-row"><span>AI / Research</span><div class="bar-track"><div class="bar-fill" data-width="82"></div></div><span class="bar-val">82%</span></div>
-          <div class="bar-row"><span>CAD / 3D</span><div class="bar-track"><div class="bar-fill" data-width="75"></div></div><span class="bar-val">75%</span></div>
-        </div>
-        <div class="info-panel tilt-card gs-panel"><h3>Flight log</h3>
-          <div class="terminal">[ BUILD ]  software products
+  <!-- 3D STAGE 3: Generative field / ECHO -->
+  <section class="scroll-stage scroll-stage--mid" data-scene="field" aria-label="3D generative field visualization">
+    <div class="scroll-stage-inner">
+      <canvas aria-hidden="true"></canvas>
+      <div class="scroll-stage-content">
+        <h2>Presence becomes the instrument</h2>
+        <p>ECHO / FIELD: motion, voice, and memory reshape a living visual field in real time.</p>
+        <div class="scroll-stage-tags"><span>Canvas</span><span>Web Audio</span><span>Generative</span></div>
+        <a class="scroll-stage-link" href="https://suhaslord.github.io/ECHO-FIELD/" target="_blank" rel="noopener">Enter ECHO / FIELD ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <h2 class="section-title gs-title">Where I've been building</h2>
+    <p class="section-lede gs-lede">Internships and team work across product, AI, and design.</p>
+    <div class="timeline" id="timeline">
+      <div class="timeline-line-fill" id="timelineFill"></div>
+      <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">Software Development Intern</h3><p class="exp-org">OpenStage Gym</p><p class="exp-desc">Production AI and product engineering for OpenStage/Seagulls.</p></div>
+      <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">AI Research &amp; Development Intern</h3><p class="exp-org">Cruze</p><p class="exp-desc">Early-stage AI/software research and product problem solving.</p></div>
+      <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">Growth Intern</h3><p class="exp-org">Exovista</p><p class="exp-desc">Startup growth, experimentation, and product execution.</p></div>
+      <div class="exp-item gs-exp"><span class="exp-year">2026</span><h3 class="exp-role">Game Design Team Member</h3><p class="exp-org">StemE</p><p class="exp-desc">Interactive game features and technical design.</p></div>
+      <div class="exp-item gs-exp"><span class="exp-year">Now</span><h3 class="exp-role">Student · College coursework</h3><p class="exp-org">River Islands HS · Delta College</p><p class="exp-desc">College-level CS plus systems, simulation, and research.</p></div>
+    </div>
+  </section>
+
+  <!-- 3D STAGE 4: Research helix / systems -->
+  <section class="scroll-stage" data-scene="helix" aria-label="3D research systems visualization">
+    <div class="scroll-stage-inner">
+      <canvas aria-hidden="true"></canvas>
+      <div class="scroll-stage-content">
+        <h2>Systems that survive contact with reality</h2>
+        <p>From internships to research: prototype, measure, find the failure mode, then improve.</p>
+        <div class="scroll-stage-tags"><span>OpenStage</span><span>Cruze</span><span>Exovista</span><span>StemE</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <h2 class="section-title gs-title">Tools and depth</h2>
+    <p class="section-lede gs-lede">Learned in service of shipping and measuring real work.</p>
+    <div class="info-grid">
+      <div class="info-panel tilt-card gs-panel"><h3>Proficiency</h3>
+        <div class="bar-row"><span>Python</span><div class="bar-track"><div class="bar-fill" data-width="88"></div></div><span class="bar-val">88%</span></div>
+        <div class="bar-row"><span>JavaScript</span><div class="bar-track"><div class="bar-fill" data-width="78"></div></div><span class="bar-val">78%</span></div>
+        <div class="bar-row"><span>AI / Research</span><div class="bar-track"><div class="bar-fill" data-width="82"></div></div><span class="bar-val">82%</span></div>
+        <div class="bar-row"><span>CAD / 3D</span><div class="bar-track"><div class="bar-fill" data-width="75"></div></div><span class="bar-val">75%</span></div>
+      </div>
+      <div class="info-panel tilt-card gs-panel"><h3>Flight log</h3>
+        <div class="terminal">[ BUILD ]  software products
 [ TEST  ]  AI reliability
 [ MODEL ]  aerospace systems
 [ DESIGN]  CAD + 3D
 [ LEARN ]  everything I can get my hands on</div>
-        </div>
       </div>
-      <div class="skills-bento gs-bento">
-        <div class="skill-card tilt-card"><h3>Software</h3><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">JS</span><span class="skill-tag">Git</span><span class="skill-tag">Vercel</span></div></div>
-        <div class="skill-card tilt-card"><h3>Research</h3><div class="skill-tags"><span class="skill-tag">Simulation</span><span class="skill-tag">Uncertainty</span><span class="skill-tag">Monte Carlo</span></div></div>
-        <div class="skill-card tilt-card"><h3>Design</h3><div class="skill-tags"><span class="skill-tag">Blender</span><span class="skill-tag">CAD</span><span class="skill-tag">Three.js</span></div></div>
-      </div>
-      <div class="highlights-grid gs-highlights">
-        <div class="highlight-card"><strong>SkillsUSA Regional Champion</strong>3D Visualization &amp; Animation</div>
-        <div class="highlight-card"><strong>Python Game Jam</strong>2nd place</div>
-        <div class="highlight-card"><strong>AI Collective Hackathon</strong>5th of 25+ teams</div>
-        <div class="highlight-card"><strong>StudySync AI</strong>200+ peak active users</div>
-      </div>
-    </section>
+    </div>
+    <div class="skills-bento gs-bento">
+      <div class="skill-card tilt-card"><h3>Software</h3><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">JS</span><span class="skill-tag">Git</span><span class="skill-tag">Vercel</span></div></div>
+      <div class="skill-card tilt-card"><h3>Research</h3><div class="skill-tags"><span class="skill-tag">Simulation</span><span class="skill-tag">Uncertainty</span><span class="skill-tag">Monte Carlo</span></div></div>
+      <div class="skill-card tilt-card"><h3>Design</h3><div class="skill-tags"><span class="skill-tag">Blender</span><span class="skill-tag">CAD</span><span class="skill-tag">Three.js</span></div></div>
+    </div>
+    <div class="highlights-grid gs-highlights">
+      <div class="highlight-card"><strong>SkillsUSA Regional Champion</strong>3D Visualization &amp; Animation</div>
+      <div class="highlight-card"><strong>Python Game Jam</strong>2nd place</div>
+      <div class="highlight-card"><strong>AI Collective Hackathon</strong>5th of 25+ teams</div>
+      <div class="highlight-card"><strong>StudySync AI</strong>200+ peak active users</div>
+    </div>
+  </section>
 
-    <section class="contact" id="contact">
-      <div class="contact-inner gs-contact">
-        <h2 class="section-title">Let's build something careful.</h2>
-        <p class="section-lede">Open to research, engineering projects, internships, and ambitious collaborations.</p>
-        <a class="contact-email" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
-        <div class="social-row">
-          <a href="https://github.com/suhaslord" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/suhas-beemineni-1984763b8/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="mailto:suhas.aug20@gmail.com">Email</a>
-        </div>
+  <section class="contact" id="contact">
+    <div class="contact-inner gs-contact">
+      <h2 class="section-title">Let's build something careful.</h2>
+      <p class="section-lede">Open to research, engineering projects, internships, and ambitious collaborations.</p>
+      <a class="contact-email" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+      <div class="social-row">
+        <a href="https://github.com/suhaslord" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/suhas-beemineni-1984763b8/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:suhas.aug20@gmail.com">Email</a>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -425,28 +460,22 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
 <script>
 (function(){
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ACCENT=0x3D5A4C, WARM=0xB48C5A;
+
+  /* Nav + progress + orbs */
   const nav=document.getElementById("siteNav");
   const progress=document.getElementById("progressBar");
-
   window.addEventListener("scroll",()=>{
     nav.classList.toggle("is-scrolled",scrollY>10);
     progress.style.width=(scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+"%";
-    document.querySelectorAll(".orb").forEach(o=>{
-      const s=+o.dataset.speed||0.3;
-      o.style.transform=`translateY(${scrollY*s*-0.15}px)`;
-    });
+    document.querySelectorAll(".orb").forEach(o=>{o.style.transform=`translateY(${scrollY*(+o.dataset.speed||.3)*-.15}px)`;});
   },{passive:true});
-
-  document.getElementById("navToggle").addEventListener("click",()=>{
-    document.getElementById("navLinks").classList.toggle("is-open");
-  });
+  document.getElementById("navToggle").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("is-open"));
   document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navLinks").classList.remove("is-open")));
 
-  /* Hero 2D particles */
+  /* Hero particles + photo tilt */
   if(!reduced){
-    const canvas=document.getElementById("heroCanvas");
-    const ctx=canvas.getContext("2d");
-    const hero=canvas.parentElement;
+    const canvas=document.getElementById("heroCanvas"), ctx=canvas.getContext("2d"), hero=canvas.parentElement;
     let pts=[],W,H,mx=0,my=0;
     function resize(){W=canvas.width=hero.offsetWidth;H=canvas.height=hero.offsetHeight;pts=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:1+Math.random()*2.5}));}
     hero.addEventListener("mousemove",e=>{const r=hero.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});
@@ -464,171 +493,219 @@ a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3p
       requestAnimationFrame(draw);
     })();
     resize();window.addEventListener("resize",resize);
-
-    /* Photo tilt */
-    const wrap=document.getElementById("heroPhotoWrap");
-    const photo=document.getElementById("heroPhoto");
-    wrap.addEventListener("mousemove",e=>{
-      const r=wrap.getBoundingClientRect();
-      const x=(e.clientX-r.left)/r.width-.5;
-      const y=(e.clientY-r.top)/r.height-.5;
-      photo.style.transform=`rotateY(${x*12}deg) rotateX(${-y*12}deg) scale(1.02)`;
-    });
+    const wrap=document.getElementById("heroPhotoWrap"), photo=document.getElementById("heroPhoto");
+    wrap.addEventListener("mousemove",e=>{const r=wrap.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;photo.style.transform=`rotateY(${x*12}deg) rotateX(${-y*12}deg) scale(1.02)`;});
     wrap.addEventListener("mouseleave",()=>{photo.style.transform="";});
   }
 
-  /* Three.js scroll scene */
-  if(!reduced&&typeof THREE!=="undefined"){
-    const stage=document.getElementById("scrollStage");
-    const cvs=document.getElementById("scrollCanvas");
-    const renderer=new THREE.WebGLRenderer({canvas:cvs,alpha:true,antialias:true});
+  if(reduced||typeof THREE==="undefined") return;
+
+  const mat=()=>new THREE.MeshBasicMaterial({color:ACCENT,wireframe:true});
+  const warmMat=()=>new THREE.MeshBasicMaterial({color:WARM,wireframe:true,transparent:true,opacity:.65});
+
+  function makeParticles(n,span){
+    const g=new THREE.BufferGeometry(), pos=new Float32Array(n*3);
+    for(let i=0;i<n*3;i++)pos[i]=(Math.random()-.5)*span;
+    g.setAttribute("position",new THREE.BufferAttribute(pos,3));
+    return new THREE.Points(g,new THREE.PointsMaterial({color:ACCENT,size:.035,transparent:true,opacity:.45}));
+  }
+
+  function buildUAV(){
+    const root=new THREE.Group();
+    root.add(new THREE.Mesh(new THREE.BoxGeometry(1.2,.3,.8),mat()));
+    [[-1.8,-1.8],[1.8,-1.8],[-1.8,1.8],[1.8,1.8]].forEach(([x,z])=>{
+      const arm=new THREE.Mesh(new THREE.BoxGeometry(2.2,.06,.06),mat());
+      arm.position.set(x/2,0,z/2);arm.rotation.y=Math.atan2(z,x);root.add(arm);
+      const prop=new THREE.Mesh(new THREE.TorusGeometry(.35,.02,8,24),warmMat());
+      prop.position.set(x,0,z);prop.rotation.x=Math.PI/2;prop.userData.spin=true;root.add(prop);
+    });
+    const ico=new THREE.Mesh(new THREE.IcosahedronGeometry(1,1),warmMat());ico.position.set(-3.2,1.2,-1.5);root.add(ico);
+    const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(.65,.16,80,12),mat());knot.position.set(3.2,-1,0);root.add(knot);
+    const ring=new THREE.Mesh(new THREE.TorusGeometry(2.4,.02,8,64),warmMat());ring.rotation.x=Math.PI/2;root.add(ring);
+    root.add(makeParticles(350,12));
+    return {root, tick(t){root.children.forEach(c=>{if(c.userData.spin)c.rotation.z+=.08;});ico.rotation.y+=.004;knot.rotation.z+=.003;},
+      scrub(p){root.rotation.y=p*Math.PI*2;root.rotation.x=p*.6;root.position.y=p*1.1;ico.rotation.x=p*Math.PI*2;knot.rotation.x=p*Math.PI*3;ring.rotation.z=p*Math.PI*2;}};
+  }
+
+  function buildNeural(){
+    const root=new THREE.Group();
+    const layers=[5,7,7,4], nodes=[], spacing=1.6;
+    layers.forEach((n,li)=>{
+      for(let i=0;i<n;i++){
+        const node=new THREE.Mesh(new THREE.SphereGeometry(.12,12,12), i%2?warmMat():mat());
+        node.position.set((li-(layers.length-1)/2)*spacing,(i-(n-1)/2)*.7,0);
+        root.add(node);nodes.push({mesh:node,li,i});
+      }
+    });
+    // connections
+    for(let li=0;li<layers.length-1;li++){
+      for(let a=0;a<layers[li];a++)for(let b=0;b<layers[li+1];b++){
+        const p1=new THREE.Vector3((li-(layers.length-1)/2)*spacing,(a-(layers[li]-1)/2)*.7,0);
+        const p2=new THREE.Vector3((li+1-(layers.length-1)/2)*spacing,(b-(layers[li+1]-1)/2)*.7,0);
+        const geo=new THREE.BufferGeometry().setFromPoints([p1,p2]);
+        root.add(new THREE.Line(geo,new THREE.LineBasicMaterial({color:ACCENT,transparent:true,opacity:.25})));
+      }
+    }
+    // answer / abstain gate
+    const gate=new THREE.Mesh(new THREE.TorusGeometry(1.8,.04,8,48),warmMat());
+    gate.position.x=3.6;root.add(gate);
+    const yes=new THREE.Mesh(new THREE.BoxGeometry(.4,.4,.4),mat());yes.position.set(5,.6,0);root.add(yes);
+    const no=new THREE.Mesh(new THREE.OctahedronGeometry(.35),warmMat());no.position.set(5,-.6,0);root.add(no);
+    root.add(makeParticles(220,10));
+    return {root, tick(t){nodes.forEach((n,i)=>{n.mesh.scale.setScalar(1+.15*Math.sin(t*2+i));});gate.rotation.z+=.01;yes.rotation.y+=.02;no.rotation.y-=.02;},
+      scrub(p){root.rotation.y=p*Math.PI*1.5;root.position.x=-p*1.5;gate.rotation.x=p*Math.PI;yes.position.y=.6+p*.8;no.position.y=-.6-p*.8;}};
+  }
+
+  function buildField(){
+    const root=new THREE.Group();
+    const cols=18, rows=14, spacing=.35;
+    const meshes=[];
+    for(let x=0;x<cols;x++)for(let z=0;z<rows;z++){
+      const m=new THREE.Mesh(new THREE.SphereGeometry(.06,6,6),(x+z)%3?mat():warmMat());
+      m.position.set((x-cols/2)*spacing,0,(z-rows/2)*spacing);
+      m.userData={ox:m.position.x,oz:m.position.z};root.add(m);meshes.push(m);
+    }
+    const wave=new THREE.Mesh(new THREE.TorusGeometry(2.8,.03,8,64),warmMat());wave.rotation.x=Math.PI/2;root.add(wave);
+    const core=new THREE.Mesh(new THREE.IcosahedronGeometry(.5,0),mat());root.add(core);
+    return {root, tick(t){meshes.forEach(m=>{const {ox,oz}=m.userData;m.position.y=Math.sin(ox*1.5+t*1.5)*Math.cos(oz*1.5+t)*.6;});core.rotation.y+=.01;wave.rotation.z+=.005;},
+      scrub(p){root.rotation.y=p*Math.PI*2;root.rotation.x=p*.4;core.scale.setScalar(1+p*.8);wave.scale.setScalar(1+p*.5);}};
+  }
+
+  function buildHelix(){
+    const root=new THREE.Group();
+    const pts=60;
+    for(let i=0;i<pts;i++){
+      const a=i/pts*Math.PI*6;
+      const y=(i/pts)*6-3;
+      const r=1.2;
+      const a1=new THREE.Mesh(new THREE.SphereGeometry(.1,8,8),mat());
+      a1.position.set(Math.cos(a)*r,y,Math.sin(a)*r);root.add(a1);
+      const a2=new THREE.Mesh(new THREE.SphereGeometry(.1,8,8),warmMat());
+      a2.position.set(Math.cos(a+Math.PI)*r,y,Math.sin(a+Math.PI)*r);root.add(a2);
+      if(i%3===0){
+        const geo=new THREE.BufferGeometry().setFromPoints([a1.position.clone(),a2.position.clone()]);
+        root.add(new THREE.Line(geo,new THREE.LineBasicMaterial({color:WARM,transparent:true,opacity:.4})));
+      }
+    }
+    const shell=new THREE.Mesh(new THREE.CylinderGeometry(1.8,1.8,6.5,24,1,true),mat());
+    shell.material.transparent=true;shell.material.opacity=.15;root.add(shell);
+    root.add(makeParticles(180,8));
+    return {root, tick(){root.rotation.y+=.008;}, scrub(p){root.rotation.y=p*Math.PI*4;root.position.y=p*1.2;root.rotation.x=p*.3;}};
+  }
+
+  function buildRank(){
+    const root=new THREE.Group();
+    [1.6,1.1,.7].forEach((h,i)=>{
+      const bar=new THREE.Mesh(new THREE.BoxGeometry(.5,h,.5),i===0?warmMat():mat());
+      bar.position.set((i-1)*1.1,h/2,0);root.add(bar);
+    });
+    root.add(new THREE.Mesh(new THREE.TorusGeometry(2,.03,8,48),mat()));
+    return {root, tick(){root.rotation.y+=.01;}, scrub(p){root.rotation.y=p*Math.PI*2;}};
+  }
+
+  const builders={uav:buildUAV,neural:buildNeural,field:buildField,helix:buildHelix,rank:buildRank};
+
+  function mountScrollScene(stage){
+    const type=stage.dataset.scene;
+    const canvas=stage.querySelector("canvas");
+    const content=stage.querySelector(".scroll-stage-content");
+    const built=builders[type]();
+    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
     const scene=new THREE.Scene();
     const camera=new THREE.PerspectiveCamera(45,1,.1,100);
     camera.position.z=6;
-
-    const accent=0x3D5A4C, warm=0xB48C5A;
-    const mat=new THREE.MeshBasicMaterial({color:accent,wireframe:true});
-    const warmMat=new THREE.MeshBasicMaterial({color:warm,wireframe:true,transparent:true,opacity:.6});
-
-    /* UAV wireframe */
-    const uav=new THREE.Group();
-    const body=new THREE.Mesh(new THREE.BoxGeometry(1.2,.3,.8),mat);uav.add(body);
-    [[-1.8,0,-1.8],[1.8,0,-1.8],[-1.8,0,1.8],[1.8,0,1.8]].forEach(([x,,z])=>{
-      const arm=new THREE.Mesh(new THREE.BoxGeometry(2.2,.06,.06),mat);
-      arm.position.set(x/2,0,z/2);arm.rotation.y=Math.atan2(z,x);uav.add(arm);
-      const prop=new THREE.Mesh(new THREE.TorusGeometry(.35,.02,8,24),warmMat);
-      prop.position.set(x,0,z);prop.rotation.x=Math.PI/2;uav.add(prop);
-    });
-    scene.add(uav);
-
-    const ico=new THREE.Mesh(new THREE.IcosahedronGeometry(1.1,1),warmMat);
-    ico.position.set(-3.5,1.5,-2);scene.add(ico);
-    const torus=new THREE.Mesh(new THREE.TorusKnotGeometry(.7,.18,100,16),mat);
-    torus.position.set(3.5,-1,0);scene.add(torus);
-    const ring=new THREE.Mesh(new THREE.TorusGeometry(2.5,.02,8,64),warmMat);
-    ring.rotation.x=Math.PI/2;scene.add(ring);
-
-    const particles=new THREE.BufferGeometry();
-    const count=400;
-    const pos=new Float32Array(count*3);
-    for(let i=0;i<count*3;i++)pos[i]=(Math.random()-.5)*14;
-    particles.setAttribute("position",new THREE.BufferAttribute(pos,3));
-    scene.add(new THREE.Points(particles,new THREE.PointsMaterial({color:accent,size:.04,transparent:true,opacity:.5})));
-
-    function resize3d(){
+    scene.add(built.root);
+    function resize(){
       const w=stage.offsetWidth,h=window.innerHeight;
       renderer.setSize(w,h);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
       camera.aspect=w/h;camera.updateProjectionMatrix();
     }
-    resize3d();window.addEventListener("resize",resize3d);
-
+    resize();window.addEventListener("resize",resize);
+    let t0=performance.now();
+    (function loop(){
+      const t=(performance.now()-t0)/1000;
+      built.tick(t);renderer.render(scene,camera);requestAnimationFrame(loop);
+    })();
     if(typeof gsap!=="undefined"&&typeof ScrollTrigger!=="undefined"){
       gsap.registerPlugin(ScrollTrigger);
-      gsap.timeline({scrollTrigger:{trigger:stage,start:"top top",end:"bottom bottom",scrub:1.2}})
-        .to(uav.rotation,{y:Math.PI*2,x:.6,ease:"none"},0)
-        .to(uav.position,{y:1.2,ease:"none"},0)
-        .to(ico.rotation,{x:Math.PI*2,y:Math.PI,ease:"none"},0)
-        .to(torus.rotation,{x:Math.PI*3,y:Math.PI*2,ease:"none"},0)
-        .to(ring.rotation,{z:Math.PI*2,ease:"none"},0)
-        .to(camera.position,{z:4.2,y:.5,ease:"none"},0)
-        .fromTo("#scrollStageContent",{opacity:.3,scale:.92},{opacity:1,scale:1,ease:"none"},0);
+      const state={p:0};
+      gsap.to(state,{p:1,ease:"none",scrollTrigger:{trigger:stage,start:"top top",end:"bottom bottom",scrub:1.1,
+        onUpdate:()=>{built.scrub(state.p);camera.position.z=6-state.p*1.6;camera.position.y=state.p*.4;}}});
+      if(content) gsap.fromTo(content,{opacity:.35,scale:.92},{opacity:1,scale:1,ease:"none",scrollTrigger:{trigger:stage,start:"top top",end:"center center",scrub:true}});
     }
-
-    (function anim(){
-      uav.children.forEach((c,i)=>{if(c.geometry.type==="TorusGeometry"&&i>0)c.rotation.z+=.06;});
-      ico.rotation.y+=.004;torus.rotation.z+=.003;
-      renderer.render(scene,camera);
-      requestAnimationFrame(anim);
-    })();
   }
 
-  /* GSAP scroll animations */
-  if(!reduced&&typeof gsap!=="undefined"&&typeof ScrollTrigger!=="undefined"){
+  function mountMini(el){
+    const type=el.dataset.mini;
+    const canvas=document.createElement("canvas");
+    el.appendChild(canvas);
+    const built=builders[type]?builders[type]():buildUAV();
+    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(40,1,.1,50);
+    camera.position.z=5;
+    scene.add(built.root);
+    function resize(){
+      const w=el.clientWidth||140,h=el.clientHeight||160;
+      renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+    }
+    resize();
+    let active=false;
+    new IntersectionObserver(e=>{active=e[0].isIntersecting;},{threshold:.1}).observe(el);
+    (function loop(){
+      if(active){built.tick(performance.now()/1000);built.root.rotation.y+=.006;renderer.render(scene,camera);}
+      requestAnimationFrame(loop);
+    })();
+    window.addEventListener("resize",resize);
+  }
+
+  document.querySelectorAll(".scroll-stage[data-scene]").forEach(mountScrollScene);
+  document.querySelectorAll(".work-3d[data-mini]").forEach(mountMini);
+
+  /* GSAP section reveals */
+  if(typeof gsap!=="undefined"&&typeof ScrollTrigger!=="undefined"){
     gsap.registerPlugin(ScrollTrigger);
     gsap.from("#heroCopy",{y:40,opacity:0,duration:1,ease:"power3.out"});
     gsap.from("#heroPhotoWrap",{y:40,opacity:0,duration:1,delay:.15,ease:"power3.out"});
-    gsap.utils.toArray(".gs-stat").forEach((el,i)=>gsap.from(el,{y:30,opacity:0,duration:.6,delay:i*.1,scrollTrigger:{trigger:el,start:"top 90%"}}));
-    gsap.utils.toArray(".gs-title,.gs-lede").forEach(el=>gsap.from(el,{y:24,opacity:0,duration:.7,scrollTrigger:{trigger:el,start:"top 88%"}}));
-    gsap.from(".gs-photo",{x:-40,opacity:0,duration:.8,scrollTrigger:{trigger:"#about",start:"top 75%"}});
-    gsap.from(".gs-about",{x:40,opacity:0,duration:.8,scrollTrigger:{trigger:"#about",start:"top 75%"}});
-    gsap.utils.toArray(".gs-mission .info-panel").forEach((el,i)=>gsap.from(el,{y:30,opacity:0,rotationX:8,duration:.7,delay:i*.12,scrollTrigger:{trigger:el,start:"top 85%"}}));
-    gsap.utils.toArray(".orbit-card").forEach((el,i)=>gsap.from(el,{y:40,opacity:0,scale:.9,duration:.6,delay:i*.1,scrollTrigger:{trigger:".visual-band",start:"top 80%"}}));
-    gsap.utils.toArray(".gs-work-item").forEach((el,i)=>gsap.from(el,{x:-30,opacity:0,duration:.6,delay:i*.08,scrollTrigger:{trigger:el,start:"top 90%"}}));
-    gsap.utils.toArray(".gs-exp").forEach((el,i)=>gsap.from(el,{x:-20,opacity:0,duration:.5,delay:i*.07,scrollTrigger:{trigger:el,start:"top 92%"}}));
-    gsap.utils.toArray(".gs-panel,.skill-card,.highlight-card").forEach((el,i)=>gsap.from(el,{y:24,opacity:0,duration:.5,delay:i*.05,scrollTrigger:{trigger:el,start:"top 92%"}}));
-    gsap.from(".gs-contact",{y:30,opacity:0,duration:.8,scrollTrigger:{trigger:"#contact",start:"top 85%"}});
+    gsap.utils.toArray(".gs-stat").forEach((el,i)=>gsap.from(el,{y:30,opacity:0,duration:.55,delay:i*.08,scrollTrigger:{trigger:el,start:"top 90%"}}));
+    gsap.utils.toArray(".gs-title,.gs-lede,.gs-photo,.gs-about,.gs-work,.gs-work-item,.gs-exp,.gs-panel,.skill-card,.highlight-card,.orbit-card,.gs-contact").forEach(el=>{
+      gsap.from(el,{y:28,opacity:0,duration:.65,scrollTrigger:{trigger:el,start:"top 90%"}});
+    });
+    if(document.getElementById("radarArea")){
+      gsap.fromTo("#radarArea",{scale:0,transformOrigin:"100px 100px"},{scale:1,duration:1.1,ease:"back.out(1.4)",scrollTrigger:{trigger:"#radarArea",start:"top 85%"}});
+    }
   }
 
-  /* Counters */
+  /* Counters / bars / timeline / terminal */
   function animateCounters(){
     document.querySelectorAll("[data-count]").forEach(el=>{
-      const target=+el.dataset.count,suffix=target>=200?"+":"";
-      const t0=performance.now();
-      (function step(t){
-        const p=Math.min((t-t0)/1200,1);
-        el.textContent=Math.round(target*(1-Math.pow(1-p,3)))+suffix;
-        if(p<1)requestAnimationFrame(step);
-      })(t0);
+      const target=+el.dataset.count,suffix=target>=200?"+":"",t0=performance.now();
+      (function step(t){const p=Math.min((t-t0)/1200,1);el.textContent=Math.round(target*(1-Math.pow(1-p,3)))+suffix;if(p<1)requestAnimationFrame(step);})(t0);
     });
+  }
+  function animateBars(){
+    document.querySelectorAll(".bar-fill").forEach(b=>b.style.width=b.dataset.width+"%");
+    document.querySelectorAll(".donut-fill").forEach(d=>{d.style.strokeDashoffset=314-(+d.dataset.offset||0);});
   }
   if("IntersectionObserver"in window){
     new IntersectionObserver(e=>{if(e[0].isIntersecting)animateCounters();},{threshold:.3}).observe(document.querySelector(".stats-strip"));
+    const skills=document.getElementById("skills");
+    if(skills) new IntersectionObserver(e=>{if(e[0].isIntersecting)animateBars();},{threshold:.2}).observe(skills);
+    const donuts=document.querySelector(".gs-donuts");
+    if(donuts) new IntersectionObserver(e=>{if(e[0].isIntersecting)animateBars();},{threshold:.2}).observe(donuts);
+    const timeline=document.getElementById("timeline");
+    if(timeline) new IntersectionObserver(e=>{if(e[0].isIntersecting){document.getElementById("timelineFill").style.height="100%";timeline.querySelectorAll(".exp-item").forEach((item,i)=>setTimeout(()=>item.classList.add("is-active"),i*180));}},{threshold:.2}).observe(timeline);
   }
-
-  /* Bars & donuts */
-  function animateBars(){
-    document.querySelectorAll(".bar-fill").forEach(b=>{b.style.width=b.dataset.width+"%";});
-    document.querySelectorAll(".donut-fill").forEach(d=>{
-      const off=+d.dataset.offset||0;
-      d.style.strokeDashoffset=314-off;
-    });
-  }
-  if("IntersectionObserver"in window){
-    new IntersectionObserver(e=>{if(e[0].isIntersecting)animateBars();},{threshold:.2}).observe(document.getElementById("skills"));
-    new IntersectionObserver(e=>{if(e[0].isIntersecting)animateBars();},{threshold:.2}).observe(document.querySelector(".gs-donuts"));
-  }
-
-  /* Timeline */
-  const timeline=document.getElementById("timeline");
-  if(timeline&&"IntersectionObserver"in window){
-    new IntersectionObserver(e=>{
-      if(e[0].isIntersecting){
-        document.getElementById("timelineFill").style.height="100%";
-        timeline.querySelectorAll(".exp-item").forEach((item,i)=>setTimeout(()=>item.classList.add("is-active"),i*180));
-      }
-    },{threshold:.2}).observe(timeline);
-  }
-
-  /* Mission terminal */
   const mission=`SYSTEM STATUS\n────────────────────────\nAI / SOFTWARE     ████████████░░ ACTIVE\nAEROSPACE         █████████░░░░░ EXPLORING\nRESEARCH          ██████████░░░░ ACTIVE\nCAD / 3D          ███████████░░░ ACTIVE\nCURIOSITY         ██████████████ MAX\n────────────────────────\nMISSION → AegisLand UAV safety`;
   const term=document.getElementById("missionTerminal");
   if(term){
-    if(!reduced){
-      let i=0;
-      new IntersectionObserver(e=>{
-        if(e[0].isIntersecting)(function type(){if(i<=mission.length){term.textContent=mission.slice(0,i++);setTimeout(type,i<40?16:6);}})();
-      },{threshold:.3}).observe(term.parentElement);
-    } else term.textContent=mission;
+    if(!reduced){let i=0;new IntersectionObserver(e=>{if(e[0].isIntersecting)(function type(){if(i<=mission.length){term.textContent=mission.slice(0,i++);setTimeout(type,i<40?16:6);}})();},{threshold:.3}).observe(term.parentElement);}
+    else term.textContent=mission;
   }
-
-  /* Tilt cards */
-  if(!reduced){
-    document.querySelectorAll(".tilt-card").forEach(card=>{
-      card.addEventListener("mousemove",e=>{
-        const r=card.getBoundingClientRect();
-        const x=(e.clientX-r.left)/r.width-.5;
-        const y=(e.clientY-r.top)/r.height-.5;
-        card.style.transform=`perspective(600px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-4px)`;
-      });
-      card.addEventListener("mouseleave",()=>{card.style.transform="";});
-    });
-  }
-
-  /* Radar pulse on scroll */
-  const radar=document.getElementById("radarArea");
-  if(radar&&typeof gsap!=="undefined"){
-    gsap.fromTo(radar,{scale:0,transformOrigin:"100px 100px"},{scale:1,duration:1.2,ease:"back.out(1.4)",scrollTrigger:{trigger:radar,start:"top 85%"}});
-  }
+  document.querySelectorAll(".tilt-card").forEach(card=>{
+    card.addEventListener("mousemove",e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(600px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-4px)`;});
+    card.addEventListener("mouseleave",()=>{card.style.transform="";});
+  });
 })();
 </script>
 </body>
