@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AbstainBench — Suhas Beemineni</title>
+<meta name="description" content="A local-first 30-question benchmark for when a language model should answer — and when it should say I don’t know.">
+<meta name="theme-color" content="#F4EFE6">
+<link rel="canonical" href="https://suhaslord.github.io/portfolio/work/abstainbench.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suhaslord.github.io/portfolio/work/abstainbench.html">
+<meta property="og:title" content="AbstainBench — when models should stay quiet">
+<meta property="og:description" content="Same thesis as AegisLand, for language models. Answer vs. abstain. No API keys.">
+<meta property="og:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">Suhas Beemineni</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="aegisland.html">AegisLand</a></li>
+      <li><a href="abstainbench.html" aria-current="page">AbstainBench</a></li>
+      <li><a href="../resume.html">Resume</a></li>
+      <li><a class="nav-cta" href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="case-hero wrap">
+    <p class="kicker">Case study · LLM reliability</p>
+    <h1>AbstainBench</h1>
+    <p class="lede prose">The same question as AegisLand, for language: when should a model answer, and when should it say it does not know?</p>
+    <div class="scope-row">
+      <span class="scope">30 questions</span>
+      <span class="scope">local-first · no API keys</span>
+      <span class="scope">student benchmark · small on purpose</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="../demos/abstainbench/">Run the live demo</a>
+      <a class="btn btn-secondary" href="https://github.com/suhaslord/AbstainBench" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </header>
+
+  <div class="hero-media">
+    <figure>
+      <a href="../demos/abstainbench/">
+        <img src="../assets/abstain/cover.svg" width="1600" height="900" alt="Split panel: Answer when evidence holds, Abstain when it does not">
+      </a>
+      <figcaption>
+        <span>Live demo hosted on this site</span>
+        <span>Offline baseline + optional in-browser Llama 3.2 1B</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <article class="wrap prose section" style="padding-top:0">
+    <h2>What it measures</h2>
+    <p>Half the set is supported by ordinary facts. Half is intentionally missing evidence — fictional cities, lost books, imaginary treaties. A useful system answers the first and abstains on the second. A fluent system that invents an author for a book that does not exist is scored as a hallucination, not as creativity.</p>
+    <p>Metrics: answer accuracy, abstention accuracy, hallucination count, false abstention count, results by category. Export JSON or a Markdown report from the demo.</p>
+
+    <h2>How to run it</h2>
+    <p>The <strong>offline baseline</strong> is a transparent rule: answer when the item is labeled supported, abstain otherwise. It is not an LLM. It exists so the pipeline, labels, and exports can be checked without a model.</p>
+    <p>The optional <strong>local browser LLM</strong> uses WebLLM to run quantized <code>Llama-3.2-1B-Instruct</code> through WebGPU. First load downloads weights into the browser cache. No server upload, no API key. Chrome or Edge with hardware acceleration.</p>
+
+    <h2>Limits — say them with the result</h2>
+    <ul>
+      <li>Thirty items. Not a leaderboard, not a paper-scale eval.</li>
+      <li>The offline baseline must not be quoted as model performance.</li>
+      <li>The 1B local model is small; quality depends on hardware, version, and prompt.</li>
+      <li>Future work: more models, human labels, confidence intervals across repeats.</li>
+    </ul>
+    <p>I built this as an independent exploration of LLM reliability, in parallel with AegisLand’s abstention work on cameras. The shared claim is narrow: <strong>refusal is a first-class output</strong>, and it should be measured.</p>
+    <p><a href="../index.html">← Back to the studio</a></p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>© 2026 Suhas Beemineni</p>
+    <div class="footer-links">
+      <a href="../demos/abstainbench/">Demo</a>
+      <a href="https://github.com/suhaslord/AbstainBench" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+<script src="../js/site.js"></script>
+</body>
+</html>

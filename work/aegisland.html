@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AegisLand — Suhas Beemineni</title>
+<meta name="description" content="AegisLand: simulation research on perception overconfidence, calibrated abstention, and frozen holdouts. safety_acceptance = false.">
+<meta name="theme-color" content="#F4EFE6">
+<link rel="canonical" href="https://suhaslord.github.io/portfolio/work/aegisland.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suhaslord.github.io/portfolio/work/aegisland.html">
+<meta property="og:title" content="AegisLand — external perception evidence you can inspect">
+<meta property="og:description" content="If visual perception is internally consistent but systematically wrong, can independent evidence expose the error?">
+<meta property="og:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">Suhas Beemineni</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="aegisland.html" aria-current="page">AegisLand</a></li>
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../resume.html">Resume</a></li>
+      <li><a class="nav-cta" href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="case-hero wrap">
+    <p class="kicker">Case study · UAV perception reliability</p>
+    <h1>AegisLand</h1>
+    <p class="lede prose">External perception evidence you can inspect — not just trust.</p>
+    <div class="scope-row">
+      <span class="scope">simulation only</span>
+      <span class="scope is-fail">safety_acceptance = false</span>
+      <span class="scope">Phase 10R frozen · mixed / failed overall</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open the live cockpit</a>
+      <a class="btn btn-secondary" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn btn-secondary" href="https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_protocol.md" target="_blank" rel="noopener noreferrer">Read the protocol</a>
+    </div>
+  </header>
+
+  <div class="hero-media">
+    <figure>
+      <img src="../assets/aegisland/frame_home.png" width="1600" height="1031" alt="AegisLand cockpit homepage with simulation-only prototype card and safety acceptance false">
+      <figcaption>
+        <span>Research cockpit · aegisland-research-cockpit.vercel.app</span>
+        <span>Poster, not an iframe — the archive is heavy. Open it live.</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <article class="wrap prose section" style="padding-top:0">
+    <h2>The question</h2>
+    <p>If visual perception is internally consistent but systematically wrong, can independent evidence expose the error without making landing unusably conservative?</p>
+    <p>That is the whole program. Not “can I land a drone in Gazebo.” The failure mode that matters is a camera that looks calibrated, agrees with itself, and is still biased — then a vehicle that should have abstained.</p>
+
+    <h2>Scope, said plainly</h2>
+    <p>AegisLand is <strong>not</strong> validated flight-control software. Nothing here is a physical-flight safety acceptance. <code>safety_acceptance = false</code>. <code>controller_tuning_allowed = false</code>. Simulation only. CI green is not flight-safe.</p>
+
+    <h2>Evidence ladder</h2>
+    <p>Each layer is frozen or labeled seen. Later phases do not quietly rewrite earlier numbers.</p>
+    <ol class="ladder">
+      <li>
+        <span class="ladder-phase">6B</span>
+        <div>
+          <strong>Synthetic landing + selective confidence</strong>
+          <p>Defined the synthetic benchmark: abstain when uncertain rather than touch down unsafe.</p>
+        </div>
+        <span class="ladder-status">frozen held-out</span>
+      </li>
+      <li>
+        <span class="ladder-phase">7–8</span>
+        <div>
+          <strong>Stress factorial + PX4/Gazebo traces</strong>
+          <p>Where redundancy assumptions break. Phase 8 resemblance is diagnostic_mismatch, not a pass.</p>
+        </div>
+        <span class="ladder-status">audited / seen</span>
+      </li>
+      <li>
+        <span class="ladder-phase">9</span>
+        <div>
+          <strong>Genuine Gazebo camera evidence</strong>
+          <p>Strong detection is not the same as trustworthy metric geometry.</p>
+        </div>
+        <span class="ladder-status">external perception seen</span>
+      </li>
+      <li>
+        <span class="ladder-phase">10</span>
+        <div>
+          <strong>Temporal metric + calibrated σ</strong>
+          <p>Uncertainty honesty improved sharply. Point-error vs Phase 9 did not. Frozen mixed.</p>
+        </div>
+        <span class="ladder-status">frozen holdout</span>
+      </li>
+      <li>
+        <span class="ladder-phase">10R</span>
+        <div>
+          <strong>Edge / partial-view generalization</strong>
+          <p>Mean ambiguous-view error dropped. Tail, availability, and shift calibration gates failed. Frozen as-is.</p>
+        </div>
+        <span class="ladder-status">frozen holdout</span>
+      </li>
+      <li>
+        <span class="ladder-phase">11</span>
+        <div>
+          <strong>Domain-shift-aware reliability</strong>
+          <p>Next: does uncertainty know when its guarantees stop transferring?</p>
+        </div>
+        <span class="ladder-status">next phase</span>
+      </li>
+    </ol>
+    <p>Physical aircraft: not tested.</p>
+
+    <h2>Phase 6B — selective confidence</h2>
+    <p>On the synthetic landing benchmark, image-only temporal control left <strong>43% unsafe</strong> episodes. Phase 6 Aegis cut that to 6%. Phase 6B selective confidence reached <strong>99% success / 1% unsafe</strong>, paying a deliberate 3% timeout cost in low light rather than forcing a landing.</p>
+    <figure class="figure">
+      <img src="../assets/aegisland/chart_phase6b_light.png" width="1600" height="727" alt="Stacked bars: image-only 43% unsafe, Phase 6 Aegis 6% unsafe, Phase 6B 1% unsafe">
+      <figcaption>Phase 6B frozen mixed degradation. Success vs unsafe episode share. Synthetic. Not a camera result.</figcaption>
+    </figure>
+    <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Architecture</th><th>Success</th><th>Unsafe</th><th>vs image-only</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Image-only temporal</td><td class="num">57%</td><td class="num">43%</td><td>—</td></tr>
+        <tr><td>Phase 6 Aegis</td><td class="num">94%</td><td class="num">6%</td><td>+37 pp success</td></tr>
+        <tr><td>Phase 6B selective</td><td class="num">99%</td><td class="num">1%</td><td>+42 pp success</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2>V3 — redundant perception</h2>
+    <p>Smoothing a single biased stream does almost nothing. Independent error structure does. Baseline unsafe <strong>84.2%</strong>; V2 temporal <strong>84.0%</strong>; V3 redundant <strong>2.4%</strong>.</p>
+    <figure class="figure">
+      <img src="../assets/aegisland/chart_v3_light.png" width="1600" height="727" alt="Chart comparing baseline, V2 temporal, and V3 redundant unsafe rates">
+      <figcaption>V3 mixed unsafe touchdown rates. Abstract redundant perception. The lesson is the error structure, not the renderer.</figcaption>
+    </figure>
+    <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Architecture</th><th>Unsafe</th><th>Success</th><th>Lesson</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Baseline</td><td class="num">84.2%</td><td class="num">15.8%</td><td>persistent visual bias remains dangerous</td></tr>
+        <tr><td>V2 temporal</td><td class="num">84.0%</td><td class="num">16.0%</td><td>smoothing does not expose single-stream bias</td></tr>
+        <tr><td>V3 redundant</td><td class="num">2.4%</td><td class="num">97.6%</td><td>independent error structure can expose the bias</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2>Phase 10 — honesty without a point-error win</h2>
+    <p>AegisT10 did <strong>not</strong> beat Phase 9 centimeter-scale ArUco point estimates on the Gazebo-camera holdout. Every usable observation was already clean geometry, so temporal filtering had nothing catastrophic to rescue. What changed was uncertainty: median |residual|/σ moved from <strong>13.17 / 5.11</strong> (badly overconfident) to <strong>0.65 / 0.52</strong>, with 2σ coverage <strong>93% / 100%</strong>. The mixed result was frozen. Nothing was retuned after exposure.</p>
+    <figure class="figure">
+      <img src="../assets/aegisland/chart_uncertainty_light.png" width="1600" height="759" alt="Uncertainty honesty chart: Phase 9 versus AegisT10 residuals over sigma">
+      <figcaption>Uncertainty honesty, Phase 9 vs AegisT10. Point error matched. Calibration did not. That is still a result.</figcaption>
+    </figure>
+
+    <h2>The uncomfortable table — Phase 10R</h2>
+    <p>The Phase 10R candidate was frozen at <code>e1d566f8baa47bf10f9bdf39dd5988724208be80</code>, then evaluated <strong>once</strong> on a protected holdout: 12 new geometry trajectories, three appearance conditions, 36 sequences, <strong>1,440 truth-visible frames</strong>. Under the preregistered all-gates rule the overall result is <strong>mixed / failed</strong>. It is preserved without post-holdout retuning.</p>
+    <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Frozen gate</th><th>Result</th><th>Reading</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Clean lateral / altitude MAE ≤ 1.10× Phase 9</td><td class="tag-pass">PASS</td><td class="num">0.704× / 0.417×</td></tr>
+        <tr><td>Ambiguous lateral MAE improvement ≥ 30%</td><td class="tag-pass">PASS</td><td class="num">79.2%</td></tr>
+        <tr><td>Ambiguous altitude MAE improvement ≥ 30%</td><td class="tag-pass">PASS</td><td class="num">73.7%</td></tr>
+        <tr><td>Ambiguous lateral p95 improvement ≥ 25%</td><td class="tag-fail">FAIL</td><td class="num">−1.1%</td></tr>
+        <tr><td>Ambiguous altitude p95 improvement ≥ 25%</td><td class="tag-fail">FAIL</td><td class="num">7.3%</td></tr>
+        <tr><td>Truth-visible miss rate ≤ 10%</td><td class="tag-fail">FAIL</td><td class="num">20.0%</td></tr>
+        <tr><td>False-positive rate ≤ 1%</td><td class="tag-pass">PASS</td><td class="num">0.0%</td></tr>
+        <tr><td>95% uncertainty coverage 90–98%</td><td class="tag-fail">FAIL</td><td class="num">84.3% lat / 79.7% alt</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout">
+      <strong>The finding that is worth keeping</strong>
+      Phase 10R dramatically reduced average ambiguous-view error while leaving a hard tail, a 20% availability gap, and under-covering uncertainty after appearance + geometry shift. In-domain calibration did not automatically survive distribution shift. That is why the holdout stays frozen, and why Phase 11 exists.
+    </div>
+    <p>
+      <a href="https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_result.md" target="_blank" rel="noopener noreferrer">Frozen result ↗</a>
+      ·
+      <a href="https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_protocol.md" target="_blank" rel="noopener noreferrer">Protocol ↗</a>
+    </p>
+
+    <h2>What Phase 11 is for</h2>
+    <p>Not retuning 10R after seeing the holdout. Coverage under shift, tail failures, and principled abstention — whether the system can know when its guarantees have stopped transferring.</p>
+
+    <h2>Limits</h2>
+    <ul>
+      <li>Simulation only — no hardware-camera or physical-flight validation.</li>
+      <li>Frozen 10R miss rate 20% against a ≤10% target.</li>
+      <li>p95 gates failed; average gains did not remove the difficult error tail.</li>
+      <li>The 10R holdout is now seen. It cannot be reused as a hidden test.</li>
+      <li>Phase 10 camera holdout is small: 20 truth-visible, 15 paired observations.</li>
+    </ul>
+
+    <h2>Cite</h2>
+    <p>Source of the figures and tables: <a href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">suhaslord/uav-safety-research</a>. Citation file on the repo: <code>CITATION.cff</code>.</p>
+    <p><a href="../index.html">← Back to the studio</a></p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>© 2026 Suhas Beemineni · not flight software</p>
+    <div class="footer-links">
+      <a href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Cockpit</a>
+      <a href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+<script src="../js/site.js"></script>
+</body>
+</html>
