@@ -1,2 +1,7 @@
-# portfolio
-Responsive personal portfolio designed to highlight my technical skills, projects, and internship experience. Built to demonstrate web content organization, UI design, and frontend development fundamentals.
+# Suhas Beemineni — portfolio
+
+Warm, static personal site for selected work, internships, and research.
+
+**Live:** [https://suhaslord.github.io/portfolio/](https://suhaslord.github.io/portfolio/)
+
+Single-file HTML/CSS/JS, hosted on GitHub Pages.
