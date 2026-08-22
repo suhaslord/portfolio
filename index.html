@@ -44,19 +44,61 @@
   <header class="hero" id="top">
     <div class="hero-inner wrap">
       <p class="kicker">SUHAS BEEMINENI · RIHS '29 · SJ DELTA</p>
-      <h1>Perception reliability for autonomy — simulation-first research.</h1>
-      <p class="lede">Independent work on perception overconfidence and calibrated abstention for UAV safety. I freeze holdouts — including the ones that fail — so results can be inspected, not trusted on a demo reel.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#flagship">Enter AegisLand</a>
-        <a class="btn btn-secondary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open cockpit</a>
-        <a class="btn btn-ghost" href="mailto:suhas.aug20@gmail.com">Email</a>
-      </div>
-      <div class="trust-chips">
-        <span class="chip">Sim-only</span>
-        <span class="chip">safety_acceptance = false</span>
-        <span class="chip">Phase 11</span>
-        <span class="chip">P14R</span>
-        <a class="chip chip-link" href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub suhaslord</a>
+      <div class="hero-layout">
+        <div class="hero-main">
+          <h1>Perception reliability for autonomy — simulation-first research.</h1>
+          <p class="lede">Independent work on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts — including failures — stay inspectable.</p>
+          <div class="proof-strip">
+            <div class="proof-strip-item">
+              <div class="proof-strip-num">43% → 1%</div>
+              <div class="proof-strip-label">Phase 6B unsafe</div>
+            </div>
+            <div class="proof-strip-item is-fail">
+              <div class="proof-strip-num">false</div>
+              <div class="proof-strip-label">safety_acceptance</div>
+            </div>
+            <div class="proof-strip-item">
+              <div class="proof-strip-num">Phase 11 · P14R</div>
+              <div class="proof-strip-label">Frontier</div>
+            </div>
+            <div class="proof-strip-item">
+              <div class="proof-strip-num">Sim-only</div>
+              <div class="proof-strip-label">Archive · not flight SW</div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#flagship" aria-label="Enter AegisLand research cockpit">Enter AegisLand</a>
+            <a class="btn btn-secondary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open AegisLand cockpit">Cockpit</a>
+            <a class="btn btn-ghost" href="mailto:suhas.aug20@gmail.com" aria-label="Email Suhas">Email</a>
+          </div>
+          <div class="trust-chips">
+            <span class="chip">Sim-only</span>
+            <a class="chip chip-link" href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub suhaslord</a>
+          </div>
+        </div>
+        <aside class="hero-rail">
+          <div class="hero-rail-cover">
+            <img src="assets/aegisland/chart_phase6b_light.png" alt="Phase 6B unsafe reduction chart" width="400" height="250">
+          </div>
+          <div class="hero-rail-bento">
+            <div class="rail-metric">
+              <div class="rail-metric-num">43% → 1%</div>
+              <div class="rail-metric-label">Phase 6B</div>
+            </div>
+            <div class="rail-metric">
+              <div class="rail-metric-num">84.2% → 2.4%</div>
+              <div class="rail-metric-label">V3 arch</div>
+            </div>
+            <div class="rail-metric is-fail">
+              <div class="rail-metric-num">false</div>
+              <div class="rail-metric-label">safety_acceptance</div>
+            </div>
+            <div class="rail-metric">
+              <div class="rail-metric-num">Frozen</div>
+              <div class="rail-metric-label">Holdouts</div>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   </header>
@@ -65,7 +107,7 @@
     <div class="wrap">
       <div class="flagship-card">
         <div class="flagship-visual">
-          <img src="assets/aegisland/cover.jpg" width="1600" height="1000" alt="AegisLand research cockpit showing unsafe rates and abstention behavior">
+          <img src="assets/aegisland/chart_phase6b_light.png" width="1600" height="1000" alt="Phase 6B unsafe reduction research chart">
           <div class="flagship-overlay">
             <span class="badge-mono">FLAGSHIP · SIMULATION ONLY</span>
             <span class="badge-mono badge-fail">safety_acceptance: false</span>
@@ -74,25 +116,39 @@
         <div class="flagship-content">
           <h2 class="section-title">AegisLand</h2>
           <p class="flagship-meta">UAV perception reliability · research cockpit</p>
+          <div class="flagship-metrics-mobile">
+            <div class="metric-mobile">
+              <span class="metric-mobile-num">43% → 1%</span>
+              <span class="metric-mobile-label">Phase 6B</span>
+            </div>
+            <div class="metric-mobile is-fail">
+              <span class="metric-mobile-num">false</span>
+              <span class="metric-mobile-label">safety_acceptance</span>
+            </div>
+            <div class="metric-mobile">
+              <span class="metric-mobile-num">Phase 11</span>
+              <span class="metric-mobile-label">P14R</span>
+            </div>
+          </div>
           <p class="flagship-blurb">AegisLand is a simulation-only research cockpit for UAV perception reliability. Not flight software. Not a safety case. An inspectable archive where unsafe rates and abstention behavior stay visible.</p>
           <div class="flagship-metrics">
             <div class="metric-item">
-              <span class="metric-value">Phase 6B</span>
-              <span class="metric-label">43% → 1% unsafe reduction</span>
+              <span class="metric-value">43% → 1%</span>
+              <span class="metric-label">Phase 6B unsafe reduction</span>
             </div>
             <div class="metric-item">
-              <span class="metric-value is-fail">safety_acceptance</span>
-              <span class="metric-label">false</span>
+              <span class="metric-value is-fail">false</span>
+              <span class="metric-label">safety_acceptance</span>
             </div>
             <div class="metric-item">
-              <span class="metric-value">Frontier</span>
-              <span class="metric-label">Phase 11 · P14R</span>
+              <span class="metric-value">Phase 11 · P14R</span>
+              <span class="metric-label">Frontier</span>
             </div>
           </div>
           <div class="flagship-ctas">
-            <a class="btn btn-primary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open research cockpit</a>
-            <a class="btn btn-secondary" href="work/aegisland.html">Read protocol</a>
-            <a class="btn btn-ghost" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="btn btn-primary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open AegisLand research cockpit">Open cockpit</a>
+            <a class="btn btn-secondary" href="work/aegisland.html" aria-label="Read AegisLand protocol">Protocol</a>
+            <a class="btn btn-ghost" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">GitHub</a>
           </div>
         </div>
       </div>
@@ -108,12 +164,16 @@
         <a class="project-card" href="https://github.com/elodin-sys/elodin/pull/769" target="_blank" rel="noopener noreferrer">
           <div class="project-visual">
             <img src="assets/aegisland/cover.jpg" width="1600" height="1000" alt="Elodin Voyager contribution">
-            <span class="project-badge">Merged</span>
+            <span class="project-badge">Merged PR #769</span>
           </div>
           <div class="project-content">
             <h3>Elodin Voyager PR #769</h3>
             <p class="project-meta">Open source contribution</p>
             <p class="project-description">Merged pull request to Elodin aerospace simulation framework.</p>
+            <div class="project-metrics">
+              <span class="metric-chip">Merged</span>
+              <span class="metric-chip">2026</span>
+            </div>
             <div class="project-stack">
               <span class="stack-chip">Rust</span>
               <span class="stack-chip">Simulation</span>
@@ -130,6 +190,10 @@
             <h3>AbstainBench</h3>
             <p class="project-meta">Language model abstention</p>
             <p class="project-description">30-question local benchmark for answer vs. abstain. No API keys. Hallucination is a scoring category.</p>
+            <div class="project-metrics">
+              <span class="metric-chip">30 questions</span>
+              <span class="metric-chip">Local eval</span>
+            </div>
             <div class="project-stack">
               <span class="stack-chip">Python</span>
               <span class="stack-chip">LLMs</span>
@@ -138,14 +202,18 @@
         </a>
 
         <div class="project-card">
-          <div class="project-visual project-visual-solid">
-            <div class="project-icon">📱</div>
+          <div class="project-visual">
+            <img src="assets/aegisland/chart_uncertainty_light.png" width="1600" height="1000" alt="StudySync platform">
             <span class="project-badge">Shipped</span>
           </div>
           <div class="project-content">
             <h3>StudySync</h3>
             <p class="project-meta">AI study platform</p>
             <p class="project-description">Peak ~200 active users. AI-powered study tools and scheduling.</p>
+            <div class="project-metrics">
+              <span class="metric-chip">~200 peak users</span>
+              <span class="metric-chip">2025</span>
+            </div>
             <div class="project-stack">
               <span class="stack-chip">React</span>
               <span class="stack-chip">AI</span>
@@ -154,14 +222,18 @@
         </div>
 
         <div class="project-card">
-          <div class="project-visual project-visual-solid">
-            <div class="project-icon">🎮</div>
+          <div class="project-visual">
+            <img src="assets/aegisland/chart_v3_light.png" width="1600" height="1000" alt="Python Game Jam entry">
             <span class="project-badge">2nd place</span>
           </div>
           <div class="project-content">
             <h3>Python Game Jam</h3>
             <p class="project-meta">Competition entry</p>
             <p class="project-description">Runner-up in competitive game development jam.</p>
+            <div class="project-metrics">
+              <span class="metric-chip">2nd place</span>
+              <span class="metric-chip">2025</span>
+            </div>
             <div class="project-stack">
               <span class="stack-chip">Python</span>
               <span class="stack-chip">Pygame</span>
@@ -170,14 +242,18 @@
         </div>
 
         <div class="project-card">
-          <div class="project-visual project-visual-solid">
-            <div class="project-icon">🏆</div>
+          <div class="project-visual">
+            <img src="assets/aegisland/frame_home.png" width="1600" height="1000" alt="SkillsUSA 3D Visualization">
             <span class="project-badge">1st Regional</span>
           </div>
           <div class="project-content">
             <h3>SkillsUSA 3D Viz</h3>
             <p class="project-meta">Competition</p>
             <p class="project-description">1st place regional, 16th California state in 3D Visualization & Animation.</p>
+            <div class="project-metrics">
+              <span class="metric-chip">1st Regional</span>
+              <span class="metric-chip">16th CA State</span>
+            </div>
             <div class="project-stack">
               <span class="stack-chip">Blender</span>
               <span class="stack-chip">3D</span>
@@ -194,6 +270,10 @@
             <h3>ECHO / FIELD</h3>
             <p class="project-meta">Canvas experiment</p>
             <p class="project-description">Voice, motion, and memory become a field that cannot be screenshotted into the same image twice.</p>
+            <div class="project-metrics">
+              <span class="metric-chip">WebAudio</span>
+              <span class="metric-chip">Generative</span>
+            </div>
             <div class="project-stack">
               <span class="stack-chip">Canvas</span>
               <span class="stack-chip">WebAudio</span>
