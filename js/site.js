@@ -1,4 +1,5 @@
 (function () {
+  // Mobile navigation toggle
   const nav = document.getElementById("siteNav");
   const toggle = document.getElementById("navToggle");
   const links = document.getElementById("navLinks");
@@ -9,6 +10,8 @@
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
+
+    // Close menu when clicking a link
     links.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", function () {
         links.classList.remove("is-open");
@@ -18,6 +21,7 @@
     });
   }
 
+  // Add scrolled class to nav
   window.addEventListener(
     "scroll",
     function () {
@@ -26,26 +30,32 @@
     { passive: true }
   );
 
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const nodes = document.querySelectorAll(".reveal");
-  if (reduced || !("IntersectionObserver" in window)) {
-    nodes.forEach(function (el) {
-      el.classList.add("is-visible");
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (href === "#") return;
+
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const navHeight = nav ? nav.offsetHeight : 0;
+        const targetPosition = target.offsetTop - navHeight - 20;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }
     });
-    return;
-  }
-  const io = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
-  );
-  nodes.forEach(function (el) {
-    io.observe(el);
+  });
+
+  // Set current page indicator
+  const currentPath = window.location.pathname;
+  links.querySelectorAll("a").forEach(function (link) {
+    const linkPath = new URL(link.href).pathname;
+    if (linkPath === currentPath) {
+      link.setAttribute("aria-current", "page");
+    }
   });
 })();
