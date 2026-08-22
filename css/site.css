@@ -560,17 +560,15 @@ a {
   display: contents;
 }
 
-.flagship-chapters {
+/* Desktop: nav is the left grid item (track is display:contents).
+   Mobile: nav is the first flex child of the tall track. Either way
+   the sticky box is .chapters-nav — never a short aside wrapper. */
+.chapters-nav {
   position: sticky;
   top: 5rem;
   align-self: start;
-  height: fit-content;
-  /* Grid item: without this the chapter rail's intrinsic width forces
-     horizontal page overflow once the container stacks single-column */
+  z-index: 20;
   min-width: 0;
-}
-
-.chapters-nav {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -1792,24 +1790,19 @@ main > .hero-media figcaption {
     gap: var(--s-3);
   }
 
-  .flagship-chapters {
-    position: sticky;
-    top: 4rem;
-    z-index: 20;
-    align-self: stretch;
-    background: rgba(244, 239, 230, 0.94);
-    backdrop-filter: blur(12px);
-    margin-inline: calc(-1 * var(--space));
-    padding: 0.5rem var(--space);
-    border-bottom: 1px solid var(--line);
-  }
-
   .chapters-nav {
+    top: 4rem;
+    align-self: stretch;
     flex-direction: row;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scrollbar-width: thin;
     gap: 0.25rem;
+    background: rgba(244, 239, 230, 0.94);
+    backdrop-filter: blur(12px);
+    margin-inline: calc(-1 * var(--space));
+    padding: 0.5rem var(--space);
+    border-bottom: 1px solid var(--line);
   }
 
   /* Horizontal rail: dual active cue = forest fill + copper underline.
@@ -1887,30 +1880,6 @@ main > .hero-media figcaption {
 }
 
 @media (max-width: 640px) {
-  /* Auditor fix: sticky the chips themselves. display:contents on the
-     aside removes the short (~nav-tall) containing block so .chapters-nav
-     sticks inside .flagship-track (which spans every chapter). */
-  .flagship-chapters {
-    display: contents;
-    position: static;
-    background: none;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    backdrop-filter: none;
-  }
-
-  .chapters-nav {
-    position: sticky;
-    top: 4rem;
-    z-index: 20;
-    background: rgba(244, 239, 230, 0.94);
-    backdrop-filter: blur(12px);
-    margin-inline: calc(-1 * var(--space));
-    padding: 0.5rem var(--space);
-    border-bottom: 1px solid var(--line);
-  }
-
   .nav-toggle {
     display: inline-flex;
     align-items: center;
