@@ -56,7 +56,7 @@ Voice, motion, and memory become a field that cannot be screenshotted into the s
 
 ## Recognition
 
-- **Aviary Gym Contributions** — Performance optimizations merged into [PettingZoo Aviary](https://github.com/Farama-Foundation/PettingZoo)
+- **Aviary Contributions** — Performance optimizations merged into [OpenMDAO Aviary](https://github.com/OpenMDAO/Aviary)
 - **Voyager/Elodin Validation** — Early sim-to-sim validation work (simulation-only, not flight-tested)
 - **SkillsUSA Regional Champion** — 3D Visualization & Animation (2026)
 
