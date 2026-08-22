@@ -15,15 +15,15 @@ html {
   --bg-deep: #ebe4d6;
   --paper: #fcfaf6;
   --ink: #1a1714;
-  --ink-soft: #4a453e;
-  --muted: #7a7368;
-  --line: rgba(26, 23, 20, 0.12);
+  --ink-soft: #3d3935;
+  --muted: #6f6660;
+  --line: rgba(26, 23, 20, 0.14);
   --accent: #2f4a3c;
   --accent-soft: rgba(47, 74, 60, 0.1);
   --warm: #a67c4e;
   --fail: #8c3d2a;
   --pass: #2f4a3c;
-  --radius: 0.55rem;
+  --radius: 0.65rem;
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Source Sans 3", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -31,6 +31,7 @@ html {
   --max: 1080px;
   --max-wide: 1240px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 ::selection {
@@ -174,31 +175,37 @@ a {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
+  opacity: 0.95;
 }
 
 .hero {
-  padding: clamp(3rem, 9vh, 5.5rem) 0 clamp(2.5rem, 6vh, 4rem);
+  padding: clamp(3.5rem, 10vh, 6rem) 0 clamp(2.5rem, 6vh, 4rem);
 }
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.35rem, 6.4vw, 4.35rem);
+  font-size: clamp(2.5rem, 6.8vw, 4.6rem);
   font-weight: 600;
-  letter-spacing: -0.042em;
-  line-height: 1.08;
+  letter-spacing: -0.044em;
+  line-height: 1.06;
   max-width: 18ch;
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero .lede {
   color: var(--ink-soft);
-  font-size: clamp(1.05rem, 2vw, 1.2rem);
-  max-width: 40rem;
-  margin-bottom: 1.75rem;
+  font-size: clamp(1.08rem, 2.2vw, 1.25rem);
+  max-width: 42rem;
+  margin-bottom: 2rem;
+  line-height: 1.7;
 }
 
 .lede {
@@ -224,18 +231,25 @@ code {
 .btn {
   display: inline-flex;
   align-items: center;
-  padding: 0.78rem 1.2rem;
+  padding: 0.85rem 1.35rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   text-decoration: none;
   border-radius: var(--radius);
   border: 1.5px solid transparent;
-  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+  transition: transform 0.28s var(--ease-out), box-shadow 0.28s var(--ease-out), background 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(47, 74, 60, 0.14);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(47, 74, 60, 0.16), 0 4px 12px rgba(47, 74, 60, 0.1);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  transition-duration: 0.1s;
 }
 
 .btn-primary {
@@ -243,8 +257,12 @@ code {
   color: var(--bg);
 }
 
+.btn-primary:hover {
+  background: #264235;
+}
+
 .btn-secondary {
-  background: transparent;
+  background: var(--paper);
   border-color: var(--line);
   color: var(--ink);
 }
@@ -252,6 +270,7 @@ code {
 .btn-secondary:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--paper);
 }
 
 .hero-media {
@@ -266,12 +285,24 @@ code {
 
 .hero-media img {
   width: 100%;
-  border-radius: 0.85rem;
+  border-radius: 1rem;
   border: 1px solid var(--line);
-  box-shadow: 0 28px 70px rgba(26, 23, 20, 0.14);
+  box-shadow: 
+    0 32px 80px rgba(26, 23, 20, 0.12),
+    0 8px 24px rgba(26, 23, 20, 0.08),
+    0 2px 8px rgba(26, 23, 20, 0.04);
   aspect-ratio: 16 / 9;
   object-fit: cover;
   background: var(--bg-deep);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+.hero-media a:hover img {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 40px 100px rgba(26, 23, 20, 0.14),
+    0 12px 32px rgba(26, 23, 20, 0.1),
+    0 4px 12px rgba(26, 23, 20, 0.06);
 }
 
 .hero-media figcaption {
@@ -288,7 +319,8 @@ code {
 
 .telemetry {
   border-block: 1px solid var(--line);
-  background: rgba(252, 250, 246, 0.55);
+  background: rgba(252, 250, 246, 0.65);
+  backdrop-filter: blur(8px);
 }
 
 .telemetry-grid {
@@ -299,8 +331,13 @@ code {
 }
 
 .tele-cell {
-  padding: 1.35rem var(--space);
+  padding: 1.5rem var(--space);
   border-right: 1px solid var(--line);
+  transition: background 0.3s;
+}
+
+.tele-cell:hover {
+  background: rgba(252, 250, 246, 0.5);
 }
 
 .tele-cell:last-child {
@@ -309,9 +346,9 @@ code {
 
 .tele-value {
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  font-size: clamp(1.4rem, 2.8vw, 1.95rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.032em;
   color: var(--accent);
   line-height: 1.15;
 }
@@ -321,9 +358,10 @@ code {
 }
 
 .tele-label {
-  margin-top: 0.4rem;
-  font-size: 0.82rem;
+  margin-top: 0.5rem;
+  font-size: 0.84rem;
   color: var(--muted);
+  line-height: 1.5;
 }
 
 .section {
@@ -332,16 +370,19 @@ code {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  font-size: clamp(1.8rem, 3.8vw, 2.5rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.6rem;
+  letter-spacing: -0.034em;
+  margin-bottom: 0.75rem;
+  line-height: 1.15;
 }
 
 .section-lede {
-  color: var(--muted);
-  max-width: 36rem;
-  margin-bottom: 2rem;
+  color: var(--ink-soft);
+  max-width: 38rem;
+  margin-bottom: 2.25rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
 }
 
 .cover {
@@ -349,14 +390,21 @@ code {
   text-decoration: none;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 0.85rem;
+  border-radius: 1rem;
   overflow: hidden;
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  transition: transform 0.38s var(--ease-out), box-shadow 0.38s var(--ease-out), border-color 0.3s;
+  box-shadow: 
+    0 4px 12px rgba(26, 23, 20, 0.04),
+    0 1px 4px rgba(26, 23, 20, 0.02);
 }
 
 .cover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 50px rgba(26, 23, 20, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 
+    0 24px 56px rgba(26, 23, 20, 0.11),
+    0 8px 20px rgba(26, 23, 20, 0.08),
+    0 2px 8px rgba(26, 23, 20, 0.04);
+  border-color: rgba(47, 74, 60, 0.2);
 }
 
 .cover img,
@@ -368,54 +416,65 @@ code {
 }
 
 .cover-body {
-  padding: 1.25rem 1.35rem 1.45rem;
+  padding: 1.4rem 1.5rem 1.6rem;
 }
 
 .cover-kicker {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .cover h3 {
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.4rem;
+  letter-spacing: -0.032em;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+  transition: color 0.25s;
+}
+
+.cover:hover h3 {
+  color: var(--accent);
 }
 
 .cover p {
   color: var(--ink-soft);
-  font-size: 0.98rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .cover-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.15rem;
-  margin-top: 1.15rem;
+  gap: 1.35rem;
+  margin-top: 1.5rem;
 }
 
 .about-copy {
   display: grid;
-  gap: 1rem;
+  gap: 1.1rem;
   color: var(--ink-soft);
-  max-width: 62ch;
+  max-width: 64ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 .about-copy strong {
   color: var(--ink);
+  font-weight: 600;
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 1.25rem;
+  gap: 0.5rem;
+  margin-top: 1.35rem;
 }
 
 .chip {
@@ -423,8 +482,17 @@ code {
   font-weight: 600;
   color: var(--accent);
   background: var(--accent-soft);
-  padding: 0.32rem 0.7rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 999px;
+  border: 1px solid rgba(47, 74, 60, 0.15);
+  transition: transform 0.2s var(--ease-out), background 0.2s, border-color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  background: rgba(47, 74, 60, 0.14);
+  border-color: rgba(47, 74, 60, 0.25);
 }
 
 .experience-list {
@@ -436,9 +504,15 @@ code {
 .exp-row {
   display: grid;
   grid-template-columns: 5.5rem 1fr;
-  gap: 1.25rem;
-  padding: 1.2rem 0;
+  gap: 1.35rem;
+  padding: 1.35rem 0;
   border-top: 1px solid var(--line);
+  transition: padding 0.3s var(--ease-out);
+}
+
+.exp-row:hover {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .exp-row:last-child {
@@ -449,29 +523,50 @@ code {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--accent);
-  padding-top: 0.25rem;
+  padding-top: 0.3rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .exp-role {
   font-family: var(--font-display);
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
 }
 
 .exp-org {
   color: var(--muted);
-  font-size: 0.92rem;
-  margin: 0.1rem 0 0.35rem;
+  font-size: 0.94rem;
+  margin: 0.2rem 0 0.4rem;
+  font-weight: 500;
 }
 
 .exp-desc {
   color: var(--ink-soft);
-  font-size: 0.98rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .contact {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, #264235 100%);
   color: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(166, 124, 78, 0.15), transparent 60%);
+  pointer-events: none;
+}
+
+.contact .section {
+  position: relative;
+  z-index: 1;
 }
 
 .contact .section-title,
@@ -480,7 +575,7 @@ code {
 }
 
 .contact .section-lede {
-  color: rgba(244, 239, 230, 0.82);
+  color: rgba(244, 239, 230, 0.88);
 }
 
 .contact-email {
@@ -505,7 +600,9 @@ code {
 }
 
 .site-footer {
-  padding: 1.6rem var(--space) 2.4rem;
+  padding: 2rem var(--space) 2.6rem;
+  border-top: 1px solid var(--line);
+  background: rgba(252, 250, 246, 0.4);
 }
 
 .footer-inner {
@@ -513,21 +610,27 @@ code {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 0.85rem;
+  gap: 1rem;
   color: var(--muted);
   font-size: 0.9rem;
 }
 
 .footer-links {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .footer-links a {
   text-decoration: none;
   color: var(--ink-soft);
   font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
 }
 
 /* Case study */
