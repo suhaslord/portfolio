@@ -1115,15 +1115,11 @@ a {
   .cta-row .btn-primary,
   .cta-row a.btn-primary {
     grid-column: 1 / -1;
-    width: 100%;
-  }
-
-  .cta-row .btn:not(.btn-primary) {
-    width: 100%;
   }
 
   .btn {
     justify-content: center;
+    width: 100%;
     min-height: 44px;
   }
 
@@ -1136,11 +1132,6 @@ a {
   .chapter-ctas .btn-primary,
   .chapter-ctas a.btn-primary {
     grid-column: 1 / -1;
-    width: 100%;
-  }
-
-  .chapter-ctas .btn:not(.btn-primary) {
-    width: 100%;
   }
 
   .trust-chips {
