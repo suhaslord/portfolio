@@ -240,15 +240,34 @@ code {
   transition: transform 0.28s var(--ease-out), box-shadow 0.28s var(--ease-out), background 0.2s;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(47, 74, 60, 0.16), 0 4px 12px rgba(47, 74, 60, 0.1);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(47, 74, 60, 0.18), 0 6px 16px rgba(47, 74, 60, 0.12);
 }
 
 .btn:active {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(0.98);
   transition-duration: 0.1s;
 }
 
@@ -396,15 +415,33 @@ code {
   box-shadow: 
     0 4px 12px rgba(26, 23, 20, 0.04),
     0 1px 4px rgba(26, 23, 20, 0.02);
+  position: relative;
+}
+
+.cover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(47, 74, 60, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  pointer-events: none;
 }
 
 .cover:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px) scale(1.01);
   box-shadow: 
-    0 24px 56px rgba(26, 23, 20, 0.11),
-    0 8px 20px rgba(26, 23, 20, 0.08),
-    0 2px 8px rgba(26, 23, 20, 0.04);
-  border-color: rgba(47, 74, 60, 0.2);
+    0 28px 64px rgba(26, 23, 20, 0.13),
+    0 10px 24px rgba(26, 23, 20, 0.09),
+    0 4px 12px rgba(26, 23, 20, 0.05);
+  border-color: rgba(47, 74, 60, 0.3);
+}
+
+.cover:hover::after {
+  opacity: 1;
 }
 
 .cover img,
@@ -413,6 +450,12 @@ code {
   aspect-ratio: 16 / 9;
   object-fit: cover;
   background: var(--bg-deep);
+  transition: transform 0.6s var(--ease-out), filter 0.4s;
+}
+
+.cover:hover img,
+.cover:hover .cover-art {
+  filter: brightness(1.05) contrast(1.05);
 }
 
 .cover-body {
@@ -838,6 +881,155 @@ code {
   padding: 4rem 0;
 }
 
+/* 3D Canvas Container */
+#hero-canvas-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Initial animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s var(--ease-out) forwards;
+  opacity: 0;
+}
+
+/* Achievements Grid */
+.achievements-section {
+  background: linear-gradient(135deg, rgba(47, 74, 60, 0.03) 0%, transparent 100%);
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.achievement-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1.75rem 1.5rem;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--warm));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.achievement-card:hover::before {
+  transform: scaleX(1);
+}
+
+.achievement-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 48px rgba(26, 23, 20, 0.1),
+    0 8px 20px rgba(26, 23, 20, 0.06);
+  border-color: rgba(47, 74, 60, 0.25);
+}
+
+.achievement-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.achievement-card:nth-child(2) .achievement-icon {
+  animation-delay: 0.5s;
+}
+
+.achievement-card:nth-child(3) .achievement-icon {
+  animation-delay: 1s;
+}
+
+.achievement-card:nth-child(4) .achievement-icon {
+  animation-delay: 1.5s;
+}
+
+.achievement-card:nth-child(5) .achievement-icon {
+  animation-delay: 2s;
+}
+
+.achievement-card:nth-child(6) .achievement-icon {
+  animation-delay: 2.5s;
+}
+
+.achievement-metric {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+.achievement-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.achievement-card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -890,6 +1082,16 @@ code {
 
   .ladder-status {
     padding-top: 0;
+  }
+
+  #hero-canvas-container {
+    width: 100%;
+    height: 40vh;
+    opacity: 0.4;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -947,13 +1149,25 @@ code {
 
   .reveal,
   .cover:hover,
-  .btn:hover {
+  .btn:hover,
+  .achievement-card:hover {
     transform: none;
     transition: none;
   }
 
-  .reveal {
+  .reveal,
+  .animate-fade-up {
     opacity: 1;
+    animation: none;
+  }
+
+  .achievement-icon {
+    animation: none;
+  }
+
+  #hero-canvas-container,
+  #particles-canvas {
+    display: none;
   }
 }
 
