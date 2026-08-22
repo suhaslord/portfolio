@@ -26,14 +26,36 @@
     });
   }
 
-  // Add scrolled class to nav
+  // --page-progress 0–1 drives the nav hairline (and any other scrub)
+  // when scroll-driven animations are missing. Dumb write; CSS decides.
+  var progressTick = 0;
+  function writeProgress() {
+    progressTick = 0;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    document.documentElement.style.setProperty("--page-progress", p.toFixed(4));
+    if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+
   window.addEventListener(
     "scroll",
     function () {
-      if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 8);
+      if (!progressTick) {
+        progressTick = window.requestAnimationFrame(writeProgress);
+      }
     },
     { passive: true }
   );
+  writeProgress();
+
+  // Sticky chapter rail height on stacked layouts (0 on desktop sidebar)
+  function railOffset() {
+    const rail = document.getElementById("flagshipChapters");
+    if (!rail) return 0;
+    const sticky = window.getComputedStyle(rail).position === "sticky";
+    const stacked = window.matchMedia("(max-width: 1024px)").matches;
+    return sticky && stacked ? rail.offsetHeight : 0;
+  }
 
   // Smooth scroll for anchor links (instant when reduced motion is preferred)
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
@@ -45,7 +67,7 @@
       if (target) {
         e.preventDefault();
         const navHeight = nav ? nav.offsetHeight : 0;
-        const targetPosition = target.offsetTop - navHeight - 20;
+        const targetPosition = target.offsetTop - navHeight - railOffset() - 12;
 
         window.scrollTo({
           top: targetPosition,
@@ -55,12 +77,13 @@
     });
   });
 
-  // Set current page indicator
+  // Set current page indicator (skip same-page hash links: they are section
+  // anchors, not pages, and would all light up at once)
   const currentPath = window.location.pathname;
   if (links) {
     links.querySelectorAll("a").forEach(function (link) {
-      const linkPath = new URL(link.href).pathname;
-      if (linkPath === currentPath) {
+      const url = new URL(link.href);
+      if (url.pathname === currentPath && !url.hash) {
         link.setAttribute("aria-current", "page");
       }
     });
@@ -85,6 +108,16 @@
             link.classList.remove("is-active");
             if (link.getAttribute("href") === "#" + id) {
               link.classList.add("is-active");
+
+              // Keep the active chip latched in view when the rail is a
+              // horizontal scroller (stacked layouts)
+              const rail = link.closest(".chapters-nav");
+              if (rail && rail.scrollWidth > rail.clientWidth) {
+                rail.scrollTo({
+                  left: Math.max(0, link.offsetLeft - 24),
+                  behavior: reduceMotion.matches ? "auto" : "smooth",
+                });
+              }
             }
           });
         }

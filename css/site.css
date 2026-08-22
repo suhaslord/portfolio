@@ -122,20 +122,24 @@ a {
   border-bottom-color: var(--line);
 }
 
-/* Move 6 — reading progress hairline, scrubbed by scroll position.
-   Pure CSS scroll-driven animation; decorative, so no JS fallback. */
+/* Craft 6 — reading progress hairline. Driven by --page-progress (0–1)
+   so browsers without scroll-driven animations still get the scrub.
+   Native scroll() timeline takes over when supported. */
 @media (prefers-reduced-motion: no-preference) {
+  .site-nav::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--copper);
+    transform: scaleX(var(--page-progress, 0));
+    transform-origin: 0 50%;
+    pointer-events: none;
+  }
+
   @supports (animation-timeline: scroll()) {
     .site-nav::after {
-      content: "";
-      position: absolute;
-      inset-inline: 0;
-      bottom: -1px;
-      height: 2px;
-      background: var(--copper);
-      transform: scaleX(0);
-      transform-origin: 0 50%;
-      pointer-events: none;
       animation: nav-progress linear both;
       animation-timeline: scroll();
     }
@@ -145,6 +149,18 @@ a {
 @keyframes nav-progress {
   to {
     transform: scaleX(1);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
   }
 }
 
@@ -346,6 +362,27 @@ a {
   box-shadow: 0 1px 0 rgba(26, 23, 20, 0.04), 0 24px 48px -36px rgba(26, 23, 20, 0.3);
 }
 
+/* Craft 2 — scroll-scrubbed hero media (no video asset exists, so the
+   poster itself is scroll-tied): as the hero leaves, the exhibit drifts
+   up and recedes. Pure CSS view timeline, transform+opacity only. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    .hero-grid .hero-media img {
+      animation: hero-drift linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+
+@keyframes hero-drift {
+  to {
+    opacity: 0.45;
+    translate: 0 -28px;
+    scale: 0.99;
+  }
+}
+
 .cta-row {
   display: flex;
   flex-wrap: wrap;
@@ -522,12 +559,16 @@ a {
   top: 5rem;
   align-self: start;
   height: fit-content;
+  /* Grid item: without this the chapter rail's intrinsic width forces
+     horizontal page overflow once the container stacks single-column */
+  min-width: 0;
 }
 
 .chapters-nav {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  counter-reset: chapter;
 }
 
 .chapter-link {
@@ -540,10 +581,20 @@ a {
   padding: 0.5rem 0.75rem;
   border-left: 2px solid transparent;
   border-radius: 0 var(--radius) var(--radius) 0;
+  counter-increment: chapter;
   transition:
     color var(--dur-micro) var(--ease),
     background-color var(--dur-micro) var(--ease),
     border-color var(--dur-micro) var(--ease);
+}
+
+/* Dossier index: the rail reads as a numbered table of contents */
+.chapter-link::before {
+  content: counter(chapter, decimal-leading-zero) / "";
+  font-size: 0.68rem;
+  color: var(--copper-deep);
+  margin-right: 0.75ch;
+  letter-spacing: 0.04em;
 }
 
 .chapter-link:hover,
@@ -558,6 +609,7 @@ a {
 
 .flagship-content-scroll {
   max-width: 58rem;
+  min-width: 0;
 }
 
 .flagship-intro {
@@ -609,6 +661,28 @@ a {
   }
 }
 
+/* Craft 6 — progress-driven section exits: chapter openers ease off as
+   they leave the top of the scrollport. Scrubbed, transform+opacity only,
+   decorative (no fallback needed). */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    .section-title-display,
+    .section-title-invert,
+    .chapter-title {
+      animation: section-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 85%;
+    }
+  }
+}
+
+@keyframes section-exit {
+  to {
+    opacity: 0.35;
+    translate: 0 -14px;
+  }
+}
+
 .media-overlay {
   position: absolute;
   top: 1rem;
@@ -632,7 +706,7 @@ a {
   font-weight: 500;
 }
 
-.badge-fail {
+.badge-mono.badge-fail {
   background: rgba(140, 61, 42, 0.85);
 }
 
@@ -730,7 +804,8 @@ a {
   color: var(--forest);
 }
 
-.badge-fail {
+.badge-value.badge-fail {
+  font-family: var(--font-mono);
   color: var(--fail);
 }
 
@@ -751,9 +826,11 @@ a {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--s-3);
+  counter-reset: work;
 }
 
 .work-card {
+  counter-increment: work;
   display: grid;
   grid-template-rows: auto 1fr;
   text-decoration: none;
@@ -890,6 +967,12 @@ a {
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 0.75rem;
+}
+
+/* Same numbered-index discipline as the chapter rail */
+.work-meta::before {
+  content: "W·" counter(work, decimal-leading-zero) "  " / "";
+  color: var(--copper-deep);
 }
 
 .work-text p {
@@ -1687,32 +1770,62 @@ main > .hero-media figcaption {
 
 /* Responsive */
 @media (max-width: 1024px) {
+  /* Latch: leave CSS Grid. A sticky grid item is trapped in its own
+     short row, so the chips scroll away with that row. Flex column
+     makes the aside's containing block the full-height flagship, so
+     position:sticky on .flagship-chapters can pin under the nav
+     for the whole dossier. */
+  html {
+    scroll-padding-top: 8rem;
+  }
+
   .flagship-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
   }
 
   .flagship-chapters {
-    position: static;
+    position: sticky;
+    top: 4rem;
+    z-index: 20;
+    align-self: stretch;
+    background: rgba(244, 239, 230, 0.94);
+    backdrop-filter: blur(12px);
+    margin-inline: calc(-1 * var(--space));
+    padding: 0.5rem var(--space);
+    border-bottom: 1px solid var(--line);
   }
 
   .chapters-nav {
     flex-direction: row;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
-    gap: 0.75rem;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    gap: 0.25rem;
   }
 
-  /* Horizontal rail: the active marker reads as a tab underline */
+  /* Horizontal rail: dual active cue = forest fill + copper underline.
+     44px min tap. Numbers stay in ::before from the desktop index. */
   .chapter-link {
     white-space: nowrap;
+    min-block-size: 44px;
+    display: inline-flex;
+    align-items: center;
     border-left: 0;
     border-bottom: 2px solid transparent;
     border-radius: var(--radius) var(--radius) 0 0;
+    padding: 0.5rem 0.7rem;
   }
 
   .chapter-link.is-active {
     border-bottom-color: var(--copper);
+    color: var(--forest);
+    background: rgba(47, 74, 60, 0.08);
+  }
+
+  .flagship-chapter {
+    scroll-margin-top: 8rem;
   }
 }
 
@@ -1782,21 +1895,42 @@ main > .hero-media figcaption {
     flex-direction: column;
     gap: 0;
     background: rgba(244, 239, 230, 0.97);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
     padding: 0.5rem var(--space) var(--s-2);
+    counter-reset: navi;
   }
 
   .nav-links.is-open {
     display: flex;
   }
 
-  .nav-links li {
-    border-top: 1px solid var(--line);
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-links.is-open {
+      animation: menu-in var(--dur-micro) var(--ease) both;
+    }
   }
 
+  .nav-links li {
+    border-top: 1px solid var(--line);
+    counter-increment: navi;
+  }
+
+  /* ≥44px targets, indexed like the dossier rail */
   .nav-links a {
-    display: block;
-    padding: 0.75rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75ch;
+    padding: 0.85rem 0;
+    min-block-size: 44px;
+  }
+
+  .nav-links a::before {
+    content: counter(navi, decimal-leading-zero) / "";
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--copper-deep);
+    letter-spacing: 0.04em;
   }
 
   /* The animated underline is a pointer affordance; off in the stacked menu */
@@ -1843,18 +1977,6 @@ main > .hero-media figcaption {
 
   .chapter-media img {
     height: clamp(18rem, 42vh, 28rem);
-  }
-
-  .chapters-nav {
-    position: sticky;
-    top: 4rem;
-    background: var(--cream);
-    z-index: 20;
-    padding: 0.75rem 0;
-    margin: 0 calc(-1 * var(--space));
-    padding-left: var(--space);
-    padding-right: var(--space);
-    border-bottom: 1px solid var(--line);
   }
 
   .exp-row {
