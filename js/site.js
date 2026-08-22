@@ -52,10 +52,42 @@
 
   // Set current page indicator
   const currentPath = window.location.pathname;
-  links.querySelectorAll("a").forEach(function (link) {
-    const linkPath = new URL(link.href).pathname;
-    if (linkPath === currentPath) {
-      link.setAttribute("aria-current", "page");
-    }
-  });
+  if (links) {
+    links.querySelectorAll("a").forEach(function (link) {
+      const linkPath = new URL(link.href).pathname;
+      if (linkPath === currentPath) {
+        link.setAttribute("aria-current", "page");
+      }
+    });
+  }
+
+  // Flagship chapter scroll spy
+  const chapterLinks = document.querySelectorAll(".chapter-link");
+  const chapters = document.querySelectorAll(".flagship-chapter");
+
+  if (chapterLinks.length > 0 && chapters.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          chapterLinks.forEach(function (link) {
+            link.classList.remove("is-active");
+            if (link.getAttribute("href") === "#" + id) {
+              link.classList.add("is-active");
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    chapters.forEach(function (chapter) {
+      observer.observe(chapter);
+    });
+  }
 })();

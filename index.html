@@ -30,8 +30,8 @@
     <a class="nav-brand" href="#top">Suhas Beemineni</a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#work">Work</a></li>
       <li><a href="#flagship">AegisLand</a></li>
+      <li><a href="#work">Work</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#wins">Wins</a></li>
       <li><a href="resume.html">Resume</a></li>
@@ -43,288 +43,328 @@
 <main id="main">
   <header class="hero" id="top">
     <div class="hero-inner wrap">
-      <p class="kicker">SUHAS BEEMINENI · RIHS '29 · SJ DELTA</p>
-      <h1>Perception reliability for autonomy — simulation-first research.</h1>
-      <p class="lede">Independent work on perception overconfidence and calibrated abstention for UAV safety. I freeze holdouts — including the ones that fail — so results can be inspected, not trusted on a demo reel.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#flagship">Enter AegisLand</a>
-        <a class="btn btn-secondary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open cockpit</a>
-        <a class="btn btn-ghost" href="mailto:suhas.aug20@gmail.com">Email</a>
-      </div>
-      <div class="trust-chips">
-        <span class="chip">Sim-only</span>
-        <span class="chip">safety_acceptance = false</span>
-        <span class="chip">Phase 11</span>
-        <span class="chip">P14R</span>
-        <a class="chip chip-link" href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub suhaslord</a>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="kicker">SUHAS BEEMINENI · RIHS '29 · SJ DELTA</p>
+          <h1>Perception reliability for autonomy — simulation-first research.</h1>
+          <p class="lede">Independent work on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts — including failures — stay inspectable.</p>
+          
+          <div class="hero-proof">
+            <div class="proof-metric">
+              <span class="proof-value">43% → 1%</span>
+              <span class="proof-label">Phase 6B unsafe</span>
+            </div>
+            <div class="proof-status">
+              <span class="status-line">safety_acceptance: <strong>false</strong></span>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#flagship">Enter AegisLand</a>
+            <a class="btn btn-secondary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Cockpit</a>
+            <a class="btn btn-ghost" href="mailto:suhas.aug20@gmail.com">Email</a>
+          </div>
+          <div class="trust-chips">
+            <span class="chip">Sim-only</span>
+            <a class="chip chip-link" href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub suhaslord</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="assets/aegisland/cover.jpg" width="1600" height="1000" alt="AegisLand frozen holdout visualization" loading="eager">
+        </div>
       </div>
     </div>
   </header>
 
   <section class="section flagship-section" id="flagship">
-    <div class="wrap">
-      <div class="flagship-card">
-        <div class="flagship-visual">
-          <img src="assets/aegisland/cover.jpg" width="1600" height="1000" alt="AegisLand research cockpit showing unsafe rates and abstention behavior">
-          <div class="flagship-overlay">
-            <span class="badge-mono">FLAGSHIP · SIMULATION ONLY</span>
-            <span class="badge-mono badge-fail">safety_acceptance: false</span>
-          </div>
+    <div class="flagship-container">
+      <aside class="flagship-chapters" id="flagshipChapters">
+        <nav class="chapters-nav">
+          <a href="#flagship-exhibit" class="chapter-link is-active" data-chapter="exhibit">Exhibit</a>
+          <a href="#flagship-method" class="chapter-link" data-chapter="method">Method</a>
+          <a href="#flagship-numbers" class="chapter-link" data-chapter="numbers">Numbers</a>
+          <a href="#flagship-honesty" class="chapter-link" data-chapter="honesty">Honesty</a>
+          <a href="#flagship-open" class="chapter-link" data-chapter="open">Open</a>
+        </nav>
+      </aside>
+      
+      <div class="flagship-content-scroll">
+        <div class="flagship-intro">
+          <p class="section-kicker">01 — AEGISLAND</p>
+          <h2 class="section-title-display">Perception reliability for autonomy — simulation-first research.</h2>
+          <p class="section-lede-display">Independent work on perception overconfidence and calibrated abstention for UAV safety.</p>
+          <div class="copper-rule"></div>
         </div>
-        <div class="flagship-content">
-          <h2 class="section-title">AegisLand</h2>
-          <p class="flagship-meta">UAV perception reliability · research cockpit</p>
-          <p class="flagship-blurb">AegisLand is a simulation-only research cockpit for UAV perception reliability. Not flight software. Not a safety case. An inspectable archive where unsafe rates and abstention behavior stay visible.</p>
-          <div class="flagship-metrics">
-            <div class="metric-item">
-              <span class="metric-value">Phase 6B</span>
-              <span class="metric-label">43% → 1% unsafe reduction</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-value is-fail">safety_acceptance</span>
-              <span class="metric-label">false</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-value">Frontier</span>
-              <span class="metric-label">Phase 11 · P14R</span>
+
+        <section id="flagship-exhibit" class="flagship-chapter">
+          <div class="chapter-media">
+            <img src="assets/aegisland/cover.jpg" width="1600" height="1000" alt="AegisLand research cockpit frozen holdout">
+            <div class="media-overlay">
+              <span class="badge-mono">FLAGSHIP · SIMULATION ONLY</span>
+              <span class="badge-mono badge-fail">safety_acceptance: false</span>
             </div>
           </div>
-          <div class="flagship-ctas">
-            <a class="btn btn-primary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open research cockpit</a>
-            <a class="btn btn-secondary" href="work/aegisland.html">Read protocol</a>
-            <a class="btn btn-ghost" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <div class="chapter-body">
+            <h3 class="chapter-title">The exhibit</h3>
+            <p>AegisLand is a simulation-only research cockpit for UAV perception reliability. Not flight software. Not a safety case. An inspectable archive where unsafe rates and abstention behavior stay visible.</p>
+            <p>This is the flagship work. Frozen holdouts — including the failures — stay visible for inspection.</p>
           </div>
-        </div>
+        </section>
+
+        <section id="flagship-method" class="flagship-chapter">
+          <div class="chapter-body">
+            <h3 class="chapter-title">Method</h3>
+            <p>Simulation-first research means the test set is frozen before any tuning. No post-exposure adjustments. The cockpit displays what happened, including what failed.</p>
+            <p>Each phase locks a holdout set. Results are recorded. Retuning after seeing the holdout is not a result — it's overfitting with extra steps.</p>
+          </div>
+        </section>
+
+        <section id="flagship-numbers" class="flagship-chapter">
+          <div class="chapter-body">
+            <h3 class="chapter-title">Numbers</h3>
+            <div class="numbers-ledger">
+              <div class="ledger-row">
+                <span class="ledger-label">Phase 6B unsafe reduction</span>
+                <span class="ledger-value">43% → 1%</span>
+              </div>
+              <div class="ledger-row">
+                <span class="ledger-label">V3 arch unsafe reduction</span>
+                <span class="ledger-value">84.2% → 2.4%</span>
+              </div>
+              <div class="ledger-row">
+                <span class="ledger-label">Current frontier</span>
+                <span class="ledger-value">Phase 11 · P14R</span>
+              </div>
+              <div class="ledger-row">
+                <span class="ledger-label">Holdout exposure</span>
+                <span class="ledger-value">Frozen</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="flagship-honesty" class="flagship-chapter">
+          <div class="chapter-body">
+            <h3 class="chapter-title">Honesty</h3>
+            <div class="honesty-badges">
+              <div class="honesty-badge">
+                <span class="badge-label">Status</span>
+                <span class="badge-value badge-flag">FLAGSHIP · SIMULATION ONLY</span>
+              </div>
+              <div class="honesty-badge">
+                <span class="badge-label">Safety acceptance</span>
+                <span class="badge-value badge-fail">false</span>
+              </div>
+              <div class="honesty-badge">
+                <span class="badge-label">Flight readiness</span>
+                <span class="badge-value">Not flight software</span>
+              </div>
+              <div class="honesty-badge">
+                <span class="badge-label">Archive mode</span>
+                <span class="badge-value">Sim-only</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="flagship-open" class="flagship-chapter">
+          <div class="chapter-body">
+            <h3 class="chapter-title">Open access</h3>
+            <p>The research cockpit is live. The protocol is documented. The repository is public.</p>
+            <div class="chapter-ctas">
+              <a class="btn btn-primary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open cockpit</a>
+              <a class="btn btn-secondary" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </section>
 
   <section class="section work-section" id="work">
     <div class="wrap">
-      <h2 class="section-title">Selected work</h2>
-      <p class="section-lede">The same question in two domains: when should a system stay quiet? Then one instrument that only exists while you use it.</p>
+      <p class="section-kicker">02 — SELECTED WORK</p>
+      <h2 class="section-title-display">The same question in two domains: when should a system stay quiet?</h2>
+      <p class="section-lede-display">Then one instrument that only exists while you use it.</p>
+      <div class="copper-rule"></div>
 
-      <div class="project-grid">
-        <a class="project-card" href="https://github.com/elodin-sys/elodin/pull/769" target="_blank" rel="noopener noreferrer">
-          <div class="project-visual">
-            <img src="assets/aegisland/cover.jpg" width="1600" height="1000" alt="Elodin Voyager contribution">
-            <span class="project-badge">Merged</span>
+      <div class="work-bento">
+        <a class="work-card work-card-large" href="https://github.com/elodin-sys/elodin/pull/769" target="_blank" rel="noopener noreferrer">
+          <div class="work-visual">
+            <img src="assets/aegisland/cover.jpg" width="1600" height="1000" alt="Elodin Voyager PR #769">
+            <span class="work-badge">Merged · 2026</span>
           </div>
-          <div class="project-content">
+          <div class="work-text">
             <h3>Elodin Voyager PR #769</h3>
-            <p class="project-meta">Open source contribution</p>
-            <p class="project-description">Merged pull request to Elodin aerospace simulation framework.</p>
-            <div class="project-stack">
+            <p class="work-meta">Open source contribution</p>
+            <p>Merged pull request to Elodin aerospace simulation framework.</p>
+            <div class="work-stack">
               <span class="stack-chip">Rust</span>
               <span class="stack-chip">Simulation</span>
             </div>
           </div>
         </a>
 
-        <a class="project-card" href="work/abstainbench.html">
-          <div class="project-visual">
-            <img class="project-art" src="assets/abstain/cover.svg" width="1600" height="1000" alt="AbstainBench">
-            <span class="project-badge">Frozen holdout</span>
+        <a class="work-card work-card-medium" href="work/abstainbench.html">
+          <div class="work-visual">
+            <img src="assets/abstain/cover.svg" width="1600" height="1000" alt="AbstainBench">
+            <span class="work-badge">30 questions · Local eval</span>
           </div>
-          <div class="project-content">
+          <div class="work-text">
             <h3>AbstainBench</h3>
-            <p class="project-meta">Language model abstention</p>
-            <p class="project-description">30-question local benchmark for answer vs. abstain. No API keys. Hallucination is a scoring category.</p>
-            <div class="project-stack">
+            <p class="work-meta">Language model abstention</p>
+            <p>30-question local benchmark for answer vs. abstain. No API keys. Hallucination is a scoring category.</p>
+            <div class="work-stack">
               <span class="stack-chip">Python</span>
               <span class="stack-chip">LLMs</span>
             </div>
           </div>
         </a>
 
-        <div class="project-card">
-          <div class="project-visual project-visual-solid">
-            <div class="project-icon">📱</div>
-            <span class="project-badge">Shipped</span>
-          </div>
-          <div class="project-content">
+        <div class="work-card work-card-small">
+          <div class="work-text">
+            <span class="work-badge">~200 peak users · 2025</span>
             <h3>StudySync</h3>
-            <p class="project-meta">AI study platform</p>
-            <p class="project-description">Peak ~200 active users. AI-powered study tools and scheduling.</p>
-            <div class="project-stack">
+            <p class="work-meta">AI study platform</p>
+            <p>Peak ~200 active users. AI-powered study tools and scheduling.</p>
+            <div class="work-stack">
               <span class="stack-chip">React</span>
               <span class="stack-chip">AI</span>
             </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-visual project-visual-solid">
-            <div class="project-icon">🎮</div>
-            <span class="project-badge">2nd place</span>
+        <a class="work-card work-card-medium" href="work/echo-field.html">
+          <div class="work-visual">
+            <img src="assets/echo/cover.jpg" width="1600" height="1000" alt="ECHO / FIELD">
+            <span class="work-badge">Instrument</span>
           </div>
-          <div class="project-content">
-            <h3>Python Game Jam</h3>
-            <p class="project-meta">Competition entry</p>
-            <p class="project-description">Runner-up in competitive game development jam.</p>
-            <div class="project-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">Pygame</span>
+          <div class="work-text">
+            <h3>ECHO / FIELD</h3>
+            <p class="work-meta">Canvas experiment</p>
+            <p>Voice, motion, and memory become a field that cannot be screenshotted into the same image twice.</p>
+            <div class="work-stack">
+              <span class="stack-chip">Canvas</span>
+              <span class="stack-chip">WebAudio</span>
             </div>
           </div>
-        </div>
+        </a>
 
-        <div class="project-card">
-          <div class="project-visual project-visual-solid">
-            <div class="project-icon">🏆</div>
-            <span class="project-badge">1st Regional</span>
-          </div>
-          <div class="project-content">
+        <div class="work-card work-card-small">
+          <div class="work-text">
+            <span class="work-badge">1st Regional · 2026</span>
             <h3>SkillsUSA 3D Viz</h3>
-            <p class="project-meta">Competition</p>
-            <p class="project-description">1st place regional, 16th California state in 3D Visualization & Animation.</p>
-            <div class="project-stack">
+            <p class="work-meta">Competition</p>
+            <p>1st place regional, 16th California state in 3D Visualization & Animation.</p>
+            <div class="work-stack">
               <span class="stack-chip">Blender</span>
               <span class="stack-chip">3D</span>
             </div>
           </div>
         </div>
 
-        <a class="project-card" href="work/echo-field.html">
-          <div class="project-visual">
-            <img src="assets/echo/cover.jpg" width="1600" height="1000" alt="ECHO / FIELD">
-            <span class="project-badge">Instrument</span>
-          </div>
-          <div class="project-content">
-            <h3>ECHO / FIELD</h3>
-            <p class="project-meta">Canvas experiment</p>
-            <p class="project-description">Voice, motion, and memory become a field that cannot be screenshotted into the same image twice.</p>
-            <div class="project-stack">
-              <span class="stack-chip">Canvas</span>
-              <span class="stack-chip">WebAudio</span>
+        <div class="work-card work-card-small">
+          <div class="work-text">
+            <span class="work-badge">2nd place · 2025</span>
+            <h3>Python Game Jam</h3>
+            <p class="work-meta">Competition entry</p>
+            <p>Runner-up in competitive game development jam.</p>
+            <div class="work-stack">
+              <span class="stack-chip">Python</span>
+              <span class="stack-chip">Pygame</span>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section achievements-section" id="wins">
+  <section class="section wins-section" id="wins">
     <div class="wrap">
-      <h2 class="section-title">Wins</h2>
-      <p class="section-lede">Dated, verifiable results from research, competition, and open source contribution.</p>
+      <p class="section-kicker">04 — WINS</p>
+      <h2 class="section-title-display">Dated, verifiable results</h2>
+      <p class="section-lede-display">Research, competition, and open source contribution.</p>
+      <div class="copper-rule"></div>
       
-      <div class="achievement-list">
-        <div class="achievement-item">
-          <div class="achievement-metric">Phase 6B</div>
-          <div class="achievement-details">
-            <h3>AegisLand 43% → 1% unsafe reduction</h3>
-            <p>Unsafe share reduction through selective confidence. Frozen holdout, simulation only. 2026.</p>
-          </div>
+      <div class="wins-ledger">
+        <div class="wins-row">
+          <span class="wins-label">AegisLand Phase 6B unsafe reduction</span>
+          <span class="wins-value">43% → 1%</span>
+          <span class="wins-year">2026</span>
         </div>
-
-        <div class="achievement-item">
-          <div class="achievement-metric">V3</div>
-          <div class="achievement-details">
-            <h3>84.2% → 2.4% unsafe share reduction</h3>
-            <p>Redundant perception architecture versus baseline. 2026.</p>
-          </div>
+        <div class="wins-row">
+          <span class="wins-label">V3 architecture unsafe share reduction</span>
+          <span class="wins-value">84.2% → 2.4%</span>
+          <span class="wins-year">2026</span>
         </div>
-
-        <div class="achievement-item">
-          <div class="achievement-metric">PR #769</div>
-          <div class="achievement-details">
-            <h3>Elodin Voyager OSS contribution</h3>
-            <p>Merged pull request to open-source aerospace simulation project. 2026.</p>
-          </div>
+        <div class="wins-row">
+          <span class="wins-label">Elodin Voyager open source contribution</span>
+          <span class="wins-value">PR #769 merged</span>
+          <span class="wins-year">2026</span>
         </div>
-
-        <div class="achievement-item">
-          <div class="achievement-metric">1st Regional</div>
-          <div class="achievement-details">
-            <h3>SkillsUSA 3D Visualization & Animation</h3>
-            <p>Regional champion. Advanced to state, placed 16th in California. 2026.</p>
-          </div>
+        <div class="wins-row">
+          <span class="wins-label">SkillsUSA 3D Visualization & Animation</span>
+          <span class="wins-value">1st Regional, 16th State</span>
+          <span class="wins-year">2026</span>
         </div>
-
-        <div class="achievement-item">
-          <div class="achievement-metric">2nd Place</div>
-          <div class="achievement-details">
-            <h3>Python Game Jam</h3>
-            <p>Runner-up in competitive game development competition. 2025.</p>
-          </div>
+        <div class="wins-row">
+          <span class="wins-label">StudySync peak active users</span>
+          <span class="wins-value">~200 users</span>
+          <span class="wins-year">2025</span>
         </div>
-
-        <div class="achievement-item">
-          <div class="achievement-metric">~200 Users</div>
-          <div class="achievement-details">
-            <h3>StudySync Peak</h3>
-            <p>Peak active users for AI study platform. 2025.</p>
-          </div>
+        <div class="wins-row">
+          <span class="wins-label">Python Game Jam</span>
+          <span class="wins-value">2nd place</span>
+          <span class="wins-year">2025</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section about-section" id="about">
-    <div class="wrap">
-      <div class="about-grid">
-        <div class="about-content">
-          <h2 class="section-title">Curious builder. Careful tester.</h2>
-          <div class="about-text">
-            <p>I'm a student at <strong>River Islands High School</strong>, taking college CS at Delta College, and running an independent research program on when perception — cameras or language models — should refuse to act.</p>
-            <p>I care about questions that survive contact with a holdout: Does it work reliably? Can I measure it? What happens when the training distribution moves? If the answer is mixed, I freeze it. Retuning after exposure is not a result.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="section experience-section" id="experience">
-    <div class="wrap">
-      <h2 class="section-title">Experience</h2>
-      <p class="section-lede">Building in the world. Internships, open source, and team work.</p>
-      <div class="experience-timeline">
-        <div class="exp-item">
-          <div class="exp-marker">
-            <span class="exp-dot"></span>
-            <span class="exp-year">2026</span>
-          </div>
-          <div class="exp-content">
-            <h3>AI Engineer Intern</h3>
-            <p class="exp-org">Seagulls</p>
-            <p class="exp-desc">Production AI for OpenStage/Seagulls: assistant-integrated exercise search, chat UX, tracing/QA, and Core AI work around routing, memory, safety, and agent architecture.</p>
-          </div>
-        </div>
+    <div class="experience-invert">
+      <div class="wrap">
+        <p class="section-kicker-invert">03 — EXPERIENCE</p>
+        <h2 class="section-title-invert">Building in the world</h2>
+        <p class="section-lede-invert">Internships, open source, and team work.</p>
+        <div class="copper-rule-invert"></div>
 
-        <div class="exp-item">
-          <div class="exp-marker">
-            <span class="exp-dot"></span>
-            <span class="exp-year">2026</span>
+        <div class="experience-logbook">
+          <div class="logbook-entry">
+            <div class="logbook-year">2026</div>
+            <div class="logbook-details">
+              <h3>AI Engineer Intern</h3>
+              <p class="logbook-org">Seagulls</p>
+              <p class="logbook-desc">Production AI for OpenStage/Seagulls: assistant-integrated exercise search, chat UX, tracing/QA, and Core AI work around routing, memory, safety, and agent architecture.</p>
+            </div>
           </div>
-          <div class="exp-content">
-            <h3>Fleet Outreach & Business Development Intern</h3>
-            <p class="exp-org">Cruze</p>
-            <p class="exp-desc">Supported fleet outreach and business development focused on moving qualified prospects toward pilot agreements; researched prospective fleet partners and structured outreach around operational value.</p>
-          </div>
-        </div>
 
-        <div class="exp-item">
-          <div class="exp-marker">
-            <span class="exp-dot"></span>
-            <span class="exp-year">2025–26</span>
+          <div class="logbook-entry">
+            <div class="logbook-year">2026</div>
+            <div class="logbook-details">
+              <h3>Fleet Outreach & Business Development Intern</h3>
+              <p class="logbook-org">Cruze</p>
+              <p class="logbook-desc">Supported fleet outreach and business development focused on moving qualified prospects toward pilot agreements; researched prospective fleet partners and structured outreach around operational value.</p>
+            </div>
           </div>
-          <div class="exp-content">
-            <h3>Volunteer & Program Participation</h3>
-            <p class="exp-org">NSRI · Venture Starters · Learn To Be · STEM·E</p>
-            <p class="exp-desc">Research support, startup mentorship, tutoring, and game development team work.</p>
-          </div>
-        </div>
 
-        <div class="exp-item">
-          <div class="exp-marker">
-            <span class="exp-dot"></span>
-            <span class="exp-year">Now</span>
+          <div class="logbook-entry">
+            <div class="logbook-year">2025–26</div>
+            <div class="logbook-details">
+              <h3>Volunteer & Program Participation</h3>
+              <p class="logbook-org">NSRI · Venture Starters · Learn To Be · STEM·E</p>
+              <p class="logbook-desc">Research support, startup mentorship, tutoring, and game development team work.</p>
+            </div>
           </div>
-          <div class="exp-content">
-            <h3>Student</h3>
-            <p class="exp-org">River Islands HS · Delta College</p>
-            <p class="exp-desc">Class of 2029. College-level CS alongside self-directed work in systems, simulation, and research. San Joaquin Delta College concurrent enrollment.</p>
+
+          <div class="logbook-entry">
+            <div class="logbook-year">Now</div>
+            <div class="logbook-details">
+              <h3>Student</h3>
+              <p class="logbook-org">River Islands HS · Delta College</p>
+              <p class="logbook-desc">Class of 2029. College-level CS alongside self-directed work in systems, simulation, and research. San Joaquin Delta College concurrent enrollment.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -332,14 +372,20 @@
   </section>
 
   <section class="contact" id="contact">
-    <div class="section wrap">
-      <h2 class="section-title">Let's build something careful.</h2>
-      <p class="section-lede">Open to research conversations, engineering internships, and collaborations that can survive a holdout.</p>
-      <a class="contact-email" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
-      <div class="social-row">
-        <a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/suhas-beemineni-1984763b8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="resume.html">Resume</a>
+    <div class="contact-invert">
+      <div class="section wrap">
+        <p class="section-kicker-invert">05 — CONTACT</p>
+        <h2 class="section-title-invert">Let's build something careful.</h2>
+        <p class="section-lede-invert">Open to research conversations, engineering internships, and collaborations that can survive a holdout.</p>
+        <a class="contact-email" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+        <div class="social-row">
+          <a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/suhas-beemineni-1984763b8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="resume.html">Resume</a>
+        </div>
+        <div class="contact-footer">
+          <p>Simulation research, not flight software · Frozen holdouts stay inspectable</p>
+        </div>
       </div>
     </div>
   </section>
