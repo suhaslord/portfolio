@@ -665,6 +665,7 @@ a {
 
 .work-visual img {
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   background: var(--cream);
@@ -1106,13 +1107,40 @@ a {
   }
 
   .cta-row {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .cta-row .btn-primary,
+  .cta-row a.btn-primary {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .cta-row .btn:not(.btn-primary) {
+    width: 100%;
   }
 
   .btn {
     justify-content: center;
-    width: 100%;
     min-height: 44px;
+  }
+
+  .chapter-ctas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .chapter-ctas .btn-primary,
+  .chapter-ctas a.btn-primary {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .chapter-ctas .btn:not(.btn-primary) {
+    width: 100%;
   }
 
   .trust-chips {
