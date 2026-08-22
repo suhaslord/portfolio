@@ -554,6 +554,12 @@ a {
   padding: var(--section-y) var(--space);
 }
 
+/* Desktop: unwrap so aside + content stay the 14rem | 1fr grid items.
+   Mobile: this box becomes the tall parent that sticky chips travel in. */
+.flagship-track {
+  display: contents;
+}
+
 .flagship-chapters {
   position: sticky;
   top: 5rem;
@@ -1770,16 +1776,17 @@ main > .hero-media figcaption {
 
 /* Responsive */
 @media (max-width: 1024px) {
-  /* Latch: leave CSS Grid. A sticky grid item is trapped in its own
-     short row, so the chips scroll away with that row. Flex column
-     makes the aside's containing block the full-height flagship, so
-     position:sticky on .flagship-chapters can pin under the nav
-     for the whole dossier. */
+  /* Latch: the track (not the short aside) is the tall containing block.
+     Sticky then has the full dossier height to travel through. */
   html {
     scroll-padding-top: 8rem;
   }
 
   .flagship-container {
+    display: block;
+  }
+
+  .flagship-track {
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
@@ -1880,6 +1887,30 @@ main > .hero-media figcaption {
 }
 
 @media (max-width: 640px) {
+  /* Auditor fix: sticky the chips themselves. display:contents on the
+     aside removes the short (~nav-tall) containing block so .chapters-nav
+     sticks inside .flagship-track (which spans every chapter). */
+  .flagship-chapters {
+    display: contents;
+    position: static;
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    backdrop-filter: none;
+  }
+
+  .chapters-nav {
+    position: sticky;
+    top: 4rem;
+    z-index: 20;
+    background: rgba(244, 239, 230, 0.94);
+    backdrop-filter: blur(12px);
+    margin-inline: calc(-1 * var(--space));
+    padding: 0.5rem var(--space);
+    border-bottom: 1px solid var(--line);
+  }
+
   .nav-toggle {
     display: inline-flex;
     align-items: center;

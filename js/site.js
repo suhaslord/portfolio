@@ -48,13 +48,17 @@
   );
   writeProgress();
 
-  // Sticky chapter rail height on stacked layouts (0 on desktop sidebar)
+  // Sticky chapter rail height on stacked layouts (0 on desktop sidebar).
+  // ≤640px: .chapters-nav is the sticky box. 641–1024: the aside is.
   function railOffset() {
-    const rail = document.getElementById("flagshipChapters");
-    if (!rail) return 0;
-    const sticky = window.getComputedStyle(rail).position === "sticky";
     const stacked = window.matchMedia("(max-width: 1024px)").matches;
-    return sticky && stacked ? rail.offsetHeight : 0;
+    if (!stacked) return 0;
+    const navRail = document.querySelector("#flagship .chapters-nav");
+    const aside = document.getElementById("flagshipChapters");
+    const navSticky = navRail && window.getComputedStyle(navRail).position === "sticky";
+    const asideSticky = aside && window.getComputedStyle(aside).position === "sticky";
+    const el = navSticky ? navRail : asideSticky ? aside : null;
+    return el ? el.offsetHeight : 0;
   }
 
   // Smooth scroll for anchor links (instant when reduced motion is preferred)
