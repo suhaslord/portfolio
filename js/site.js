@@ -1,4 +1,9 @@
 (function () {
+  // Gate for CSS that must only apply when JS is running (reveal states)
+  document.documentElement.classList.add("js");
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
   // Mobile navigation toggle
   const nav = document.getElementById("siteNav");
   const toggle = document.getElementById("navToggle");
@@ -30,7 +35,7 @@
     { passive: true }
   );
 
-  // Smooth scroll for anchor links
+  // Smooth scroll for anchor links (instant when reduced motion is preferred)
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener("click", function (e) {
       const href = this.getAttribute("href");
@@ -44,7 +49,7 @@
 
         window.scrollTo({
           top: targetPosition,
-          behavior: "smooth",
+          behavior: reduceMotion.matches ? "auto" : "smooth",
         });
       }
     });
@@ -89,5 +94,92 @@
     chapters.forEach(function (chapter) {
       observer.observe(chapter);
     });
+  }
+
+  // Shared reveal language: mark [data-reveal] elements once they enter.
+  // CSS decides whether a hidden initial state exists (JS + motion allowed),
+  // so this observer is inert for reduced-motion users and no-JS visitors.
+  const revealEls = document.querySelectorAll("[data-reveal]");
+
+  if (revealEls.length > 0) {
+    if ("IntersectionObserver" in window && !reduceMotion.matches) {
+      const revealObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-inview");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -6% 0px" }
+      );
+
+      revealEls.forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    } else {
+      revealEls.forEach(function (el) {
+        el.classList.add("is-inview");
+      });
+    }
+  }
+
+  // Sticky mobile Email CTA: appears after ~300px of scroll on small screens,
+  // hides near the contact section, dismissible for the session.
+  const mobileCta = document.getElementById("mobileCta");
+
+  if (mobileCta) {
+    const DISMISS_KEY = "mobileCtaDismissed";
+    const smallScreen = window.matchMedia("(max-width: 700px)");
+    const contactSection = document.getElementById("contact");
+    let dismissed = false;
+    let nearContact = false;
+
+    try {
+      dismissed = sessionStorage.getItem(DISMISS_KEY) === "1";
+    } catch (err) {
+      /* storage unavailable: bar stays dismissible per page load */
+    }
+
+    mobileCta.hidden = false;
+
+    const update = function () {
+      const show =
+        !dismissed && smallScreen.matches && window.scrollY > 300 && !nearContact;
+      mobileCta.classList.toggle("is-shown", show);
+    };
+
+    if (contactSection && "IntersectionObserver" in window) {
+      const contactObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            nearContact = entry.isIntersecting;
+          });
+          update();
+        },
+        { rootMargin: "0px 0px 10% 0px", threshold: 0 }
+      );
+      contactObserver.observe(contactSection);
+    }
+
+    const dismissBtn = mobileCta.querySelector(".mobile-cta-dismiss");
+    if (dismissBtn) {
+      dismissBtn.addEventListener("click", function () {
+        dismissed = true;
+        try {
+          sessionStorage.setItem(DISMISS_KEY, "1");
+        } catch (err) {
+          /* ignore */
+        }
+        update();
+      });
+    }
+
+    window.addEventListener("scroll", update, { passive: true });
+    if (typeof smallScreen.addEventListener === "function") {
+      smallScreen.addEventListener("change", update);
+    }
+    update();
   }
 })();
