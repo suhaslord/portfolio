@@ -137,6 +137,7 @@
   .hero-copy { min-width: 0; }
   .hero h1 {
     font-family: var(--font-display);
+    letter-spacing: -0.02em;
     font-size: var(--fs-display);
     font-weight: 400; line-height: 0.9;
     letter-spacing: -0.035em;
@@ -389,17 +390,14 @@
     padding-left: var(--space-md);
   }
   .projects.is-grid {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
-    gap: var(--space-lg) var(--space-md);
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+    gap: var(--space-xl) var(--space-lg);
+    align-items: start;
   }
   .projects.is-grid .proj:nth-of-type(1) { grid-column: 1 / -1; }
-  .projects.is-grid .proj:nth-of-type(3) { margin-top: var(--space-md); }
-
-  .projects.is-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 2.5rem;
-  }
+  .projects.is-grid .proj:nth-of-type(2) { padding-right: var(--space-sm); }
+  .projects.is-grid .proj:nth-of-type(3) { margin-top: var(--space-md); padding-left: var(--space-sm); }
   .proj {
     padding: var(--space-md) 0;
     border-bottom: 1px solid var(--mist);
@@ -432,15 +430,19 @@
     color: var(--whisper); margin-bottom: 0.75rem;
   }
   .method-tags {
-    display: flex; flex-wrap: wrap; gap: 0.45rem 0.55rem;
-    margin-bottom: 0.85rem;
+    display: flex; flex-wrap: wrap; gap: 0.55rem 0.75rem;
+    margin: 0.35rem 0 1.15rem;
   }
   .method-tags span {
     font-family: var(--font-mono);
-    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--whisper);
-    border: 1px solid var(--mist);
-    padding: 0.45rem 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bone);
+    background: rgba(232,228,220,0.04);
+    border: 1px solid rgba(138,135,128,0.55);
+    border-radius: 0;
+    padding: 0.55rem 0.95rem 0.5rem;
   }
   .proj p.problem { color: var(--fog); max-width: 38rem; font-size: 1rem; }
   .proj-details {
@@ -766,10 +768,10 @@
         <span>[pilot]</span>
         <span>[texas]</span>
       </div>
-      <p class="problem">Problem: partner and fleet conversations that stay deliverable, not AI R&amp;D cosplay.</p>
+      <p class="problem">Problem: fleet and DOT partners need a credible pilot path — clear traffic jams before they form — without overclaiming savings we have not earned.</p>
       <details class="proj-details">
         <summary>Method / detail</summary>
-        <p class="detail-body">Outbound proof: <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a>. Role stays Fleet Outreach &amp; BD — not an autonomy eng claim.</p>
+        <p class="detail-body">Fleet Outreach &amp; BD at Cruze (<a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a>): Texas pilot outreach, partner conversations scoped to what the virtual infrastructure can actually demonstrate. Not an autonomy / perception eng role — honesty lock holds.</p>
       </details>
     </article>
     <article class="proj">
@@ -785,10 +787,10 @@
         <span>[chat-ux]</span>
         <span>[tracing]</span>
       </div>
-      <p class="problem">Problem: scoped tooling with evaluation clarity, not vague AI surfaces.</p>
+      <p class="problem">Problem: fan-data / assistant tooling needs evaluation traces and clear routing — not a vague "AI surface" demo.</p>
       <details class="proj-details">
         <summary>Method / detail</summary>
-        <p class="detail-body">Scoped tooling/integration for OpenStage/Seagulls. Outbound: <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a>. Not a flagship research claim.</p>
+        <p class="detail-body">AI Engineer Intern on Seagulls / OpenStage (<a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a>): chat UX, exercise/search integration, tracing/QA, and scoped work around routing / memory / safety. Secondary case — depth without competing with AegisLand as flagship.</p>
       </details>
     </article>
   </div>
@@ -828,12 +830,12 @@
     <div class="exp-item">
       <div class="role">Cruze · ongoing · <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a></div>
       <h3>Fleet Outreach &amp; BD</h3>
-      <p>Partner and fleet conversations grounded in what can actually be delivered.</p>
+      <p>Texas pilot outreach and fleet/DOT conversations grounded in what Cruze can demonstrate — not inflated AI R&amp;D claims.</p>
     </div>
     <div class="exp-item">
       <div class="role">Seagulls / OpenStage · prior · <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a></div>
       <h3>AI Engineer Intern</h3>
-      <p>Tooling and integration work with attention to evaluation and clear scope.</p>
+      <p>Production tooling for OpenStage/Seagulls: chat UX, tracing/QA, and scoped routing/memory/safety — evaluation first.</p>
     </div>
   </div>
 </section>
