@@ -1,448 +1,929 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Suhas Beemineni — Perception reliability for autonomy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suhas Beemineni  ·  Perception reliability for autonomy</title>
 <meta name="description" content="Perception reliability for autonomy. Simulation-first research on perception overconfidence and calibrated abstention for UAV safety.">
 <meta name="author" content="Suhas Beemineni">
-<meta name="theme-color" content="#F4EFE6">
+<meta name="theme-color" content="#0c0c0b">
 <link rel="canonical" href="https://suhaslord.github.io/portfolio/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://suhaslord.github.io/portfolio/">
-<meta property="og:title" content="Suhas Beemineni — Perception reliability for autonomy">
+<meta property="og:title" content="Suhas Beemineni  ·  Perception reliability for autonomy">
 <meta property="og:description" content="Simulation-first research on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts, not demos.">
 <meta property="og:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Suhas Beemineni — Perception reliability for autonomy">
+<meta name="twitter:title" content="Suhas Beemineni  ·  Perception reliability for autonomy">
 <meta name="twitter:description" content="Simulation-first research on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts, not demos.">
 <meta name="twitter:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0c0c0b;
+    --fog: #8a8780;
+    --mist: #2a2926;
+    --bone: #e8e4dc;
+    --whisper: #c4bfb4;
+    --accent: #c9b896;
+
+    --font-display: "Instrument Serif", serif;
+    --font-body: "DM Sans", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+    --fs-display: clamp(3.4rem, 9.5vw, 7.6rem);
+    --fs-heading: clamp(2.6rem, 6vw, 4.8rem);
+    --fs-subhead: clamp(2.2rem, 4.8vw, 3.6rem);
+    --fs-body: 1.05rem;
+    --fs-label: 0.6rem;
+    --fs-nav: 0.62rem;
+
+    /* 8-step space ladder */
+    --space-3xs: 0.35rem;
+    --space-2xs: 0.5rem;
+    --space-xs: 0.75rem;
+    --space-sm: 1.15rem;
+    --space-md: 1.75rem;
+    --space-lg: 3.5rem;
+    --space-xl: 5rem;
+    --space-2xl: 7.5rem;
+    /* Section / hero air — hero > content bands */
+    --space-hero-y: var(--space-xl);
+    --section-pad: var(--space-2xl);
+    --section-pad-sm: var(--space-xl);
+    --section-gap: var(--space-lg);
+    --section-gap-sm: var(--space-md);
+    --ease: cubic-bezier(0.19, 1, 0.22, 1);
+    --dur: 0.6s;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--void);
+    color: var(--bone);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .skip-link {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--bone); color: var(--void);
+    padding: 0.6rem 1rem; z-index: 100; font-size: 0.85rem;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
+
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem;
+    padding: var(--space-sm) 6vw;
+    background: var(--void);
+    border-bottom: 1px solid var(--mist);
+  }
+  nav .sig {
+    font-family: var(--font-display);
+    font-size: 1.15rem; letter-spacing: 0.02em;
+    color: var(--bone); text-decoration: none;
+  }
+  nav .cred {
+    font-family: var(--font-mono);
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog); margin-left: 0.85rem; white-space: nowrap;
+  }
+  nav .brand { display: flex; align-items: baseline; gap: 0; min-width: 0; flex-wrap: wrap; }
+  nav ul {
+    display: flex; flex-wrap: wrap; gap: 1.35rem 1.85rem; list-style: none;
+    justify-content: flex-end; align-items: center;
+  }
+  nav a {
+    font-family: var(--font-mono);
+    font-size: var(--fs-nav); letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fog); text-decoration: none; font-weight: 400;
+  }
+  a { transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+  nav a:hover, nav a:focus-visible { color: var(--bone); }
+  nav a.ext::after {
+    content: " \2197";
+    font-size: 0.75em;
+    letter-spacing: 0;
+  }
+  .nav-toggle {
+    display: none;
+    background: transparent; border: 1px solid var(--mist);
+    color: var(--bone); font-family: var(--font-mono);
+    font-size: 0.68rem; letter-spacing: 0.16em;
+    text-transform: uppercase; line-height: 1;
+    padding: 0.5rem 0.7rem; cursor: pointer;
+    position: relative; z-index: 52;
+  }
+
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-hero-y) 6vw var(--space-lg);
+    position: relative;
+  }
+  .hero-inner {
+    max-width: 1240px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+    gap: var(--space-md) var(--space-lg);
+    align-items: end;
+  }
+  .hero-copy { min-width: 0; }
+  .hero h1 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    font-size: var(--fs-display);
+    font-weight: 400; line-height: 0.9;
+    letter-spacing: -0.035em;
+    max-width: 11ch;
+    margin-bottom: 1.35rem;
+  }
+  .hero-aside { padding-bottom: 0.15rem; }
+  .hero-aside p {
+    color: var(--fog);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    max-width: 26rem;
+    margin-bottom: 0.8rem;
+  }
+  .hero-aside p:last-of-type { margin-bottom: 0; }
+  .hero-exhibit {
+    margin: 0;
+    border: 1px solid var(--mist);
+    background: var(--void);
+    align-self: end;
+  }
+  .hero-exhibit > a { display: block; color: inherit; text-decoration: none; }
+  .hero-exhibit img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(52vh, 520px);
+    object-fit: cover;
+    object-position: center;
+  }
+  .hero-exhibit figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog);
+    padding: 0.7rem 0.85rem;
+    border-top: 1px solid var(--mist);
+  }
+
+  .hero-exhibit-cta {
+    display: flex; flex-wrap: wrap; gap: 0.65rem 1.1rem;
+    padding: var(--space-2xs) var(--space-xs) var(--space-xs);
+    border-top: 1px solid var(--mist);
+  }
+  .hero-exhibit-cta a,
+  .case-out a {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog); text-decoration: none;
+    border-bottom: 1px solid var(--mist); padding-bottom: 0.1rem;
+  }
+  .hero-exhibit-cta a:hover,
+  .case-out a:hover { color: var(--bone); border-bottom-color: var(--bone); }
+  .case-out {
+    margin-top: var(--space-md);
+    display: flex; flex-wrap: wrap; gap: 0.75rem 1.35rem;
+  }
+  .hero-exhibit figcaption { border-top: 1px solid var(--mist); }
+
+  .hero-proof {
+    margin-top: 1.15rem;
+    display: flex; flex-wrap: wrap; gap: 0.65rem 0.8rem;
+  }
+  .hero-proof span {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(201,184,150,0.5);
+    padding: 0.58rem 0.95rem;
+    background: transparent;
+  }
+  .hero-meta {
+    margin-top: 1.35rem;
+    display: flex; flex-wrap: wrap; gap: 1.4rem 2.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog);
+  }
+  .hero-meta a { color: var(--fog); text-decoration: none; }
+  .hero-meta a:hover { color: var(--bone); }
+
+  section {
+    padding: var(--section-pad) 6vw;
+    border-top: 1px solid var(--mist);
+  }
+
+  .sec-head {
+    display: flex; align-items: baseline; gap: 1.1rem;
+    margin-bottom: 1.1rem;
+    max-width: 1180px;
+  }
+  .sec-index {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fog); font-weight: 500; flex-shrink: 0;
+  }
+  .sec-rule {
+    flex: 1; height: 1px; background: var(--mist); align-self: center;
+  }
+
+  .polarity {
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
+    gap: 1.5rem 3rem;
+    align-items: end;
+    margin-bottom: var(--section-gap);
+  }
+  .polarity-word {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 8.5vw, 7.2rem);
+    font-weight: 400; line-height: 0.88;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+  .polarity-aside { padding-bottom: 0.35rem; }
+  .polarity-aside .sec-label { margin-bottom: 0.55rem; }
+  .polarity-aside .sec-title {
+    margin-bottom: 0;
+    font-size: var(--fs-subhead);
+    max-width: 18ch;
+  }
+  .sec-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 1rem; font-weight: 500;
+  }
+  .sec-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-heading);
+    font-weight: 400; letter-spacing: -0.025em;
+    margin-bottom: 2.8rem; max-width: 16ch; line-height: 1.02;
+  }
+  .sec-title em { font-style: italic; font-weight: 400; }
+
+  .aegis {
+    display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--space-lg) var(--space-xl);
+    align-items: start; max-width: 1180px;
+  }
+  .aegis-meta {
+    display: flex; flex-wrap: wrap; gap: 0.45rem 0.35rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 1.5rem;
+  }
+  .aegis-meta span + span::before {
+    content: "\00b7";
+    margin: 0 0.55rem 0 0.2rem;
+    color: var(--mist);
+  }
+  .aegis p.lead {
+    font-size: 1.28rem; color: var(--whisper); max-width: 34rem; margin-bottom: 1.4rem;
+    line-height: 1.48;
+  }
+  .aegis p.body { color: var(--fog); max-width: 34rem; }
+  .constraint {
+    margin-top: 2rem;
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(201,184,150,0.5);
+    padding: 0.65rem 1.05rem;
+  }
+
+  .artifact-rail {
+    border: 1px solid var(--mist);
+    padding: var(--space-md) var(--space-md) var(--space-md);
+  }
+  .artifact-rail .rail-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 1.6rem;
+  }
+  .stat-stack { display: flex; flex-direction: column; gap: 0; }
+  .stat {
+    border-top: 1px solid var(--mist);
+    padding: 1.45rem 0 1.35rem;
+  }
+  .stat:first-child { border-top: 0; padding-top: 0; }
+  .stat:last-child { padding-bottom: 0; }
+  .stat .n {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 0.95; letter-spacing: -0.03em;
+  }
+  .stat .d { margin-top: 0.55rem; color: var(--fog); font-size: 0.88rem; max-width: 16rem; line-height: 1.4; }
+
+  .styleframes {
+    margin-top: var(--section-gap);
+    max-width: 1180px;
+  }
+  .styleframes .rail-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 1.1rem;
+  }
+  .styleframes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem 1.25rem;
+  }
+  .styleframes figure {
+    margin: 0;
+    border: 1px solid var(--mist);
+    background: var(--void);
+  }
+  .styleframes img {
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 16 / 10; object-fit: cover;
+  }
+  .styleframes figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog);
+    padding: 0.6rem 0.75rem;
+    border-top: 1px solid var(--mist);
+  }
+
+  .work-toolbar {
+    max-width: 920px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem; margin-bottom: 1.25rem;
+  }
+  .view-toggle {
+    display: inline-flex; gap: 0; border: 1px solid var(--mist);
+  }
+  .view-toggle button {
+    font-family: var(--font-mono);
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: transparent; color: var(--fog);
+    border: 0; padding: 0.55rem 0.85rem; cursor: pointer;
+  }
+  .view-toggle button[aria-pressed="true"] {
+    color: var(--bone); background: rgba(232,228,220,0.06);
+  }
+
+  .projects { max-width: 920px; }
+
+  /* Break equal-card rhythm (Supreme) */
+  .projects:not(.is-grid) .proj:nth-of-type(1) {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+  .projects:not(.is-grid) .proj:nth-of-type(2) {
+    padding-left: var(--space-lg);
+    max-width: 38rem;
+  }
+  .projects:not(.is-grid) .proj:nth-of-type(3) {
+    padding-top: var(--space-md);
+    border-left: 2px solid var(--mist);
+    padding-left: var(--space-md);
+  }
+  .projects.is-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+    gap: var(--space-xl) var(--space-lg);
+    align-items: start;
+  }
+  .projects.is-grid .proj:nth-of-type(1) { grid-column: 1 / -1; }
+  .projects.is-grid .proj:nth-of-type(2) { padding-right: var(--space-sm); }
+  .projects.is-grid .proj:nth-of-type(3) { margin-top: var(--space-md); padding-left: var(--space-sm); }
+  .proj {
+    padding: var(--space-lg) 0 var(--space-xl);
+    border-bottom: 1px solid var(--mist);
+  }
+  .projects:not(.is-grid) .proj:first-of-type { border-top: 1px solid var(--mist); }
+  .projects.is-grid .proj {
+    border-top: 1px solid var(--mist);
+    padding-top: 1.75rem;
+  }
+  .proj-top {
+    display: flex; flex-wrap: wrap; justify-content: space-between;
+    gap: 0.6rem 1.5rem; align-items: baseline; margin-bottom: 0.5rem;
+  }
+  .proj h3 {
+    font-family: var(--font-display);
+    font-size: 2.35rem; font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    /* peer-craft-work-h3 */
+  }
+  .proj .credit {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog);
+  }
+  .proj .credit a {
+    color: var(--fog); text-decoration: none; border-bottom: 1px solid var(--mist);
+  }
+  .proj .credit a:hover { color: var(--bone); border-bottom-color: var(--bone); }
+  .proj-trail {
+    font-family: var(--font-mono);
+    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--whisper); margin-bottom: 0.75rem;
+  }
+  .method-tags {
+    display: flex; flex-wrap: wrap; gap: 0.55rem 0.75rem;
+    margin: 0.35rem 0 1.15rem;
+  }
+
+  /* Cruze tags: thicker chips (Supreme) */
+  .projects .proj:nth-of-type(2) .method-tags {
+    gap: 0.65rem 0.85rem;
+    margin-bottom: 1.35rem;
+  }
+  .projects .proj:nth-of-type(2) .method-tags span {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    padding: 0.7rem 1.15rem 0.65rem;
+    border-width: 1.5px;
+    background: rgba(232,228,220,0.07);
+    color: var(--bone);
+  }
+
+  .method-tags span {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bone);
+    background: rgba(232,228,220,0.04);
+    border: 1px solid rgba(138,135,128,0.55);
+    border-radius: 0;
+    padding: 0.55rem 0.95rem 0.5rem;
+  }
+  .proj p.problem { color: var(--fog); max-width: 38rem; font-size: 1rem; }
+  .proj-details {
+    margin-top: 0.9rem;
+    border-top: 1px solid var(--mist);
+    padding-top: 0.75rem;
+  }
+  .proj-details summary {
+    font-family: var(--font-mono);
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog); cursor: pointer; list-style: none;
+  }
+  .proj-details summary::-webkit-details-marker { display: none; }
+  .proj-details summary::before { content: "[+] "; color: var(--accent); }
+  .proj-details[open] summary::before { content: "[-] "; }
+  .proj-details .detail-body {
+    margin-top: 0.75rem; color: var(--fog); font-size: 0.95rem; max-width: 38rem;
+  }
+
+  .measured {
+    max-width: 920px;
+    display: flex; flex-wrap: wrap; gap: 1.75rem 3.75rem;
+    align-items: baseline;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--mist);
+  }
+  .measured .m { display: flex; flex-direction: column; gap: 0.35rem; }
+  .measured .m .n {
+    font-family: var(--font-display);
+    font-size: 2.1rem; letter-spacing: -0.02em;
+  }
+  .measured .m .d {
+    font-family: var(--font-mono);
+    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fog);
+  }
+
+  .exp { max-width: 820px; display: grid; gap: 3.25rem; }
+  .exp-item .role {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 0.5rem;
+  }
+  .exp-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.9rem; font-weight: 400;
+  }
+  .exp-item p { color: var(--fog); max-width: 34rem; margin-top: 0.5rem; }
+
+  .contact { max-width: 720px; }
+  .contact p.lead {
+    color: var(--fog); margin-bottom: 2rem; font-size: 1.1rem; max-width: 28rem;
+  }
+  .contact a.mail {
+    font-family: var(--font-display);
+    font-size: 2.05rem; color: var(--bone); text-decoration: none;
+    border-bottom: 1px solid var(--mist); padding-bottom: 0.2rem;
+  }
+  .contact a.mail:hover { border-bottom-color: var(--bone); }
+  .contact-links {
+    margin-top: 2rem;
+    display: flex; flex-wrap: wrap; gap: 1.4rem 2rem;
+  }
+  .contact-links a {
+    font-family: var(--font-mono);
+    font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog); text-decoration: none;
+    border-bottom: 1px solid var(--mist); padding-bottom: 0.15rem;
+  }
+  .contact-links a:hover { color: var(--bone); border-bottom-color: var(--bone); }
+
+  footer {
+    padding: var(--section-pad-sm) 6vw var(--space-lg);
+    border-top: 1px solid var(--mist);
+    max-width: 100%;
+  }
+  .foot-frame {
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: 1.55fr 0.85fr;
+    gap: 2.5rem 4rem;
+    align-items: end;
+  }
+  .foot-close {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    color: var(--bone);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    max-width: 14ch;
+    margin-bottom: 2rem;
+  }
+  .foot-links {
+    display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
+    margin-bottom: 1.6rem;
+  }
+  .foot-links a {
+    font-family: var(--font-mono);
+    font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog); text-decoration: none;
+  }
+  .foot-links a:hover { color: var(--bone); }
+  .foot-honesty {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog); line-height: 1.65;
+  }
+  .foot-meta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog);
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .styleframes-grid { grid-template-columns: 1fr; }
+    .projects.is-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 780px) {
+    .nav-toggle { display: inline-flex; align-items: center; }
+    nav .cred { display: none; }
+    nav ul {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; gap: 0; justify-content: center;
+      background: var(--void);
+      padding: var(--space-xl) 6vw var(--space-md);
+      z-index: 45;
+    }
+    nav.is-open ul { display: flex; }
+    nav.is-open ~ main { visibility: hidden; }
+    nav ul a { display: block; padding: 1rem 0; border-top: 1px solid var(--mist); font-size: 0.85rem; }
+    .hero-inner, .aegis, .foot-frame, .polarity { grid-template-columns: 1fr; }
+    .polarity { gap: 0.75rem; margin-bottom: 2.5rem; }
+    .hero { min-height: auto; padding: var(--space-lg) 6vw var(--space-md); }
+    .hero-exhibit { order: -1; }
+    .hero-exhibit img { max-height: 42vh; }
+    section { padding: var(--space-xl) 6vw; }
+    .sec-title { margin-bottom: 2.2rem; }
+    .foot-meta { text-align: left; }
+    .artifact-rail { padding: var(--space-sm) var(--space-sm) var(--space-md); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<nav class="site-nav" id="siteNav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="#top">Suhas Beemineni</a>
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#flagship">AegisLand</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#wins">Wins</a></li>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a class="nav-cta" href="#contact">Contact</a></li>
-    </ul>
+<nav id="siteNav" aria-label="Primary">
+  <div class="brand">
+    <a class="sig" href="#top">Suhas Beemineni</a>
+    <span class="cred">[sim-only · 2026]</span>
   </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
+  <ul id="navLinks">
+    <li><a href="#aegis">Aegis</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="mailto:suhas.aug20@gmail.com">Email</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
 <main id="main">
-  <header class="hero" id="top">
-    <div class="hero-inner wrap">
-      <div class="hero-claim">
-        <p class="kicker" data-reveal>SUHAS BEEMINENI · RIHS '29 · SJ DELTA</p>
-        <h1 data-reveal style="--reveal-delay: 60ms">Perception reliability for autonomy. Simulation-first research.</h1>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <h1>Perception reliability for autonomy.</h1>
+      <div class="hero-aside">
+        <p>I study perception overconfidence in simulation for UAV safety.</p>
+        <p>Frozen holdouts. Calibrated abstention. No live vehicle authority.</p>
       </div>
-      <div class="hero-grid">
-        <div class="hero-text">
-          <p class="lede" data-reveal style="--reveal-delay: 120ms">Independent work on perception overconfidence and calibrated abstention for UAV safety. The holdouts stay frozen, and the failures stay inspectable.</p>
-
-          <div class="hero-proof" data-reveal style="--reveal-delay: 180ms">
-            <div class="proof-metric">
-              <span class="proof-value">43% → 1%</span>
-              <span class="proof-label">Phase 6B unsafe</span>
-            </div>
-            <div class="proof-status">
-              <span class="status-line">safety_acceptance: <strong>false</strong></span>
-            </div>
-          </div>
-
-          <div class="cta-row" data-reveal style="--reveal-delay: 240ms">
-            <a class="btn btn-primary" href="#flagship">Enter AegisLand</a>
-            <a class="btn btn-secondary" href="mailto:suhas.aug20@gmail.com">Email</a>
-          </div>
-          <div class="trust-chips" data-reveal style="--reveal-delay: 300ms">
-            <span class="chip">Sim-only</span>
-            <a class="chip chip-link" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Cockpit ↗</a>
-            <a class="chip chip-link" href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub suhaslord</a>
-          </div>
-          <div class="scroll-cue" aria-hidden="true"><span class="cue-rule"></span></div>
-        </div>
-        <div class="hero-media" data-reveal style="--reveal-delay: 180ms">
-          <img src="assets/aegisland/exhibit-still.jpg" width="900" height="840" alt="AegisLand fiducial marker geometry, archival still" loading="eager" fetchpriority="high">
-        </div>
+      <div class="hero-proof" aria-label="Honesty locks">
+        <span>[sim-only]</span>
+        <span>[safety_acceptance: false]</span>
+        <span>[43%&rarr;1%]</span>
+      </div>
+      <div class="hero-meta">
+        <span>RIHS &rsquo;29</span>
+        <span>SJ Delta</span>
+        <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="resume.html">Resume</a>
       </div>
     </div>
-  </header>
-
-  <section class="section flagship-section" id="flagship">
-    <div class="flagship-container">
-      <div class="flagship-track">
-        <nav class="chapters-nav" id="flagshipChapters" aria-label="AegisLand chapters">
-          <a href="#flagship-exhibit" class="chapter-link is-active" data-chapter="exhibit">Evidence</a>
-          <a href="#flagship-method" class="chapter-link" data-chapter="method">Method</a>
-          <a href="#flagship-numbers" class="chapter-link" data-chapter="numbers">Numbers</a>
-          <a href="#flagship-honesty" class="chapter-link" data-chapter="honesty">Honesty</a>
-          <a href="#flagship-open" class="chapter-link" data-chapter="open">Open</a>
-        </nav>
-
-      <div class="flagship-content-scroll">
-        <div class="flagship-intro" data-reveal>
-          <div class="section-opener">
-            <span class="opener-index" aria-hidden="true">01</span>
-            <div class="opener-body">
-              <p class="section-kicker">AegisLand</p>
-              <p class="chapter-role">Claim</p>
-              <h2 class="section-title-display">Perception reliability for autonomy. Simulation-first research.</h2>
-              <p class="section-lede-display">Independent work on perception overconfidence and calibrated abstention for UAV safety.</p>
-            </div>
-          </div>
-        </div>
-
-        <section id="flagship-exhibit" class="flagship-chapter">
-          <div class="chapter-media">
-            <img src="assets/aegisland/exhibit-still.jpg" width="900" height="840" alt="AegisLand fiducial marker geometry from the frozen holdout, archival still">
-            <div class="media-overlay">
-              <span class="badge-mono">FLAGSHIP · SIMULATION ONLY</span>
-              <span class="badge-mono badge-fail">safety_acceptance: false</span>
-            </div>
-          </div>
-          <div class="chapter-body" data-reveal>
-            <p class="chapter-role">Evidence</p>
-            <h3 class="chapter-title">The exhibit</h3>
-            <p>AegisLand is a simulation-only research cockpit for UAV perception reliability. Not flight software. Not a safety case. An inspectable archive where unsafe rates and abstention behavior stay visible.</p>
-            <p>This is the flagship work. The holdouts stay frozen, and the failures stay visible.</p>
-          </div>
-        </section>
-
-        <section id="flagship-method" class="flagship-chapter">
-          <div class="chapter-body" data-reveal>
-            <p class="chapter-role">Method</p>
-            <h3 class="chapter-title">How it is built</h3>
-            <p>Simulation-first research means the test set is frozen before any tuning. No post-exposure adjustments. The cockpit displays what happened, including what failed.</p>
-            <p>Each phase locks a holdout set. Results are recorded. Retuning after seeing the holdout is not a result. It is overfitting with extra steps.</p>
-          </div>
-        </section>
-
-        <section id="flagship-numbers" class="flagship-chapter">
-          <div class="chapter-body" data-reveal>
-            <p class="chapter-role">Numbers</p>
-            <h3 class="chapter-title">What the numbers are</h3>
-            <div class="numbers-ledger">
-              <div class="ledger-row">
-                <span class="ledger-label">Phase 6B unsafe reduction</span>
-                <span class="ledger-value">43% → 1%</span>
-              </div>
-              <div class="ledger-row">
-                <span class="ledger-label">V3 arch unsafe reduction</span>
-                <span class="ledger-value">84.2% → 2.4%</span>
-              </div>
-              <div class="ledger-row">
-                <span class="ledger-label">Current frontier</span>
-                <span class="ledger-value">Phase 11 · P14R</span>
-              </div>
-              <div class="ledger-row">
-                <span class="ledger-label">Holdout exposure</span>
-                <span class="ledger-value">Frozen</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="flagship-honesty" class="flagship-chapter">
-          <div class="chapter-body" data-reveal>
-            <p class="chapter-role">Honesty</p>
-            <h3 class="chapter-title">What this is not</h3>
-            <dl class="honesty-ledger">
-              <div class="honesty-row">
-                <dt>Status</dt>
-                <dd class="hv-flag">FLAGSHIP · SIMULATION ONLY</dd>
-              </div>
-              <div class="honesty-row is-loud">
-                <dt>safety_acceptance</dt>
-                <dd class="hv-false">false</dd>
-              </div>
-              <div class="honesty-row">
-                <dt>Flight readiness</dt>
-                <dd>Not flight software</dd>
-              </div>
-              <div class="honesty-row">
-                <dt>Archive mode</dt>
-                <dd>Sim-only</dd>
-              </div>
-            </dl>
-          </div>
-        </section>
-
-        <section id="flagship-open" class="flagship-chapter">
-          <div class="chapter-body" data-reveal>
-            <p class="chapter-role">Open</p>
-            <h3 class="chapter-title">What is still open</h3>
-            <p>The research cockpit is live. The protocol is documented. The repository is public.</p>
-            <div class="chapter-ctas">
-              <a class="btn btn-secondary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open cockpit</a>
-              <a class="btn btn-ghost" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
-            </div>
-          </div>
-        </section>
+    <figure class="hero-exhibit">
+      <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank" aria-label="Open AegisLand research cockpit">
+        <img src="assets/aegisland/cockpit-still.png" width="1280" height="800" alt="AegisLand research cockpit dashboard still" loading="eager" fetchpriority="high" decoding="async">
+      </a>
+      <figcaption>AegisLand · cockpit dashboard still · [sim-only]</figcaption>
+      <div class="hero-exhibit-cta" aria-label="AegisLand proof">
+        <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Open cockpit</a>
+        <a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">uav-safety-research</a>
       </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="chapter-cut" aria-hidden="true">
-    <p class="cut-line">when should a system stay quiet?</p>
+    </figure>
   </div>
+</header>
 
-  <section class="section work-section" id="work">
-    <div class="wrap">
-      <div data-reveal class="section-opener">
-        <span class="opener-index" aria-hidden="true">02</span>
-        <div class="opener-body">
-          <p class="section-kicker">Selected work</p>
-          <h2 class="section-title-display">The same question in two domains: when should a system stay quiet?</h2>
-          <p class="section-lede-display">Then one instrument that only exists while you use it.</p>
-        </div>
+<section id="aegis">
+  <div class="sec-head">
+    <span class="sec-index">01 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <div class="polarity">
+    <div class="polarity-word">Measure</div>
+    <div class="polarity-aside">
+      <p class="sec-label">[ lead case ]</p>
+      <h2 class="sec-title">Aegis<em>Land</em></h2>
+    </div>
+  </div>
+  <div class="aegis">
+    <div>
+      <div class="aegis-meta" aria-label="Case trail">
+        <span>Solo research</span>
+        <span>Simulation cockpit</span>
+        <span>Ongoing · 2026</span>
       </div>
-
-      <div class="work-bento">
-        <a class="work-card work-card-large" data-reveal href="https://github.com/elodin-sys/elodin/pull/769" target="_blank" rel="noopener noreferrer">
-          <div class="work-visual">
-            <img src="assets/aegisland/cover.jpg" width="1600" alt="Elodin Voyager PR #769">
-            <span class="work-badge">Merged · 2026</span>
-          </div>
-          <div class="work-text">
-            <h3>Elodin Voyager PR #769</h3>
-            <p class="work-meta">Open source contribution</p>
-            <p>Merged pull request to Elodin aerospace simulation framework.</p>
-            <div class="work-stack">
-              <span class="stack-chip">Rust</span>
-              <span class="stack-chip">Simulation</span>
-            </div>
-          </div>
-        </a>
-
-        <a class="work-card work-card-medium" data-reveal href="work/abstainbench.html">
-          <div class="work-visual">
-            <img src="assets/abstain/cover.svg" width="1600" alt="AbstainBench">
-            <span class="work-badge">30 questions · Local eval</span>
-          </div>
-          <div class="work-text">
-            <h3>AbstainBench</h3>
-            <p class="work-meta">Language model abstention</p>
-            <p>30-question local benchmark for answer vs. abstain. No API keys. Hallucination is a scoring category.</p>
-            <div class="work-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">LLMs</span>
-            </div>
-          </div>
-        </a>
-
-        <div class="work-card work-card-small" data-reveal>
-          <div class="work-text">
-            <span class="work-badge">~200 peak users · 2025</span>
-            <h3>StudySync</h3>
-            <p class="work-meta">AI study platform</p>
-            <p>Peak ~200 active users. AI-powered study tools and scheduling.</p>
-            <div class="work-stack">
-              <span class="stack-chip">React</span>
-              <span class="stack-chip">AI</span>
-            </div>
-          </div>
+      <div class="method-tags" aria-label="Methods">
+        <span>[sim-only]</span>
+        <span>[holdout]</span>
+        <span>[perception]</span>
+        <span>[abstention]</span>
+      </div>
+      <p class="lead">A simulation-only research cockpit for UAV perception reliability and calibrated abstention under constraint.</p>
+      <p class="body">Not a live autonomy product. Phase 6B work reduced unsafe rates on frozen holdouts from 43% to 1%, with safety_acceptance held at false.</p>
+      <span class="constraint">[safety_acceptance: false]</span>
+      <div class="case-out" aria-label="AegisLand outbound proof">
+        <a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">GitHub · uav-safety-research</a>
+        <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Open research cockpit</a>
+      </div>
+    </div>
+    <div class="artifact-rail" aria-label="Live artifacts">
+      <p class="rail-label">[ live artifacts · phase 6b ]</p>
+      <div class="stat-stack">
+        <div class="stat">
+          <div class="n">43%&rarr;1%</div>
+          <div class="d">Holdout unsafe rate · Phase 6B frozen set.</div>
         </div>
-
-        <a class="work-card work-card-medium" data-reveal href="work/echo-field.html">
-          <div class="work-visual">
-            <img src="assets/echo/cover.jpg" width="1600" alt="ECHO / FIELD">
-            <span class="work-badge">Instrument</span>
-          </div>
-          <div class="work-text">
-            <h3>ECHO / FIELD</h3>
-            <p class="work-meta">Canvas experiment</p>
-            <p>Voice, motion, and memory become a field that cannot be screenshotted into the same image twice.</p>
-            <div class="work-stack">
-              <span class="stack-chip">Canvas</span>
-              <span class="stack-chip">WebAudio</span>
-            </div>
-          </div>
-        </a>
-
-        <div class="work-card work-card-small" data-reveal>
-          <div class="work-text">
-            <span class="work-badge">1st Regional · 2026</span>
-            <h3>SkillsUSA 3D Viz</h3>
-            <p class="work-meta">Competition</p>
-            <p>1st place regional, 16th California state in 3D Visualization & Animation.</p>
-            <div class="work-stack">
-              <span class="stack-chip">Blender</span>
-              <span class="stack-chip">3D</span>
-            </div>
-          </div>
+        <div class="stat">
+          <div class="n">false</div>
+          <div class="d">safety_acceptance · locked for evaluation.</div>
         </div>
-
-        <div class="work-card work-card-small" data-reveal>
-          <div class="work-text">
-            <span class="work-badge">2nd place · 2025</span>
-            <h3>Python Game Jam</h3>
-            <p class="work-meta">Competition entry</p>
-            <p>Runner-up in competitive game development jam.</p>
-            <div class="work-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">Pygame</span>
-            </div>
-          </div>
+        <div class="stat">
+          <div class="n">Sim</div>
+          <div class="d">Evaluation environment. No live vehicle authority.</div>
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="section wins-section" id="wins">
-    <div class="wrap">
-      <div data-reveal class="section-opener">
-        <span class="opener-index" aria-hidden="true">04</span>
-        <div class="opener-body">
-          <p class="section-kicker">Wins</p>
-          <h2 class="section-title-display">Dated, verifiable results</h2>
-          <p class="section-lede-display">Research, competition, and open source contribution.</p>
-        </div>
-      </div>
-
-      <div class="wins-ledger">
-        <div class="wins-row" data-reveal>
-          <span class="wins-label">AegisLand Phase 6B unsafe reduction</span>
-          <span class="wins-value">43% → 1%</span>
-          <span class="wins-year">2026</span>
-        </div>
-        <div class="wins-row" data-reveal>
-          <span class="wins-label">V3 architecture unsafe share reduction</span>
-          <span class="wins-value">84.2% → 2.4%</span>
-          <span class="wins-year">2026</span>
-        </div>
-        <div class="wins-row" data-reveal>
-          <span class="wins-label">Elodin Voyager open source contribution</span>
-          <span class="wins-value">PR #769 merged</span>
-          <span class="wins-year">2026</span>
-        </div>
-        <div class="wins-row" data-reveal>
-          <span class="wins-label">SkillsUSA 3D Visualization & Animation</span>
-          <span class="wins-value">1st Regional, 16th State</span>
-          <span class="wins-year">2026</span>
-        </div>
-        <div class="wins-row" data-reveal>
-          <span class="wins-label">StudySync peak active users</span>
-          <span class="wins-value">~200 users</span>
-          <span class="wins-year">2025</span>
-        </div>
-        <div class="wins-row" data-reveal>
-          <span class="wins-label">Python Game Jam</span>
-          <span class="wins-value">2nd place</span>
-          <span class="wins-year">2025</span>
-        </div>
-      </div>
+  </div>
+  <div class="styleframes" aria-label="Method styleframes">
+    <p class="rail-label">[ method stills · process beside final ]</p>
+    <div class="styleframes-grid">
+      <figure>
+        <img src="assets/aegisland/cockpit-still.png" width="640" height="400" alt="AegisLand cockpit still final" loading="lazy" decoding="async">
+        <figcaption>01 · cockpit still · final</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/aegisland/chart_phase6b_light.png" width="640" height="400" alt="Phase 6B holdout chart" loading="lazy" decoding="async">
+        <figcaption>02 · phase 6b chart · method</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/aegisland/exhibit-still.jpg" width="640" height="400" alt="AegisLand exhibit still" loading="lazy" decoding="async">
+        <figcaption>03 · exhibit frame · method</figcaption>
+      </figure>
     </div>
-  </section>
+  </div>
+</section>
 
-
-  <section class="section experience-section" id="experience">
-    <div class="experience-invert">
-      <div class="wrap">
-        <div data-reveal class="section-opener">
-          <span class="opener-index" aria-hidden="true">03</span>
-          <div class="opener-body">
-            <p class="section-kicker-invert">Experience</p>
-            <h2 class="section-title-invert">Building in the world</h2>
-            <p class="section-lede-invert">Internships, open source, and team work.</p>
-          </div>
-        </div>
-
-        <div class="experience-logbook">
-          <div class="logbook-entry" data-reveal>
-            <div class="logbook-year">2026</div>
-            <div class="logbook-details">
-              <h3>AI Engineer Intern</h3>
-              <p class="logbook-org">Seagulls</p>
-              <p class="logbook-desc">Production AI for OpenStage/Seagulls: assistant-integrated exercise search, chat UX, tracing/QA, and Core AI work around routing, memory, safety, and agent architecture.</p>
-            </div>
-          </div>
-
-          <div class="logbook-entry" data-reveal>
-            <div class="logbook-year">2026</div>
-            <div class="logbook-details">
-              <h3>Fleet Outreach & Business Development Intern</h3>
-              <p class="logbook-org">Cruze</p>
-              <p class="logbook-desc">Supported fleet outreach and business development focused on moving qualified prospects toward pilot agreements; researched prospective fleet partners and structured outreach around operational value.</p>
-            </div>
-          </div>
-
-          <div class="logbook-entry" data-reveal>
-            <div class="logbook-year">2025–26</div>
-            <div class="logbook-details">
-              <h3>Volunteer & Program Participation</h3>
-              <p class="logbook-org">NSRI · Venture Starters · Learn To Be · STEM·E</p>
-              <p class="logbook-desc">Research support, startup mentorship, tutoring, and game development team work.</p>
-            </div>
-          </div>
-
-          <div class="logbook-entry" data-reveal>
-            <div class="logbook-year">Now</div>
-            <div class="logbook-details">
-              <h3>Student</h3>
-              <p class="logbook-org">River Islands HS · Delta College</p>
-              <p class="logbook-desc">Class of 2029. College-level CS alongside self-directed work in systems, simulation, and research. San Joaquin Delta College concurrent enrollment.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+<section id="work">
+  <div class="sec-head">
+    <span class="sec-index">02 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <div class="polarity">
+    <div class="polarity-word">Work</div>
+    <div class="polarity-aside">
+      <p class="sec-label">[ index ]</p>
+      <h2 class="sec-title">Selected cases</h2>
     </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <div class="contact-invert">
-      <div class="section wrap">
-        <div data-reveal class="section-opener">
-          <span class="opener-index" aria-hidden="true">05</span>
-          <div class="opener-body">
-            <p class="section-kicker-invert">Contact</p>
-            <h2 class="section-title-invert">Let's build something careful.</h2>
-            <p class="section-lede-invert">Open to research conversations, engineering internships, and collaborations that can survive a holdout.</p>
-          </div>
-        </div>
-        <div data-reveal style="--reveal-delay: 120ms">
-          <a class="contact-email" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
-          <div class="social-row">
-            <a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/suhas-beemineni-1984763b8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="resume.html">Resume</a>
-          </div>
-          <div class="contact-footer">
-            <p>Simulation research, not flight software · Frozen holdouts stay inspectable</p>
-          </div>
-        </div>
-      </div>
+  </div>
+  <div class="work-toolbar">
+    <p class="sec-label" style="margin:0">[ same items · list default ]</p>
+    <div class="view-toggle" role="group" aria-label="Work view">
+      <button type="button" id="viewList" aria-pressed="true">List</button>
+      <button type="button" id="viewGrid" aria-pressed="false">Grid</button>
     </div>
-  </section>
+  </div>
+  <div class="projects" id="projects" data-view="list">
+    <article class="proj">
+      <div class="proj-top">
+        <h3>AegisLand</h3>
+        <span class="credit"><a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">GitHub · uav-safety-research</a> · <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Cockpit</a></span>
+      </div>
+      <p class="proj-trail">Solo research · simulation cockpit · ongoing · 2026</p>
+      <div class="method-tags" aria-label="Methods">
+        <span>[sim-only]</span>
+        <span>[holdout]</span>
+        <span>[perception]</span>
+        <span>[abstention]</span>
+      </div>
+      <p class="problem">Problem: perception overconfidence on frozen holdouts; measure unsafe rate without live vehicle authority.</p>
+      <details class="proj-details">
+        <summary>Method / detail</summary>
+        <p class="detail-body">Phase 6B frozen-holdout evaluation. Unsafe rate moved 43%&rarr;1% with safety_acceptance locked false. Cockpit is a research instrument, not a ship path.</p>
+      </details>
+    </article>
+    <article class="proj">
+      <div class="proj-top">
+        <h3>Cruze</h3>
+        <span class="credit"><a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a> · Fleet Outreach &amp; BD</span>
+      </div>
+      <p class="proj-trail">Fleet Outreach &amp; BD · Cruze · ongoing</p>
+      <div class="method-tags" aria-label="Methods">
+        <span>[pilot path]</span>
+        <span>[partner honesty]</span>
+        <span>[texas corridors]</span>
+        <span>[no overclaim]</span>
+      </div>
+      <p class="problem">Problem: fleet and DOT partners need a credible pilot path — clear traffic jams before they form — without overclaiming savings we have not earned.</p>
+      <details class="proj-details">
+        <summary>Method / detail</summary>
+        <p class="detail-body">Fleet Outreach &amp; BD at Cruze (<a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a>): Texas pilot outreach, partner conversations scoped to what the virtual infrastructure can actually demonstrate. Not an autonomy / perception eng role — honesty lock holds.</p>
+      </details>
+    </article>
+    <article class="proj">
+      <div class="proj-top">
+        <h3>Seagulls / OpenStage</h3>
+        <span class="credit"><a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a> · AI Engineer Intern</span>
+      </div>
+      <p class="proj-trail">AI Engineer Intern · tooling / integration · prior</p>
+      <div class="method-tags" aria-label="Methods">
+        <span>[tooling]</span>
+        <span>[integration]</span>
+        <span>[eval]</span>
+        <span>[chat-ux]</span>
+        <span>[tracing]</span>
+      </div>
+      <p class="problem">Problem: fan-data / assistant tooling needs evaluation traces and clear routing — not a vague “AI surface” demo.</p>
+      <details class="proj-details">
+        <summary>Method / detail</summary>
+        <p class="detail-body">AI Engineer Intern on Seagulls / OpenStage (<a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a>): chat UX, exercise/search integration, tracing/QA, and scoped work around routing / memory / safety. Secondary case — depth without competing with AegisLand as flagship.</p>
+      </details>
+    </article>
+  </div>
+</section>
+
+<section id="measured">
+  <div class="sec-head">
+    <span class="sec-index">03 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <p class="sec-label">[ holdouts ]</p>
+  <h2 class="sec-title">Measured</h2>
+  <div class="measured" aria-label="Measured strip">
+    <div class="m">
+      <span class="n">43%&rarr;1%</span>
+      <span class="d">Phase 6B unsafe reduction</span>
+    </div>
+    <div class="m">
+      <span class="n">false</span>
+      <span class="d">safety_acceptance locked</span>
+    </div>
+    <div class="m">
+      <span class="n">[sim-only]</span>
+      <span class="d">No live vehicle authority</span>
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="sec-head">
+    <span class="sec-index">04 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <p class="sec-label">[ roles ]</p>
+  <h2 class="sec-title">Experience</h2>
+  <div class="exp">
+    <div class="exp-item">
+      <div class="role">Cruze · ongoing · <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a></div>
+      <h3>Fleet Outreach &amp; BD</h3>
+      <p>Texas pilot outreach and fleet/DOT conversations grounded in what Cruze can demonstrate — not inflated AI R&amp;D claims.</p>
+    </div>
+    <div class="exp-item">
+      <div class="role">Seagulls / OpenStage · prior · <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a></div>
+      <h3>AI Engineer Intern</h3>
+      <p>Production tooling for OpenStage/Seagulls: chat UX, tracing/QA, and scoped routing/memory/safety — evaluation first.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="sec-head">
+    <span class="sec-index">05 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <p class="sec-label">[ reach ]</p>
+  <h2 class="sec-title">Contact</h2>
+  <p class="lead">Email is enough. Resume and GitHub are public.</p>
+  <a class="mail" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+  <div class="contact-links">
+    <a href="resume.html">Resume</a>
+    <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub · suhaslord</a>
+  </div>
+</section>
 </main>
 
-<div class="mobile-cta" id="mobileCta" hidden>
-  <p class="mobile-cta-line">Open to research & internships</p>
-  <a class="mobile-cta-btn" href="mailto:suhas.aug20@gmail.com">Email</a>
-  <button class="mobile-cta-dismiss" type="button" aria-label="Dismiss email bar">&#215;</button>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <p>© 2026 Suhas Beemineni · simulation research, not flight software</p>
-    <div class="footer-links">
-      <a href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">AegisLand</a>
-      <a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="mailto:suhas.aug20@gmail.com">Email</a>
+<footer>
+  <div class="foot-frame">
+    <div>
+      <p class="foot-close">Build carefully. Measure before you ship.</p>
+      <div class="foot-links">
+        <a href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+        <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="resume.html">Resume</a>
+      </div>
+      <p class="foot-honesty">Suhas Beemineni · RIHS &rsquo;29 · SJ Delta · simulation research, not flight software · [sim-only · 2026]</p>
+    </div>
+    <div class="foot-meta">
+      <p>RIHS &rsquo;29 · SJ Delta</p>
+      <p style="margin-top:0.75rem">[sim-only · 2026]</p>
     </div>
   </div>
 </footer>
-<script src="js/site.js"></script>
+<script>
+(function () {
+  var nav = document.getElementById('siteNav');
+  var btn = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if (nav && btn && links) {
+    function setOpen(open) {
+      nav.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      btn.textContent = open ? 'Close' : 'Menu';
+    }
+    btn.addEventListener('click', function () {
+      setOpen(!nav.classList.contains('is-open'));
+    });
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+  }
+
+  var projects = document.getElementById('projects');
+  var viewList = document.getElementById('viewList');
+  var viewGrid = document.getElementById('viewGrid');
+  function setView(mode) {
+    if (!projects || !viewList || !viewGrid) return;
+    var grid = mode === 'grid';
+    projects.classList.toggle('is-grid', grid);
+    projects.setAttribute('data-view', grid ? 'grid' : 'list');
+    viewList.setAttribute('aria-pressed', grid ? 'false' : 'true');
+    viewGrid.setAttribute('aria-pressed', grid ? 'true' : 'false');
+  }
+  if (viewList) viewList.addEventListener('click', function () { setView('list'); });
+  if (viewGrid) viewGrid.addEventListener('click', function () { setView('grid'); });
+})();
+</script>
 </body>
 </html>
