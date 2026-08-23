@@ -1,57 +1,103 @@
-# Pass B — V3 Vast Quiet Cinematic (3 body options)
+# Portfolio Pass B — V3 Vast Quiet bodies
 
-**Direction confirmed:** V3 vast quiet cinematic — NOT print-tech, NOT Theme #17.
+Local-only scaffolding. **No git PR from this pass** — Dev Bot owns the PR lift onto branch `cursor/five-style-variants-21a3`.
 
-This folder contains 3 layout/body variants of the V3 vast-quiet aesthetic family from Pass A (`styles/vast-quiet/`). Same aesthetic lock (void / fog / mist / bone / whisper palette + Instrument Serif/DM Sans), distinct layout grammar only.
+## Direction lock (CONFIRMED)
 
----
+**V3 vast quiet cinematic** — NOT print-tech, NOT Theme #17.
 
-## Files
+Base feel: `/workspace/suhas-drafts/portfolio-pass-a/v3-vast-quiet.html`
 
-1. **`b1-monument-stack.html`** — Huge hero, sparse full-bleed sections, enormous vertical margins; most direct extension of Pass A V3.
-2. **`b2-asymmetric-rail.html`** — Left thin sticky meta rail + right long content column; more editorial/structural.
-3. **`b3-chapter-void.html`** — Near-empty chapter voids (roman marks) between centered content islands; extreme whitespace.
-4. **`compare.html`** — 3-up iframe comparison + recommendation notes.
-5. **`README.md`** — This file.
+| Token | Value |
+|-------|-------|
+| Void | `#0c0c0b` |
+| Fog | `#8a8780` |
+| Mist | `#2a2926` |
+| Bone | `#e8e4dc` |
+| Whisper | `#c4bfb4` |
+| Display | Instrument Serif |
+| Body | DM Sans |
 
----
+Sparse dark field · long breathing room · cinematic quiet. No ledger paper, no cream/forest/copper, no neon lime.
 
-## Recommendation
+## Output root
 
-**App Builder lean:** B1 Monument Stack as the primary V3 body.  
-**B3 Chapter Void** is the strongest alternate if extreme whitespace wins craft review.  
-**B2 Asymmetric Rail** is distinctive but more UI-structural than pure void cinema.
+```
+/workspace/suhas-drafts/portfolio-pass-b/
+```
 
-**Suhas has NOT picked a body yet.** These options remain open under `pass-b/`.
+## Deliverables
 
----
+| File | Body / layout |
+|------|----------------|
+| `b1-monument-stack.html` | Monumental stacked vertical: huge hero, sparse full-bleed sections, huge margins |
+| `b2-asymmetric-rail.html` | Left thin meta rail + right long content column (still dark/quiet) |
+| `b3-chapter-void.html` | Chapter breaks as near-empty voids between content islands; extreme whitespace |
+| `compare.html` | 3-up iframes + notes + recommendation banner |
+| `shots/` | Playwright screenshots (heroes, Aegis, compare) |
+| `README.md` | This file |
 
-## Honesty locks (verbatim in all 3)
+Leftover print-tech `b1-ledger-columns.html` was cleared before writing these files.
 
-- **AegisLand:** simulation-only; `safety_acceptance: false`; Phase 6B unsafe 43%→1%; frozen holdouts
-- **Cruze:** Fleet Outreach & BD (NOT AI R&D)
-- **Seagulls/OpenStage:** AI Engineer Intern
-- **CTA:** suhas.aug20@gmail.com
-- **BANS:** no Elodin, no flight-software claims, no neon lime, no Inter-as-display, no purple/blue SaaS gradients, no 3D blobs, no fake browser chrome, no Theme #17 cream/forest/copper, no print-tech/ledger paper
+## Section order (every landing)
 
----
+1. Hero  
+2. Featured Aegis (sim-only)  
+3. Projects  
+4. Experience  
+5. Wins  
+6. Contact  
 
-## Dev Bot lift
+## Content truth (honesty locks)
 
-Local draft only. Prefer lifting `b1-monument-stack.html` into the portfolio repo on branch `cursor/five-style-variants-21a3`. Keep honesty locks verbatim. Do not mirror into Theme #17 cream/forest/copper or print-tech ledger paper.
+Do **not** invent beyond this:
 
----
+- **Name:** Suhas Beemineni · RIHS '29 · SJ Delta  
+- **AegisLand:** simulation-only research cockpit; `safety_acceptance: false`; Phase 6B unsafe **43% → 1%**; frozen holdouts  
+- **Cruze:** Fleet Outreach & BD  
+- **Seagulls / OpenStage:** AI Engineer Intern  
+- **CTA:** Email `suhas.aug20@gmail.com`  
 
-## No live index default
+### Explicit bans
 
-**Do NOT modify root `index.html` or any live default.** The base `index.html` on `main` is NOT overridden. Pass B variants are OPTIONS ONLY under `pass-b/`.
+- No Elodin  
+- No flight-software claims  
+- No neon lime-on-charcoal  
+- No Inter-as-display  
+- No purple/blue SaaS gradients  
+- No 3D blobs  
+- No fake browser chrome spam  
+- No Theme #17 cream/forest/copper  
+- No print-tech / ledger paper  
 
----
+## Preview locally
 
-## DRAFT · HOLD MERGE
+```bash
+cd /workspace/suhas-drafts/portfolio-pass-b
+python3 -m http.server 8766
+# open http://127.0.0.1:8766/compare.html
+```
 
-`isDraft=true`. Do not merge PR. Suhas has not picked a body.
+## Screenshots
 
----
+Captured at 1440×900 (heroes + Aegis mid-pages). Compare page full-page / wider.
 
-© 2026 Suhas Beemineni · simulation research, not flight software
+```
+shots/b1-hero.png  shots/b2-hero.png  shots/b3-hero.png
+shots/b1-aegis.png shots/b2-aegis.png shots/b3-aegis.png
+shots/compare.png
+```
+
+## How Dev Bot lifts into a PR
+
+1. Copy this folder (or selected winner HTML) into the real portfolio repo path Dev Bot owns.  
+2. Target branch: **`cursor/five-style-variants-21a3`**.  
+3. Do **not** re-author claims — keep honesty locks above.  
+4. Prefer **B1 Monument Stack** unless craft review clearly favors B3 Chapter Void.  
+5. Do not reintroduce Theme #17 or print-tech.  
+6. Open the PR from Dev Bot's workflow; this Pass B tree stays draft/local.  
+7. Optionally attach `shots/` for design review in the PR description.
+
+## Recommendation (Pass B)
+
+**Ship B1 Monument Stack (`b1-monument-stack.html`)** as the strongest V3 body layout — monumental hero + sparse full-bleed sections with huge breathing room, closest amplification of Pass A v3. **B3 Chapter Void** is the strong alternate for extreme quiet; **B2 Asymmetric Rail** is distinctive but more UI-structural than pure cinematic void.
