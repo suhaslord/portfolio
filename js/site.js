@@ -3,6 +3,7 @@
   document.documentElement.classList.add("js");
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var syncMobileCta = function () {};
 
   // Mobile navigation toggle
   const nav = document.getElementById("siteNav");
@@ -14,6 +15,7 @@
       const open = links.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      syncMobileCta();
     });
 
     // Close menu when clicking a link
@@ -22,6 +24,7 @@
         links.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
         toggle.setAttribute("aria-label", "Open menu");
+        syncMobileCta();
       });
     });
   }
@@ -30,12 +33,20 @@
   // when scroll-driven animations are missing. Dumb write; CSS decides.
   var progressTick = 0;
   var flagship = document.getElementById("flagship");
+  var hero = document.getElementById("top");
   function writeProgress() {
     progressTick = 0;
     var max = document.documentElement.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
     document.documentElement.style.setProperty("--page-progress", p.toFixed(4));
     if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 8);
+
+    if (hero) {
+      var heroRect = hero.getBoundingClientRect();
+      var heroTravel = Math.max(1, hero.offsetHeight);
+      var hp = Math.max(0, Math.min(1, -heroRect.top / heroTravel));
+      document.documentElement.style.setProperty("--hero-progress", hp.toFixed(4));
+    }
 
     if (flagship) {
       var rect = flagship.getBoundingClientRect();
@@ -103,35 +114,45 @@
   const chapters = document.querySelectorAll(".flagship-chapter");
 
   if (chapterLinks.length > 0 && chapters.length > 0) {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -70% 0px",
-      threshold: 0,
-    };
+    const rail = document.getElementById("flagshipChapters");
 
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          chapterLinks.forEach(function (link) {
-            link.classList.remove("is-active");
-            if (link.getAttribute("href") === "#" + id) {
-              link.classList.add("is-active");
-
-              // Keep the active chip latched in view when the rail is a
-              // horizontal scroller (stacked layouts)
-              const rail = link.closest(".chapters-nav");
-              if (rail && rail.scrollWidth > rail.clientWidth) {
-                rail.scrollTo({
-                  left: Math.max(0, link.offsetLeft - 24),
-                  behavior: reduceMotion.matches ? "auto" : "smooth",
-                });
-              }
-            }
-          });
+    function markChapter(id) {
+      var activeIndex = -1;
+      chapterLinks.forEach(function (link, i) {
+        var on = link.getAttribute("href") === "#" + id;
+        link.classList.toggle("is-active", on);
+        if (on) {
+          activeIndex = i;
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
         }
       });
-    }, observerOptions);
+      chapterLinks.forEach(function (link, i) {
+        link.classList.toggle("is-past", activeIndex >= 0 && i < activeIndex);
+      });
+      if (rail) {
+        rail.style.setProperty("--chapter-i", String(Math.max(0, activeIndex)));
+      }
+      if (activeIndex >= 0 && rail && rail.scrollWidth > rail.clientWidth) {
+        var activeLink = chapterLinks[activeIndex];
+        rail.scrollTo({
+          left: Math.max(0, activeLink.offsetLeft - 24),
+          behavior: reduceMotion.matches ? "auto" : "smooth",
+        });
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            markChapter(entry.target.id);
+          }
+        });
+      },
+      { root: null, rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+    );
 
     chapters.forEach(function (chapter) {
       observer.observe(chapter);
@@ -187,10 +208,18 @@
     mobileCta.hidden = false;
 
     const update = function () {
+      const menuOpen = links && links.classList.contains("is-open");
       const show =
-        !dismissed && smallScreen.matches && window.scrollY > 300 && !nearContact;
+        !dismissed &&
+        smallScreen.matches &&
+        window.scrollY > 300 &&
+        !nearContact &&
+        !menuOpen;
       mobileCta.classList.toggle("is-shown", show);
+      mobileCta.setAttribute("aria-hidden", show ? "false" : "true");
+      mobileCta.toggleAttribute("inert", !show);
     };
+    syncMobileCta = update;
 
     if (contactSection && "IntersectionObserver" in window) {
       const contactObserver = new IntersectionObserver(

@@ -61,6 +61,7 @@ html {
   --measure: 62ch;
   --page-progress: 0;
   --flagship-progress: 0;
+  --hero-progress: 0;
 }
 
 ::selection {
@@ -361,6 +362,8 @@ a {
 .hero-media img {
   width: 100%;
   height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: var(--radius-lg);
   border: 1px solid var(--line);
   box-shadow: 0 1px 0 rgba(26, 23, 20, 0.04), 0 24px 48px -36px rgba(26, 23, 20, 0.3);
@@ -375,6 +378,14 @@ a {
       animation: hero-drift linear both;
       animation-timeline: view();
       animation-range: exit 0% exit 100%;
+    }
+  }
+
+  /* Same scrub language when view timelines are missing: --hero-progress 0–1 */
+  @supports not ((animation-timeline: view()) and (animation-range: entry)) {
+    .hero-grid .hero-media img {
+      opacity: calc(1 - var(--hero-progress, 0) * 0.55);
+      translate: 0 calc(var(--hero-progress, 0) * -28px);
     }
   }
 }
@@ -633,6 +644,16 @@ a {
   border-left-color: var(--copper);
 }
 
+/* Read chapters stay on the rail — copper, not a second widget */
+.chapter-link.is-past {
+  color: var(--copper-deep);
+  border-left-color: rgba(166, 124, 78, 0.45);
+}
+
+.chapter-link.is-past::before {
+  color: var(--copper);
+}
+
 .flagship-content-scroll {
   max-width: 58rem;
   min-width: 0;
@@ -640,6 +661,14 @@ a {
 
 .flagship-intro {
   margin-bottom: var(--s-6);
+}
+
+.flagship-intro .section-kicker {
+  margin-bottom: 0.65rem;
+}
+
+.flagship-intro .chapter-role {
+  margin-bottom: 0.75rem;
 }
 
 .flagship-chapter {
@@ -969,7 +998,8 @@ a {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .work-card:hover {
+  .work-card:hover,
+  .work-card:focus-visible {
     transform: translateY(-3px);
     box-shadow: 0 20px 40px -30px rgba(26, 23, 20, 0.4);
   }
@@ -1042,8 +1072,12 @@ a {
   font-weight: 500;
 }
 
-.work-card-small .work-badge,
-.work-card-medium .work-badge {
+/* Overlay stays on media. Ink chips only when the badge lives in the text. */
+.work-visual .work-badge {
+  z-index: 1;
+}
+
+.work-text .work-badge {
   position: static;
   display: inline-block;
   margin-bottom: 0.75rem;
@@ -1056,6 +1090,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 0.35rem;
   padding: var(--s-3);
   background: var(--surface-alt);
 }
@@ -1069,7 +1104,7 @@ a {
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: -0.032em;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0;
   color: var(--ink);
   transition: color var(--dur-micro) var(--ease);
 }
@@ -1088,7 +1123,7 @@ a {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--copper-deep);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
 /* Same numbered-index discipline as the chapter rail */
@@ -1102,7 +1137,7 @@ a {
   font-size: 0.98rem;
   line-height: 1.65;
   max-width: var(--measure);
-  margin-bottom: var(--s-2);
+  margin-bottom: 0.25rem;
   text-wrap: pretty;
 }
 
@@ -1496,6 +1531,12 @@ a {
   translate: 0 0;
   visibility: visible;
   transition-delay: 0s;
+}
+
+@media (max-width: 700px) {
+  html:has(.mobile-cta.is-shown) .site-footer {
+    padding-bottom: calc(var(--s-8) + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 .mobile-cta-line {
@@ -1964,6 +2005,12 @@ main > .hero-media figcaption {
     border-bottom-color: var(--copper);
     color: var(--forest);
     background: rgba(47, 74, 60, 0.08);
+  }
+
+  .chapter-link.is-past {
+    border-left-color: transparent;
+    border-bottom-color: rgba(166, 124, 78, 0.4);
+    color: var(--copper-deep);
   }
 
   .flagship-chapter {
