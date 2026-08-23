@@ -399,7 +399,7 @@
   .projects.is-grid .proj:nth-of-type(2) { padding-right: var(--space-sm); }
   .projects.is-grid .proj:nth-of-type(3) { margin-top: var(--space-md); padding-left: var(--space-sm); }
   .proj {
-    padding: var(--space-md) 0;
+    padding: var(--space-lg) 0 var(--space-xl);
     border-bottom: 1px solid var(--mist);
   }
   .projects:not(.is-grid) .proj:first-of-type { border-top: 1px solid var(--mist); }
@@ -413,7 +413,10 @@
   }
   .proj h3 {
     font-family: var(--font-display);
-    font-size: 2.05rem; font-weight: 400;
+    font-size: 2.35rem; font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    /* peer-craft-work-h3 */
   }
   .proj .credit {
     font-family: var(--font-mono);
@@ -433,6 +436,21 @@
     display: flex; flex-wrap: wrap; gap: 0.55rem 0.75rem;
     margin: 0.35rem 0 1.15rem;
   }
+
+  /* Cruze tags: thicker chips (Supreme) */
+  .projects .proj:nth-of-type(2) .method-tags {
+    gap: 0.65rem 0.85rem;
+    margin-bottom: 1.35rem;
+  }
+  .projects .proj:nth-of-type(2) .method-tags span {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    padding: 0.7rem 1.15rem 0.65rem;
+    border-width: 1.5px;
+    background: rgba(232,228,220,0.07);
+    color: var(--bone);
+  }
+
   .method-tags span {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -762,11 +780,10 @@
       </div>
       <p class="proj-trail">Fleet Outreach &amp; BD · Cruze · ongoing</p>
       <div class="method-tags" aria-label="Methods">
-        <span>[BD]</span>
-        <span>[outreach]</span>
-        <span>[fleet]</span>
-        <span>[pilot]</span>
-        <span>[texas]</span>
+        <span>[pilot path]</span>
+        <span>[partner honesty]</span>
+        <span>[texas corridors]</span>
+        <span>[no overclaim]</span>
       </div>
       <p class="problem">Problem: fleet and DOT partners need a credible pilot path — clear traffic jams before they form — without overclaiming savings we have not earned.</p>
       <details class="proj-details">
