@@ -373,6 +373,28 @@
   }
 
   .projects { max-width: 920px; }
+
+  /* Break equal-card rhythm (Supreme) */
+  .projects:not(.is-grid) .proj:nth-of-type(1) {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+  .projects:not(.is-grid) .proj:nth-of-type(2) {
+    padding-left: var(--space-lg);
+    max-width: 38rem;
+  }
+  .projects:not(.is-grid) .proj:nth-of-type(3) {
+    padding-top: var(--space-md);
+    border-left: 2px solid var(--mist);
+    padding-left: var(--space-md);
+  }
+  .projects.is-grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
+    gap: var(--space-lg) var(--space-md);
+  }
+  .projects.is-grid .proj:nth-of-type(1) { grid-column: 1 / -1; }
+  .projects.is-grid .proj:nth-of-type(3) { margin-top: var(--space-md); }
+
   .projects.is-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -415,10 +437,10 @@
   }
   .method-tags span {
     font-family: var(--font-mono);
-    font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--fog);
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--whisper);
     border: 1px solid var(--mist);
-    padding: 0.35rem 0.55rem;
+    padding: 0.45rem 0.7rem;
   }
   .proj p.problem { color: var(--fog); max-width: 38rem; font-size: 1rem; }
   .proj-details {
@@ -725,28 +747,40 @@ Ongoing · 2026</span>
     <article class="proj">
       <div class="proj-top">
         <h3>Cruze</h3>
-        <span class="credit">Fleet Outreach &amp; BD</span>
+        <span class="credit"><a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a> · Fleet Outreach &amp; BD</span>
       </div>
       <p class="proj-trail">Fleet Outreach &amp; BD · Cruze · ongoing</p>
       <div class="method-tags" aria-label="Methods">
         <span>[BD]</span>
         <span>[outreach]</span>
         <span>[fleet]</span>
+        <span>[pilot]</span>
+        <span>[texas]</span>
       </div>
       <p class="problem">Problem: partner and fleet conversations that stay deliverable, not AI R&amp;D cosplay.</p>
+      <details class="proj-details">
+        <summary>Method / detail</summary>
+        <p class="detail-body">Outbound proof: <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a>. Role stays Fleet Outreach &amp; BD — not an autonomy eng claim.</p>
+      </details>
     </article>
     <article class="proj">
       <div class="proj-top">
         <h3>Seagulls / OpenStage</h3>
-        <span class="credit">AI Engineer Intern</span>
+        <span class="credit"><a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a> · AI Engineer Intern</span>
       </div>
       <p class="proj-trail">AI Engineer Intern · tooling / integration · prior</p>
       <div class="method-tags" aria-label="Methods">
         <span>[tooling]</span>
         <span>[integration]</span>
         <span>[eval]</span>
+        <span>[chat-ux]</span>
+        <span>[tracing]</span>
       </div>
       <p class="problem">Problem: scoped tooling with evaluation clarity, not vague AI surfaces.</p>
+      <details class="proj-details">
+        <summary>Method / detail</summary>
+        <p class="detail-body">Scoped tooling/integration for OpenStage/Seagulls. Outbound: <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a>. Not a flagship research claim.</p>
+      </details>
     </article>
   </div>
 </section>
@@ -778,12 +812,12 @@ Ongoing · 2026</span>
   <h2 class="sec-title">Experience</h2>
   <div class="exp">
     <div class="exp-item">
-      <div class="role">Cruze · ongoing</div>
+      <div class="role">Cruze · ongoing · <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a></div>
       <h3>Fleet Outreach &amp; BD</h3>
       <p>Partner and fleet conversations grounded in what can actually be delivered.</p>
     </div>
     <div class="exp-item">
-      <div class="role">Seagulls / OpenStage · prior</div>
+      <div class="role">Seagulls / OpenStage · prior · <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a></div>
       <h3>AI Engineer Intern</h3>
       <p>Tooling and integration work with attention to evaluation and clear scope.</p>
     </div>
