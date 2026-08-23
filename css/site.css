@@ -285,6 +285,8 @@ a {
   background:
     radial-gradient(120% 90% at 85% -10%, rgba(166, 124, 78, 0.07), transparent 55%),
     var(--cream);
+  /* Scrub transforms must never widen the page */
+  overflow-x: clip;
 }
 
 .hero-inner {
@@ -314,14 +316,19 @@ a {
   margin-bottom: var(--s-3);
 }
 
+/* Type-led break: the claim runs full-width above the 7/5 grid,
+   not boxed into a bilateral column. */
+.hero-claim {
+  margin-bottom: clamp(var(--s-3), 4vw, var(--s-6));
+}
+
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 1.2rem + 4.6vw, 4.35rem);
+  font-size: clamp(2.4rem, 1.2rem + 5vw, 5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
-  line-height: 1.04;
-  max-width: 22ch;
-  margin-bottom: var(--s-3);
+  line-height: 1.02;
+  max-width: 18ch;
   color: var(--ink);
   text-wrap: balance;
 }
@@ -381,9 +388,9 @@ a {
   font-weight: 600;
 }
 
-/* Hero product frame drops below the claim line — asymmetric beat */
+/* Exhibit still drops below the claim baseline — asymmetric beat */
 .hero-grid .hero-media {
-  margin-top: clamp(var(--s-6), 6vw, 4.5rem);
+  margin-top: clamp(var(--s-2), 3vw, var(--s-6));
 }
 
 .hero-media img {
@@ -396,15 +403,17 @@ a {
   box-shadow: 0 1px 0 rgba(26, 23, 20, 0.04), 0 24px 48px -36px rgba(26, 23, 20, 0.3);
 }
 
-/* Hero scrub beat — the one visible scroll story (Caleb).
+/* Hero scrub beat — resolves onto the proof + CTA (narrative payoff).
    Driven directly by --hero-progress (0–1, written every frame in JS),
    so it scrubs identically in every browser and is capture-able:
-   the claim column and the exhibit part at different rates while the
-   scroll cue rule drains. Transform/opacity only. */
+   the claim recedes, the exhibit drifts, the cue rule drains — while
+   the proof panel settles forward and the CTA row stays anchored, so
+   a scrub capture ends framed on 43%→1% / safety_acceptance / Enter.
+   Transform/opacity only. */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-text {
-    translate: 0 calc(var(--hero-progress, 0) * -44px);
-    opacity: calc(1 - var(--hero-progress, 0) * 0.62);
+  .hero-claim {
+    translate: 0 calc(var(--hero-progress, 0) * -52px);
+    opacity: calc(1 - var(--hero-progress, 0) * 0.75);
   }
 
   .hero-grid .hero-media img {
@@ -412,18 +421,21 @@ a {
     scale: calc(1 - var(--hero-progress, 0) * 0.04);
     opacity: calc(1 - var(--hero-progress, 0) * 0.45);
   }
+
+  /* The payoff comes forward instead of fading out. Desktop only:
+     at stacked widths the panel is full-bleed and growth would poke
+     past the viewport (the mobile payoff is the sticky Email CTA). */
+  @media (min-width: 901px) {
+    .hero-proof {
+      scale: calc(1 + var(--hero-progress, 0) * 0.02);
+      transform-origin: 0 50%;
+    }
+  }
 }
 
+/* Wordless cue: a copper rule that drains as the hero is read */
 .scroll-cue {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
   margin-top: var(--s-4);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--copper-deep);
 }
 
 .cue-rule {
@@ -437,10 +449,6 @@ a {
 @media (prefers-reduced-motion: no-preference) {
   .cue-rule {
     transform: scaleX(calc(1 - var(--hero-progress, 0)));
-  }
-
-  .scroll-cue {
-    opacity: calc(1 - var(--hero-progress, 0) * 1.4);
   }
 }
 
@@ -836,7 +844,9 @@ a {
       animation-range: exit 0% exit 70%;
     }
 
-    .flagship-chapter {
+    /* The last chapter (Open) never ghosts: there is nothing after it
+       to hand off to, and its copy must stay AA-legible. */
+    .flagship-chapter:not(:last-of-type) {
       animation: chapter-exit linear both;
       animation-timeline: view();
       animation-range: exit 0% exit 62%;
@@ -925,6 +935,12 @@ a {
   line-height: 1.7;
   margin-bottom: var(--s-2);
   text-wrap: pretty;
+}
+
+/* Open is the hand-off — full ink, no ghost grey */
+#flagship-open .chapter-body p {
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .chapter-body p:last-child {
