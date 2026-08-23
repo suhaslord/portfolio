@@ -29,12 +29,20 @@
   // --page-progress 0–1 drives the nav hairline (and any other scrub)
   // when scroll-driven animations are missing. Dumb write; CSS decides.
   var progressTick = 0;
+  var flagship = document.getElementById("flagship");
   function writeProgress() {
     progressTick = 0;
     var max = document.documentElement.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
     document.documentElement.style.setProperty("--page-progress", p.toFixed(4));
     if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 8);
+
+    if (flagship) {
+      var rect = flagship.getBoundingClientRect();
+      var travel = Math.max(1, flagship.offsetHeight - window.innerHeight);
+      var fp = Math.max(0, Math.min(1, -rect.top / travel));
+      document.documentElement.style.setProperty("--flagship-progress", fp.toFixed(4));
+    }
   }
 
   window.addEventListener(
@@ -46,6 +54,7 @@
     },
     { passive: true }
   );
+  window.addEventListener("resize", writeProgress);
   writeProgress();
 
   function railOffset() {

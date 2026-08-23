@@ -57,6 +57,10 @@ html {
   --dur-hover: 0.35s;
   --dur-reveal: 0.7s;
   --dur-slow: 0.95s;
+  --hover-scale: 1.04;
+  --measure: 62ch;
+  --page-progress: 0;
+  --flagship-progress: 0;
 }
 
 ::selection {
@@ -297,7 +301,7 @@ a {
 .hero .lede {
   color: var(--ink-soft);
   font-size: clamp(1.05rem, 2vw, 1.2rem);
-  max-width: 54ch;
+  max-width: var(--measure);
   margin-bottom: var(--s-4);
   line-height: 1.7;
   text-wrap: pretty;
@@ -377,9 +381,9 @@ a {
 
 @keyframes hero-drift {
   to {
-    opacity: 0.45;
-    translate: 0 -28px;
-    scale: 0.99;
+    opacity: 0.32;
+    translate: 0 -36px;
+    scale: 0.985;
   }
 }
 
@@ -524,7 +528,7 @@ a {
 
 .section-lede-display {
   color: var(--ink-soft);
-  max-width: 52ch;
+  max-width: var(--measure);
   margin-bottom: var(--s-3);
   font-size: 1.15rem;
   line-height: 1.7;
@@ -536,6 +540,7 @@ a {
   height: 2px;
   background: var(--copper);
   margin-bottom: var(--s-6);
+  transform-origin: 0 50%;
 }
 
 /* Flagship section */
@@ -573,6 +578,23 @@ a {
   flex-direction: column;
   gap: 0.5rem;
   counter-reset: chapter;
+}
+
+/* Dossier progress: --flagship-progress 0–1 (JS). Desktop = left tick
+   growth; stacked layouts restyle this to a bottom hairline. */
+@media (prefers-reduced-motion: no-preference) {
+  .chapters-nav::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--copper);
+    transform: scaleY(var(--flagship-progress, 0));
+    transform-origin: 0 0;
+    pointer-events: none;
+  }
 }
 
 .chapter-link {
@@ -665,25 +687,95 @@ a {
   }
 }
 
-/* Craft 6 — progress-driven section exits: chapter openers ease off as
-   they leave the top of the scrollport. Scrubbed, transform+opacity only,
-   decorative (no fallback needed). */
+/* Craft 6 — progress-driven exits. Claim block, chapters, work cards,
+   and ledger rows recede as they leave. Transform+opacity only.
+   Never applied to .flagship-track / .chapters-nav (sticky latch). */
 @media (prefers-reduced-motion: no-preference) {
   @supports ((animation-timeline: view()) and (animation-range: entry)) {
-    .section-title-display,
+    .work-section .section-title-display,
+    .wins-section .section-title-display,
     .section-title-invert,
-    .chapter-title {
+    .work-section .section-lede-display,
+    .wins-section .section-lede-display,
+    .section-lede-invert {
       animation: section-exit linear both;
       animation-timeline: view();
       animation-range: exit 0% exit 85%;
+    }
+
+    .flagship-intro {
+      animation: intro-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 70%;
+    }
+
+    .flagship-chapter {
+      animation: chapter-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 62%;
+    }
+
+    .work-card {
+      animation: work-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 75%;
+    }
+
+    .wins-row,
+    .logbook-entry {
+      animation: row-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 80%;
+    }
+
+    .copper-rule,
+    .copper-rule-invert {
+      animation: rule-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 70%;
     }
   }
 }
 
 @keyframes section-exit {
   to {
-    opacity: 0.35;
+    opacity: 0.28;
+    translate: 0 -18px;
+  }
+}
+
+@keyframes intro-exit {
+  to {
+    opacity: 0.34;
+    translate: 0 -22px;
+  }
+}
+
+@keyframes chapter-exit {
+  to {
+    opacity: 0.3;
+    translate: 0 -26px;
+  }
+}
+
+@keyframes work-exit {
+  to {
+    opacity: 0.42;
     translate: 0 -14px;
+  }
+}
+
+@keyframes row-exit {
+  to {
+    opacity: 0.4;
+    translate: 0 -10px;
+  }
+}
+
+@keyframes rule-exit {
+  to {
+    opacity: 0.25;
+    transform: scaleX(0.22);
   }
 }
 
@@ -715,12 +807,25 @@ a {
 }
 
 .chapter-body {
-  max-width: 56ch;
+  max-width: var(--measure);
 }
 
+/* Rung 2 — role (claim / evidence / method / numbers / honesty).
+   Mono copper. Not a control strip — a reading order. */
+.chapter-role {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper-deep);
+  margin-bottom: 0.5rem;
+}
+
+/* Rung 4 — chapter claim (Fraunces). Roles above stay mono copper. */
 .chapter-title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.75rem);
   font-weight: 600;
   letter-spacing: -0.032em;
   color: var(--ink);
@@ -751,6 +856,11 @@ a {
   gap: var(--s-4);
   padding: var(--s-2) 0;
   border-bottom: 1px solid var(--line);
+  transition: border-color var(--dur-hover) var(--ease);
+}
+
+.ledger-row:hover {
+  border-bottom-color: rgba(166, 124, 78, 0.45);
 }
 
 .ledger-row:first-child {
@@ -784,6 +894,11 @@ a {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  transition: border-color var(--dur-hover) var(--ease);
+}
+
+.honesty-badge:hover {
+  border-color: rgba(166, 124, 78, 0.55);
 }
 
 .badge-label {
@@ -861,7 +976,7 @@ a {
 
   .work-card:hover .work-visual img,
   .work-card:focus-visible .work-visual img {
-    transform: scale(1.04);
+    transform: scale(var(--hover-scale));
   }
 }
 
@@ -938,6 +1053,9 @@ a {
 }
 
 .work-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: var(--s-3);
   background: var(--surface-alt);
 }
@@ -969,7 +1087,7 @@ a {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--copper-deep);
   margin-bottom: 0.75rem;
 }
 
@@ -982,7 +1100,8 @@ a {
 .work-text p {
   color: var(--ink-soft);
   font-size: 0.98rem;
-  line-height: 1.6;
+  line-height: 1.65;
+  max-width: var(--measure);
   margin-bottom: var(--s-2);
   text-wrap: pretty;
 }
@@ -1057,7 +1176,7 @@ a {
 
 .section-lede-invert {
   color: rgba(244, 239, 230, 0.88);
-  max-width: 52ch;
+  max-width: var(--measure);
   margin-bottom: var(--s-3);
   font-size: 1.15rem;
   line-height: 1.7;
@@ -1071,6 +1190,7 @@ a {
   background: var(--copper);
   margin-bottom: var(--s-6);
   position: relative;
+  transform-origin: 0 50%;
 }
 
 .experience-logbook {
@@ -1085,6 +1205,11 @@ a {
   gap: var(--s-4);
   padding: var(--s-3) 0;
   border-top: 1px solid var(--line-light);
+  transition: border-color var(--dur-hover) var(--ease);
+}
+
+.logbook-entry:hover {
+  border-top-color: rgba(201, 160, 110, 0.55);
 }
 
 .logbook-entry:last-child {
@@ -1143,6 +1268,11 @@ a {
   padding: var(--s-3) 0;
   border-bottom: 1px solid var(--line);
   align-items: baseline;
+  transition: border-color var(--dur-hover) var(--ease);
+}
+
+.wins-row:hover {
+  border-bottom-color: rgba(166, 124, 78, 0.45);
 }
 
 .wins-row:first-child {
@@ -1703,7 +1833,7 @@ main > .hero-media figcaption {
 
 .section-lede {
   color: var(--ink-soft);
-  max-width: 52ch;
+  max-width: var(--measure);
   margin-bottom: var(--s-3);
   font-size: 1.1rem;
   line-height: 1.7;
@@ -1803,6 +1933,18 @@ main > .hero-media figcaption {
     margin-inline: calc(-1 * var(--space));
     padding: 0.5rem var(--space);
     border-bottom: 1px solid var(--line);
+  }
+
+  /* Horizontal rail: progress reads as a copper underline, not a Y tick */
+  @media (prefers-reduced-motion: no-preference) {
+    .chapters-nav::after {
+      top: auto;
+      bottom: -1px;
+      width: 100%;
+      height: 2px;
+      transform: scaleX(var(--flagship-progress, 0));
+      transform-origin: 0 50%;
+    }
   }
 
   /* Horizontal rail: dual active cue = forest fill + copper underline.
