@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Suhas Beemineni — Monument Stack (Pass B1)</title>
+<title>Suhas Beemineni — Perception reliability for autonomy</title>
+<meta name="description" content="Perception reliability for autonomy. Simulation-first research on perception overconfidence and calibrated abstention for UAV safety.">
+<meta name="author" content="Suhas Beemineni">
+<meta name="theme-color" content="#0c0c0b">
+<link rel="canonical" href="https://suhaslord.github.io/portfolio/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://suhaslord.github.io/portfolio/">
+<meta property="og:title" content="Suhas Beemineni — Perception reliability for autonomy">
+<meta property="og:description" content="Simulation-first research on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts, not demos.">
+<meta property="og:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Suhas Beemineni — Perception reliability for autonomy">
+<meta name="twitter:description" content="Simulation-first research on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts, not demos.">
+<meta name="twitter:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,6 +38,21 @@
     font-size: 17px;
     line-height: 1.65;
   }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--bone);
+    color: var(--void);
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+  
   nav {
     position: sticky; top: 0; z-index: 40;
     display: flex; justify-content: space-between; align-items: center;
@@ -41,8 +70,17 @@
     color: var(--fog); text-decoration: none; font-weight: 500;
   }
   nav a:hover { color: var(--bone); }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--mist);
+    color: var(--bone);
+    font-size: 1.2rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+  }
 
-  /* Monumental stacked hero — nearly full viewport */
+  /* Monumental stacked hero */
   .hero {
     min-height: 96vh;
     display: flex; flex-direction: column;
@@ -59,21 +97,41 @@
     pointer-events: none;
   }
   .hero-inner { position: relative; max-width: 1200px; }
-  .hero .eyebrow {
-    font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 3rem; font-weight: 500;
+  
+  /* Hero load-in animation */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 {
+      animation: heroFadeUp 700ms cubic-bezier(0.16, 1, 0.3, 1) 120ms backwards;
+    }
+    .hero .sub {
+      animation: heroFadeUp 650ms cubic-bezier(0.16, 1, 0.3, 1) 280ms backwards;
+    }
+    .hero-meta {
+      animation: heroFadeUp 600ms cubic-bezier(0.16, 1, 0.3, 1) 380ms backwards;
+    }
+    @keyframes heroFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   }
+  
   .hero h1 {
     font-family: "Instrument Serif", serif;
     font-size: clamp(4.2rem, 13vw, 9.5rem);
     font-weight: 400; line-height: 0.88;
     letter-spacing: -0.035em;
-    max-width: 11ch;
+    max-width: 13ch;
   }
   .hero h1 em { font-style: italic; color: var(--whisper); }
   .hero .sub {
     margin-top: 3.5rem;
-    max-width: 26rem;
+    max-width: 28rem;
     font-size: 1.08rem;
     color: var(--fog);
   }
@@ -84,7 +142,7 @@
     color: var(--fog);
   }
 
-  /* Sparse full-bleed sections — huge vertical margins */
+  /* Sections */
   section {
     padding: 10rem 6vw;
     border-top: 1px solid var(--mist);
@@ -105,7 +163,7 @@
     align-items: start; max-width: 1100px;
   }
   .aegis p.lead {
-    font-size: 1.35rem; color: var(--whisper); max-width: 30rem; margin-bottom: 1.8rem;
+    font-size: 1.35rem; color: var(--whisper); max-width: 32rem; margin-bottom: 1.8rem;
     line-height: 1.5;
   }
   .aegis p.body { color: var(--fog); max-width: 30rem; }
@@ -137,6 +195,8 @@
   .proj .tag {
     font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fog);
   }
+  .proj a { color: var(--whisper); border-bottom: 1px solid var(--mist); }
+  .proj a:hover { color: var(--bone); border-bottom-color: var(--bone); }
 
   .exp { max-width: 820px; display: grid; gap: 4.5rem; }
   .exp-item h3 {
@@ -171,6 +231,15 @@
     border-bottom: 1px solid var(--mist); padding-bottom: 0.25rem;
   }
   .contact a:hover { border-bottom-color: var(--bone); }
+  .contact-links {
+    margin-top: 2rem;
+    display: flex; gap: 2rem; flex-wrap: wrap;
+  }
+  .contact-links a {
+    font-size: 0.875rem;
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+  
   footer {
     padding: 4rem 6vw 5rem;
     font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
@@ -178,7 +247,19 @@
   }
 
   @media (max-width: 780px) {
-    nav ul { display: none; }
+    nav ul { 
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--void);
+      padding: 2rem;
+      border-top: 1px solid var(--mist);
+    }
+    nav ul.is-open { display: flex; }
+    .nav-toggle { display: block; }
     .aegis, .wins, .proj { grid-template-columns: 1fr; }
     .hero { min-height: 88vh; padding: 4rem 6vw 5rem; }
     section { padding: 6rem 6vw; }
@@ -186,26 +267,28 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <nav>
   <div class="sig">Suhas Beemineni</div>
-  <ul>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+  <ul id="navLinks">
     <li><a href="#aegis">Aegis</a></li>
     <li><a href="#projects">Work</a></li>
     <li><a href="#experience">Roles</a></li>
     <li><a href="#wins">Wins</a></li>
+    <li><a href="resume.html">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
+<main id="main">
 <header class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Pass B · Monument Stack</p>
-    <h1>Quiet room for <em>true</em> claims.</h1>
-    <p class="sub">Simulation research. Fleet outreach. AI engineering — measured, sparse, and honest.</p>
+    <h1>Perception reliability for autonomy.</h1>
+    <p class="sub">Simulation-first research. Fleet outreach. AI engineering.</p>
     <div class="hero-meta">
       <span>RIHS &rsquo;29</span>
       <span>SJ Delta</span>
-      <span>V3 family</span>
     </div>
   </div>
 </header>
@@ -215,7 +298,7 @@
   <h2 class="sec-title">AegisLand</h2>
   <div class="aegis">
     <div>
-      <p class="lead">A simulation-only research cockpit for studying agent behavior under constraint.</p>
+      <p class="lead">A simulation-only research cockpit for UAV perception reliability and calibrated abstention under constraint.</p>
       <p class="body">Not a live autonomy product. Phase 6B work reduced unsafe rates on frozen holdouts from 43% to 1%, with safety_acceptance held at false.</p>
       <span class="constraint">safety_acceptance: false</span>
     </div>
@@ -239,7 +322,7 @@
     <article class="proj">
       <div>
         <h3>AegisLand</h3>
-        <p>Research cockpit for simulated evaluation, holdout integrity, and unsafe-rate measurement.</p>
+        <p>Research cockpit for simulated evaluation, holdout integrity, and unsafe-rate measurement. <a href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Cockpit ↗</a></p>
       </div>
       <span class="tag">Research</span>
     </article>
@@ -253,7 +336,7 @@
     <article class="proj">
       <div>
         <h3>Seagulls / OpenStage</h3>
-        <p>AI Engineer Intern — tooling and integration with honest scope.</p>
+        <p>AI Engineer Intern — production AI integration and tooling.</p>
       </div>
       <span class="tag">AI Eng</span>
     </article>
@@ -267,12 +350,12 @@
     <div class="exp-item">
       <div class="role">Cruze</div>
       <h3>Fleet Outreach &amp; BD</h3>
-      <p>Partner and fleet conversations grounded in what can actually be delivered.</p>
+      <p>Fleet outreach and business development — moving qualified prospects toward pilot agreements.</p>
     </div>
     <div class="exp-item">
       <div class="role">Seagulls / OpenStage</div>
       <h3>AI Engineer Intern</h3>
-      <p>Engineering work across AI surfaces with attention to evaluation and clarity.</p>
+      <p>Production AI for OpenStage: assistant search, chat UX, tracing, and core AI work.</p>
     </div>
   </div>
 </section>
@@ -301,8 +384,28 @@
   <h2 class="sec-title">Contact</h2>
   <p>Email is enough.</p>
   <a href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+  <div class="contact-links">
+    <a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://www.linkedin.com/in/suhas-beemineni-1984763b8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="resume.html">Resume</a>
+  </div>
 </section>
+</main>
 
-<footer>Suhas Beemineni · RIHS &rsquo;29 · SJ Delta · Monument Stack · Pass B1</footer>
+<footer>Suhas Beemineni · RIHS &rsquo;29 · SJ Delta · simulation research, not flight software</footer>
+
+<script>
+(function() {
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('navLinks');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function() {
+      var isOpen = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+  }
+})();
+</script>
 </body>
 </html>
