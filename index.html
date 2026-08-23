@@ -137,7 +137,6 @@
   .hero-copy { min-width: 0; }
   .hero h1 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
     font-size: var(--fs-display);
     font-weight: 400; line-height: 0.9;
     letter-spacing: -0.035em;
@@ -374,32 +373,13 @@
   }
 
   .projects { max-width: 920px; }
-
-  /* Break equal-card rhythm (Supreme) */
-  .projects:not(.is-grid) .proj:nth-of-type(1) {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
-  }
-  .projects:not(.is-grid) .proj:nth-of-type(2) {
-    padding-left: var(--space-lg);
-    max-width: 38rem;
-  }
-  .projects:not(.is-grid) .proj:nth-of-type(3) {
-    padding-top: var(--space-md);
-    border-left: 2px solid var(--mist);
-    padding-left: var(--space-md);
-  }
   .projects.is-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
-    gap: var(--space-xl) var(--space-lg);
-    align-items: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 2.5rem;
   }
-  .projects.is-grid .proj:nth-of-type(1) { grid-column: 1 / -1; }
-  .projects.is-grid .proj:nth-of-type(2) { padding-right: var(--space-sm); }
-  .projects.is-grid .proj:nth-of-type(3) { margin-top: var(--space-md); padding-left: var(--space-sm); }
   .proj {
-    padding: var(--space-lg) 0 var(--space-xl);
+    padding: var(--space-md) 0;
     border-bottom: 1px solid var(--mist);
   }
   .projects:not(.is-grid) .proj:first-of-type { border-top: 1px solid var(--mist); }
@@ -413,10 +393,7 @@
   }
   .proj h3 {
     font-family: var(--font-display);
-    font-size: 2.35rem; font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1.05;
-    /* peer-craft-work-h3 */
+    font-size: 2.05rem; font-weight: 400;
   }
   .proj .credit {
     font-family: var(--font-mono);
@@ -433,34 +410,15 @@
     color: var(--whisper); margin-bottom: 0.75rem;
   }
   .method-tags {
-    display: flex; flex-wrap: wrap; gap: 0.55rem 0.75rem;
-    margin: 0.35rem 0 1.15rem;
+    display: flex; flex-wrap: wrap; gap: 0.45rem 0.55rem;
+    margin-bottom: 0.85rem;
   }
-
-  /* Cruze tags: thicker chips (Supreme) */
-  .projects .proj:nth-of-type(2) .method-tags {
-    gap: 0.65rem 0.85rem;
-    margin-bottom: 1.35rem;
-  }
-  .projects .proj:nth-of-type(2) .method-tags span {
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    padding: 0.7rem 1.15rem 0.65rem;
-    border-width: 1.5px;
-    background: rgba(232,228,220,0.07);
-    color: var(--bone);
-  }
-
   .method-tags span {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--bone);
-    background: rgba(232,228,220,0.04);
-    border: 1px solid rgba(138,135,128,0.55);
-    border-radius: 0;
-    padding: 0.55rem 0.95rem 0.5rem;
+    font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fog);
+    border: 1px solid var(--mist);
+    padding: 0.35rem 0.55rem;
   }
   .proj p.problem { color: var(--fog); max-width: 38rem; font-size: 1rem; }
   .proj-details {
@@ -776,39 +734,28 @@
     <article class="proj">
       <div class="proj-top">
         <h3>Cruze</h3>
-        <span class="credit"><a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a> · Fleet Outreach &amp; BD</span>
+        <span class="credit">Fleet Outreach &amp; BD</span>
       </div>
       <p class="proj-trail">Fleet Outreach &amp; BD · Cruze · ongoing</p>
       <div class="method-tags" aria-label="Methods">
-        <span>[pilot path]</span>
-        <span>[partner honesty]</span>
-        <span>[texas corridors]</span>
-        <span>[no overclaim]</span>
+        <span>[BD]</span>
+        <span>[outreach]</span>
+        <span>[fleet]</span>
       </div>
-      <p class="problem">Problem: fleet and DOT partners need a credible pilot path — clear traffic jams before they form — without overclaiming savings we have not earned.</p>
-      <details class="proj-details">
-        <summary>Method / detail</summary>
-        <p class="detail-body">Fleet Outreach &amp; BD at Cruze (<a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a>): Texas pilot outreach, partner conversations scoped to what the virtual infrastructure can actually demonstrate. Not an autonomy / perception eng role — honesty lock holds.</p>
-      </details>
+      <p class="problem">Problem: partner and fleet conversations that stay deliverable, not AI R&amp;D cosplay.</p>
     </article>
     <article class="proj">
       <div class="proj-top">
         <h3>Seagulls / OpenStage</h3>
-        <span class="credit"><a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a> · AI Engineer Intern</span>
+        <span class="credit">AI Engineer Intern</span>
       </div>
       <p class="proj-trail">AI Engineer Intern · tooling / integration · prior</p>
       <div class="method-tags" aria-label="Methods">
         <span>[tooling]</span>
         <span>[integration]</span>
         <span>[eval]</span>
-        <span>[chat-ux]</span>
-        <span>[tracing]</span>
       </div>
-      <p class="problem">Problem: fan-data / assistant tooling needs evaluation traces and clear routing — not a vague “AI surface” demo.</p>
-      <details class="proj-details">
-        <summary>Method / detail</summary>
-        <p class="detail-body">AI Engineer Intern on Seagulls / OpenStage (<a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a>): chat UX, exercise/search integration, tracing/QA, and scoped work around routing / memory / safety. Secondary case — depth without competing with AegisLand as flagship.</p>
-      </details>
+      <p class="problem">Problem: scoped tooling with evaluation clarity, not vague AI surfaces.</p>
     </article>
   </div>
 </section>
@@ -845,14 +792,14 @@
   <h2 class="sec-title">Experience</h2>
   <div class="exp">
     <div class="exp-item">
-      <div class="role">Cruze · ongoing · <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a></div>
+      <div class="role">Cruze · ongoing</div>
       <h3>Fleet Outreach &amp; BD</h3>
-      <p>Texas pilot outreach and fleet/DOT conversations grounded in what Cruze can demonstrate — not inflated AI R&amp;D claims.</p>
+      <p>Partner and fleet conversations grounded in what can actually be delivered.</p>
     </div>
     <div class="exp-item">
-      <div class="role">Seagulls / OpenStage · prior · <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a></div>
+      <div class="role">Seagulls / OpenStage · prior</div>
       <h3>AI Engineer Intern</h3>
-      <p>Production tooling for OpenStage/Seagulls: chat UX, tracing/QA, and scoped routing/memory/safety — evaluation first.</p>
+      <p>Tooling and integration work with attention to evaluation and clear scope.</p>
     </div>
   </div>
 </section>
