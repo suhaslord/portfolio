@@ -109,14 +109,22 @@
     });
   }
 
-  // Flagship chapter scroll spy
+  // Flagship chapter scroll spy.
+  // Threshold sync, not an IntersectionObserver band: the active chapter
+  // is the last one whose top has crossed the reading line, recomputed
+  // every scroll frame. An observer band only fires on edge events, so
+  // the rail could lag a chapter behind (Method lit while Numbers was
+  // on screen). This can never be stale.
   const chapterLinks = document.querySelectorAll(".chapter-link");
   const chapters = document.querySelectorAll(".flagship-chapter");
 
   if (chapterLinks.length > 0 && chapters.length > 0) {
     const rail = document.getElementById("flagshipChapters");
+    let markedId = null;
 
     function markChapter(id) {
+      if (id === markedId) return;
+      markedId = id;
       var activeIndex = -1;
       chapterLinks.forEach(function (link, i) {
         var on = link.getAttribute("href") === "#" + id;
@@ -143,20 +151,42 @@
       }
     }
 
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            markChapter(entry.target.id);
+    let spyTick = 0;
+    function syncChapter() {
+      spyTick = 0;
+      // Reading line: below the site nav and the latched rail, about a
+      // third of the way down the viewport. The chapter that CONTAINS
+      // the line is active; when the line sits in a gap between
+      // chapters, the last chapter that crossed it stays lit.
+      var line =
+        (nav ? nav.offsetHeight : 0) +
+        railOffset() +
+        window.innerHeight * 0.35;
+      var active = chapters[0];
+      var container = null;
+      chapters.forEach(function (chapter) {
+        var r = chapter.getBoundingClientRect();
+        if (r.top <= line) {
+          active = chapter;
+          if (r.bottom > line) {
+            container = chapter;
           }
-        });
-      },
-      { root: null, rootMargin: "-20% 0px -70% 0px", threshold: 0 }
-    );
+        }
+      });
+      markChapter((container || active).id);
+    }
 
-    chapters.forEach(function (chapter) {
-      observer.observe(chapter);
-    });
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!spyTick) {
+          spyTick = window.requestAnimationFrame(syncChapter);
+        }
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", syncChapter);
+    syncChapter();
   }
 
   // Shared reveal language: mark [data-reveal] elements once they enter.
