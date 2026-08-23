@@ -1,6 +1,8 @@
 Figures copied from suhaslord/uav-safety-research (docs/assets/readme/) for this static archive.
 
 - frame_home.png — research cockpit still
+- cover.jpg — research cockpit still (full frame)
+- exhibit-still.jpg — geometry-only crop of cover.jpg (700,60)–(1600,900); no UI chrome
 - chart_phase6b_light.png
 - chart_v3_light.png
 - chart_uncertainty_light.png
