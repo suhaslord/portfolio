@@ -159,8 +159,8 @@ a {
     content: "";
     position: absolute;
     inset-inline: 0;
-    bottom: -1px;
-    height: 2px;
+    bottom: -1.5px;
+    height: 3px;
     background: var(--copper);
     transform: scaleX(var(--page-progress, 0));
     transform-origin: 0 50%;
@@ -396,43 +396,51 @@ a {
   box-shadow: 0 1px 0 rgba(26, 23, 20, 0.04), 0 24px 48px -36px rgba(26, 23, 20, 0.3);
 }
 
-/* Hero scrub — the exhibit recedes as the hero leaves. */
+/* Hero scrub beat — the one visible scroll story (Caleb).
+   Driven directly by --hero-progress (0–1, written every frame in JS),
+   so it scrubs identically in every browser and is capture-able:
+   the claim column and the exhibit part at different rates while the
+   scroll cue rule drains. Transform/opacity only. */
 @media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: view()) and (animation-range: entry)) {
-    .hero-grid .hero-media {
-      animation: hero-drift linear both;
-      animation-timeline: view();
-      animation-range: exit 0% exit 100%;
-    }
-
-    .hero-text {
-      animation: hero-text-exit linear both;
-      animation-timeline: view();
-      animation-range: exit 0% exit 90%;
-    }
+  .hero-text {
+    translate: 0 calc(var(--hero-progress, 0) * -44px);
+    opacity: calc(1 - var(--hero-progress, 0) * 0.62);
   }
 
-  /* Same scrub language via --hero-progress when view() is missing */
-  @supports not ((animation-timeline: view()) and (animation-range: entry)) {
-    .hero-grid .hero-media {
-      opacity: calc(1 - var(--hero-progress, 0) * 0.55);
-      translate: 0 calc(var(--hero-progress, 0) * -28px);
-    }
+  .hero-grid .hero-media img {
+    translate: 0 calc(var(--hero-progress, 0) * -92px);
+    scale: calc(1 - var(--hero-progress, 0) * 0.04);
+    opacity: calc(1 - var(--hero-progress, 0) * 0.45);
   }
 }
 
-@keyframes hero-drift {
-  to {
-    opacity: 0.3;
-    translate: 0 -40px;
-    scale: 0.98;
-  }
+.scroll-cue {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper-deep);
 }
 
-@keyframes hero-text-exit {
-  to {
-    opacity: 0.35;
-    translate: 0 -24px;
+.cue-rule {
+  display: inline-block;
+  width: 3.5rem;
+  height: 2px;
+  background: var(--copper);
+  transform-origin: 0 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cue-rule {
+    transform: scaleX(calc(1 - var(--hero-progress, 0)));
+  }
+
+  .scroll-cue {
+    opacity: calc(1 - var(--hero-progress, 0) * 1.4);
   }
 }
 
@@ -631,42 +639,13 @@ a {
   text-wrap: pretty;
 }
 
-/* ============ Product frame — large media chrome ============ */
-.product-frame {
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--surface);
-  box-shadow: 0 24px 48px -36px rgba(26, 23, 20, 0.25);
-}
-
-.frame-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.6rem 1rem;
-  background: var(--surface-deep);
-  border-bottom: 1px solid var(--rule);
-}
-
-.frame-dots {
-  flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--rule-strong);
-  box-shadow: 14px 0 0 var(--rule-strong), 28px 0 0 var(--rule-strong);
-  margin-right: 28px;
-}
-
-.frame-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  color: var(--ink-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* Archival stills — screenshots are flattened to a warm monochrome so
+   nothing in-frame reads as a live control (no blue CTAs). Exhibits,
+   not embeds. */
+.hero-media img,
+.chapter-media img,
+.work-visual img {
+  filter: grayscale(1) sepia(0.32) contrast(0.92) brightness(1.05);
 }
 
 /* ============ Flagship — pinned chapter storytelling ============ */
@@ -799,6 +778,10 @@ a {
 .chapter-media {
   position: relative;
   margin-bottom: var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 48px -36px rgba(26, 23, 20, 0.25);
 }
 
 .chapter-media img {
@@ -954,72 +937,84 @@ a {
   margin-top: var(--s-3);
 }
 
+/* Evidence ledger — the numbers are the loudest thing in the chapter.
+   Fraunces display values at ink/forest on cream (WCAG AA+). */
 .ledger-row {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--s-4);
-  padding: var(--s-2) 0;
-  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid var(--rule-strong);
   transition: border-color var(--dur-hover) var(--ease);
 }
 
 .ledger-row:hover {
-  border-bottom-color: var(--copper-dim);
+  border-bottom-color: var(--copper);
 }
 
 .ledger-row:first-child {
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-strong);
 }
 
 .ledger-label {
-  color: var(--ink-soft);
-  font-size: 0.96rem;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 .ledger-value {
-  font-family: var(--font-mono);
-  font-size: 0.88rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1rem + 1.6vw, 2rem);
+  letter-spacing: -0.032em;
   color: var(--forest);
   font-weight: 600;
   white-space: nowrap;
 }
 
-.honesty-badges {
-  display: grid;
-  gap: var(--s-2);
+/* The headline reduction reads first */
+.ledger-row:first-child .ledger-value {
+  font-size: clamp(1.8rem, 1.2rem + 2.6vw, 2.9rem);
+}
+
+/* Honesty — one stamped dossier record, not four twin cards. */
+.honesty-ledger {
   margin-top: var(--s-3);
-}
-
-.honesty-badge {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: var(--s-2) var(--s-3);
-  background: var(--surface);
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-strong);
+  border-left: 3px solid var(--fail);
   border-radius: var(--radius);
-  transition: border-color var(--dur-hover) var(--ease);
+  background: var(--surface);
 }
 
-.honesty-badge:hover {
-  border-color: var(--rule-strong);
+.honesty-row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) 1fr;
+  gap: var(--s-3);
+  align-items: baseline;
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--rule);
 }
 
-.badge-label {
+.honesty-row:last-child {
+  border-bottom: 0;
+}
+
+.honesty-row dt {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
 
-.badge-value {
+.honesty-row dd {
+  margin: 0;
   font-size: 1rem;
   font-weight: 600;
   color: var(--ink);
 }
 
-.badge-flag {
+.honesty-row .hv-flag {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   letter-spacing: 0.04em;
@@ -1027,8 +1022,17 @@ a {
   color: var(--forest);
 }
 
-.badge-value.badge-fail {
+.honesty-row.is-loud {
+  background: rgba(140, 61, 42, 0.06);
+}
+
+.honesty-row.is-loud dt {
+  color: var(--fail);
+}
+
+.honesty-row .hv-false {
   font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 1rem + 0.8vw, 1.4rem);
   color: var(--fail);
 }
 
@@ -1037,6 +1041,36 @@ a {
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: var(--s-3);
+}
+
+/* ============ Chapter cut — full-bleed Fraunces type risk ============
+   One oversized italic line bridges the dossier into the work grid.
+   Wider than the viewport on purpose; the band clips it. Drifts
+   sideways with --page-progress (scrubbed, transform only). */
+.chapter-cut {
+  overflow: hidden;
+  background: var(--cream);
+  border-bottom: 1px solid var(--rule);
+  padding: clamp(var(--s-4), 6vw, var(--s-8)) 0;
+}
+
+.cut-line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(4rem, 11vw, 10rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: var(--forest);
+  white-space: nowrap;
+  margin-left: calc(-1 * var(--space));
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cut-line {
+    translate: calc(var(--page-progress, 0) * -18vw) 0;
+  }
 }
 
 /* ============ Work — unequal bento ============ */

@@ -61,13 +61,14 @@
 
           <div class="cta-row" data-reveal style="--reveal-delay: 240ms">
             <a class="btn btn-primary" href="#flagship">Enter AegisLand</a>
-            <a class="btn btn-secondary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Cockpit</a>
-            <a class="btn btn-ghost" href="mailto:suhas.aug20@gmail.com">Email</a>
+            <a class="btn btn-secondary" href="mailto:suhas.aug20@gmail.com">Email</a>
           </div>
           <div class="trust-chips" data-reveal style="--reveal-delay: 300ms">
             <span class="chip">Sim-only</span>
+            <a class="chip chip-link" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Cockpit ↗</a>
             <a class="chip chip-link" href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub suhaslord</a>
           </div>
+          <p class="scroll-cue" aria-hidden="true"><span class="cue-rule"></span>Scroll — the evidence is below</p>
         </div>
         <div class="hero-media" data-reveal style="--reveal-delay: 180ms">
           <img src="assets/aegisland/cover.jpg" width="1600" height="900" alt="AegisLand frozen holdout visualization" loading="eager" fetchpriority="high">
@@ -101,12 +102,8 @@
         </div>
 
         <section id="flagship-exhibit" class="flagship-chapter">
-          <div class="chapter-media product-frame">
-            <div class="frame-bar" aria-hidden="true">
-              <span class="frame-dots"></span>
-              <span class="frame-label">aegisland-research-cockpit — exhibit 01</span>
-            </div>
-            <img src="assets/aegisland/cover.jpg" width="1600" height="900" alt="AegisLand research cockpit frozen holdout">
+          <div class="chapter-media">
+            <img src="assets/aegisland/cover.jpg" width="1600" height="900" alt="AegisLand research cockpit frozen holdout, archival still">
             <div class="media-overlay">
               <span class="badge-mono">FLAGSHIP · SIMULATION ONLY</span>
               <span class="badge-mono badge-fail">safety_acceptance: false</span>
@@ -158,24 +155,24 @@
           <div class="chapter-body" data-reveal>
             <p class="chapter-role">Honesty</p>
             <h3 class="chapter-title">What this is not</h3>
-            <div class="honesty-badges">
-              <div class="honesty-badge">
-                <span class="badge-label">Status</span>
-                <span class="badge-value badge-flag">FLAGSHIP · SIMULATION ONLY</span>
+            <dl class="honesty-ledger">
+              <div class="honesty-row">
+                <dt>Status</dt>
+                <dd class="hv-flag">FLAGSHIP · SIMULATION ONLY</dd>
               </div>
-              <div class="honesty-badge">
-                <span class="badge-label">Safety acceptance</span>
-                <span class="badge-value badge-fail">false</span>
+              <div class="honesty-row is-loud">
+                <dt>safety_acceptance</dt>
+                <dd class="hv-false">false</dd>
               </div>
-              <div class="honesty-badge">
-                <span class="badge-label">Flight readiness</span>
-                <span class="badge-value">Not flight software</span>
+              <div class="honesty-row">
+                <dt>Flight readiness</dt>
+                <dd>Not flight software</dd>
               </div>
-              <div class="honesty-badge">
-                <span class="badge-label">Archive mode</span>
-                <span class="badge-value">Sim-only</span>
+              <div class="honesty-row">
+                <dt>Archive mode</dt>
+                <dd>Sim-only</dd>
               </div>
-            </div>
+            </dl>
           </div>
         </section>
 
@@ -185,8 +182,8 @@
             <h3 class="chapter-title">What is still open</h3>
             <p>The research cockpit is live. The protocol is documented. The repository is public.</p>
             <div class="chapter-ctas">
-              <a class="btn btn-primary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open cockpit</a>
-              <a class="btn btn-secondary" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a class="btn btn-secondary" href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">Open cockpit</a>
+              <a class="btn btn-ghost" href="https://github.com/suhaslord/uav-safety-research" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         </section>
@@ -194,6 +191,10 @@
       </div>
     </div>
   </section>
+
+  <div class="chapter-cut" aria-hidden="true">
+    <p class="cut-line">when should a system stay quiet?</p>
+  </div>
 
   <section class="section work-section" id="work">
     <div class="wrap">
