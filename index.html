@@ -28,6 +28,7 @@
     --mist: #2a2926;
     --bone: #e8e4dc;
     --whisper: #c4bfb4;
+    --accent: #c9b896;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -44,259 +45,371 @@
     padding: 0.6rem 1rem; z-index: 100; font-size: 0.85rem;
   }
   .skip-link:focus { left: 1rem; top: 1rem; }
+
   nav {
-    position: sticky; top: 0; z-index: 40;
+    position: sticky; top: 0; z-index: 50;
     display: flex; justify-content: space-between; align-items: center;
     gap: 1rem;
-    padding: 1.35rem 6vw;
+    padding: 1.15rem 6vw;
     background: var(--void);
     border-bottom: 1px solid var(--mist);
   }
   nav .sig {
     font-family: "Instrument Serif", serif;
-    font-size: 1.2rem; letter-spacing: 0.02em;
+    font-size: 1.15rem; letter-spacing: 0.02em;
     color: var(--bone); text-decoration: none;
   }
   nav ul {
-    display: flex; flex-wrap: wrap; gap: 1.4rem 2rem; list-style: none;
-    justify-content: flex-end;
+    display: flex; flex-wrap: wrap; gap: 1.35rem 1.85rem; list-style: none;
+    justify-content: flex-end; align-items: center;
   }
   nav a {
-    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--fog); text-decoration: none; font-weight: 500;
   }
+  a { transition: color 0.6s cubic-bezier(0.19, 1, 0.22, 1), border-color 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
   nav a:hover, nav a:focus-visible { color: var(--bone); }
+  nav a.ext::after {
+    content: " \2197";
+    font-size: 0.75em;
+    letter-spacing: 0;
+  }
   .nav-toggle {
     display: none;
     background: transparent; border: 1px solid var(--mist);
-    color: var(--bone); font-size: 1rem; line-height: 1;
-    padding: 0.45rem 0.65rem; cursor: pointer;
+    color: var(--bone); font-size: 0.68rem; letter-spacing: 0.16em;
+    text-transform: uppercase; line-height: 1;
+    padding: 0.5rem 0.7rem; cursor: pointer;
+    position: relative; z-index: 52;
   }
 
   .hero {
-    min-height: 96vh;
+    min-height: 92vh;
     display: flex; flex-direction: column;
     justify-content: flex-end;
-    padding: 6rem 6vw 5rem;
+    padding: 4.5rem 6vw 3.75rem;
     position: relative;
   }
-  .hero::before {
-    content: "";
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 70% 45% at 55% 15%, rgba(232,228,220,0.035), transparent 58%),
-      linear-gradient(180deg, transparent 50%, var(--void) 100%);
-    pointer-events: none;
+  .hero-inner {
+    max-width: 1240px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+    gap: 2.5rem 3.5rem;
+    align-items: end;
   }
-  .hero-inner { position: relative; max-width: 1200px; }
-
-  /* Single quiet settle only (no staggered multi-delay catalog motion) */
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-inner {
-      animation: heroSettle 500ms ease-out both;
-    }
-    @keyframes heroSettle {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  }
-
+  .hero-copy { min-width: 0; }
   .hero h1 {
     font-family: "Instrument Serif", serif;
-    font-size: clamp(3.8rem, 10vw, 7.5rem);
-    font-weight: 400; line-height: 0.92;
-    letter-spacing: -0.032em;
-    max-width: 16ch;
-    margin-bottom: 0;
+    font-size: clamp(3.4rem, 9.5vw, 7.6rem);
+    font-weight: 400; line-height: 0.9;
+    letter-spacing: -0.035em;
+    max-width: 11ch;
+    margin-bottom: 1.35rem;
   }
-  .hero .sub {
-    margin-top: 2.8rem;
-    max-width: 34rem;
-    font-size: 1.15rem;
+  .hero-aside {
+    padding-bottom: 0.15rem;
+  }
+  .hero-aside p {
     color: var(--fog);
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    max-width: 26rem;
+    margin-bottom: 0.8rem;
+  }
+  .hero-aside p:last-of-type { margin-bottom: 0; }
+  .hero-exhibit {
+    margin: 0;
+    border: 1px solid var(--mist);
+    background: var(--void);
+    align-self: end;
+  }
+  .hero-exhibit img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(52vh, 520px);
+    object-fit: cover;
+    object-position: center;
+  }
+  .hero-exhibit figcaption {
+    font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fog);
+    padding: 0.7rem 0.85rem;
+    border-top: 1px solid var(--mist);
   }
   .hero-proof {
-    margin-top: 2.8rem;
-    display: flex; flex-wrap: wrap; gap: 0.85rem 1.2rem;
+    margin-top: 1.15rem;
+    display: flex; flex-wrap: wrap; gap: 0.65rem 0.8rem;
   }
   .hero-proof span {
-    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--bone); border: 1px solid var(--mist); padding: 0.65rem 1rem;
-    font-weight: 500;
+    font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(201,184,150,0.5);
+    padding: 0.58rem 0.95rem;
+    background: transparent;
   }
   .hero-meta {
-    margin-top: 4rem;
-    display: flex; flex-wrap: wrap; gap: 2.5rem 3.5rem;
-    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    margin-top: 1.35rem;
+    display: flex; flex-wrap: wrap; gap: 1.4rem 2.4rem;
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--fog);
-    font-weight: 500;
   }
   .hero-meta a { color: var(--fog); text-decoration: none; }
   .hero-meta a:hover { color: var(--bone); }
 
   section {
-    padding: 12rem 6vw;
+    padding: 7.5rem 6vw;
     border-top: 1px solid var(--mist);
   }
+
+  .sec-head {
+    display: flex; align-items: baseline; gap: 1.1rem;
+    margin-bottom: 1.1rem;
+    max-width: 1180px;
+  }
+  .sec-index {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--fog); font-weight: 500; flex-shrink: 0;
+  }
+  .sec-rule {
+    flex: 1; height: 1px; background: var(--mist); align-self: center;
+  }
+
+  .polarity {
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
+    gap: 1.5rem 3rem;
+    align-items: end;
+    margin-bottom: 3.5rem;
+  }
+  .polarity-word {
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(3.2rem, 8.5vw, 7.2rem);
+    font-weight: 400; line-height: 0.88;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+  .polarity-aside {
+    padding-bottom: 0.35rem;
+  }
+  .polarity-aside .sec-label {
+    margin-bottom: 0.55rem;
+  }
+  .polarity-aside .sec-title {
+    margin-bottom: 0;
+    font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+    max-width: 18ch;
+  }
   .sec-label {
-    font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 2.5rem; font-weight: 600;
+    font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 1rem; font-weight: 500;
   }
   .sec-title {
     font-family: "Instrument Serif", serif;
-    font-size: clamp(3.2rem, 7.5vw, 6rem);
-    font-weight: 400; letter-spacing: -0.028em;
-    margin-bottom: 5rem; max-width: 16ch; line-height: 0.98;
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
+    font-weight: 400; letter-spacing: -0.025em;
+    margin-bottom: 2.8rem; max-width: 16ch; line-height: 1.02;
+  }
+  .sec-title em {
+    font-style: italic; font-weight: 400;
   }
 
   .aegis {
-    display: grid; grid-template-columns: 1.5fr 1fr; gap: 7rem;
-    align-items: start; max-width: 1200px;
+    display: grid; grid-template-columns: 1.35fr 1fr; gap: 4rem 5rem;
+    align-items: start; max-width: 1180px;
+  }
+  .aegis-meta {
+    display: flex; flex-wrap: wrap; gap: 0.45rem 0.35rem;
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 1.5rem;
+  }
+  .aegis-meta span + span::before {
+    content: "\00b7";
+    margin: 0 0.55rem 0 0.2rem;
+    color: var(--mist);
   }
   .aegis p.lead {
-    font-size: 1.45rem; color: var(--whisper); max-width: 36rem; margin-bottom: 2rem;
+    font-size: 1.28rem; color: var(--whisper); max-width: 34rem; margin-bottom: 1.4rem;
     line-height: 1.48;
-    font-weight: 400;
   }
-  .aegis p.body { 
-    color: var(--fog); max-width: 36rem; 
-    line-height: 1.7; font-size: 1.05rem;
-  }
+  .aegis p.body { color: var(--fog); max-width: 34rem; }
   .constraint {
-    margin-top: 3rem;
+    margin-top: 2rem;
     display: inline-block;
-    font-size: 0.7rem; letter-spacing: 0.17em; text-transform: uppercase;
-    color: var(--bone); border: 1px solid var(--mist); padding: 0.75rem 1.2rem;
-    font-weight: 600;
+    font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(201,184,150,0.5);
+    padding: 0.65rem 1.05rem;
   }
-  .stat-stack { display: flex; flex-direction: column; gap: 4rem; padding-top: 1rem; }
+
+  .artifact-rail {
+    border: 1px solid var(--mist);
+    padding: 1.5rem 1.6rem 1.75rem;
+  }
+  .artifact-rail .rail-label {
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 1.6rem;
+  }
+  .stat-stack { display: flex; flex-direction: column; gap: 0; }
+  .stat {
+    border-top: 1px solid var(--mist);
+    padding: 1.45rem 0 1.35rem;
+  }
+  .stat:first-child { border-top: 0; padding-top: 0; }
+  .stat:last-child { padding-bottom: 0; }
   .stat .n {
     font-family: "Instrument Serif", serif;
-    font-size: 3.8rem; line-height: 1; letter-spacing: -0.032em;
+    font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 0.95; letter-spacing: -0.03em;
   }
-  .stat .d { margin-top: 0.9rem; color: var(--fog); font-size: 0.95rem; max-width: 18rem; line-height: 1.6; }
+  .stat .d { margin-top: 0.55rem; color: var(--fog); font-size: 0.88rem; max-width: 16rem; line-height: 1.4; }
 
-  .projects { max-width: 900px; }
+  .projects { max-width: 920px; }
   .proj {
-    padding: 3.5rem 0;
+    padding: 2.5rem 0;
     border-bottom: 1px solid var(--mist);
-    display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: start;
   }
-  .proj:first-of-type { border-top: 1px solid var(--mist); padding-top: 0; }
+  .proj:first-of-type { border-top: 1px solid var(--mist); }
+  .proj-top {
+    display: flex; flex-wrap: wrap; justify-content: space-between;
+    gap: 0.6rem 1.5rem; align-items: baseline; margin-bottom: 0.5rem;
+  }
   .proj h3 {
     font-family: "Instrument Serif", serif;
-    font-size: 2.4rem; font-weight: 400; margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
+    font-size: 2.05rem; font-weight: 400;
   }
-  .proj p { color: var(--fog); max-width: 36rem; line-height: 1.7; font-size: 1.05rem; }
-  .proj .tag {
-    font-size: 0.68rem; letter-spacing: 0.17em; text-transform: uppercase; color: var(--fog);
-    font-weight: 600; white-space: nowrap;
-  }
-  .proj .meta {
-    font-size: 0.92rem;
-    color: var(--whisper);
-    margin-top: 0.5rem;
-  }
-  .proj a {
-    color: var(--whisper);
-    border-bottom: 1px solid var(--mist);
-    transition: all 0.2s;
-  }
-  .proj a:hover {
-    color: var(--bone);
-    border-bottom-color: var(--bone);
-  }
-
-  .exp { max-width: 900px; display: grid; gap: 5rem; }
-  .exp-item h3 {
-    font-family: "Instrument Serif", serif;
-    font-size: 2.2rem; font-weight: 400;
-    letter-spacing: -0.02em;
-  }
-  .exp-item .role {
-    font-size: 0.72rem; letter-spacing: 0.17em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 0.9rem; font-weight: 600;
-  }
-  .exp-item p { color: var(--fog); max-width: 36rem; margin-top: 0.75rem; line-height: 1.7; font-size: 1.05rem; }
-  .exp-item .details {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--mist);
-    font-size: 0.92rem;
-    color: var(--whisper);
-    line-height: 1.6;
-  }
-  .exp-item .details dt {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.7rem;
-    margin-top: 0.75rem;
+  .proj .credit {
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--fog);
   }
-  .exp-item .details dt:first-child { margin-top: 0; }
-  .exp-item .details dd {
-    margin-top: 0.25rem;
+  .proj .credit a {
+    color: var(--fog); text-decoration: none; border-bottom: 1px solid var(--mist);
   }
+  .proj .credit a:hover { color: var(--bone); border-bottom-color: var(--bone); }
+  .proj-trail {
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--whisper); margin-bottom: 0.8rem;
+  }
+  .proj p.problem { color: var(--fog); max-width: 38rem; font-size: 1rem; }
 
-  .wins {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem;
-    max-width: 1200px;
-  }
-  .win {
-    padding-top: 2.5rem;
+  .measured {
+    max-width: 920px;
+    display: flex; flex-wrap: wrap; gap: 1.75rem 3.75rem;
+    align-items: baseline;
+    padding-top: 0.35rem;
     border-top: 1px solid var(--mist);
   }
-  .win .n {
-    font-family: "Instrument Serif", serif;
-    font-size: 3rem; letter-spacing: -0.025em;
-    line-height: 1.1;
+  .measured .m {
+    display: flex; flex-direction: column; gap: 0.35rem;
   }
-  .win p { margin-top: 1.2rem; color: var(--fog); font-size: 0.98rem; line-height: 1.6; }
+  .measured .m .n {
+    font-family: "Instrument Serif", serif;
+    font-size: 2.1rem; letter-spacing: -0.02em;
+  }
+  .measured .m .d {
+    font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fog);
+  }
 
-  .contact { max-width: 750px; }
-  .contact p { color: var(--fog); margin-bottom: 3rem; font-size: 1.2rem; line-height: 1.65; }
-  .contact a {
-    font-family: "Instrument Serif", serif;
-    font-size: 2.4rem; color: var(--bone); text-decoration: none;
-    border-bottom: 1px solid var(--mist); padding-bottom: 0.3rem;
-    transition: all 0.2s;
+  .exp { max-width: 820px; display: grid; gap: 3.25rem; }
+  .exp-item .role {
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 0.5rem;
   }
-  .contact a:hover { border-bottom-color: var(--bone); }
+  .exp-item h3 {
+    font-family: "Instrument Serif", serif;
+    font-size: 1.9rem; font-weight: 400;
+  }
+  .exp-item p { color: var(--fog); max-width: 34rem; margin-top: 0.5rem; }
+
+  .contact { max-width: 720px; }
+  .contact p.lead {
+    color: var(--fog); margin-bottom: 2rem; font-size: 1.1rem; max-width: 28rem;
+  }
+  .contact a.mail {
+    font-family: "Instrument Serif", serif;
+    font-size: 2.05rem; color: var(--bone); text-decoration: none;
+    border-bottom: 1px solid var(--mist); padding-bottom: 0.2rem;
+  }
+  .contact a.mail:hover { border-bottom-color: var(--bone); }
   .contact-links {
-    margin-top: 3rem;
-    display: flex; flex-wrap: wrap; gap: 2rem 2.5rem;
+    margin-top: 2rem;
+    display: flex; flex-wrap: wrap; gap: 1.4rem 2rem;
   }
   .contact-links a {
-    font-family: "DM Sans", system-ui, sans-serif;
-    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
-    border-bottom: none; color: var(--fog); font-weight: 600;
+    font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fog); text-decoration: none;
+    border-bottom: 1px solid var(--mist); padding-bottom: 0.15rem;
   }
-  .contact-links a:hover { color: var(--bone); }
+  .contact-links a:hover { color: var(--bone); border-bottom-color: var(--bone); }
+
   footer {
-    padding: 5rem 6vw 6rem;
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--fog); border-top: 1px solid var(--mist);
-    line-height: 1.8;
+    padding: 5rem 6vw 4.5rem;
+    border-top: 1px solid var(--mist);
+    max-width: 100%;
+  }
+  .foot-frame {
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: 1.55fr 0.85fr;
+    gap: 2.5rem 4rem;
+    align-items: end;
+  }
+  .foot-close {
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    color: var(--bone);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    max-width: 14ch;
+    margin-bottom: 2rem;
+  }
+  .foot-links {
+    display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
+    margin-bottom: 1.6rem;
+  }
+  .foot-links a {
+    font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog); text-decoration: none;
+  }
+  .foot-links a:hover { color: var(--bone); }
+  .foot-honesty {
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog); line-height: 1.65;
+  }
+  .foot-meta {
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fog);
+    text-align: right;
   }
 
   @media (max-width: 780px) {
     .nav-toggle { display: inline-flex; align-items: center; }
     nav ul {
       display: none;
-      position: absolute; top: 100%; left: 0; right: 0;
-      flex-direction: column; gap: 0;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; gap: 0; justify-content: center;
       background: var(--void);
-      border-bottom: 1px solid var(--mist);
-      padding: 0.5rem 6vw 1rem;
+      padding: 5rem 6vw 2rem;
+      z-index: 45;
     }
     nav.is-open ul { display: flex; }
-    nav ul a { display: block; padding: 0.85rem 0; border-top: 1px solid var(--mist); }
-    .aegis, .wins, .proj { grid-template-columns: 1fr; }
-    .hero { min-height: 88vh; padding: 4rem 6vw 4rem; }
-    section { padding: 6rem 6vw; }
+    nav.is-open ~ main { visibility: hidden; }
+    nav ul a { display: block; padding: 1rem 0; border-top: 1px solid var(--mist); font-size: 0.85rem; }
+    .hero-inner, .aegis, .foot-frame, .polarity { grid-template-columns: 1fr; }
+    .polarity { gap: 0.75rem; margin-bottom: 2.5rem; }
+    .hero { min-height: auto; padding: 3.5rem 6vw 3rem; }
+    .hero-exhibit { order: -1; }
+    .hero-exhibit img { max-height: 42vh; }
+    section { padding: 5rem 6vw; }
+    .sec-title { margin-bottom: 2.2rem; }
+    .foot-meta { text-align: left; }
+    .artifact-rail { padding: 1.25rem 1.2rem 1.4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
@@ -307,10 +420,9 @@
   <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
   <ul id="navLinks">
     <li><a href="#aegis">Aegis</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#experience">Roles</a></li>
-    <li><a href="#wins">Wins</a></li>
+    <li><a href="#work">Work</a></li>
     <li><a href="resume.html">Resume</a></li>
+    <li><a class="ext" href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -318,155 +430,207 @@
 <main id="main">
 <header class="hero" id="top">
   <div class="hero-inner">
-    <h1>Perception reliability for autonomy.</h1>
-    <p class="sub">Simulation-first research. Fleet outreach. AI engineering.</p>
-    <div class="hero-proof" aria-label="Honesty locks">
-      <span>sim-only</span>
-      <span>safety_acceptance: false</span>
-      <span>43%→1%</span>
+    <div class="hero-copy">
+      <h1>Perception reliability for autonomy.</h1>
+      <div class="hero-aside">
+        <p>I study perception overconfidence in simulation for UAV safety.</p>
+        <p>Frozen holdouts. Calibrated abstention. No live vehicle authority.</p>
+      </div>
+      <div class="hero-proof" aria-label="Honesty locks">
+        <span>sim-only</span>
+        <span>safety_acceptance: false</span>
+        <span>43%&rarr;1%</span>
+      </div>
+      <div class="hero-meta">
+        <span>RIHS &rsquo;29</span>
+        <span>SJ Delta</span>
+        <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="resume.html">Resume</a>
+      </div>
     </div>
-    <div class="hero-meta">
-      <span>RIHS &rsquo;29</span>
-      <span>SJ Delta</span>
-      <a href="https://github.com/suhaslord">GitHub</a>
-    </div>
+    <figure class="hero-exhibit">
+      <img src="assets/aegisland/cockpit-still.png" width="1280" height="800" alt="AegisLand research cockpit dashboard still" loading="eager" fetchpriority="high" decoding="async">
+      <figcaption>AegisLand · cockpit dashboard still · sim-only</figcaption>
+    </figure>
   </div>
 </header>
 
 <section id="aegis">
-  <p class="sec-label">Featured</p>
-  <h2 class="sec-title">AegisLand</h2>
+  <div class="sec-head">
+    <span class="sec-index">01 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <div class="polarity">
+    <div class="polarity-word">Measure</div>
+    <div class="polarity-aside">
+      <p class="sec-label">Lead case</p>
+      <h2 class="sec-title">Aegis<em>Land</em></h2>
+    </div>
+  </div>
   <div class="aegis">
     <div>
+      <div class="aegis-meta" aria-label="Case trail">
+        <span>Solo research</span>
+        <span>Simulation cockpit</span>
+        <span>Ongoing</span>
+      </div>
       <p class="lead">A simulation-only research cockpit for UAV perception reliability and calibrated abstention under constraint.</p>
       <p class="body">Not a live autonomy product. Phase 6B work reduced unsafe rates on frozen holdouts from 43% to 1%, with safety_acceptance held at false.</p>
       <span class="constraint">safety_acceptance: false</span>
     </div>
-    <div class="stat-stack">
-      <div class="stat">
-        <div class="n">43%→1%</div>
-        <div class="d">Unsafe rate on Phase 6B frozen holdouts</div>
-      </div>
-      <div class="stat">
-        <div class="n">Sim</div>
-        <div class="d">Evaluation environment. No live vehicle authority.</div>
+    <div class="artifact-rail" aria-label="Live artifacts">
+      <p class="rail-label">Live artifacts · Phase 6B</p>
+      <div class="stat-stack">
+        <div class="stat">
+          <div class="n">43%&rarr;1%</div>
+          <div class="d">Holdout unsafe rate · Phase 6B frozen set.</div>
+        </div>
+        <div class="stat">
+          <div class="n">false</div>
+          <div class="d">safety_acceptance · locked for evaluation.</div>
+        </div>
+        <div class="stat">
+          <div class="n">Sim</div>
+          <div class="d">Evaluation environment. No live vehicle authority.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <p class="sec-label">Selected</p>
-  <h2 class="sec-title">Projects</h2>
+<section id="work">
+  <div class="sec-head">
+    <span class="sec-index">02 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <div class="polarity">
+    <div class="polarity-word">Work</div>
+    <div class="polarity-aside">
+      <p class="sec-label">Index</p>
+      <h2 class="sec-title">Selected cases</h2>
+    </div>
+  </div>
   <div class="projects">
     <article class="proj">
-      <div>
+      <div class="proj-top">
         <h3>AegisLand</h3>
-        <p class="meta">UAV perception reliability · Simulation research · 2026</p>
-        <p>Research cockpit for simulated evaluation, holdout integrity, and unsafe-rate measurement. Phase 6B work reduced unsafe rates from 43% to 1% on frozen holdouts.</p>
-        <p><a href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">View cockpit ↗</a></p>
+        <span class="credit"><a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub · suhaslord</a></span>
       </div>
-      <span class="tag">Research</span>
+      <p class="proj-trail">Solo research · simulation cockpit · ongoing</p>
+      <p class="problem">Problem: perception overconfidence on frozen holdouts; measure unsafe rate without live vehicle authority.</p>
     </article>
     <article class="proj">
-      <div>
+      <div class="proj-top">
         <h3>Cruze</h3>
-        <p class="meta">Fleet Outreach & Business Development · 2026</p>
-        <p>Fleet outreach and business development: clear messaging, disciplined follow-up, moving qualified prospects toward pilot agreements.</p>
+        <span class="credit">Fleet Outreach &amp; BD</span>
       </div>
-      <span class="tag">Outreach</span>
+      <p class="proj-trail">Fleet Outreach &amp; BD · Cruze · ongoing</p>
+      <p class="problem">Problem: partner and fleet conversations that stay deliverable, not AI R&amp;D cosplay.</p>
     </article>
     <article class="proj">
-      <div>
+      <div class="proj-top">
         <h3>Seagulls / OpenStage</h3>
-        <p class="meta">AI Engineer Intern · 2026</p>
-        <p>Production AI for OpenStage: assistant-integrated exercise search, chat UX, tracing/QA, and core AI work around routing, memory, and safety.</p>
+        <span class="credit">AI Engineer Intern</span>
       </div>
-      <span class="tag">AI Eng</span>
+      <p class="proj-trail">AI Engineer Intern · tooling / integration · prior</p>
+      <p class="problem">Problem: scoped tooling with evaluation clarity, not vague AI surfaces.</p>
     </article>
   </div>
 </section>
 
-<section id="experience">
+<section id="measured">
+  <div class="sec-head">
+    <span class="sec-index">03 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
+  <p class="sec-label">Holdouts</p>
+  <h2 class="sec-title">Measured</h2>
+  <div class="measured" aria-label="Measured strip">
+    <div class="m">
+      <span class="n">43%&rarr;1%</span>
+      <span class="d">Phase 6B unsafe reduction</span>
+    </div>
+    <div class="m">
+      <span class="n">false</span>
+      <span class="d">safety_acceptance locked</span>
+    </div>
+    <div class="m">
+      <span class="n">sim-only</span>
+      <span class="d">No live vehicle authority</span>
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="sec-head">
+    <span class="sec-index">04 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
   <p class="sec-label">Roles</p>
   <h2 class="sec-title">Experience</h2>
   <div class="exp">
     <div class="exp-item">
-      <div class="role">Cruze · 2026</div>
-      <h3>Fleet Outreach &amp; Business Development Intern</h3>
-      <p>Supported fleet outreach and business development focused on moving qualified prospects toward pilot agreements. Researched prospective fleet partners and structured outreach around operational value.</p>
-      <dl class="details">
-        <dt>Scope</dt>
-        <dd>Fleet partner research, outreach strategy, prospect qualification</dd>
-        <dt>Duration</dt>
-        <dd>2026 internship</dd>
-      </dl>
+      <div class="role">Cruze · ongoing</div>
+      <h3>Fleet Outreach &amp; BD</h3>
+      <p>Partner and fleet conversations grounded in what can actually be delivered.</p>
     </div>
     <div class="exp-item">
-      <div class="role">Seagulls / OpenStage · 2026</div>
+      <div class="role">Seagulls / OpenStage · prior</div>
       <h3>AI Engineer Intern</h3>
-      <p>Production AI for OpenStage/Seagulls: assistant-integrated exercise search, chat UX, tracing/QA, and Core AI work around routing, memory, safety, and agent architecture.</p>
-      <dl class="details">
-        <dt>Scope</dt>
-        <dd>AI assistant integration, search infrastructure, UX, evaluation systems</dd>
-        <dt>Duration</dt>
-        <dd>2026 internship</dd>
-      </dl>
-    </div>
-  </div>
-</section>
-
-<section id="wins">
-  <p class="sec-label">Measured</p>
-  <h2 class="sec-title">Wins</h2>
-  <div class="wins">
-    <div class="win">
-      <div class="n">43%→1%</div>
-      <p>Phase 6B unsafe reduction on frozen holdouts.</p>
-    </div>
-    <div class="win">
-      <div class="n">False</div>
-      <p>safety_acceptance locked. Simulation boundary respected.</p>
-    </div>
-    <div class="win">
-      <div class="n">BD</div>
-      <p>Fleet outreach systems that stay precise.</p>
+      <p>Tooling and integration work with attention to evaluation and clear scope.</p>
     </div>
   </div>
 </section>
 
 <section id="contact" class="contact">
+  <div class="sec-head">
+    <span class="sec-index">05 /</span>
+    <span class="sec-rule" aria-hidden="true"></span>
+  </div>
   <p class="sec-label">Reach</p>
   <h2 class="sec-title">Contact</h2>
-  <p>For collaboration, research inquiries, or opportunities.</p>
-  <a href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+  <p class="lead">Email is enough. Resume and GitHub are public.</p>
+  <a class="mail" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
   <div class="contact-links">
     <a href="resume.html">Resume</a>
-    <a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="https://www.linkedin.com/in/suhas-beemineni-1984763b8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://aegisland-research-cockpit.vercel.app/" target="_blank" rel="noopener noreferrer">AegisLand Cockpit</a>
+    <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub · suhaslord</a>
   </div>
 </section>
 </main>
 
-<footer>Suhas Beemineni · RIHS &rsquo;29 · SJ Delta · simulation research, not flight software</footer>
+<footer>
+  <div class="foot-frame">
+    <div>
+      <p class="foot-close">Build carefully. Measure before you ship.</p>
+      <div class="foot-links">
+        <a href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+        <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="resume.html">Resume</a>
+      </div>
+      <p class="foot-honesty">Suhas Beemineni · RIHS &rsquo;29 · SJ Delta · simulation research, not flight software</p>
+    </div>
+    <div class="foot-meta">
+      <p>RIHS &rsquo;29 · SJ Delta</p>
+    </div>
+  </div>
+</footer>
 <script>
 (function () {
   var nav = document.getElementById('siteNav');
   var btn = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
   if (!nav || !btn || !links) return;
-  btn.addEventListener('click', function () {
-    var open = nav.classList.toggle('is-open');
+  function setOpen(open) {
+    nav.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    btn.textContent = open ? 'Close' : 'Menu';
+  }
+  btn.addEventListener('click', function () {
+    setOpen(!nav.classList.contains('is-open'));
   });
   links.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () {
-      nav.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'Open menu');
-    });
+    a.addEventListener('click', function () { setOpen(false); });
   });
 })();
 </script>
