@@ -6,887 +6,946 @@
 <title>Suhas Beemineni  ·  Perception reliability for autonomy</title>
 <meta name="description" content="Perception reliability for autonomy. Simulation-first research on perception overconfidence and calibrated abstention for UAV safety.">
 <meta name="author" content="Suhas Beemineni">
-<meta name="theme-color" content="#0c0c0b">
+<meta name="theme-color" content="#f4efe6">
 <link rel="canonical" href="https://suhaslord.github.io/portfolio/">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://suhaslord.github.io/portfolio/">
-<meta property="og:title" content="Suhas Beemineni  ·  Perception reliability for autonomy">
-<meta property="og:description" content="Simulation-first research on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts, not demos.">
-<meta property="og:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Suhas Beemineni  ·  Perception reliability for autonomy">
-<meta name="twitter:description" content="Simulation-first research on perception overconfidence and calibrated abstention for UAV safety. Frozen holdouts, not demos.">
-<meta name="twitter:image" content="https://suhaslord.github.io/portfolio/assets/og/aegisland.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --void: #0c0c0b;
-    --fog: #8a8780;
-    --mist: #2a2926;
-    --bone: #e8e4dc;
-    --whisper: #c4bfb4;
-    --accent: #c9b896;
-
-    --font-display: "Instrument Serif", serif;
-    --font-body: "DM Sans", system-ui, sans-serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-
-    --fs-display: clamp(3.4rem, 9.5vw, 7.6rem);
-    --fs-heading: clamp(2.6rem, 6vw, 4.8rem);
-    --fs-subhead: clamp(2.2rem, 4.8vw, 3.6rem);
-    --fs-body: 1.05rem;
-    --fs-label: 0.6rem;
-    --fs-nav: 0.62rem;
-
-    /* 8-step space ladder */
-    --space-3xs: 0.35rem;
-    --space-2xs: 0.5rem;
-    --space-xs: 0.75rem;
-    --space-sm: 1.15rem;
-    --space-md: 1.75rem;
-    --space-lg: 3.5rem;
-    --space-xl: 5rem;
-    --space-2xl: 7.5rem;
-    /* Section / hero air — hero > content bands */
-    --space-hero-y: var(--space-xl);
-    --section-pad: var(--space-2xl);
-    --section-pad-sm: var(--space-xl);
-    --section-gap: var(--space-lg);
-    --section-gap-sm: var(--space-md);
-    --ease: cubic-bezier(0.19, 1, 0.22, 1);
-    --dur: 0.6s;
+:root {
+  --cream: #f4efe6;
+  --forest: #2f4a3c;
+  --copper: #a67c4e;
+  --ink: #1a241e;
+  --mist: rgba(47, 74, 60, 0.18);
+  --mist-strong: rgba(47, 74, 60, 0.32);
+  --paper-deep: #ebe4d8;
+  --well: #121a16;
+  --well-fog: #8a948c;
+  --well-bone: #e8e4dc;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --col-count: 12;
+  --grid-gap: max(0.75rem, calc(16 / 1440 * 100vw));
+  --grid-margin: max(1.25rem, calc(72 / 1440 * 100vw));
+  --gutter: max(0.75rem, calc(16 / 1440 * 100vw));
+  --margin: max(1.25rem, calc(72 / 1440 * 100vw));
+  --section-xs: max(1.5rem, calc(24 / 1440 * 100vw));
+  --section-sm: max(2rem, calc(40 / 1440 * 100vw));
+  --section-md: max(3rem, calc(64 / 1440 * 100vw));
+  --section-lg: max(4rem, calc(96 / 1440 * 100vw));
+  --section-xl: max(5.5rem, calc(128 / 1440 * 100vw));
+  --section-2xl: max(7rem, calc(160 / 1440 * 100vw));
+  --section-3xl: max(9rem, calc(200 / 1440 * 100vw));
+  --section-4xl: max(11rem, calc(256 / 1440 * 100vw));
+  --fs-display: clamp(3.05rem, 7.6vw, 6.2rem);
+  --fs-heading: clamp(2.25rem, 4.6vw, 3.85rem);
+  --fs-sub: clamp(1.45rem, 2.4vw, 2rem);
+  --fs-body: 1.0625rem;
+  --fs-label: 0.62rem;
+  --fs-nav: 0.64rem;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 0.55s;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+body.is-gated { overflow: hidden; }
+a { color: inherit; transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease); }
+img { max-width: 100%; display: block; height: auto; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--forest); color: var(--cream);
+  padding: 0.6rem 1rem; z-index: 200; font-family: var(--font-mono); font-size: 0.8rem;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
+#entryGate {
+  position: fixed; inset: 0; z-index: 120;
+  background: var(--cream);
+  display: grid; place-items: center;
+  padding: var(--margin);
+  transition: opacity 0.7s var(--ease), visibility 0.7s;
+}
+#entryGate.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+.gate-inner { max-width: 34rem; text-align: left; }
+.gate-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--copper); margin-bottom: var(--section-xs);
+}
+.gate-inner h1 {
+  font-family: var(--font-display);
+  font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.05; letter-spacing: -0.03em;
+  color: var(--forest); margin-bottom: 1rem;
+}
+.gate-inner h1 em { font-style: italic; color: var(--copper); }
+.gate-inner p { color: rgba(26, 36, 30, 0.72); max-width: 32rem; margin-bottom: var(--section-sm); }
+.gate-actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; }
+.gate-actions button {
+  font-family: var(--font-mono);
+  font-size: var(--fs-nav); letter-spacing: 0.14em; text-transform: uppercase;
+  border: 1px solid var(--forest);
+  background: var(--forest); color: var(--cream);
+  padding: 0.85rem 1.25rem; cursor: pointer;
+}
+.gate-actions button.ghost { background: transparent; color: var(--forest); }
+.gate-actions button:hover { border-color: var(--copper); }
+.gate-actions button.ghost:hover { color: var(--copper); border-color: var(--copper); }
+.gate-locks { margin-top: var(--section-sm); display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.gate-locks span {
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--forest);
+  border: 0;
+  border-bottom: 1px solid var(--copper);
+  padding: 0.15rem 0 0.2rem;
+}
+.gate-locks { gap: 0.85rem 1.25rem; }
+.shell {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding-left: var(--margin);
+  padding-right: var(--margin);
+}
+nav#siteNav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(244, 239, 230, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--mist);
+}
+.nav-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1rem; padding: 0.85rem 0;
+  width: min(1440px, 100%); margin: 0 auto;
+  padding-left: var(--margin); padding-right: var(--margin);
+}
+nav .brand { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; min-width: 0; }
+nav .sig {
+  font-family: var(--font-display);
+  font-size: 1.15rem; letter-spacing: -0.01em;
+  color: var(--forest); text-decoration: none;
+}
+nav .cred, nav .clock {
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--copper); white-space: nowrap;
+}
+nav ul {
+  display: flex; flex-wrap: wrap; gap: 1.1rem 1.6rem; list-style: none;
+  align-items: center; justify-content: flex-end;
+}
+nav a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-nav); letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.7); text-decoration: none;
+}
+nav a:hover, nav a:focus-visible { color: var(--forest); }
+.nav-toggle {
+  display: none;
+  background: transparent; border: 1px solid var(--mist-strong);
+  color: var(--forest); font-family: var(--font-mono);
+  font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; line-height: 1;
+  padding: 0.5rem 0.7rem; cursor: pointer;
+  position: relative; z-index: 52;
+}
+.hero {
+  padding: var(--section-xl) 0 var(--section-lg);
+  border-bottom: 1px solid var(--mist);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), minmax(0, 1fr));
+  gap: var(--gutter); align-items: end;
+}
+.hero-copy { grid-column: 1 / span 7; min-width: 0; }
+.hero-media { grid-column: 8 / span 5; min-width: 0; }
+.hero-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 1.1rem;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 400; font-size: var(--fs-display);
+  line-height: 0.95; letter-spacing: -0.035em;
+  color: var(--forest); max-width: 12ch; margin-bottom: 1.15rem;
+}
+.hero h1 em { font-style: italic; color: var(--copper); }
+.hero-lede {
+  font-size: 1.12rem; color: rgba(26, 36, 30, 0.78);
+  max-width: 34rem; margin-bottom: 0.55rem;
+}
+.hero-sub { color: rgba(26, 36, 30, 0.62); max-width: 32rem; margin-bottom: 1.15rem; }
+.proof-row { display: flex; flex-wrap: wrap; gap: 0.55rem 0.65rem; margin-bottom: 1.2rem; }
+.proof-row span, .tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--forest);
+  border: 0;
+  border-bottom: 1px solid var(--copper);
+  padding: 0.15rem 0 0.2rem; background: transparent;
+}
+.proof-row { gap: 0.85rem 1.35rem; }
+.method-tags .tag { color: rgba(47, 74, 60, 0.78); }
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.65);
+}
+.hero-meta a { color: rgba(47, 74, 60, 0.65); text-decoration: none; border-bottom: 1px solid var(--mist); }
+.hero-meta a:hover { color: var(--forest); border-bottom-color: var(--copper); }
+.media-well { background: var(--well); border: 1px solid #1e2a24; color: var(--well-bone); }
+.media-well a { color: inherit; text-decoration: none; display: block; }
+.media-well img {
+  width: 100%; max-height: min(44vh, 420px);
+  object-fit: cover; object-position: center;
+}
+.media-well figcaption, .media-well .well-cta {
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--well-fog);
+}
+.media-well figcaption {
+  padding: 0.65rem 0.85rem;
+  border-top: 1px solid rgba(138, 148, 140, 0.25);
+}
+.media-well .well-cta {
+  display: flex; flex-wrap: wrap; gap: 0.65rem 1.1rem;
+  padding: 0.5rem 0.85rem 0.8rem;
+  border-top: 1px solid rgba(138, 148, 140, 0.18);
+}
+.media-well .well-cta a {
+  display: inline; color: var(--well-fog);
+  border-bottom: 1px solid rgba(138, 148, 140, 0.35); padding-bottom: 0.1rem;
+}
+.media-well .well-cta a:hover { color: var(--well-bone); border-bottom-color: var(--copper); }
+section { padding: var(--section-xl) 0; border-bottom: 1px solid var(--mist); }
+.sec-head { display: flex; align-items: baseline; gap: 1.15rem; margin-bottom: var(--section-md); }
+.sec-index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--copper); flex-shrink: 0;
+}
+.sec-rule { flex: 1; height: 1px; background: var(--mist); align-self: center; }
+.sec-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 0.65rem;
+}
+.sec-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-heading); font-weight: 400;
+  letter-spacing: -0.03em; color: var(--forest);
+  line-height: 1.05; max-width: 16ch; margin-bottom: var(--section-md);
+}
+.sec-title em { font-style: italic; color: var(--copper); }
+.polarity {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), minmax(0, 1fr));
+  gap: var(--gutter); align-items: end;
+  margin-bottom: var(--section-md);
+}
+.polarity-word {
+  grid-column: 1 / span 5;
+  font-family: var(--font-display);
+  font-size: clamp(2.85rem, 7.4vw, 6rem);
+  font-weight: 400; line-height: 0.86;
+  letter-spacing: -0.045em; text-transform: uppercase; color: var(--forest);
+}
+.polarity-aside { grid-column: 6 / span 7; padding-bottom: 0.35rem; }
+.aegis-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), minmax(0, 1fr));
+  gap: var(--gutter) calc(var(--gutter) * 2); align-items: start;
+}
+.aegis-copy { grid-column: 1 / span 7; }
+.aegis-rail { grid-column: 8 / span 5; }
+.trail {
+  display: flex; flex-wrap: wrap; gap: 0.45rem 0.2rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.65); margin-bottom: 0.9rem;
+}
+.trail span + span::before { content: "·"; margin: 0 0.55rem 0 0.35rem; color: var(--mist-strong); }
+.method-tags { display: flex; flex-wrap: wrap; gap: 0.45rem 0.55rem; margin: 0 0 1rem; }
+.lead {
+  font-size: 1.18rem; color: rgba(26, 36, 30, 0.82);
+  max-width: 36rem; margin-bottom: 0.85rem; line-height: 1.5;
+}
+.body-copy { color: rgba(26, 36, 30, 0.68); max-width: 36rem; }
+.constraint {
+  display: inline-block; margin-top: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--copper);
+  border: 0;
+  border-bottom: 1px solid rgba(166, 124, 78, 0.7);
+  padding: 0.2rem 0 0.25rem;
+}
+.case-out { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem 1.35rem; }
+.case-out a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.7); text-decoration: none;
+  border-bottom: 1px solid var(--mist); padding-bottom: 0.1rem;
+}
+.case-out a:hover { color: var(--forest); border-bottom-color: var(--copper); }
+.artifact-rail {
+  border: 1px solid var(--mist-strong);
+  padding: var(--section-sm); background: var(--paper-deep);
+}
+.rail-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 1.1rem;
+}
+.stat { border-top: 1px solid var(--mist); padding: 1.05rem 0; }
+.stat:first-of-type { border-top: 0; padding-top: 0; }
+.stat:last-of-type { padding-bottom: 0; }
+.stat .n {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 3.8vw, 3rem);
+  line-height: 0.95; letter-spacing: -0.03em; color: var(--forest);
+}
+.stat .d { margin-top: 0.4rem; color: rgba(26, 36, 30, 0.62); font-size: 0.9rem; max-width: 16rem; }
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), minmax(0, 1fr));
+  gap: var(--gutter);
+}
+.system-block {
+  grid-column: span 4;
+  border-top: 2px solid var(--forest); padding-top: 1rem;
+}
+.system-block h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-sub); font-weight: 400;
+  color: var(--forest); margin-bottom: 0.55rem;
+}
+.system-block p { color: rgba(26, 36, 30, 0.68); font-size: 0.96rem; max-width: 22rem; }
+.system-block .mono-line {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 0.45rem;
+}
+#build { padding-top: var(--section-lg); padding-bottom: var(--section-lg); }
+#build .polarity-word { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+#build .sec-title { margin-bottom: var(--section-sm); }
+.work-toolbar {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; margin-bottom: var(--section-xs); flex-wrap: wrap;
+}
+.view-toggle { display: inline-flex; gap: 0; border: 1px solid var(--mist-strong); }
+.view-toggle button {
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  background: transparent; color: rgba(47, 74, 60, 0.65);
+  border: 0; padding: 0.5rem 0.8rem; cursor: pointer;
+}
+.view-toggle button[aria-pressed="true"] { color: var(--cream); background: var(--forest); }
+.projects { display: flex; flex-direction: column; gap: 0; }
+.proj { padding: 1.15rem 0; border-bottom: 1px solid var(--mist); }
+.projects:not(.is-grid) .proj:first-of-type { border-top: 1px solid var(--mist); }
+.proj-top {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  gap: 0.45rem 1.25rem; align-items: baseline; margin-bottom: 0.3rem;
+}
+.proj h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.4vw, 2rem); font-weight: 400;
+  letter-spacing: -0.025em; color: var(--forest); line-height: 1.05;
+}
+.proj .credit {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.65);
+}
+.proj .credit a {
+  color: rgba(47, 74, 60, 0.65); text-decoration: none; border-bottom: 1px solid var(--mist);
+}
+.proj .credit a:hover { color: var(--forest); border-bottom-color: var(--copper); }
+.proj-trail {
+  font-family: var(--font-mono);
+  font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(26, 36, 30, 0.55); margin-bottom: 0.55rem;
+}
+.case-spine {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem 1.15rem; margin-top: 0.85rem; max-width: 70rem;
+}
+.spine-item { border-top: 1px solid var(--mist); padding-top: 0.55rem; }
+.spine-item .k {
+  font-family: var(--font-mono);
+  font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 0.3rem;
+}
+.spine-item p { color: rgba(26, 36, 30, 0.72); font-size: 0.86rem; line-height: 1.42; }
+/* Cruze — partner ledger (asymmetric, not 4 equal boxes) */
+.partner-ledger {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 1rem var(--gutter);
+  margin-top: 0.9rem;
+  max-width: 70rem;
+  align-items: start;
+}
+.ledger-main { min-width: 0; }
+.ledger-rail {
+  border-left: 2px solid var(--forest);
+  padding-left: 1rem;
+  background: linear-gradient(180deg, rgba(47,74,60,0.06), transparent 70%);
+  min-width: 0;
+}
+.ledger-row {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 0.65rem 1rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--mist);
+}
+.ledger-row:first-child { border-top: 0; padding-top: 0; }
+.ledger-k {
+  font-family: var(--font-mono);
+  font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--copper); padding-top: 0.15rem;
+}
+.ledger-v { color: rgba(26, 36, 30, 0.78); font-size: 0.92rem; line-height: 1.45; }
+.ledger-v strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 1.05rem;
+  color: var(--forest); letter-spacing: -0.02em; margin-bottom: 0.2rem;
+}
+.rail-metric { padding: 0.55rem 0 0.75rem; border-bottom: 1px solid var(--mist); }
+.rail-metric:last-child { border-bottom: 0; }
+.rail-metric .n {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.4vw, 2.1rem);
+  line-height: 0.95; letter-spacing: -0.03em; color: var(--forest);
+}
+.rail-metric .d {
+  margin-top: 0.35rem; color: rgba(26, 36, 30, 0.62);
+  font-size: 0.84rem; line-height: 1.4; max-width: 18rem;
+}
+.claim-bound {
+  margin-top: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.72); line-height: 1.7;
+}
+/* Seagulls — eval stack (vertical ladder, not equal spine) */
+.eval-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1rem var(--gutter);
+  margin-top: 0.9rem;
+  max-width: 70rem;
+}
+.eval-ladder { border-top: 2px solid var(--forest); }
+.eval-step {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: 0.55rem 0.85rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--mist);
+}
+.eval-step .ix {
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--copper); padding-top: 0.2rem;
+}
+.eval-step h4 {
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 1.05rem;
+  color: var(--forest); letter-spacing: -0.02em; margin-bottom: 0.25rem;
+}
+.eval-step p { color: rgba(26, 36, 30, 0.72); font-size: 0.9rem; line-height: 1.42; }
+.eval-panel {
+  border: 1px solid var(--mist-strong);
+  background: var(--paper-deep);
+  padding: 1rem 1.05rem;
+}
+.eval-panel .rail-label { margin-bottom: 0.85rem; }
+.eval-panel .stat { padding: 0.85rem 0; }
+.eval-panel .stat .n { font-size: clamp(1.7rem, 2.8vw, 2.35rem); }
+.proj-outcome {
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.7);
+  border-top: 1px solid var(--mist); padding-top: 0.55rem;
+}
+.projects.is-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem var(--gutter);
+  align-items: start;
+}
+.projects.is-grid .proj {
+  grid-column: auto;
+  border-top: 2px solid var(--forest); border-bottom: 0;
+  padding-top: 0.75rem; padding-bottom: 0;
+  min-width: 0;
+}
+.projects.is-grid .proj:nth-of-type(1),
+.projects.is-grid .proj:nth-of-type(2),
+.projects.is-grid .proj:nth-of-type(3) { grid-column: auto; }
+.projects.is-grid .case-spine,
+.projects.is-grid .partner-ledger,
+.projects.is-grid .eval-stack { display: none; }
+.projects.is-grid .proj-trail { margin-bottom: 0.35rem; }
+.projects.is-grid .method-tags { margin-bottom: 0.35rem; }
+.projects.is-grid .proj-outcome { margin-top: 0.45rem; padding-top: 0.4rem; font-size: 0.52rem; }
+.projects.is-grid .proj h3 { font-size: clamp(1.2rem, 1.7vw, 1.55rem); }
+.projects.is-grid .proj-top { flex-direction: column; align-items: flex-start; gap: 0.25rem; margin-bottom: 0.2rem; }
+.projects.is-grid .credit { font-size: 0.52rem; }
+.lock-line {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.72); margin-bottom: 1.1rem; line-height: 1.7;
+}
+.gate-locks { display: none; }
+.roster { border-top: 1px solid var(--mist); }
+.roster-row {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), minmax(0, 1fr));
+  gap: var(--gutter); padding: 0.95rem 0;
+  border-bottom: 1px solid var(--mist); align-items: baseline;
+}
+.roster-idx {
+  grid-column: 1 / span 1;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--copper);
+}
+.roster-role {
+  grid-column: 2 / span 4;
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.7);
+}
+.roster-title {
+  grid-column: 6 / span 4;
+  font-family: var(--font-display);
+  font-size: 1.3rem; font-weight: 400; color: var(--forest);
+}
+.roster-note { grid-column: 10 / span 3; font-size: 0.9rem; color: rgba(26, 36, 30, 0.62); }
+.roster-row a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--mist); }
+.roster-row a:hover { border-bottom-color: var(--copper); }
+.contact-block { margin-top: var(--section-lg); max-width: 36rem; }
+.contact-block .lead { margin-bottom: 1.15rem; }
+.mail {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--forest); text-decoration: none;
+  border-bottom: 1px solid var(--mist); padding-bottom: 0.15rem;
+}
+.mail:hover { border-bottom-color: var(--copper); }
+.contact-links { margin-top: 1.35rem; display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; }
+.contact-links a {
+  font-family: var(--font-mono);
+  font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.7); text-decoration: none;
+  border-bottom: 1px solid var(--mist); padding-bottom: 0.15rem;
+}
+.contact-links a:hover { color: var(--forest); border-bottom-color: var(--copper); }
+footer { padding: var(--section-xl) 0 var(--section-lg); }
+.foot-frame {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), minmax(0, 1fr));
+  gap: var(--gutter); align-items: end;
+}
+.foot-main { grid-column: 1 / span 8; }
+.foot-meta { grid-column: 9 / span 4; text-align: right; }
+.foot-close {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  color: var(--forest); line-height: 1.05;
+  letter-spacing: -0.025em; max-width: 14ch; margin-bottom: 1.5rem;
+}
+.foot-links { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-bottom: 1.2rem; }
+.foot-links a, .foot-honesty, .foot-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(47, 74, 60, 0.65);
+}
+.foot-links a { text-decoration: none; }
+.foot-links a:hover { color: var(--forest); }
+.foot-honesty { line-height: 1.65; }
+@media (max-width: 1100px) {
+  .case-spine { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .partner-ledger, .eval-stack { grid-template-columns: 1fr; }
+  .ledger-rail { border-left: 0; border-top: 2px solid var(--forest); padding-left: 0; padding-top: 0.85rem; margin-top: 0.35rem; }
+}
+@media (max-width: 960px) {
+  .hero-copy, .hero-media, .aegis-copy, .aegis-rail,
+  .polarity-word, .polarity-aside, .system-block, .foot-main, .foot-meta {
+    grid-column: 1 / -1;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--font-body);
-    background: var(--void);
-    color: var(--bone);
-    font-size: 17px;
-    line-height: 1.65;
-  }
-  .skip-link {
-    position: absolute; left: -9999px; top: 0;
-    background: var(--bone); color: var(--void);
-    padding: 0.6rem 1rem; z-index: 100; font-size: 0.85rem;
-  }
-  .skip-link:focus { left: 1rem; top: 1rem; }
-
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 1rem;
-    padding: var(--space-sm) 6vw;
-    background: var(--void);
-    border-bottom: 1px solid var(--mist);
-  }
-  nav .sig {
-    font-family: var(--font-display);
-    font-size: 1.15rem; letter-spacing: 0.02em;
-    color: var(--bone); text-decoration: none;
-  }
-  nav .cred {
-    font-family: var(--font-mono);
-    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--fog); margin-left: 0.85rem; white-space: nowrap;
-  }
-  nav .brand { display: flex; align-items: baseline; gap: 0; min-width: 0; flex-wrap: wrap; }
+  .system-block { margin-bottom: 1.1rem; }
+  .hero-media { order: -1; margin-bottom: var(--section-sm); }
+  .hero-grid { display: flex; flex-direction: column; }
+  .case-spine { grid-template-columns: 1fr; }
+  .ledger-row { grid-template-columns: 1fr; gap: 0.25rem; }
+  .roster-idx { grid-column: 1 / span 2; }
+  .roster-role { grid-column: 3 / span 10; }
+  .roster-title, .roster-note { grid-column: 1 / -1; }
+  .foot-meta { text-align: left; margin-top: 1.35rem; }
+  .projects.is-grid { grid-template-columns: 1fr; }
+  .projects.is-grid .case-spine,
+  .projects.is-grid .partner-ledger,
+  .projects.is-grid .eval-stack { display: grid; }
+}
+@media (max-width: 780px) {
+  .nav-toggle { display: inline-flex; align-items: center; }
+  nav .cred { display: none; }
   nav ul {
-    display: flex; flex-wrap: wrap; gap: 1.35rem 1.85rem; list-style: none;
-    justify-content: flex-end; align-items: center;
-  }
-  nav a {
-    font-family: var(--font-mono);
-    font-size: var(--fs-nav); letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--fog); text-decoration: none; font-weight: 400;
-  }
-  a { transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
-  nav a:hover, nav a:focus-visible { color: var(--bone); }
-  nav a.ext::after {
-    content: " \2197";
-    font-size: 0.75em;
-    letter-spacing: 0;
-  }
-  .nav-toggle {
     display: none;
-    background: transparent; border: 1px solid var(--mist);
-    color: var(--bone); font-family: var(--font-mono);
-    font-size: 0.68rem; letter-spacing: 0.16em;
-    text-transform: uppercase; line-height: 1;
-    padding: 0.5rem 0.7rem; cursor: pointer;
-    position: relative; z-index: 52;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    flex-direction: column; gap: 0; justify-content: center;
+    background: var(--cream);
+    padding: var(--section-xl) var(--margin) var(--section-md);
+    z-index: 45;
   }
+  nav.is-open ul { display: flex; }
+  nav ul a {
+    display: block; padding: 1rem 0;
+    border-top: 1px solid var(--mist); font-size: 0.85rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
 
-  .hero {
-    min-height: 92vh;
-    display: flex; flex-direction: column;
-    justify-content: flex-end;
-    padding: var(--space-hero-y) 6vw var(--space-lg);
-    position: relative;
-  }
-  .hero-inner {
-    max-width: 1240px;
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
-    gap: var(--space-md) var(--space-lg);
-    align-items: end;
-  }
-  .hero-copy { min-width: 0; }
-  .hero h1 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    font-size: var(--fs-display);
-    font-weight: 400; line-height: 0.9;
-    letter-spacing: -0.035em;
-    max-width: 11ch;
-    margin-bottom: 1.35rem;
-  }
-  .hero-aside { padding-bottom: 0.15rem; }
-  .hero-aside p {
-    color: var(--fog);
-    font-size: var(--fs-body);
-    line-height: 1.5;
-    max-width: 26rem;
-    margin-bottom: 0.8rem;
-  }
-  .hero-aside p:last-of-type { margin-bottom: 0; }
-  .hero-exhibit {
-    margin: 0;
-    border: 1px solid var(--mist);
-    background: var(--void);
-    align-self: end;
-  }
-  .hero-exhibit > a { display: block; color: inherit; text-decoration: none; }
-  .hero-exhibit img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: min(52vh, 520px);
-    object-fit: cover;
-    object-position: center;
-  }
-  .hero-exhibit figcaption {
-    font-family: var(--font-mono);
-    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--fog);
-    padding: 0.7rem 0.85rem;
-    border-top: 1px solid var(--mist);
-  }
+.grid-12 { display:grid; grid-template-columns:repeat(var(--col-count),minmax(0,1fr)); gap:var(--grid-gap); padding-inline:var(--grid-margin); }
+.col-1{grid-column:span 1}.col-2{grid-column:span 2}.col-3{grid-column:span 3}.col-4{grid-column:span 4}
+.col-5{grid-column:span 5}.col-6{grid-column:span 6}.col-7{grid-column:span 7}.col-8{grid-column:span 8}
+.col-9{grid-column:span 9}.col-10{grid-column:span 10}.col-11{grid-column:span 11}.col-12{grid-column:span 12}
 
-  .hero-exhibit-cta {
-    display: flex; flex-wrap: wrap; gap: 0.65rem 1.1rem;
-    padding: var(--space-2xs) var(--space-xs) var(--space-xs);
-    border-top: 1px solid var(--mist);
-  }
-  .hero-exhibit-cta a,
-  .case-out a {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--fog); text-decoration: none;
-    border-bottom: 1px solid var(--mist); padding-bottom: 0.1rem;
-  }
-  .hero-exhibit-cta a:hover,
-  .case-out a:hover { color: var(--bone); border-bottom-color: var(--bone); }
-  .case-out {
-    margin-top: var(--space-md);
-    display: flex; flex-wrap: wrap; gap: 0.75rem 1.35rem;
-  }
-  .hero-exhibit figcaption { border-top: 1px solid var(--mist); }
-
-  .hero-proof {
-    margin-top: 1.15rem;
-    display: flex; flex-wrap: wrap; gap: 0.65rem 0.8rem;
-  }
-  .hero-proof span {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid rgba(201,184,150,0.5);
-    padding: 0.58rem 0.95rem;
-    background: transparent;
-  }
-  .hero-meta {
-    margin-top: 1.35rem;
-    display: flex; flex-wrap: wrap; gap: 1.4rem 2.4rem;
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--fog);
-  }
-  .hero-meta a { color: var(--fog); text-decoration: none; }
-  .hero-meta a:hover { color: var(--bone); }
-
-  section {
-    padding: var(--section-pad) 6vw;
-    border-top: 1px solid var(--mist);
-  }
-
-  .sec-head {
-    display: flex; align-items: baseline; gap: 1.1rem;
-    margin-bottom: 1.1rem;
-    max-width: 1180px;
-  }
-  .sec-index {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--fog); font-weight: 500; flex-shrink: 0;
-  }
-  .sec-rule {
-    flex: 1; height: 1px; background: var(--mist); align-self: center;
-  }
-
-  .polarity {
-    max-width: 1180px;
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
-    gap: 1.5rem 3rem;
-    align-items: end;
-    margin-bottom: var(--section-gap);
-  }
-  .polarity-word {
-    font-family: var(--font-display);
-    font-size: clamp(3.2rem, 8.5vw, 7.2rem);
-    font-weight: 400; line-height: 0.88;
-    letter-spacing: -0.035em;
-    text-transform: uppercase;
-  }
-  .polarity-aside { padding-bottom: 0.35rem; }
-  .polarity-aside .sec-label { margin-bottom: 0.55rem; }
-  .polarity-aside .sec-title {
-    margin-bottom: 0;
-    font-size: var(--fs-subhead);
-    max-width: 18ch;
-  }
-  .sec-label {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 1rem; font-weight: 500;
-  }
-  .sec-title {
-    font-family: var(--font-display);
-    font-size: var(--fs-heading);
-    font-weight: 400; letter-spacing: -0.025em;
-    margin-bottom: 2.8rem; max-width: 16ch; line-height: 1.02;
-  }
-  .sec-title em { font-style: italic; font-weight: 400; }
-
-  .aegis {
-    display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--space-lg) var(--space-xl);
-    align-items: start; max-width: 1180px;
-  }
-  .aegis-meta {
-    display: flex; flex-wrap: wrap; gap: 0.45rem 0.35rem;
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 1.5rem;
-  }
-  .aegis-meta span + span::before {
-    content: "\00b7";
-    margin: 0 0.55rem 0 0.2rem;
-    color: var(--mist);
-  }
-  .aegis p.lead {
-    font-size: 1.28rem; color: var(--whisper); max-width: 34rem; margin-bottom: 1.4rem;
-    line-height: 1.48;
-  }
-  .aegis p.body { color: var(--fog); max-width: 34rem; }
-  .constraint {
-    margin-top: 2rem;
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid rgba(201,184,150,0.5);
-    padding: 0.65rem 1.05rem;
-  }
-
-  .artifact-rail {
-    border: 1px solid var(--mist);
-    padding: var(--space-md) var(--space-md) var(--space-md);
-  }
-  .artifact-rail .rail-label {
-    font-family: var(--font-mono);
-    font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 1.6rem;
-  }
-  .stat-stack { display: flex; flex-direction: column; gap: 0; }
-  .stat {
-    border-top: 1px solid var(--mist);
-    padding: 1.45rem 0 1.35rem;
-  }
-  .stat:first-child { border-top: 0; padding-top: 0; }
-  .stat:last-child { padding-bottom: 0; }
-  .stat .n {
-    font-family: var(--font-display);
-    font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 0.95; letter-spacing: -0.03em;
-  }
-  .stat .d { margin-top: 0.55rem; color: var(--fog); font-size: 0.88rem; max-width: 16rem; line-height: 1.4; }
-
-  .styleframes {
-    margin-top: var(--section-gap);
-    max-width: 1180px;
-  }
-  .styleframes .rail-label {
-    font-family: var(--font-mono);
-    font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 1.1rem;
-  }
-  .styleframes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem 1.25rem;
-  }
-  .styleframes figure {
-    margin: 0;
-    border: 1px solid var(--mist);
-    background: var(--void);
-  }
-  .styleframes img {
-    display: block; width: 100%; height: auto;
-    aspect-ratio: 16 / 10; object-fit: cover;
-  }
-  .styleframes figcaption {
-    font-family: var(--font-mono);
-    font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--fog);
-    padding: 0.6rem 0.75rem;
-    border-top: 1px solid var(--mist);
-  }
-
-  .work-toolbar {
-    max-width: 920px;
-    display: flex; justify-content: space-between; align-items: baseline;
-    gap: 1rem; margin-bottom: 1.25rem;
-  }
-  .view-toggle {
-    display: inline-flex; gap: 0; border: 1px solid var(--mist);
-  }
-  .view-toggle button {
-    font-family: var(--font-mono);
-    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
-    background: transparent; color: var(--fog);
-    border: 0; padding: 0.55rem 0.85rem; cursor: pointer;
-  }
-  .view-toggle button[aria-pressed="true"] {
-    color: var(--bone); background: rgba(232,228,220,0.06);
-  }
-
-  .projects { max-width: 920px; }
-
-  /* Break equal-card rhythm (Supreme) */
-  .projects:not(.is-grid) .proj:nth-of-type(1) {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
-  }
-  .projects:not(.is-grid) .proj:nth-of-type(2) {
-    padding-left: var(--space-lg);
-    max-width: 38rem;
-  }
-  .projects:not(.is-grid) .proj:nth-of-type(3) {
-    padding-top: var(--space-md);
-    border-left: 2px solid var(--mist);
-    padding-left: var(--space-md);
-  }
-  .projects.is-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
-    gap: var(--space-xl) var(--space-lg);
-    align-items: start;
-  }
-  .projects.is-grid .proj:nth-of-type(1) { grid-column: 1 / -1; }
-  .projects.is-grid .proj:nth-of-type(2) { padding-right: var(--space-sm); }
-  .projects.is-grid .proj:nth-of-type(3) { margin-top: var(--space-md); padding-left: var(--space-sm); }
-  .proj {
-    padding: var(--space-lg) 0 var(--space-xl);
-    border-bottom: 1px solid var(--mist);
-  }
-  .projects:not(.is-grid) .proj:first-of-type { border-top: 1px solid var(--mist); }
-  .projects.is-grid .proj {
-    border-top: 1px solid var(--mist);
-    padding-top: 1.75rem;
-  }
-  .proj-top {
-    display: flex; flex-wrap: wrap; justify-content: space-between;
-    gap: 0.6rem 1.5rem; align-items: baseline; margin-bottom: 0.5rem;
-  }
-  .proj h3 {
-    font-family: var(--font-display);
-    font-size: 2.35rem; font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1.05;
-    /* peer-craft-work-h3 */
-  }
-  .proj .credit {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--fog);
-  }
-  .proj .credit a {
-    color: var(--fog); text-decoration: none; border-bottom: 1px solid var(--mist);
-  }
-  .proj .credit a:hover { color: var(--bone); border-bottom-color: var(--bone); }
-  .proj-trail {
-    font-family: var(--font-mono);
-    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--whisper); margin-bottom: 0.75rem;
-  }
-  .method-tags {
-    display: flex; flex-wrap: wrap; gap: 0.55rem 0.75rem;
-    margin: 0.35rem 0 1.15rem;
-  }
-
-  /* Cruze tags: thicker chips (Supreme) */
-  .projects .proj:nth-of-type(2) .method-tags {
-    gap: 0.65rem 0.85rem;
-    margin-bottom: 1.35rem;
-  }
-  .projects .proj:nth-of-type(2) .method-tags span {
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    padding: 0.7rem 1.15rem 0.65rem;
-    border-width: 1.5px;
-    background: rgba(232,228,220,0.07);
-    color: var(--bone);
-  }
-
-  .method-tags span {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--bone);
-    background: rgba(232,228,220,0.04);
-    border: 1px solid rgba(138,135,128,0.55);
-    border-radius: 0;
-    padding: 0.55rem 0.95rem 0.5rem;
-  }
-  .proj p.problem { color: var(--fog); max-width: 38rem; font-size: 1rem; }
-  .proj-details {
-    margin-top: 0.9rem;
-    border-top: 1px solid var(--mist);
-    padding-top: 0.75rem;
-  }
-  .proj-details summary {
-    font-family: var(--font-mono);
-    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--fog); cursor: pointer; list-style: none;
-  }
-  .proj-details summary::-webkit-details-marker { display: none; }
-  .proj-details summary::before { content: "[+] "; color: var(--accent); }
-  .proj-details[open] summary::before { content: "[-] "; }
-  .proj-details .detail-body {
-    margin-top: 0.75rem; color: var(--fog); font-size: 0.95rem; max-width: 38rem;
-  }
-
-  .measured {
-    max-width: 920px;
-    display: flex; flex-wrap: wrap; gap: 1.75rem 3.75rem;
-    align-items: baseline;
-    padding-top: 0.35rem;
-    border-top: 1px solid var(--mist);
-  }
-  .measured .m { display: flex; flex-direction: column; gap: 0.35rem; }
-  .measured .m .n {
-    font-family: var(--font-display);
-    font-size: 2.1rem; letter-spacing: -0.02em;
-  }
-  .measured .m .d {
-    font-family: var(--font-mono);
-    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--fog);
-  }
-
-  .exp { max-width: 820px; display: grid; gap: 3.25rem; }
-  .exp-item .role {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--fog); margin-bottom: 0.5rem;
-  }
-  .exp-item h3 {
-    font-family: var(--font-display);
-    font-size: 1.9rem; font-weight: 400;
-  }
-  .exp-item p { color: var(--fog); max-width: 34rem; margin-top: 0.5rem; }
-
-  .contact { max-width: 720px; }
-  .contact p.lead {
-    color: var(--fog); margin-bottom: 2rem; font-size: 1.1rem; max-width: 28rem;
-  }
-  .contact a.mail {
-    font-family: var(--font-display);
-    font-size: 2.05rem; color: var(--bone); text-decoration: none;
-    border-bottom: 1px solid var(--mist); padding-bottom: 0.2rem;
-  }
-  .contact a.mail:hover { border-bottom-color: var(--bone); }
-  .contact-links {
-    margin-top: 2rem;
-    display: flex; flex-wrap: wrap; gap: 1.4rem 2rem;
-  }
-  .contact-links a {
-    font-family: var(--font-mono);
-    font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--fog); text-decoration: none;
-    border-bottom: 1px solid var(--mist); padding-bottom: 0.15rem;
-  }
-  .contact-links a:hover { color: var(--bone); border-bottom-color: var(--bone); }
-
-  footer {
-    padding: var(--section-pad-sm) 6vw var(--space-lg);
-    border-top: 1px solid var(--mist);
-    max-width: 100%;
-  }
-  .foot-frame {
-    max-width: 1180px;
-    display: grid;
-    grid-template-columns: 1.55fr 0.85fr;
-    gap: 2.5rem 4rem;
-    align-items: end;
-  }
-  .foot-close {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4.5vw, 3.4rem);
-    color: var(--bone);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    max-width: 14ch;
-    margin-bottom: 2rem;
-  }
-  .foot-links {
-    display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
-    margin-bottom: 1.6rem;
-  }
-  .foot-links a {
-    font-family: var(--font-mono);
-    font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--fog); text-decoration: none;
-  }
-  .foot-links a:hover { color: var(--bone); }
-  .foot-honesty {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--fog); line-height: 1.65;
-  }
-  .foot-meta {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--fog);
-    text-align: right;
-  }
-
-  @media (max-width: 900px) {
-    .styleframes-grid { grid-template-columns: 1fr; }
-    .projects.is-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 780px) {
-    .nav-toggle { display: inline-flex; align-items: center; }
-    nav .cred { display: none; }
-    nav ul {
-      display: none;
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      flex-direction: column; gap: 0; justify-content: center;
-      background: var(--void);
-      padding: var(--space-xl) 6vw var(--space-md);
-      z-index: 45;
-    }
-    nav.is-open ul { display: flex; }
-    nav.is-open ~ main { visibility: hidden; }
-    nav ul a { display: block; padding: 1rem 0; border-top: 1px solid var(--mist); font-size: 0.85rem; }
-    .hero-inner, .aegis, .foot-frame, .polarity { grid-template-columns: 1fr; }
-    .polarity { gap: 0.75rem; margin-bottom: 2.5rem; }
-    .hero { min-height: auto; padding: var(--space-lg) 6vw var(--space-md); }
-    .hero-exhibit { order: -1; }
-    .hero-exhibit img { max-height: 42vh; }
-    section { padding: var(--space-xl) 6vw; }
-    .sec-title { margin-bottom: 2.2rem; }
-    .foot-meta { text-align: left; }
-    .artifact-rail { padding: var(--space-sm) var(--space-sm) var(--space-md); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      transition-duration: 0.01ms !important;
-      animation-duration: 0.01ms !important;
-    }
-  }
 </style>
 </head>
-<body>
+<body class="is-gated">
 <a class="skip-link" href="#main">Skip to content</a>
-<nav id="siteNav" aria-label="Primary">
-  <div class="brand">
-    <a class="sig" href="#top">Suhas Beemineni</a>
-    <span class="cred">[sim-only · 2026]</span>
+<div id="entryGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gate-inner">
+    <p class="gate-kicker">Research portfolio</p>
+    <h1 id="gateTitle">Measure before you <em>ship</em>.</h1>
+    <p>Simulation-first research. Frozen holdouts. Calibrated abstention. No live vehicle authority.</p>
+    <div class="gate-actions">
+      <button type="button" id="enterQuiet">Enter</button>
+      <button type="button" class="ghost" id="enterFull">Enter full</button>
+    </div>
+    <p class="lock-line" aria-label="Honesty locks">sim-only · safety_acceptance false · 43%→1%</p>
   </div>
-  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
-  <ul id="navLinks">
-    <li><a href="#aegis">Aegis</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="resume.html">Resume</a></li>
+</div>
+<nav id="siteNav" aria-label="Primary">
+  <div class="nav-row">
+    <div class="brand">
+      <a class="sig" href="#top">Suhas Beemineni</a>
+      <span class="cred">sim-only · 2026</span>
+      <span class="clock" id="liveClock" aria-live="polite">--:-- PT</span>
+    </div>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <ul id="navLinks">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#system">System</a></li>
+      <li><a href="#build">Build</a></li>
+      <li><a href="#ship">Ship</a></li>
+      <li><a href="resume.html">Resume</a></li>
     <li><a href="mailto:suhas.aug20@gmail.com">Email</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+    </ul>
+  </div>
 </nav>
-
 <main id="main">
 <header class="hero" id="top">
-  <div class="hero-inner">
+  <div class="shell hero-grid">
     <div class="hero-copy">
-      <h1>Perception reliability for autonomy.</h1>
-      <div class="hero-aside">
-        <p>I study perception overconfidence in simulation for UAV safety.</p>
-        <p>Frozen holdouts. Calibrated abstention. No live vehicle authority.</p>
-      </div>
-      <div class="hero-proof" aria-label="Honesty locks">
-        <span>[sim-only]</span>
-        <span>[safety_acceptance: false]</span>
-        <span>[43%&rarr;1%]</span>
-      </div>
+      <p class="hero-kicker">research cockpit · cream paper</p>
+      <h1>Perception reliability for <em>autonomy</em>.</h1>
+      <p class="hero-lede">I study perception overconfidence in simulation for UAV safety.</p>
+      <p class="hero-sub">Frozen holdouts. Calibrated abstention. No live vehicle authority.</p>
+      <p class="lock-line" aria-label="Honesty locks">sim-only · safety_acceptance false · 43%→1%</p>
       <div class="hero-meta">
-        <span>RIHS &rsquo;29</span>
+        <span>RIHS ’29</span>
         <span>SJ Delta</span>
         <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub</a>
-        <a href="resume.html">Resume</a>
+        <a href="#ship">Contact</a>
       </div>
     </div>
-    <figure class="hero-exhibit">
+    <figure class="hero-media media-well">
       <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank" aria-label="Open AegisLand research cockpit">
         <img src="assets/aegisland/cockpit-still.png" width="1280" height="800" alt="AegisLand research cockpit dashboard still" loading="eager" fetchpriority="high" decoding="async">
       </a>
-      <figcaption>AegisLand · cockpit dashboard still · [sim-only]</figcaption>
-      <div class="hero-exhibit-cta" aria-label="AegisLand proof">
+      <figcaption>AegisLand · cockpit dashboard still · sim-only</figcaption>
+      <div class="well-cta" aria-label="AegisLand proof">
         <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Open cockpit</a>
         <a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">uav-safety-research</a>
       </div>
     </figure>
   </div>
 </header>
-
-<section id="aegis">
-  <div class="sec-head">
-    <span class="sec-index">01 /</span>
-    <span class="sec-rule" aria-hidden="true"></span>
-  </div>
-  <div class="polarity">
-    <div class="polarity-word">Measure</div>
-    <div class="polarity-aside">
-      <p class="sec-label">[ lead case ]</p>
-      <h2 class="sec-title">Aegis<em>Land</em></h2>
-    </div>
-  </div>
-  <div class="aegis">
-    <div>
-      <div class="aegis-meta" aria-label="Case trail">
-        <span>Solo research</span>
-        <span>Simulation cockpit</span>
-        <span>Ongoing · 2026</span>
-      </div>
-      <div class="method-tags" aria-label="Methods">
-        <span>[sim-only]</span>
-        <span>[holdout]</span>
-        <span>[perception]</span>
-        <span>[abstention]</span>
-      </div>
-      <p class="lead">A simulation-only research cockpit for UAV perception reliability and calibrated abstention under constraint.</p>
-      <p class="body">Not a live autonomy product. Phase 6B work reduced unsafe rates on frozen holdouts from 43% to 1%, with safety_acceptance held at false.</p>
-      <span class="constraint">[safety_acceptance: false]</span>
-      <div class="case-out" aria-label="AegisLand outbound proof">
-        <a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">GitHub · uav-safety-research</a>
-        <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Open research cockpit</a>
+<section id="research">
+  <div class="shell">
+    <div class="sec-head"><span class="sec-index">01 / Research</span><span class="sec-rule" aria-hidden="true"></span></div>
+    <div class="polarity">
+      <div class="polarity-word">Measure</div>
+      <div class="polarity-aside">
+        <p class="sec-label">lead case</p>
+        <h2 class="sec-title">Aegis<em>Land</em></h2>
       </div>
     </div>
-    <div class="artifact-rail" aria-label="Live artifacts">
-      <p class="rail-label">[ live artifacts · phase 6b ]</p>
-      <div class="stat-stack">
-        <div class="stat">
-          <div class="n">43%&rarr;1%</div>
-          <div class="d">Holdout unsafe rate · Phase 6B frozen set.</div>
+    <div class="aegis-grid">
+      <div class="aegis-copy">
+        <div class="trail" aria-label="Case trail">
+          <span>Solo research</span><span>Simulation cockpit</span><span>Ongoing · 2026</span>
         </div>
-        <div class="stat">
-          <div class="n">false</div>
-          <div class="d">safety_acceptance · locked for evaluation.</div>
+        <div class="method-tags" aria-label="Methods">
+          <span class="tag">Simulate</span>
+          <span class="tag">Hold out</span>
+          <span class="tag">Perceive</span>
+          <span class="tag">Abstain</span>
         </div>
-        <div class="stat">
-          <div class="n">Sim</div>
-          <div class="d">Evaluation environment. No live vehicle authority.</div>
+        <p class="lead">A simulation-only research cockpit for UAV perception reliability and calibrated abstention under constraint.</p>
+        <p class="body-copy">Not a live autonomy product. Phase 6B work reduced unsafe rates on frozen holdouts from 43% to 1%, with safety_acceptance held at false while the instrument measures.</p>
+        <span class="constraint">sim-only · safety_acceptance false</span>
+        <div class="case-out" aria-label="AegisLand outbound proof">
+          <a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">GitHub · uav-safety-research</a>
+          <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Open research cockpit</a>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="styleframes" aria-label="Method styleframes">
-    <p class="rail-label">[ method stills · process beside final ]</p>
-    <div class="styleframes-grid">
-      <figure>
-        <img src="assets/aegisland/cockpit-still.png" width="640" height="400" alt="AegisLand cockpit still final" loading="lazy" decoding="async">
-        <figcaption>01 · cockpit still · final</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/aegisland/chart_phase6b_light.png" width="640" height="400" alt="Phase 6B holdout chart" loading="lazy" decoding="async">
-        <figcaption>02 · phase 6b chart · method</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/aegisland/exhibit-still.jpg" width="640" height="400" alt="AegisLand exhibit still" loading="lazy" decoding="async">
-        <figcaption>03 · exhibit frame · method</figcaption>
-      </figure>
+      <div class="aegis-rail artifact-rail" aria-label="Live artifacts">
+        <p class="rail-label">live artifacts · phase 6b</p>
+        <div class="stat"><div class="n">43%→1%</div><div class="d">Holdout unsafe rate · Phase 6B frozen set.</div></div>
+        <div class="stat"><div class="n">false</div><div class="d">safety_acceptance · locked for evaluation.</div></div>
+        <div class="stat"><div class="n">Sim</div><div class="d">Evaluation environment. No live vehicle authority.</div></div>
+      </div>
     </div>
   </div>
 </section>
-
-<section id="work">
-  <div class="sec-head">
-    <span class="sec-index">02 /</span>
-    <span class="sec-rule" aria-hidden="true"></span>
-  </div>
-  <div class="polarity">
-    <div class="polarity-word">Work</div>
-    <div class="polarity-aside">
-      <p class="sec-label">[ index ]</p>
-      <h2 class="sec-title">Selected cases</h2>
-    </div>
-  </div>
-  <div class="work-toolbar">
-    <p class="sec-label" style="margin:0">[ same items · list default ]</p>
-    <div class="view-toggle" role="group" aria-label="Work view">
-      <button type="button" id="viewList" aria-pressed="true">List</button>
-      <button type="button" id="viewGrid" aria-pressed="false">Grid</button>
-    </div>
-  </div>
-  <div class="projects" id="projects" data-view="list">
-    <article class="proj">
-      <div class="proj-top">
-        <h3>AegisLand</h3>
-        <span class="credit"><a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">GitHub · uav-safety-research</a> · <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Cockpit</a></span>
+<section id="system">
+  <div class="shell">
+    <div class="sec-head"><span class="sec-index">02 / System</span><span class="sec-rule" aria-hidden="true"></span></div>
+    <p class="sec-label">mental model</p>
+    <h2 class="sec-title">How the practice holds</h2>
+    <div class="system-grid">
+      <div class="system-block">
+        <p class="mono-line">01 · holdouts</p>
+        <h3>Frozen evaluation</h3>
+        <p>Unsafe-rate movement is scored on locked holdouts — not live demos or cherry-picked clips.</p>
       </div>
-      <p class="proj-trail">Solo research · simulation cockpit · ongoing · 2026</p>
-      <div class="method-tags" aria-label="Methods">
-        <span>[sim-only]</span>
-        <span>[holdout]</span>
-        <span>[perception]</span>
-        <span>[abstention]</span>
+      <div class="system-block">
+        <p class="mono-line">02 · locks</p>
+        <h3>safety_acceptance: false</h3>
+        <p>Acceptance stays false while the instrument measures. Sim-only. No vehicle authority.</p>
       </div>
-      <p class="problem">Problem: perception overconfidence on frozen holdouts; measure unsafe rate without live vehicle authority.</p>
-      <details class="proj-details">
-        <summary>Method / detail</summary>
-        <p class="detail-body">Phase 6B frozen-holdout evaluation. Unsafe rate moved 43%&rarr;1% with safety_acceptance locked false. Cockpit is a research instrument, not a ship path.</p>
-      </details>
-    </article>
-    <article class="proj">
-      <div class="proj-top">
-        <h3>Cruze</h3>
-        <span class="credit"><a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a> · Fleet Outreach &amp; BD</span>
+      <div class="system-block">
+        <p class="mono-line">03 · honesty</p>
+        <h3>Scope before claim</h3>
+        <p>Partner paths and tooling cases stay inside what can be demonstrated — claims map to a visible surface.</p>
       </div>
-      <p class="proj-trail">Fleet Outreach &amp; BD · Cruze · ongoing</p>
-      <div class="method-tags" aria-label="Methods">
-        <span>[pilot path]</span>
-        <span>[partner honesty]</span>
-        <span>[texas corridors]</span>
-        <span>[no overclaim]</span>
-      </div>
-      <p class="problem">Problem: fleet and DOT partners need a credible pilot path — clear traffic jams before they form — without overclaiming savings we have not earned.</p>
-      <details class="proj-details">
-        <summary>Method / detail</summary>
-        <p class="detail-body">Fleet Outreach &amp; BD at Cruze (<a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a>): Texas pilot outreach, partner conversations scoped to what the virtual infrastructure can actually demonstrate. Not an autonomy / perception eng role — honesty lock holds.</p>
-      </details>
-    </article>
-    <article class="proj">
-      <div class="proj-top">
-        <h3>Seagulls / OpenStage</h3>
-        <span class="credit"><a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a> · AI Engineer Intern</span>
-      </div>
-      <p class="proj-trail">AI Engineer Intern · tooling / integration · prior</p>
-      <div class="method-tags" aria-label="Methods">
-        <span>[tooling]</span>
-        <span>[integration]</span>
-        <span>[eval]</span>
-        <span>[chat-ux]</span>
-        <span>[tracing]</span>
-      </div>
-      <p class="problem">Problem: fan-data / assistant tooling needs evaluation traces and clear routing — not a vague “AI surface” demo.</p>
-      <details class="proj-details">
-        <summary>Method / detail</summary>
-        <p class="detail-body">AI Engineer Intern on Seagulls / OpenStage (<a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a>): chat UX, exercise/search integration, tracing/QA, and scoped work around routing / memory / safety. Secondary case — depth without competing with AegisLand as flagship.</p>
-      </details>
-    </article>
-  </div>
-</section>
-
-<section id="measured">
-  <div class="sec-head">
-    <span class="sec-index">03 /</span>
-    <span class="sec-rule" aria-hidden="true"></span>
-  </div>
-  <p class="sec-label">[ holdouts ]</p>
-  <h2 class="sec-title">Measured</h2>
-  <div class="measured" aria-label="Measured strip">
-    <div class="m">
-      <span class="n">43%&rarr;1%</span>
-      <span class="d">Phase 6B unsafe reduction</span>
-    </div>
-    <div class="m">
-      <span class="n">false</span>
-      <span class="d">safety_acceptance locked</span>
-    </div>
-    <div class="m">
-      <span class="n">[sim-only]</span>
-      <span class="d">No live vehicle authority</span>
     </div>
   </div>
 </section>
-
-<section id="roles">
-  <div class="sec-head">
-    <span class="sec-index">04 /</span>
-    <span class="sec-rule" aria-hidden="true"></span>
-  </div>
-  <p class="sec-label">[ roles ]</p>
-  <h2 class="sec-title">Experience</h2>
-  <div class="exp">
-    <div class="exp-item">
-      <div class="role">Cruze · ongoing · <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a></div>
-      <h3>Fleet Outreach &amp; BD</h3>
-      <p>Texas pilot outreach and fleet/DOT conversations grounded in what Cruze can demonstrate — not inflated AI R&amp;D claims.</p>
+<section id="build">
+  <div class="shell">
+    <div class="sec-head"><span class="sec-index">03 / Build</span><span class="sec-rule" aria-hidden="true"></span></div>
+    <div class="polarity">
+      <div class="polarity-word">Work</div>
+      <div class="polarity-aside">
+        <p class="sec-label">index</p>
+        <h2 class="sec-title">Selected cases</h2>
+      </div>
     </div>
-    <div class="exp-item">
-      <div class="role">Seagulls / OpenStage · prior · <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a></div>
-      <h3>AI Engineer Intern</h3>
-      <p>Production tooling for OpenStage/Seagulls: chat UX, tracing/QA, and scoped routing/memory/safety — evaluation first.</p>
+    <div class="work-toolbar">
+      <p class="sec-label" style="margin:0">same items · list default</p>
+      <div class="view-toggle" role="group" aria-label="Work view">
+        <button type="button" id="viewList" aria-pressed="true">List</button>
+        <button type="button" id="viewGrid" aria-pressed="false">Grid</button>
+      </div>
+    </div>
+    <div class="projects" id="projects" data-view="list">
+      <article class="proj">
+        <div class="proj-top">
+          <h3>AegisLand</h3>
+          <span class="credit"><a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">GitHub · uav-safety-research</a> · <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Cockpit</a></span>
+        </div>
+        <p class="proj-trail">Solo research · simulation cockpit · Phase 6B · ongoing · 2026</p>
+        <div class="method-tags" aria-label="Methods">
+          <span class="tag">Simulate</span><span class="tag">Hold out</span><span class="tag">Perceive</span><span class="tag">Abstain</span><span class="tag">Evaluate</span>
+        </div>
+        <div class="case-spine">
+          <div class="spine-item"><p class="k">Problem</p><p>Perception overconfidence on frozen holdouts — measure unsafe rate without granting live vehicle authority.</p></div>
+          <div class="spine-item"><p class="k">Metrics</p><p>Phase 6B holdout unsafe rate 43%→1%. safety_acceptance locked false. Sim evaluation only.</p></div>
+          <div class="spine-item"><p class="k">Decisions</p><p>Ship a research cockpit as instrument, not a vehicle path. Keep acceptance false while the holdout set stays frozen.</p></div>
+          <div class="spine-item"><p class="k">Reflection</p><p>Reliability earns trust by refusing live-authority language until the instrument stays honest under constraint.</p></div>
+        </div>
+        <p class="proj-outcome">Outcome · 43%→1% on frozen holdouts · sim-only · safety_acceptance false</p>
+      </article>
+      <article class="proj">
+        <div class="proj-top">
+          <h3>Cruze</h3>
+          <span class="credit"><a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a> · Partner path</span>
+        </div>
+        <p class="proj-trail">Partner path · Texas corridors · virtual infrastructure · ongoing · claim boundary locked</p>
+        <div class="method-tags" aria-label="Methods">
+          <span class="tag">Pilot</span><span class="tag">Partner</span><span class="tag">Scope</span><span class="tag">Hold out</span>
+        </div>
+        <div class="partner-ledger" aria-label="Cruze partner ledger">
+          <div class="ledger-main">
+            <div class="ledger-row">
+              <span class="ledger-k">Pressure</span>
+              <div class="ledger-v"><strong>Clear jams before they form — without inventing savings.</strong>Partners need a credible pilot path for virtual corridor infrastructure. The failure mode is overclaim: promising dollars or autonomy depth the demo cannot show.</div>
+            </div>
+            <div class="ledger-row">
+              <span class="ledger-k">Evidence</span>
+              <div class="ledger-v"><strong>Texas corridor conversations, scoped to the demo surface.</strong>Success = partners can name what the virtual infrastructure actually demonstrates — traffic clarity under constraint — not a fleet story, not BD theater.</div>
+            </div>
+            <div class="ledger-row">
+              <span class="ledger-k">Call</span>
+              <div class="ledger-v"><strong>Lead with pilot-path honesty.</strong>Not an autonomy / perception eng seat. Partner path stays partner path. Every claim maps to a visible corridor capability.</div>
+            </div>
+            <div class="ledger-row">
+              <span class="ledger-k">Bound</span>
+              <div class="ledger-v"><strong>Credibility compounds inside the demo.</strong>If it is not on cruzemaps.com, it is not in the pitch. Overclaim is the only hard fail.</div>
+            </div>
+          </div>
+          <aside class="ledger-rail" aria-label="Cruze depth rail">
+            <div class="rail-metric"><div class="n">TX</div><div class="d">Corridor conversations framed as pilot path — geography named, savings not invented.</div></div>
+            <div class="rail-metric"><div class="n">0</div><div class="d">Autonomy / perception eng claims. Role stays partner honesty.</div></div>
+            <div class="rail-metric"><div class="n">Demo</div><div class="d">Claim boundary = what virtual infrastructure can show live.</div></div>
+            <p class="claim-bound">Locks · pilot path · partner honesty · texas corridors · no overclaim</p>
+          </aside>
+        </div>
+        <p class="proj-outcome">Outcome · partners leave able to repeat the demo boundary · no fleet / BD stickers</p>
+      </article>
+      <article class="proj">
+        <div class="proj-top">
+          <h3>Seagulls / OpenStage</h3>
+          <span class="credit"><a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a> · AI Engineer Intern</span>
+        </div>
+        <p class="proj-trail">AI Engineer Intern · chat UX · exercise/search integrate · tracing/QA · prior</p>
+        <div class="method-tags" aria-label="Methods">
+          <span class="tag">Integrate</span><span class="tag">Trace</span><span class="tag">Evaluate</span><span class="tag">Pilot</span>
+        </div>
+        <div class="eval-stack" aria-label="Seagulls evaluation stack">
+          <div class="eval-ladder">
+            <div class="eval-step">
+              <span class="ix">01</span>
+              <div>
+                <h4>Surface without theater</h4>
+                <p>Fan-data / assistant tooling needed clear routing and memory boundaries — not a vague “AI surface” demo that cannot be traced.</p>
+              </div>
+            </div>
+            <div class="eval-step">
+              <span class="ix">02</span>
+              <div>
+                <h4>Integrate where users actually move</h4>
+                <p>Chat UX plus exercise/search integration. Work scoped to routing, memory, and safety checks that show up in the product path.</p>
+              </div>
+            </div>
+            <div class="eval-step">
+              <span class="ix">03</span>
+              <div>
+                <h4>Trace before you ship the line</h4>
+                <p>Tracing/QA as first-class depth: evaluation trails on assistant behavior so regressions are visible, not argued.</p>
+              </div>
+            </div>
+            <div class="eval-step">
+              <span class="ix">04</span>
+              <div>
+                <h4>Stay secondary, stay honest</h4>
+                <p>Production discipline without competing with AegisLand as flagship. Depth = eval stack, not pitch volume.</p>
+              </div>
+            </div>
+          </div>
+          <aside class="eval-panel" aria-label="Seagulls proof panel">
+            <p class="rail-label">eval panel · openstage.live</p>
+            <div class="stat"><div class="n">UX</div><div class="d">Chat flows shaped for fan-data assistants — clarity over spectacle.</div></div>
+            <div class="stat"><div class="n">QA</div><div class="d">Tracing on routing / memory / safety so failures leave a trail.</div></div>
+            <div class="stat"><div class="n">Int</div><div class="d">Exercise + search integration landed inside the real product path.</div></div>
+          </aside>
+        </div>
+        <p class="proj-outcome">Outcome · traces before theater · integration inside product path · not flagship theater</p>
+      </article>
     </div>
   </div>
 </section>
-
-<section id="contact" class="contact">
-  <div class="sec-head">
-    <span class="sec-index">05 /</span>
-    <span class="sec-rule" aria-hidden="true"></span>
-  </div>
-  <p class="sec-label">[ reach ]</p>
-  <h2 class="sec-title">Contact</h2>
-  <p class="lead">Email is enough. Resume and GitHub are public.</p>
-  <a class="mail" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
-  <div class="contact-links">
-    <a href="resume.html">Resume</a>
-    <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub · suhaslord</a>
+<section id="ship">
+  <div class="shell">
+    <div class="sec-head"><span class="sec-index">04 / Ship</span><span class="sec-rule" aria-hidden="true"></span></div>
+    <p class="sec-label">roster · wins</p>
+    <h2 class="sec-title">Experience &amp; locks</h2>
+    <div class="roster" aria-label="Experience roster">
+      <div class="roster-row">
+        <span class="roster-idx">01</span>
+        <span class="roster-role">Cruze · ongoing · <a href="https://cruzemaps.com/" rel="noopener noreferrer" target="_blank">cruzemaps.com</a></span>
+        <span class="roster-title">Partner path</span>
+        <span class="roster-note">Texas corridor pilot path · claim boundary = demo surface · no overclaim.</span>
+      </div>
+      <div class="roster-row">
+        <span class="roster-idx">02</span>
+        <span class="roster-role">Seagulls / OpenStage · prior · <a href="https://openstage.live/" rel="noopener noreferrer" target="_blank">openstage.live</a></span>
+        <span class="roster-title">AI Engineer Intern</span>
+        <span class="roster-note">Chat UX · exercise/search integrate · tracing/QA on routing / memory / safety.</span>
+      </div>
+      <div class="roster-row">
+        <span class="roster-idx">03</span>
+        <span class="roster-role">AegisLand · solo · 2026</span>
+        <span class="roster-title">43%→1% holdout</span>
+        <span class="roster-note">sim-only · safety_acceptance false · 43%→1%</span>
+      </div>
+      <div class="roster-row">
+        <span class="roster-idx">04</span>
+        <span class="roster-role">School · path</span>
+        <span class="roster-title">RIHS ’29 · SJ Delta</span>
+        <span class="roster-note">Simulation research, not flight software.</span>
+      </div>
+    </div>
+    <div class="contact-block" id="contact">
+      <p class="sec-label">reach</p>
+      <p class="lead">Email is enough. GitHub is public.</p>
+      <a class="mail" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
+      <div class="contact-links">
+        <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub · suhaslord</a>
+        <a href="https://aegisland-research-cockpit.vercel.app/" rel="noopener noreferrer" target="_blank">Research cockpit</a>
+        <a href="https://github.com/suhaslord/uav-safety-research" rel="noopener noreferrer" target="_blank">uav-safety-research</a>
+      </div>
+    </div>
   </div>
 </section>
 </main>
-
 <footer>
-  <div class="foot-frame">
-    <div>
+  <div class="shell foot-frame">
+    <div class="foot-main">
       <p class="foot-close">Build carefully. Measure before you ship.</p>
       <div class="foot-links">
         <a href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a>
         <a href="https://github.com/suhaslord" rel="noopener noreferrer" target="_blank">GitHub</a>
-        <a href="resume.html">Resume</a>
+        <a href="#research">Research</a>
+        <a href="#build">Build</a>
       </div>
-      <p class="foot-honesty">Suhas Beemineni · RIHS &rsquo;29 · SJ Delta · simulation research, not flight software · [sim-only · 2026]</p>
+      <p class="foot-honesty">Suhas Beemineni · RIHS ’29 · SJ Delta · simulation research, not flight software · sim-only · 2026</p>
     </div>
     <div class="foot-meta">
-      <p>RIHS &rsquo;29 · SJ Delta</p>
-      <p style="margin-top:0.75rem">[sim-only · 2026]</p>
+      <p>Cream paper · forest · copper</p>
+      <p style="margin-top:0.75rem">sim-only · 2026</p>
     </div>
   </div>
 </footer>
@@ -902,14 +961,11 @@
       btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       btn.textContent = open ? 'Close' : 'Menu';
     }
-    btn.addEventListener('click', function () {
-      setOpen(!nav.classList.contains('is-open'));
-    });
+    btn.addEventListener('click', function () { setOpen(!nav.classList.contains('is-open')); });
     links.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () { setOpen(false); });
     });
   }
-
   var projects = document.getElementById('projects');
   var viewList = document.getElementById('viewList');
   var viewGrid = document.getElementById('viewGrid');
@@ -923,6 +979,29 @@
   }
   if (viewList) viewList.addEventListener('click', function () { setView('list'); });
   if (viewGrid) viewGrid.addEventListener('click', function () { setView('grid'); });
+  function dismissGate() {
+    var gate = document.getElementById('entryGate');
+    document.body.classList.remove('is-gated');
+    if (gate) gate.classList.add('is-done');
+  }
+  var eq = document.getElementById('enterQuiet');
+  var ef = document.getElementById('enterFull');
+  if (eq) eq.addEventListener('click', dismissGate);
+  if (ef) ef.addEventListener('click', dismissGate);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) dismissGate();
+  var clock = document.getElementById('liveClock');
+  function tick() {
+    if (!clock) return;
+    try {
+      var fmt = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour: '2-digit', minute: '2-digit', hour12: false
+      });
+      clock.textContent = fmt.format(new Date()) + ' PT';
+    } catch (e) { clock.textContent = '--:-- PT'; }
+  }
+  tick();
+  setInterval(tick, 30000);
 })();
 </script>
 </body>
