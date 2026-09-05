@@ -20,12 +20,22 @@
 
   function message(text) {
     if (status) status.textContent = text;
-    if (loading) loading.querySelector('span:not(.loader-dot)').textContent = text;
+    const loadingText = loading?.querySelector('span:not(.loader-dot)');
+    if (loadingText) loadingText.textContent = text;
+  }
+
+  function disableFallbackControls() {
+    [explore, labels, reset].forEach(button => {
+      if (!button) return;
+      button.disabled = true;
+      button.setAttribute('aria-disabled', 'true');
+    });
   }
 
   function fail(text) {
     viewport.classList.add('is-fallback');
     if (loading) loading.hidden = true;
+    disableFallbackControls();
     message(text);
   }
 
@@ -57,9 +67,15 @@
 
   function boot(THREE, GLTFLoader, DRACOLoader) {
     if (!window.WebGLRenderingContext) { fail('WebGL unavailable · static spacecraft view'); return; }
+    let context;
+    try {
+      context = canvas.getContext('webgl', { alpha: true, antialias: true, preserveDrawingBuffer: false })
+        || canvas.getContext('experimental-webgl');
+    } catch (_) { context = null; }
+    if (!context) { fail('WebGL unavailable · static spacecraft view'); return; }
     let renderer;
     try {
-      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+      renderer = new THREE.WebGLRenderer({ canvas, context, alpha: true, antialias: true, powerPreference: 'high-performance' });
     } catch (_) { fail('WebGL unavailable · static spacecraft view'); return; }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(canvas.clientWidth || 640, canvas.clientHeight || 540, false);
@@ -276,7 +292,7 @@
     ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => canvas.addEventListener(type, () => { dragging = false; }));
     canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); stop(); fail('Graphics context paused · static spacecraft view'); });
     resize();
-    if (loading) loading.querySelector('span:last-child').textContent = 'Loading the spacecraft';
+    if (loading) loading.querySelector('span:not(.loader-dot)').textContent = 'Loading the spacecraft';
     start();
   }
 })();
