@@ -106,44 +106,163 @@
     });
   }
 
-  // The project wall is a small spatial index: native links stay in the DOM,
-  // while a pointer moves the scene just enough to reveal its depth.
+  // The project wall is a lightweight 3D carousel. The cards remain ordinary
+  // links in the DOM; the orbit adds depth, drag-to-rotate, and a slow idle turn.
   const projectWall = document.querySelector('[data-project-wall]');
   if (projectWall) {
+    const orbit = projectWall.querySelector('[data-wall-orbit]');
     const cards = [...projectWall.querySelectorAll('[data-wall-card]')];
     const status = projectWall.parentElement?.querySelector('.project-wall-status');
+    const prev = projectWall.querySelector('[data-wall-prev]');
+    const next = projectWall.querySelector('[data-wall-next]');
+    const toggle = projectWall.querySelector('[data-wall-toggle]');
     const finePointer = window.matchMedia('(pointer:fine)').matches;
     const titleFor = card => card.querySelector('strong')?.textContent?.trim() || 'Project';
     const kindFor = card => card.querySelector('.project-object-id')?.textContent?.replace(/^\d+\s*·\s*/, '').trim().toLowerCase() || 'work';
+    const angleFor = card => Number.parseFloat(card.style.getPropertyValue('--angle')) || 0;
+    let rotation = 0;
+    let velocity = 0;
+    let raf = 0;
+    let lastTime = 0;
+    let dragging = false;
+    let pointerDown = false;
+    let dragStarted = false;
+    let suppressClick = false;
+    let startX = 0;
+    let startY = 0;
+    let lastX = 0;
+    let paused = false;
+    let hovering = false;
+    let wallVisible = true;
+
+    const defaultStatus = 'Drag to rotate · click a project to open';
     const setStatus = card => {
       if (status && card) status.textContent = `${titleFor(card)} · ${kindFor(card)} · open project ↗`;
     };
+
+    const setRotation = value => {
+      rotation = value;
+      projectWall.style.setProperty('--orbit-rotation', `${rotation.toFixed(2)}deg`);
+    };
+
+    const nearestTarget = angle => {
+      const delta = ((-angle - rotation + 540) % 360) - 180;
+      return rotation + delta;
+    };
+
+    const snapTo = card => {
+      if (!card || motion.matches) return;
+      paused = true;
+      if (toggle) {
+        toggle.setAttribute('aria-pressed', 'true');
+        toggle.textContent = 'Resume rotation';
+      }
+      projectWall.classList.add('is-snapping');
+      setRotation(nearestTarget(angleFor(card)));
+      window.setTimeout(() => projectWall.classList.remove('is-snapping'), 820);
+    };
+
+    const setPaused = value => {
+      paused = value;
+      if (toggle) {
+        toggle.setAttribute('aria-pressed', String(paused));
+        toggle.textContent = paused ? 'Resume rotation' : 'Pause rotation';
+      }
+    };
+
     cards.forEach(card => {
-      card.addEventListener('pointerenter', () => { card.classList.add('is-active'); setStatus(card); });
-      card.addEventListener('pointerleave', () => { card.classList.remove('is-active'); if (status) status.textContent = 'Hover a project to bring it forward.'; });
-      card.addEventListener('focus', () => { card.classList.add('is-active'); setStatus(card); });
-      card.addEventListener('blur', () => { card.classList.remove('is-active'); if (status) status.textContent = 'Hover a project to bring it forward.'; });
+      card.addEventListener('pointerenter', () => { hovering = true; card.classList.add('is-active'); setStatus(card); });
+      card.addEventListener('pointerleave', () => { hovering = false; card.classList.remove('is-active'); if (status) status.textContent = defaultStatus; });
+      card.addEventListener('focus', () => { hovering = true; card.classList.add('is-active'); setStatus(card); snapTo(card); });
+      card.addEventListener('blur', () => { hovering = false; card.classList.remove('is-active'); if (status) status.textContent = defaultStatus; });
     });
-    if (!motion.matches && finePointer) {
-      let pointerX = 0, pointerY = 0, frame = 0;
-      const renderWall = () => {
-        frame = 0;
-        projectWall.style.setProperty('--wall-rx', `${(-pointerY * 3.3).toFixed(2)}deg`);
-        projectWall.style.setProperty('--wall-ry', `${(pointerX * 4.2).toFixed(2)}deg`);
-        projectWall.style.setProperty('--wall-shift-x', `${(pointerX * 9).toFixed(1)}px`);
-        projectWall.style.setProperty('--wall-shift-y', `${(pointerY * 7).toFixed(1)}px`);
+
+    if (orbit && !motion.matches) {
+      const tick = time => {
+        const delta = Math.min(40, lastTime ? time - lastTime : 16);
+        lastTime = time;
+        if (wallVisible) {
+          if (!paused && !dragging && !hovering) rotation += delta * .0026;
+          if (!dragging && Math.abs(velocity) > .01) {
+            rotation += velocity * (delta / 16);
+            velocity *= Math.pow(.88, delta / 16);
+          }
+          setRotation(rotation);
+        }
+        raf = requestAnimationFrame(tick);
       };
-      projectWall.addEventListener('pointermove', event => {
-        const box = projectWall.getBoundingClientRect();
-        pointerX = (event.clientX - box.left) / box.width - .5;
-        pointerY = (event.clientY - box.top) / box.height - .5;
-        if (!frame) frame = requestAnimationFrame(renderWall);
-      });
-      projectWall.addEventListener('pointerleave', () => {
-        pointerX = 0; pointerY = 0;
-        if (!frame) frame = requestAnimationFrame(renderWall);
-      });
+      raf = requestAnimationFrame(tick);
+      if ('IntersectionObserver' in window) {
+        const wallObserver = new IntersectionObserver(entries => { wallVisible = Boolean(entries[0]?.isIntersecting); }, {threshold:.05});
+        wallObserver.observe(projectWall);
+      }
     }
+
+    if (prev) prev.addEventListener('click', () => { setPaused(true); setRotation(rotation + 60); });
+    if (next) next.addEventListener('click', () => { setPaused(true); setRotation(rotation - 60); });
+    if (toggle) toggle.addEventListener('click', () => setPaused(!paused));
+
+    let pointerX = 0, pointerY = 0, tiltFrame = 0;
+    const renderTilt = () => {
+      tiltFrame = 0;
+      projectWall.style.setProperty('--wall-rx', `${(-pointerY * 6.5).toFixed(2)}deg`);
+      projectWall.style.setProperty('--wall-ry', `${(pointerX * 8).toFixed(2)}deg`);
+      projectWall.style.setProperty('--wall-shift-x', `${(pointerX * 12).toFixed(1)}px`);
+      projectWall.style.setProperty('--wall-shift-y', `${(pointerY * 9).toFixed(1)}px`);
+    };
+    projectWall.addEventListener('pointermove', event => {
+      const box = projectWall.getBoundingClientRect();
+      pointerX = (event.clientX - box.left) / box.width - .5;
+      pointerY = (event.clientY - box.top) / box.height - .5;
+      if (!tiltFrame) tiltFrame = requestAnimationFrame(renderTilt);
+
+      if (!orbit || motion.matches || !pointerDown) return;
+      const dx = event.clientX - startX;
+      const dy = event.clientY - startY;
+      if (!dragStarted) {
+        if (Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+        if (Math.abs(dy) > Math.abs(dx) * 1.15) { pointerDown = false; return; }
+        dragStarted = true;
+        dragging = true;
+        suppressClick = true;
+        projectWall.classList.add('is-dragging');
+        try { projectWall.setPointerCapture(event.pointerId); } catch (_) {}
+      }
+      const deltaX = event.clientX - lastX;
+      lastX = event.clientX;
+      velocity = deltaX * .34;
+      rotation += deltaX * .34;
+      setRotation(rotation);
+    });
+    projectWall.addEventListener('pointerdown', event => {
+      if (!orbit || motion.matches || event.target.closest('.project-wall-controls') || (event.pointerType === 'mouse' && event.button !== 0)) return;
+      pointerDown = true;
+      dragStarted = false;
+      startX = lastX = event.clientX;
+      startY = event.clientY;
+      velocity = 0;
+    });
+    const endDrag = event => {
+      if (!pointerDown && !dragging) return;
+      pointerDown = false;
+      dragging = false;
+      projectWall.classList.remove('is-dragging');
+      if (event?.pointerId !== undefined && projectWall.hasPointerCapture?.(event.pointerId)) projectWall.releasePointerCapture(event.pointerId);
+    };
+    projectWall.addEventListener('pointerup', endDrag);
+    projectWall.addEventListener('pointercancel', endDrag);
+    projectWall.addEventListener('click', event => {
+      if (suppressClick) {
+        event.preventDefault();
+        event.stopPropagation();
+        suppressClick = false;
+      }
+    }, true);
+    projectWall.addEventListener('pointerleave', () => {
+      pointerX = 0; pointerY = 0;
+      hovering = false;
+      if (!tiltFrame) tiltFrame = requestAnimationFrame(renderTilt);
+    });
   }
 
   const canvas = document.querySelector('#flybyCanvas');
