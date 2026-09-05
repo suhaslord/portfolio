@@ -17,7 +17,7 @@ def revision(path):
 
 def nav(prefix="", active="", is_home=False):
     home = prefix + "index.html"
-    links = [("Home", home), ("Selected work", home+"#work"), ("About", home+"#about"), ("Résumé", prefix+"resume.html"), ("GitHub", "https://github.com/suhaslord")]
+    links = [("Home", home), ("Selected work", home+"#work"), ("All work", home+"#all-work"), ("About", home+"#about"), ("Résumé", prefix+"resume.html"), ("GitHub", "https://github.com/suhaslord")]
     items = "".join(f'<a href="{url}"' + (' aria-current="page"' if label == active else '') + f'>{label}</a>' for label, url in links)
     return f'''<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header{' is-over-hero' if is_home else ''}"><nav class="nav" aria-label="Primary">
