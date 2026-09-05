@@ -91,6 +91,7 @@ html:not(.js) .site-header .brand{color:var(--ink)}
   .project-image img,.featured-image img,.floating-project img{animation:media-drift linear both;animation-timeline:view();animation-range:entry 0% cover 34%}
   @keyframes media-drift{from{transform:translateY(14px) scale(1.015)}to{transform:translateY(-8px) scale(1.035)}}
 }
+@media (hover:hover) and (pointer:fine){.system-card.reveal-ready.is-visible:hover{transform:perspective(1000px) translate3d(0,-7px,0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))}}
 @media(prefers-reduced-motion:reduce){
   .js .hero-copy>*{opacity:1;transform:none}
   .reveal-ready{opacity:1;transform:none;transition:none}
