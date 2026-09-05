@@ -18,7 +18,7 @@ Reviewed September 5, 2026, including the 3D and broader-work revision inspired 
 
 ## Browser review
 
-The refreshed hosted GitHub Pages page was reviewed in Chromium after commit `fe3c4b5f0e88834d2059e5114d8d813d1acc7e01`, using a 1,363 × 936 browser viewport. These are browser layout checks, not physical-device tests.
+The refreshed hosted GitHub Pages page was reviewed in Chromium after commit `f2e68bc35697086086c89a1b869191878e497e27`, using a 1,363 × 936 browser viewport. These are browser layout checks, not physical-device tests.
 
 - Homepage: the desktop document width and scroll width were both 1,348px, with no horizontal overflow. All 16 images reported complete with a non-zero natural width in the live page. The photographic opening, scattered work index, featured project, staggered project pair, flyby, contributions, about, and contact sections were inspected.
 - Seagulls card: the live PNG loaded from `assets/seagulls/seagulls-mark.png?v=2` with a 768px natural width. The card shows the mark and crew caption without the previous misleading adjacent-interface note.
