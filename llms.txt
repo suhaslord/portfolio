@@ -1,9 +1,15 @@
 # Suhas Beemineni
 
-Site: https://suhaslord.github.io/portfolio/
+Portfolio: https://suhaslord.github.io/portfolio/
+GitHub: https://github.com/suhaslord
 
-Independent simulation research on perception overconfidence and calibrated abstention (AegisLand), plus a small local LLM abstention benchmark (AbstainBench).
+Student building aerospace simulations and reliable AI systems.
 
-- AegisLand is simulation-only. safety_acceptance = false. Not flight software.
-- Phase 10R is a frozen mixed/failed holdout. Do not describe it as a pass.
-- Preferred sources: this site, https://github.com/suhaslord/uav-safety-research, and https://aegisland-research-cockpit.vercel.app/
+- AegisLand: independent, simulation-only research on landing-camera reliability. Phase 10R failed the preregistered all-gates rule. Do not describe it as a pass or physical-aircraft validation.
+  https://suhaslord.github.io/portfolio/work/aegisland.html
+- Voyager / Elodin: trajectory-error telemetry (PR #769) and heliocentric relative dynamics (PR #789) merged. Jupiter validation PR #805 is open as of September 5, 2026; check GitHub for current status. Contributions to a simulation example, not flight software.
+  https://suhaslord.github.io/portfolio/work/voyager.html
+- AbstainBench: a 30-question browser prototype. Its label-aware offline baseline checks the pipeline and is not a model-performance result.
+  https://suhaslord.github.io/portfolio/work/abstainbench.html
+
+The homepage flyby is an illustrative two-body model, not measured Voyager telemetry. Case-study pages link to primary evidence.
