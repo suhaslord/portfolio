@@ -11,7 +11,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/space-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/lora.woff" as="font" type="font/woff" crossorigin>
-<script src="js/theme.js?v=d272e9ed20"></script><link rel="stylesheet" href="css/portfolio.css?v=00989d7b22">
+<script src="js/theme.js?v=d272e9ed20"></script><link rel="stylesheet" href="css/portfolio.css?v=406a4546fe">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Suhas Beemineni", "url": "https://suhaslord.github.io/portfolio/", "sameAs": ["https://github.com/suhaslord"], "description": "Student building aerospace simulations and reliable AI systems."}</script><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script><script type="module" src="js/voyager.js?v=dad29f1424" defer></script>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header is-over-hero"><nav class="nav" aria-label="Primary">
@@ -71,10 +71,16 @@
     <div class="systems-heading"><p class="eyebrow">Across the stack</p><h2 id="systems-title">Different questions.<br>Same care for the <span class="handline">details.</span></h2><p>I like work where a system has to be useful, explainable, and honest about its edges.</p></div>
     <div class="systems-grid">
       <a class="system-card system-card-featured" href="https://github.com/aiospathfinder/Seagulls_openstage" target="_blank" rel="noopener noreferrer">
-        <span class="system-art routing-art" aria-hidden="true"><i></i><i></i><i></i><b></b></span><span class="project-type">AI product engineering · Seagulls / OpenStage</span><h3>Make the whole crew smarter.</h3><p>As an AI engineering intern, I worked through model routing, memory boundaries, guardrails, tracing, and failure-path QA. The interesting part was not one clever prompt — it was keeping a real assistant’s behavior coherent across the product.</p><span class="system-link">Team work &amp; role context ↗</span>
+        <figure class="system-art system-art-photo">
+          <img src="assets/abstain/demo.jpg" alt="Browser interface from Suhas's AI evaluation work" width="1348" height="926" loading="lazy">
+          <figcaption>Adjacent AI artifact · not a Seagulls screenshot</figcaption>
+        </figure><span class="project-type">AI product engineering · Seagulls / OpenStage</span><h3>Make the whole crew smarter.</h3><p>As an AI engineering intern, I worked through model routing, memory boundaries, guardrails, tracing, and failure-path QA. The interesting part was not one clever prompt — it was keeping a real assistant’s behavior coherent across the product.</p><span class="system-link">Team work &amp; role context ↗</span>
       </a>
       <a class="system-card" href="https://github.com/suhaslord/citizen-science-astronomy-lab" target="_blank" rel="noopener noreferrer">
-        <span class="system-art orbit-art" aria-hidden="true"><i></i><i></i><i></i></span><span class="project-type">Research notebook</span><h3>Measure before claiming.</h3><p>Known-transit recovery with TESS data, Exoplanet Archive catalog checks, and training diagnostics. The result is a reproducible exercise, not a discovery claim.</p><span class="system-link">Astronomy lab ↗</span>
+        <figure class="system-art system-art-photo">
+          <img src="https://raw.githubusercontent.com/suhaslord/citizen-science-astronomy-lab/main/planet-hunters-tess/output/hd209458b_tess_transit.png" alt="Measured TESS transit recovery plot for HD 209458 b" width="1600" height="900" loading="lazy" referrerpolicy="no-referrer">
+          <figcaption>Measured transit recovery · public research output</figcaption>
+        </figure><span class="project-type">Research notebook</span><h3>Measure before claiming.</h3><p>Known-transit recovery with TESS data, Exoplanet Archive catalog checks, and training diagnostics. The result is a reproducible exercise, not a discovery claim.</p><span class="system-link">Astronomy lab ↗</span>
       </a>
     </div>
   </section>
@@ -84,7 +90,10 @@
       <div class="voyager-intro"><p class="eyebrow">A closer look · 01 / 03</p><h2 id="voyager-scene-title">The machine<br>behind the <span class="handline">numbers.</span></h2><p>This is a NASA 3D Resources model of Voyager, staged beside an illustrative Jupiter and trajectory. Scroll through the scene, or explore the spacecraft directly.</p><p class="caption">Model: NASA 3D Resources / Voyager Probe (A). Jupiter texture: NASA 3D Resources. This composition is illustrative; it is not a measured Voyager trajectory and NASA does not endorse this site.</p><div class="voyager-sequence" aria-live="polite"><span class="voyager-sequence-label">Close inspection</span><span class="voyager-sequence-rule"></span><span class="voyager-sequence-count">01</span></div></div>
       <div class="voyager-viewport">
         <div class="voyager-loading" id="voyagerLoading"><span class="loader-dot" aria-hidden="true"></span><span>Loading the spacecraft</span><small>the static composition stays available</small></div>
-        <div class="voyager-fallback-art" aria-hidden="true"><span class="fallback-planet"></span><span class="fallback-dish"></span><span class="fallback-body"></span><span class="fallback-boom"></span><span class="fallback-panel"></span></div>
+        <div class="voyager-fallback-art" aria-hidden="true">
+          <img class="voyager-fallback-photo" src="https://science.nasa.gov/wp-content/uploads/2024/04/pia21734.jpg?format=jpeg&amp;w=4096" alt="" width="4096" height="2731" decoding="async">
+          <span class="voyager-photo-credit">Historical proof-test model · NASA/JPL-Caltech · PIA21734</span>
+        </div>
         <canvas id="voyagerCanvas" tabindex="0" aria-label="Interactive illustrative 3D Voyager spacecraft scene. Activate Explore spacecraft to rotate with arrow keys." role="img"></canvas>
         <div class="voyager-annotations" id="voyagerAnnotations" hidden><span class="annotation annotation-dish">High-gain antenna</span><span class="annotation annotation-body">Instrument body</span><span class="annotation annotation-boom">Science boom</span></div>
         <div class="voyager-status" id="voyagerStatus" role="status">Illustrative scene · scroll to reveal</div>

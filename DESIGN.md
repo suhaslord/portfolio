@@ -8,7 +8,7 @@ The reference was inspected in a browser: its photographic opening, compact floa
 
 - Locally hosted Lora supplies the expressive serif headings. Space Grotesk handles practical reading; IBM Plex Mono is reserved for measurements and identifiers. Font licenses are included.
 - White and graphite define the main surfaces. Lilac (#e8ceff) connects navigation, actions, underlines, and the contact section. Dark theme preserves the same hierarchy.
-- A full-height photograph leads into a loose image index, one substantial AegisLand feature, then staggered Voyager and AbstainBench features. The broader systems section gives Seagulls / OpenStage and the astronomy work their own visual weight without flattening everything into equal cards.
+- A full-height photograph leads into a loose image index, one substantial AegisLand feature, then staggered Voyager and AbstainBench features. The broader systems section gives Seagulls / OpenStage and the astronomy work their own visual weight without flattening everything into equal cards. Their visual headers now use real project evidence: an adjacent AI interface capture and the author's public TESS transit-recovery plot, with captions that prevent either image from being misread as a different project's screenshot.
 - The image selector offers historical NASA photography and the author's actual Elodin demonstration. Each view has a source link. It changes on request, without automatic cycling.
 - The flyby has its own section. It is an explicitly illustrative two-body teaching model, separate from measured Voyager results. Playback starts on request and pauses offscreen or in background tabs.
 - Motion uses short menu transitions, image crossfades, small hover responses, modest section reveals, and one scroll-directed Voyager sequence. The 3D section is intentionally short enough to preserve native scrolling. Reduced-motion preferences disable decorative movement and keep controls usable.
@@ -38,7 +38,7 @@ Case-study facts and links are maintained in `content/projects.json`. Public rep
 - NASA photographs: sources and attribution in `assets/space/SOURCE.md`.
 - Fonts: Google Fonts distributions of Lora, Space Grotesk, and IBM Plex Mono; OFL licenses in `assets/fonts`.
 - Social preview: exact typesetting over credited Earthrise photography. Flyby geometry is calculated; no research data is generated for decoration.
-- Voyager 3D: `assets/3d/voyager-a.glb` is the NASA 3D Resources Voyager Probe (A) model (about 286 KB); `jupiter-map.jpg` is the matching NASA texture. The module loads the model and Draco decoder progressively, caps device pixel ratio at 1.5, pauses when hidden, and leaves a CSS spacecraft silhouette as the first-paint fallback.
+- Voyager 3D: `assets/3d/voyager-a.glb` is the NASA 3D Resources Voyager Probe (A) model (about 286 KB); `jupiter-map.jpg` is the matching NASA texture. The module loads the model and Draco decoder progressively, caps device pixel ratio at 1.5, pauses when hidden, and leaves a real NASA/JPL-Caltech Voyager test-model photograph as the first-paint fallback (with the local telemetry capture as a network-failure background).
 - NASA's official insignia is not reproduced. NASA's published brand guidelines reserve it for NASA-sponsored pages or explicit permission; the page uses plain linked attribution instead.
 
 ## Motion review
