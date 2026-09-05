@@ -12,7 +12,7 @@ The reference was inspected in a browser: its photographic opening, compact floa
 - The image selector offers historical NASA photography and the author's actual Elodin demonstration. Each view has a source link. It changes on request, without automatic cycling.
 - The flyby has its own section. It is an explicitly illustrative two-body teaching model, separate from measured Voyager results. Playback starts on request and pauses offscreen or in background tabs.
 - Motion uses short menu transitions, image crossfades, a staged hero entrance, scroll-linked image drift where supported, pointer tilt on the systems cards, modest section reveals, and one scroll-directed Voyager sequence. Each cue is interruptible and the 3D section is intentionally short enough to preserve native scrolling. Reduced-motion preferences disable decorative movement and keep controls usable.
-- The complete-work area borrows the reference site's selected-work / explorations distinction as an editorial device, not a visual copy. It is now a spatial project wall: six real project images sit at different depths and angles, respond to a fine pointer, and remain ordinary keyboard-accessible links. Three smaller threads stay in a compact notebook index underneath instead of competing with the visual work.
+- The complete-work area borrows the reference site's selected-work / explorations distinction as an editorial device, not a visual copy. It is now a rotating spatial carousel: six real project images sit on a depth-aware orbit, turn slowly at rest, respond to horizontal drag and arrow controls, and remain ordinary keyboard-accessible links. Hover and focus pull a project toward the viewer; pause and reduced-motion states keep the effect under the visitor's control. Three smaller threads stay in a compact notebook index underneath instead of competing with the visual work.
 - The compact menu supports keyboard use, outside-click dismissal, and Escape. Essential navigation remains available without JavaScript.
 
 ## Content and hierarchy
@@ -52,7 +52,7 @@ Case-study facts and links are maintained in `content/projects.json`. Public rep
 | Seagulls as one paragraph in the About section | Dedicated systems card plus a wider work archive | Represents the team product work without overstating individual ownership or crowding the case studies. |
 | No visual explanation inside AegisLand | Adjustable camera angle and marker occlusion explainer | Makes the perception problem legible while clearly separating teaching geometry from measured results. |
 | Official-looking NASA badge | Plain NASA-linked attribution and provenance file | Respects NASA identifier restrictions and avoids implying sponsorship or endorsement. |
-| Static project cards | Staged hero rise, section reveals, scroll-linked media drift, and a restrained pointer tilt | Adds tactile feedback without turning every section into a spectacle; reduced motion keeps the reading path calm. |
+| Static project cards | Staged hero rise, section reveals, scroll-linked media drift, and a rotating project orbit with drag, pause, and focus states | Gives the work a memorable spatial signature without turning every section into a spectacle; reduced motion keeps the reading path calm. |
 
 ## Editing
 
