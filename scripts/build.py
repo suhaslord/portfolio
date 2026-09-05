@@ -36,6 +36,13 @@ def page(path, title, description, body, active=""):
     kind = "website" if path == "index.html" else "article"
     structured = {"@context":"https://schema.org", "@type":"Person", "name":"Suhas Beemineni", "url":BASE,
                   "sameAs":["https://github.com/suhaslord"], "description":"Student building aerospace simulations and reliable AI systems."}
+    extras = ''
+    if path == "index.html":
+        extras += '<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script>'
+    if path == "index.html":
+        extras += f'<script type="module" src="js/voyager.js?v={revision("js/voyager.js")}" defer></script>'
+    elif path == "work/aegisland.html":
+        extras += f'<script src="../js/aegis.js?v={revision("js/aegis.js")}" defer></script>'
     markup = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +57,7 @@ def page(path, title, description, body, active=""):
 <link rel="preload" href="{prefix}assets/fonts/space-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="{prefix}assets/fonts/lora.woff" as="font" type="font/woff" crossorigin>
 <script src="{prefix}js/theme.js?v={revision('js/theme.js')}"></script><link rel="stylesheet" href="{prefix}css/portfolio.css?v={revision('css/portfolio.css')}">
-<script type="application/ld+json">{json.dumps(structured)}</script>
+<script type="application/ld+json">{json.dumps(structured)}</script>{extras}
 </head><body>{nav(prefix, active, path == "index.html")}{body}{footer(prefix)}<script src="{prefix}js/portfolio.js?v={revision('js/portfolio.js')}" defer></script></body></html>'''
     (ROOT / path).write_text(markup)
 
@@ -88,6 +95,8 @@ def case(p):
         sections += f'<section class="case-section"><h2>{E(s["title"])}</h2>{paragraphs}</section>'
     if p["slug"] == "voyager":
         sections += '''<section class="case-section" id="illustration"><h2>About the flyby illustration</h2><p>The homepage draws a hyperbolic trajectory in a Jupiter-centered frame. Changing the closest-approach radius changes the eccentricity and total turning angle. Distances are to the planet's center.</p><p>The illustrative model fixes Jupiter's gravitational parameter at 126,686,531.9 km³/s² and the incoming excess speed at 16 km/s. Jupiter's GM and 71,492 km equatorial radius follow the <a href="https://ssd.jpl.nasa.gov/sats/phys_par/">JPL gravitational-parameter table</a> and <a href="https://ssd.jpl.nasa.gov/planets/phys_par.html">planetary physical parameters</a>. It uses e = 1 + rₚv∞²/μ and δ = 2 arcsin(1/e). The drawing clips the trajectory to the visible area; the planet and path use the same distance scale.</p><p>Playback traces the shape at an illustrative pace, not physical elapsed time. This is a teaching graphic, separate from the SPICE-based Voyager work.</p></section>'''
+    if p["slug"] == "aegisland":
+        sections += '''<section class="case-section case-exhibit" id="interactive-exhibit"><h2>See the ambiguity</h2><p>This small educational model shows why a landing-marker estimate can become difficult when viewpoint and visibility change. Adjust the camera angle or cover part of the marker. The scene explains the geometry; it is separate from the measured Phase 10R results above.</p><div class="aegis-exhibit"><div class="aegis-stage"><canvas id="aegisCanvas" width="720" height="480" aria-hidden="true"></canvas><div class="aegis-stage-label">Illustrative geometry · not flight data</div></div><div class="aegis-controls"><div class="aegis-control"><label for="aegisAngle">Camera angle <output id="aegisAngleValue">18°</output></label><input id="aegisAngle" type="range" min="0" max="70" step="1" value="18" aria-describedby="aegisExplain"></div><div class="aegis-control"><label for="aegisOcclusion">Marker occlusion <output id="aegisOcclusionValue">12%</output></label><input id="aegisOcclusion" type="range" min="0" max="80" step="1" value="12" aria-describedby="aegisExplain"></div><p id="aegisExplain" class="aegis-reading" role="status">Mostly visible: the marker outline is easy to interpret.</p><button type="button" class="quiet-button" id="aegisReset">Reset view</button></div></div><p class="caption">Teaching model only. It does not replay AegisLand measurements, replace a camera model, or change the published holdout result.</p></section>'''
     sources = "".join(f"<li>{outbound(x)}</li>" for x in p["sources"])
     body = f'''<main id="main"><header class="case-header wrap"><a class="back-link" href="../index.html#work">← Selected work</a><p class="project-type">{p["category"]}</p><h1>{p["name"]}</h1><p class="case-lede">{E(p["headline"])}</p><div class="case-actions">{actions}</div></header>
 <figure class="case-image wrap"><img src="../{p["image"]}" alt="{E(p["alt"])}" width="{p["image_width"]}" height="{p["image_height"]}"><figcaption>{E(p["caption"])}</figcaption></figure>
