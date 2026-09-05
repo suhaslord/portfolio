@@ -5,7 +5,7 @@ Reviewed September 5, 2026, including the 3D and broader-work revision inspired 
 ## Build and content
 
 - `python scripts/build.py`: static pages generated successfully.
-- `python scripts/check.py`: eight entry pages and 176 local references checked, including routes, anchors, image attributes, font files, and metadata.
+- `python scripts/check.py`: eight entry pages and 181 local references checked, including routes, anchors, image attributes, font files, and metadata.
 - `node --check js/portfolio.js` and `node --check js/theme.js`: passed.
 - `node --check js/voyager.js` and `node --check js/aegis.js`: passed.
 - `git diff --check`: passed.
@@ -18,11 +18,11 @@ Reviewed September 5, 2026, including the 3D and broader-work revision inspired 
 
 ## Browser review
 
-The refreshed hosted GitHub Pages page was reviewed in Chromium after commit `f2e68bc35697086086c89a1b869191878e497e27`, using a 1,363 × 936 browser viewport. These are browser layout checks, not physical-device tests.
+The refreshed hosted GitHub Pages page was reviewed in Chromium after the spatial-wall publication, using a 1,363 × 936 browser viewport. These are browser layout checks, not physical-device tests.
 
-- Homepage: the desktop document width and scroll width were both 1,348px, with no horizontal overflow. All 16 images reported complete with a non-zero natural width in the live page. The photographic opening, scattered work index, featured project, staggered project pair, flyby, contributions, about, and contact sections were inspected.
+- Homepage: the desktop document width and scroll width were both 1,348px, with no horizontal overflow. All 16 images reported complete with a non-zero natural width in the live page. The photographic opening, scattered selected-work intro, spatial project wall, featured project, staggered project pair, flyby, contributions, about, and contact sections were inspected.
 - Seagulls card: the live PNG loaded from `assets/seagulls/seagulls-mark.png?v=2` with a 768px natural width. The card shows the mark and crew caption without the previous misleading adjacent-interface note.
-- Complete work index: `#all-work` rendered nine entries with a visible All / Builds / Research / Experiments filter toolbar. Clicking Research showed exactly three entries and updated the live status to `Showing 3 items · research`; returning to All restored all nine. The index and nav link produced no horizontal overflow.
+- Project wall: `#all-work` renders six real project links in a layered CSS 3D composition. Fine-pointer parallax updates the wall's rotate and depth variables; hover/focus brings the active piece forward and updates the live status. The wall and compact notebook links produced no horizontal overflow.
 - Motion: the root reached `js page-ready`; the systems-card pointer handler updated `--tilt-x` and `--tilt-y`, and a hovered card produced a non-identity `matrix3d` transform. The page CSS includes explicit reduced-motion rules for the entrance, reveals, card tilt, and logo orbit.
 - Image picker: click, ArrowRight, and Home changed the active image, pressed state, focus, and source credit correctly. All three full-size images loaded.
 - Menu: mobile opening, Escape dismissal, and selection of Selected work were checked. Escape returned focus to the menu button with a visible solid outline. Desktop About and Get in touch links reached their sections.
