@@ -20,7 +20,7 @@
 
   function message(text) {
     if (status) status.textContent = text;
-    if (loading) loading.querySelector('span:last-child').textContent = text;
+    if (loading) loading.querySelector('span:not(.loader-dot)').textContent = text;
   }
 
   function fail(text) {
