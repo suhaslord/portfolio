@@ -11,7 +11,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/space-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/lora.woff" as="font" type="font/woff" crossorigin>
-<script src="js/theme.js?v=d272e9ed20"></script><link rel="stylesheet" href="css/portfolio.css?v=9fb0da077e">
+<script src="js/theme.js?v=d272e9ed20"></script><link rel="stylesheet" href="css/portfolio.css?v=53e51827fa">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Suhas Beemineni", "url": "https://suhaslord.github.io/portfolio/", "sameAs": ["https://github.com/suhaslord"], "description": "Student building aerospace simulations and reliable AI systems."}</script><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script><script type="module" src="js/voyager.js?v=dad29f1424" defer></script>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header is-over-hero"><nav class="nav" aria-label="Primary">
@@ -69,39 +69,48 @@
 
   <section class="work-wall-section wrap section" id="all-work" aria-labelledby="all-work-title">
     <div class="work-wall-head">
-      <div><p class="eyebrow">A closer look · 01 / 06</p><h2 id="all-work-title">Work with<br><span class="handline">a little depth.</span></h2></div>
-      <p>Move through the collection. Hover a piece to pull it forward.</p>
+      <div><p class="eyebrow">A closer look · 01 / 06</p><h2 id="all-work-title">Work in<br><span class="handline">orbit.</span></h2></div>
+      <p>Drag the wall. Let the work come around.</p>
     </div>
     <div class="project-wall" data-project-wall>
       <div class="project-wall-light" aria-hidden="true"></div>
       <div class="project-wall-grid" aria-hidden="true"></div>
+      <div class="project-wall-orbit" data-wall-orbit>
+        <div class="project-wall-track" aria-hidden="true"></div>
+        <div class="project-wall-core" aria-hidden="true"><span>SELECTED WORK</span><b>06</b><span>ROTATE / EXPLORE</span></div>
 
-      <a class="project-object object-aegis" data-wall-card href="work/aegisland.html">
+      <a class="project-object object-aegis" data-wall-card style="--angle:0deg" href="work/aegisland.html">
         <span class="project-object-media"><img src="assets/aegisland/exhibit-still.jpg" alt="AegisLand simulated landing marker" width="900" height="840" loading="lazy" decoding="async"></span>
         <span class="project-object-meta"><span class="project-object-id">01 · BUILD</span><strong>AegisLand</strong><small>Perception reliability</small></span>
       </a>
-      <a class="project-object object-voyager" data-wall-card href="work/voyager.html">
+      <a class="project-object object-voyager" data-wall-card style="--angle:60deg" href="work/voyager.html">
         <span class="project-object-media"><img src="assets/voyager/telemetry.jpg" alt="Voyager simulation trajectories in Elodin" width="1440" height="795" loading="lazy" decoding="async"></span>
         <span class="project-object-meta"><span class="project-object-id">02 · SIMULATION</span><strong>Voyager / Elodin</strong><small>Spacecraft dynamics</small></span>
       </a>
-      <a class="project-object object-abstain" data-wall-card href="work/abstainbench.html">
+      <a class="project-object object-abstain" data-wall-card style="--angle:120deg" href="work/abstainbench.html">
         <span class="project-object-media"><img src="assets/abstain/demo.jpg" alt="AbstainBench evaluation interface" width="1348" height="926" loading="lazy" decoding="async"></span>
         <span class="project-object-meta"><span class="project-object-id">03 · EVALUATION</span><strong>AbstainBench</strong><small>Reliable language models</small></span>
       </a>
-      <a class="project-object object-seagulls" data-wall-card href="https://github.com/aiospathfinder/Seagulls_openstage" target="_blank" rel="noopener noreferrer">
+      <a class="project-object object-seagulls" data-wall-card style="--angle:180deg" href="https://github.com/aiospathfinder/Seagulls_openstage" target="_blank" rel="noopener noreferrer">
         <span class="project-object-media project-object-logo"><img src="assets/seagulls/seagulls-mark.png?v=2" alt="Seagulls / OpenStage team logo" width="768" height="768" loading="lazy" decoding="async"></span>
         <span class="project-object-meta"><span class="project-object-id">04 · PRODUCT</span><strong>Seagulls / OpenStage</strong><small>AI crew systems</small></span>
       </a>
-      <a class="project-object object-astronomy" data-wall-card href="https://github.com/suhaslord/citizen-science-astronomy-lab" target="_blank" rel="noopener noreferrer">
+      <a class="project-object object-astronomy" data-wall-card style="--angle:240deg" href="https://github.com/suhaslord/citizen-science-astronomy-lab" target="_blank" rel="noopener noreferrer">
         <span class="project-object-media"><img src="https://raw.githubusercontent.com/suhaslord/citizen-science-astronomy-lab/main/planet-hunters-tess/output/hd209458b_tess_transit.png" alt="Measured TESS transit recovery plot for HD 209458 b" width="1600" height="900" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>
         <span class="project-object-meta"><span class="project-object-id">05 · RESEARCH</span><strong>Citizen astronomy</strong><small>Reproducible transit recovery</small></span>
       </a>
-      <a class="project-object object-echo" data-wall-card href="work/echo-field.html">
+      <a class="project-object object-echo" data-wall-card style="--angle:300deg" href="work/echo-field.html">
         <span class="project-object-media"><img src="assets/echo/cover.jpg" alt="ECHO / FIELD generative sound experiment" width="1600" height="900" loading="lazy" decoding="async"></span>
         <span class="project-object-meta"><span class="project-object-id">06 · EXPERIMENT</span><strong>ECHO / FIELD</strong><small>Sound + motion</small></span>
       </a>
+      </div>
+      <div class="project-wall-controls" role="group" aria-label="Rotate the project wall">
+        <button class="wall-control" type="button" data-wall-prev aria-label="Rotate projects left">←</button>
+        <button class="wall-control wall-control-toggle" type="button" data-wall-toggle aria-pressed="false">Pause rotation</button>
+        <button class="wall-control" type="button" data-wall-next aria-label="Rotate projects right">→</button>
+      </div>
     </div>
-    <div class="project-wall-footer"><p class="project-wall-status" role="status" aria-live="polite">Hover a project to bring it forward.</p><p class="project-wall-hint">Tab through the pieces · Enter to open</p></div>
+    <div class="project-wall-footer"><p class="project-wall-status" role="status" aria-live="polite">Drag to rotate · click a project to open</p><p class="project-wall-hint">Arrow keys also work · motion can pause</p></div>
     <div class="work-wall-index" aria-label="More work"><span class="eyebrow">More in the notebook</span><div><a href="https://github.com/suhaslord/tennisrank-ai" target="_blank" rel="noopener noreferrer">TennisRank AI <span>↗</span></a><a href="https://github.com/suhaslord/pacific-climate-dataviz" target="_blank" rel="noopener noreferrer">Pacific climate data <span>↗</span></a><a href="#archive">Research in progress <span>↘</span></a></div></div>
   </section>
 
@@ -187,4 +196,4 @@
     <span id="ship" class="anchor-alias"></span><div class="contact-inner wrap"><p class="eyebrow">Let's make something useful</p><h2 id="contact-title">Have something<br>worth figuring out?</h2><a class="contact-email" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com <span aria-hidden="true">↗</span></a><p>I'd like to hear about it.</p></div>
   </section>
 </main>
-<footer class="site-footer wrap"><span><span class="footer-brand">Suhas Beemineni</span><br>© 2026 · Aerospace &amp; AI</span><div><a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="resume.html">Résumé ↗</a><a href="mailto:suhas.aug20@gmail.com">Contact ↗</a></div></footer><script src="js/portfolio.js?v=00937a57ed" defer></script></body></html>
+<footer class="site-footer wrap"><span><span class="footer-brand">Suhas Beemineni</span><br>© 2026 · Aerospace &amp; AI</span><div><a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="resume.html">Résumé ↗</a><a href="mailto:suhas.aug20@gmail.com">Contact ↗</a></div></footer><script src="js/portfolio.js?v=6616679211" defer></script></body></html>
