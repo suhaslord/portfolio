@@ -1,6 +1,6 @@
 # Portfolio verification
 
-Reviewed September 5, 2026, including the 3D and broader-work revision inspired by the user's 21 Oaks reference.
+Reviewed September 5, 2026, including the rotating 3D project-wall revision inspired by the user's 21 Oaks reference.
 
 ## Build and content
 
@@ -20,9 +20,9 @@ Reviewed September 5, 2026, including the 3D and broader-work revision inspired 
 
 The refreshed hosted GitHub Pages page was reviewed in Chromium after the spatial-wall publication, using a 1,363 × 936 browser viewport. These are browser layout checks, not physical-device tests.
 
-- Homepage: the desktop document width and scroll width were both 1,348px, with no horizontal overflow. All 16 images reported complete with a non-zero natural width in the live page. The photographic opening, scattered selected-work intro, spatial project wall, featured project, staggered project pair, flyby, contributions, about, and contact sections were inspected.
+- Homepage: the desktop document width and scroll width were both 1,348px, with no horizontal overflow. All 16 images reported complete with a non-zero natural width in the live page. The photographic opening, scattered selected-work intro, rotating project wall, featured project, staggered project pair, flyby, contributions, about, and contact sections were inspected.
 - Seagulls card: the live PNG loaded from `assets/seagulls/seagulls-mark.png?v=2` with a 768px natural width. The card shows the mark and crew caption without the previous misleading adjacent-interface note.
-- Project wall: `#all-work` renders six real project links in a layered CSS 3D composition. At the review viewport the wall measured 817.8px high; the furthest card stayed within 4px of its lower edge and the following status row remained clear. Fine-pointer parallax changed the wall to `0.56deg / -1.19deg`; hovering AegisLand changed its card to a non-identity `matrix3d` with 156px translateZ and updated the live status. The wall and compact notebook links produced no horizontal overflow.
+- Project wall: `#all-work` renders six real project links in a CSS 3D carousel. In live Chromium, the idle `--orbit-rotation` variable advanced from `206.47deg` to `208.90deg` over 900ms; the Pause control froze it, Resume restored it, and the arrow control changed the rotation by a project-sized step. Pointer tilt changed the wall to `0.63deg` on the Y axis, and the project status updated on hover/focus. The wall and compact notebook links produced no horizontal overflow.
 - Motion: the root reached `js page-ready`; the systems-card pointer handler updated `--tilt-x` and `--tilt-y`, and a hovered card produced a non-identity `matrix3d` transform. The page CSS includes explicit reduced-motion rules for the entrance, reveals, card tilt, and logo orbit.
 - Image picker: click, ArrowRight, and Home changed the active image, pressed state, focus, and source credit correctly. All three full-size images loaded.
 - Menu: mobile opening, Escape dismissal, and selection of Selected work were checked. Escape returned focus to the menu button with a visible solid outline. Desktop About and Get in touch links reached their sections.
