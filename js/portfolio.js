@@ -138,7 +138,7 @@
           button.classList.toggle('is-active', active);
           button.setAttribute('aria-pressed', String(active));
         });
-        if (status) status.textContent = `Showing ${visible} ${labels[filter]}`;
+        if (status) status.textContent = `Showing ${visible} item${visible === 1 ? '' : 's'} · ${labels[filter]}`;
       }
       filters.forEach(button => button.addEventListener('click', () => renderWork(button.dataset.filter)));
       renderWork('all', false);
