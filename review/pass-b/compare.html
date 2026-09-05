@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pass B Compare — V3 Vast Quiet Bodies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0c0c0b;
+    --fog: #8a8780;
+    --mist: #2a2926;
+    --bone: #e8e4dc;
+    --whisper: #c4bfb4;
+    --accent: #c4bfb4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "DM Sans", system-ui, sans-serif;
+    background: var(--void);
+    color: var(--bone);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  header {
+    padding: 2rem 2vw 1.5rem;
+    border-bottom: 1px solid var(--mist);
+  }
+  header h1 {
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400; letter-spacing: -0.02em;
+  }
+  header p { color: var(--fog); margin-top: 0.6rem; max-width: 52rem; }
+
+  .banner {
+    margin: 1.25rem 2vw 0;
+    padding: 1.1rem 1.4rem;
+    border: 1px solid var(--mist);
+    background: linear-gradient(90deg, rgba(232,228,220,0.06), transparent 70%);
+  }
+  .banner .kicker {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fog); margin-bottom: 0.45rem;
+  }
+  .banner strong {
+    font-family: "Instrument Serif", serif;
+    font-size: 1.35rem; font-weight: 400;
+  }
+  .banner span { color: var(--whisper); display: block; margin-top: 0.4rem; font-size: 0.92rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1.25rem 2vw 1rem;
+  }
+  .col {
+    display: flex; flex-direction: column; gap: 0.75rem;
+    min-width: 0;
+  }
+  .col h2 {
+    font-family: "Instrument Serif", serif;
+    font-size: 1.25rem; font-weight: 400;
+  }
+  .col .note {
+    color: var(--fog); font-size: 0.82rem; min-height: 4.2rem;
+  }
+  .frame-wrap {
+    border: 1px solid var(--mist);
+    background: #000;
+    height: 720px;
+    overflow: hidden;
+  }
+  iframe {
+    width: 1440px;
+    height: 900px;
+    border: 0;
+    transform: scale(0.333);
+    transform-origin: top left;
+    pointer-events: auto;
+  }
+  .links {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .links a {
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--whisper); text-decoration: none;
+    border-bottom: 1px solid var(--mist); padding-bottom: 0.15rem;
+  }
+  .links a:hover { color: var(--bone); border-bottom-color: var(--bone); }
+
+  .notes {
+    padding: 1rem 2vw 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    border-top: 1px solid var(--mist);
+    margin-top: 0.5rem;
+  }
+  .notes h3 {
+    font-family: "Instrument Serif", serif;
+    font-size: 1.15rem; font-weight: 400; margin-bottom: 0.5rem;
+  }
+  .notes p, .notes li { color: var(--fog); font-size: 0.88rem; }
+  .notes ul { margin-left: 1.1rem; }
+  .notes li { margin-bottom: 0.35rem; }
+
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: 1fr; }
+    .frame-wrap { height: 480px; }
+    iframe { transform: scale(0.5); width: 1440px; }
+    .notes { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pass B — V3 Vast Quiet · three bodies</h1>
+  <p>Same aesthetic lock (void / fog / mist / bone / whisper · Instrument Serif + DM Sans). Distinct layout grammar only. Direction confirmed: cinematic quiet — not print-tech, not Theme #17.</p>
+</header>
+
+<div class="banner">
+  <div class="kicker">Recommendation</div>
+  <strong>Ship B1 Monument Stack as the primary V3 body.</strong>
+  <span>Largest cinematic hero + sparse full-bleed sections with huge breathing room — closest amplification of Pass A v3. B3 Chapter Void is the strong alternate if extreme whitespace wins craft review; B2 Rail is distinctive but more UI-structural than pure void cinema.</span>
+</div>
+
+<div class="grid">
+  <div class="col">
+    <h2>B1 · Monument Stack</h2>
+    <p class="note">Huge hero, then sparse full-bleed sections with enormous vertical margins. Most direct extension of Pass A v3 vast quiet.</p>
+    <div class="frame-wrap"><iframe src="b1-monument-stack.html" title="B1 Monument Stack" loading="lazy"></iframe></div>
+    <div class="links">
+      <a href="b1-monument-stack.html" target="_blank">Open full</a>
+      <a href="shots/b1-hero.png" target="_blank">Hero shot</a>
+      <a href="shots/b1-aegis.png" target="_blank">Aegis shot</a>
+    </div>
+  </div>
+  <div class="col">
+    <h2>B2 · Asymmetric Rail</h2>
+    <p class="note">Left thin sticky meta rail + right long content column. Still dark/quiet; more editorial structure, less pure void.</p>
+    <div class="frame-wrap"><iframe src="b2-asymmetric-rail.html" title="B2 Asymmetric Rail" loading="lazy"></iframe></div>
+    <div class="links">
+      <a href="b2-asymmetric-rail.html" target="_blank">Open full</a>
+      <a href="shots/b2-hero.png" target="_blank">Hero shot</a>
+      <a href="shots/b2-aegis.png" target="_blank">Aegis shot</a>
+    </div>
+  </div>
+  <div class="col">
+    <h2>B3 · Chapter Void</h2>
+    <p class="note">Near-empty chapter voids (roman marks) between centered content islands. Extreme whitespace; strongest "quiet field" alternate.</p>
+    <div class="frame-wrap"><iframe src="b3-chapter-void.html" title="B3 Chapter Void" loading="lazy"></iframe></div>
+    <div class="links">
+      <a href="b3-chapter-void.html" target="_blank">Open full</a>
+      <a href="shots/b3-hero.png" target="_blank">Hero shot</a>
+      <a href="shots/b3-aegis.png" target="_blank">Aegis shot</a>
+    </div>
+  </div>
+</div>
+
+<div class="notes">
+  <div>
+    <h3>Honesty locks</h3>
+    <ul>
+      <li>AegisLand: simulation-only; safety_acceptance: false; Phase 6B 43%→1%; frozen holdouts</li>
+      <li>Cruze: Fleet Outreach &amp; BD · Seagulls/OpenStage: AI Engineer Intern</li>
+      <li>No Elodin · no flight claims · no Inter · no purple gradients · no 3D blobs · no fake chrome</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Dev Bot lift</h3>
+    <p>Local draft only. Prefer lifting <code>b1-monument-stack.html</code> into the portfolio repo on branch <code>cursor/five-style-variants-21a3</code>. Keep honesty locks verbatim. Do not reintroduce Theme #17 cream/forest/copper or print-tech ledger paper.</p>
+  </div>
+</div>
+</body>
+</html>
