@@ -62,7 +62,7 @@ def home():
     pair = ""
     for p in (v, b):
         pair += f'''<article class="project"><a class="project-image {p["slug"]}-image" href="work/{p["slug"]}.html" aria-label="Read the {E(p["name"])} case study">
-<img src="{p["image"]}" alt="{E(p["alt"])}" width="1440" height="900" loading="lazy"></a><p class="project-type">{p["category"]}</p>
+<img src="{p["image"]}" alt="{E(p["alt"])}" width="{p["image_width"]}" height="{p["image_height"]}" loading="lazy"></a><p class="project-type">{p["category"]}</p>
 <h3>{p["name"]}</h3><p>{E(p["summary"])}</p>{project_link(p)}</article>'''
     body = (ROOT/"templates/home.html").read_text().replace("{{featured}}", featured).replace("{{project_pair}}", pair)
     page("index.html", "Suhas Beemineni | Aerospace & AI", "Student building aerospace simulations and reliable AI systems. Explore AegisLand, merged Voyager contributions, and AbstainBench.", body)
@@ -82,10 +82,10 @@ def case(p):
             paragraphs += f'<div class="table-scroll" role="region" aria-label="Phase 10R results" tabindex="0"><table><caption>Selected Phase 10R results</caption><thead><tr><th scope="col">Measure</th><th scope="col">Result</th><th scope="col">Gate</th></tr></thead><tbody>{rows}</tbody></table></div><p>Both p95 improvement gates also failed. The complete protocol and result record are linked below.</p>'
         sections += f'<section class="case-section"><h2>{E(s["title"])}</h2>{paragraphs}</section>'
     if p["slug"] == "voyager":
-        sections += '''<section class="case-section" id="illustration"><h2>About the flyby illustration</h2><p>The homepage draws a hyperbolic trajectory in a Jupiter-centered frame. Changing the closest-approach radius changes the eccentricity and total turning angle. Distances are to the planet's center.</p><p>The illustrative model fixes Jupiter's gravitational parameter at 126,686,534 km³/s² and the incoming excess speed at 16 km/s. It uses e = 1 + rₚv∞²/μ and δ = 2 arcsin(1/e). The drawing clips the trajectory to the visible area; the planet and path use the same distance scale.</p><p>Playback traces the shape at an illustrative pace, not physical elapsed time. This is a teaching graphic, separate from the SPICE-based Voyager work.</p></section>'''
+        sections += '''<section class="case-section" id="illustration"><h2>About the flyby illustration</h2><p>The homepage draws a hyperbolic trajectory in a Jupiter-centered frame. Changing the closest-approach radius changes the eccentricity and total turning angle. Distances are to the planet's center.</p><p>The illustrative model fixes Jupiter's gravitational parameter at 126,686,531.9 km³/s² and the incoming excess speed at 16 km/s. Jupiter's GM and 71,492 km equatorial radius follow the <a href="https://ssd.jpl.nasa.gov/sats/phys_par/">JPL gravitational-parameter table</a> and <a href="https://ssd.jpl.nasa.gov/planets/phys_par.html">planetary physical parameters</a>. It uses e = 1 + rₚv∞²/μ and δ = 2 arcsin(1/e). The drawing clips the trajectory to the visible area; the planet and path use the same distance scale.</p><p>Playback traces the shape at an illustrative pace, not physical elapsed time. This is a teaching graphic, separate from the SPICE-based Voyager work.</p></section>'''
     sources = "".join(f"<li>{outbound(x)}</li>" for x in p["sources"])
     body = f'''<main id="main"><header class="case-header wrap"><a class="back-link" href="../index.html#work">← Selected work</a><p class="project-type">{p["category"]}</p><h1>{p["name"]}</h1><p class="case-lede">{E(p["headline"])}</p><div class="case-actions">{actions}</div></header>
-<figure class="case-image wrap"><img src="../{p["image"]}" alt="{E(p["alt"])}" width="1440" height="900"><figcaption>{E(p["caption"])}</figcaption></figure>
+<figure class="case-image wrap"><img src="../{p["image"]}" alt="{E(p["alt"])}" width="{p["image_width"]}" height="{p["image_height"]}"><figcaption>{E(p["caption"])}</figcaption></figure>
 <div class="case-layout wrap"><aside class="case-meta"><dl><dt>My role</dt><dd>{E(p["role"])}</dd><dt>Tools</dt><dd>{E(p["stack"])}</dd><dt>Status</dt><dd>{E(p["status"])}</dd></dl><p class="caption">Checked September 5, 2026</p></aside><article class="case-body">{sections}<section class="case-section sources"><h2>Code &amp; evidence</h2><ul>{sources}</ul></section></article></div>
 <div class="case-end wrap"><a class="text-link" href="../index.html#work">← All selected work</a><a class="text-link" href="mailto:suhas.aug20@gmail.com">Contact ↗</a></div></main>'''
     page(f'work/{p["slug"]}.html', p["name"]+" | Suhas Beemineni", p["summary"], body)
@@ -95,7 +95,7 @@ def resume():
     for p in DATA["projects"]:
         entries += f'''<section class="resume-entry"><h2>{p["name"]}</h2><p class="resume-role">{p["role"]}</p><p>{E(p["summary"])}</p><p>{E(p["status"])}</p><a href="work/{p["slug"]}.html">Project details and evidence ↗</a></section>'''
     body = f'''<main id="main" class="resume wrap"><header class="case-header"><h1>Suhas Beemineni</h1><p class="case-lede">Student building software for aerospace and AI.</p><div class="case-actions"><a href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a><a href="https://github.com/suhaslord">GitHub ↗</a><a href="suhas-beemineni.pdf">Download PDF ↓</a><button class="quiet-button print-button" type="button">Print résumé</button></div></header>
-<div class="resume-layout"><aside><h2>Focus</h2><p>Aerospace simulation<br>Perception reliability<br>Language-model evaluation</p><h2>Tools</h2><p>Python, JavaScript, SPICE, Elodin, computer vision, PX4/Gazebo, WebLLM</p><h2>Education</h2><p>High school student<br>River Islands High School</p></aside><article><h2 class="resume-section-title">Selected engineering work</h2>{entries}<section class="resume-entry"><h2>Seagulls / OpenStage</h2><p class="resume-role">AI engineering intern</p><p>Work on model routing, memory boundaries, tracing, guardrails, and QA. Focus on how assistant behavior holds up through real product paths.</p><p class="caption">Role summary carried from my previously published résumé. Internal code is not included here.</p></section></article></div></main>'''
+<div class="resume-layout"><aside><h2>Focus</h2><p>Aerospace simulation<br>Perception reliability<br>Language-model evaluation</p><h2>Tools</h2><p>Python, JavaScript, SPICE, Elodin, computer vision, PX4/Gazebo, WebLLM</p><h2>Education</h2><p>High school student<br>River Islands High School</p></aside><article><h2 class="resume-section-title">Selected engineering work</h2>{entries}<section class="resume-entry"><h2>Seagulls / OpenStage</h2><p class="resume-role">AI engineering intern</p><p>Work on model routing, memory boundaries, tracing, guardrails, and QA. Focus on how assistant behavior holds up through real product paths.</p></section></article></div></main>'''
     page("resume.html", "Résumé | Suhas Beemineni", "Suhas Beemineni's selected engineering work, open-source contributions, and projects.", body, "Résumé")
 
 def echo():
@@ -103,7 +103,7 @@ def echo():
     page("work/echo-field.html", "ECHO / FIELD | Suhas Beemineni", "A creative coding experiment with canvas, audio, and motion.", body)
 
 def fallback_flyby():
-    mu, speed, rp, radius = 126686534, 16, 180000, 71492
+    mu, speed, rp, radius = 126686531.9, 16, 180000, 71492
     e = 1 + rp * speed**2 / mu
     p = rp * (1 + e)
     limit = math.acos(-1/e) * .96

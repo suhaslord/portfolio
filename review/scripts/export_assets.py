@@ -38,7 +38,7 @@ def social():
     for q in [1, .25, .55, .82]:
         d.ellipse((cx-r*q,cy-r,cx+r*q,cy+r), outline="#8e9aa2", width=1)
         d.ellipse((cx-r,cy-r*q,cx+r,cy+r*q), outline="#8e9aa2", width=1)
-    rp, mu, vinf = 180000, 126686534, 16
+    rp, mu, vinf = 180000, 126686531.9, 16
     e = 1+rp*vinf**2/mu
     p = rp*(1+e)
     limit=math.acos(-1/e)*.9

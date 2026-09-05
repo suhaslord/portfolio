@@ -14,29 +14,101 @@
       "alt": "Simulated landing-marker geometry from the AegisLand research archive",
       "caption": "Landing-marker geometry from the simulation archive.",
       "links": [
-        {"label": "GitHub", "url": "https://github.com/suhaslord/uav-safety-research"},
-        {"label": "Result archive", "url": "https://aegisland-research-cockpit.vercel.app/"}
+        {
+          "label": "GitHub",
+          "url": "https://github.com/suhaslord/uav-safety-research"
+        },
+        {
+          "label": "Result archive",
+          "url": "https://aegisland-research-cockpit.vercel.app/"
+        }
       ],
       "sections": [
-        {"title": "The problem", "paragraphs": ["A camera can produce a consistent position estimate and still be wrong. I wanted to test whether a second, imperfect source of evidence could expose that error, and when the system should decline to continue.", "The project started with synthetic landing experiments. Later evaluations introduced genuine Gazebo camera frames, partial views, appearance changes, and new geometry."]},
-        {"title": "What I built", "paragraphs": ["I built the simulation experiments, supervisory variants, evaluation protocols, and result archive. I compared image-only estimation with temporal checks, an independent estimate, uncertainty calibration, and abstention.", "I froze each candidate before evaluating its holdout. That separation mattered: changing the model after seeing the test would make the same examples less useful as evidence."]},
-        {"title": "The early result", "paragraphs": ["On the Phase 6B synthetic benchmark, selective intervention reduced unsafe touchdowns from 43% to 1%, with a reported 3% timeout cost. That was evidence within a simplified experiment.", "The next question was whether the approach would survive more difficult camera evidence. The answer was mixed."]},
-        {"title": "The harder test", "paragraphs": ["Phase 10R evaluated a frozen candidate on 36 sequences, covering 12 new geometry trajectories across three appearance conditions: 1,440 truth-visible frames.", "Average error improved on ambiguous views. The candidate still failed the preregistered all-gates rule: tail error, missed observations, and uncertainty coverage did not meet their targets."]},
-        {"title": "What I learned", "paragraphs": ["Improving the average did not solve the difficult failures. Calibration that looked good during development became overconfident after the appearance and geometry changed.", "I kept the failed holdout result in the public record. My next question is whether an estimator can recognize when its uncertainty calibration has stopped transferring."]},
-        {"title": "Scope", "paragraphs": ["This is simulation research. I have not validated it on a physical aircraft or hardware camera. The Phase 10R holdout has been seen and cannot be reused as an unseen test."]}
+        {
+          "title": "The problem",
+          "paragraphs": [
+            "A camera can produce a consistent position estimate and still be wrong. I wanted to test whether a second, imperfect source of evidence could expose that error, and when the system should decline to continue.",
+            "The project started with synthetic landing experiments. Later evaluations introduced genuine Gazebo camera frames, partial views, appearance changes, and new geometry."
+          ]
+        },
+        {
+          "title": "What I built",
+          "paragraphs": [
+            "I built the simulation experiments, supervisory variants, evaluation protocols, and result archive. I compared image-only estimation with temporal checks, an independent estimate, uncertainty calibration, and abstention.",
+            "I froze each candidate before evaluating its holdout. That separation mattered: changing the model after seeing the test would make the same examples less useful as evidence."
+          ]
+        },
+        {
+          "title": "The early result",
+          "paragraphs": [
+            "On the Phase 6B synthetic benchmark, selective intervention reduced unsafe touchdowns from 43% to 1%, with a reported 3% timeout cost. That was evidence within a simplified experiment.",
+            "The next question was whether the approach would survive more difficult camera evidence. The answer was mixed."
+          ]
+        },
+        {
+          "title": "The harder test",
+          "paragraphs": [
+            "Phase 10R evaluated a frozen candidate on 36 sequences, covering 12 new geometry trajectories across three appearance conditions: 1,440 truth-visible frames.",
+            "Average error improved on ambiguous views. The candidate still failed the preregistered all-gates rule: tail error, missed observations, and uncertainty coverage did not meet their targets."
+          ]
+        },
+        {
+          "title": "What I learned",
+          "paragraphs": [
+            "Improving the average did not solve the difficult failures. Calibration that looked good during development became overconfident after the appearance and geometry changed.",
+            "I kept the failed holdout result in the public record. My next question is whether an estimator can recognize when its uncertainty calibration has stopped transferring."
+          ]
+        },
+        {
+          "title": "Scope",
+          "paragraphs": [
+            "This is simulation research. I have not validated it on a physical aircraft or hardware camera. The Phase 10R holdout has been seen and cannot be reused as an unseen test."
+          ]
+        }
       ],
       "results": [
-        ["Ambiguous lateral mean-error improvement", "79.2%", "Passed"],
-        ["Ambiguous altitude mean-error improvement", "73.7%", "Passed"],
-        ["Truth-visible miss rate", "20.0%", "Failed"],
-        ["Lateral 95% uncertainty coverage", "84.3%", "Failed"],
-        ["Altitude 95% uncertainty coverage", "79.7%", "Failed"]
+        [
+          "Ambiguous lateral mean-error improvement",
+          "79.2%",
+          "Passed"
+        ],
+        [
+          "Ambiguous altitude mean-error improvement",
+          "73.7%",
+          "Passed"
+        ],
+        [
+          "Truth-visible miss rate",
+          "20.0%",
+          "Failed"
+        ],
+        [
+          "Lateral 95% uncertainty coverage",
+          "84.3%",
+          "Failed"
+        ],
+        [
+          "Altitude 95% uncertainty coverage",
+          "79.7%",
+          "Failed"
+        ]
       ],
       "sources": [
-        {"label": "Project README and result summary", "url": "https://github.com/suhaslord/uav-safety-research/blob/main/README.md"},
-        {"label": "Frozen Phase 10R result", "url": "https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_result.md"},
-        {"label": "Preregistered evaluation protocol", "url": "https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_protocol.md"}
-      ]
+        {
+          "label": "Project README and result summary",
+          "url": "https://github.com/suhaslord/uav-safety-research/blob/main/README.md"
+        },
+        {
+          "label": "Frozen Phase 10R result",
+          "url": "https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_result.md"
+        },
+        {
+          "label": "Preregistered evaluation protocol",
+          "url": "https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_protocol.md"
+        }
+      ],
+      "image_width": 900,
+      "image_height": 840
     },
     {
       "slug": "voyager",
@@ -51,21 +123,69 @@
       "alt": "Elodin Voyager example showing simulated trajectories and numerical error telemetry",
       "caption": "The running Voyager example, from my public pull-request demo.",
       "links": [
-        {"label": "Merged dynamics PR", "url": "https://github.com/elodin-sys/elodin/pull/789"},
-        {"label": "Merged telemetry PR", "url": "https://github.com/elodin-sys/elodin/pull/769"}
+        {
+          "label": "Merged dynamics PR",
+          "url": "https://github.com/elodin-sys/elodin/pull/789"
+        },
+        {
+          "label": "Merged telemetry PR",
+          "url": "https://github.com/elodin-sys/elodin/pull/769"
+        }
       ],
       "sections": [
-        {"title": "The problem", "paragraphs": ["Elodin's Voyager example already displayed simulated and SPICE reference trajectories. Visual separation showed that they diverged, but it did not quantify the error.", "A separate modeling issue came from the reference frame: the example integrated Sun-relative states while applying only direct planetary gravity."]},
-        {"title": "Making error visible", "paragraphs": ["I added position error in kilometers and velocity error in meters per second for Voyager 1 and Voyager 2, with four corresponding plots in the editor.", "The important detail was timing. The SPICE lookup must match the completed integration tick. I also marked the diagnostic components for external control so the normal world commit would not overwrite the post-step values.", "This contribution was merged as PR #769. It added diagnostics without changing the physics model."]},
-        {"title": "Correcting the reference frame", "paragraphs": ["In PR #789, I added an optional heliocentric relative gravity model. In addition to a planet's pull on the spacecraft, it subtracts that planet's acceleration of the Sun, which is the origin of the frame.", "I kept the existing chapter as the default. The new chapter reused the kernels, masses, RK4 integrator, and timestep, keeping the change focused and independently reviewable. This contribution was merged."]},
-        {"title": "The next validation case", "paragraphs": ["PR #805 adds a reconstructed Voyager 1 Jupiter case using the February 22-28, 1979 window, with checkpoints on February 24, 26, and 28.", "The work compares both chapters against the same SPICE reference and uses Elodin's own integration path. The PR remains open as of September 5, 2026; I am not presenting it as merged work."]},
-        {"title": "What this establishes", "paragraphs": ["These are contributions to a simulation example: measurable divergence and an explicit frame correction. They do not establish navigation-grade accuracy or a validated reconstruction of the gravity assist.", "The flyby illustration on the homepage is a separate two-body teaching model. It is not a visualization of the PR's measured results."]}
+        {
+          "title": "The problem",
+          "paragraphs": [
+            "Elodin's Voyager example already displayed simulated and SPICE reference trajectories. Visual separation showed that they diverged, but it did not quantify the error.",
+            "A separate modeling issue came from the reference frame: the example integrated Sun-relative states while applying only direct planetary gravity."
+          ]
+        },
+        {
+          "title": "Making error visible",
+          "paragraphs": [
+            "I added position error in kilometers and velocity error in meters per second for Voyager 1 and Voyager 2, with four corresponding plots in the editor.",
+            "The important detail was timing. The SPICE lookup must match the completed integration tick. I also marked the diagnostic components for external control so the normal world commit would not overwrite the post-step values.",
+            "This contribution was merged as PR #769. It added diagnostics without changing the physics model."
+          ]
+        },
+        {
+          "title": "Correcting the reference frame",
+          "paragraphs": [
+            "In PR #789, I added an optional heliocentric relative gravity model. In addition to a planet's pull on the spacecraft, it subtracts that planet's acceleration of the Sun, which is the origin of the frame.",
+            "I kept the existing chapter as the default. The new chapter reused the kernels, masses, RK4 integrator, and timestep, keeping the change focused and independently reviewable. This contribution was merged."
+          ]
+        },
+        {
+          "title": "The next validation case",
+          "paragraphs": [
+            "PR #805 adds a reconstructed Voyager 1 Jupiter case using the February 22-28, 1979 window, with checkpoints on February 24, 26, and 28.",
+            "The work compares both chapters against the same SPICE reference and uses Elodin's own integration path. The PR remains open as of September 5, 2026; I am not presenting it as merged work."
+          ]
+        },
+        {
+          "title": "What this establishes",
+          "paragraphs": [
+            "These are contributions to a simulation example: measurable divergence and an explicit frame correction. They do not establish navigation-grade accuracy or a validated reconstruction of the gravity assist.",
+            "The flyby illustration on the homepage is a separate two-body teaching model. It is not a visualization of the PR's measured results."
+          ]
+        }
       ],
       "sources": [
-        {"label": "PR #769: trajectory error telemetry (merged)", "url": "https://github.com/elodin-sys/elodin/pull/769"},
-        {"label": "PR #789: heliocentric relative dynamics (merged)", "url": "https://github.com/elodin-sys/elodin/pull/789"},
-        {"label": "PR #805: Jupiter validation (open)", "url": "https://github.com/elodin-sys/elodin/pull/805"}
-      ]
+        {
+          "label": "PR #769: trajectory error telemetry (merged)",
+          "url": "https://github.com/elodin-sys/elodin/pull/769"
+        },
+        {
+          "label": "PR #789: heliocentric relative dynamics (merged)",
+          "url": "https://github.com/elodin-sys/elodin/pull/789"
+        },
+        {
+          "label": "PR #805: Jupiter validation (open)",
+          "url": "https://github.com/elodin-sys/elodin/pull/805"
+        }
+      ],
+      "image_width": 1440,
+      "image_height": 795
     },
     {
       "slug": "abstainbench",
@@ -80,19 +200,57 @@
       "alt": "AbstainBench browser interface with evaluation controls and results",
       "caption": "The actual benchmark interface. The offline baseline checks the pipeline, not a language model.",
       "links": [
-        {"label": "Run the demo", "url": "../demos/abstainbench/"},
-        {"label": "GitHub", "url": "https://github.com/suhaslord/AbstainBench"}
+        {
+          "label": "Run the demo",
+          "url": "../demos/abstainbench/"
+        },
+        {
+          "label": "GitHub",
+          "url": "https://github.com/suhaslord/AbstainBench"
+        }
       ],
       "sections": [
-        {"title": "The question", "paragraphs": ["A fluent answer can hide missing evidence. I wanted a small, inspectable way to measure when a system answers correctly, invents an answer, or declines a question it could have answered.", "AbstainBench contains 30 questions across science, math, geography, history, and fictional missing-evidence prompts."]},
-        {"title": "What I built", "paragraphs": ["I built the browser interface, fixed question set, scoring, and JSON and Markdown exports. The evaluation records answer accuracy, abstention accuracy, hallucinations, false abstentions, and results by category.", "Two modes serve different purposes. A transparent offline baseline checks the labels, scoring, and export pipeline. An optional local model uses WebLLM and WebGPU to run quantized Llama 3.2 1B in the browser."]},
-        {"title": "Try it", "paragraphs": ["Start with the offline baseline to inspect how the evaluation works. It does not need an API key or model download.", "The optional local-model mode downloads model weights on first use. It requires a compatible WebGPU browser and suitable hardware. Treat the resulting scores as a small experiment."]},
-        {"title": "The important limitation", "paragraphs": ["The offline baseline uses the known labels. Its score is not model performance. Thirty questions are also too few to support a general claim about a model's reliability.", "A stronger evaluation would add independently reviewed labels, more models, and confidence intervals across repeated runs. The value of this version is that its assumptions and outputs are easy to inspect."]}
+        {
+          "title": "The question",
+          "paragraphs": [
+            "A fluent answer can hide missing evidence. I wanted a small, inspectable way to measure when a system answers correctly, invents an answer, or declines a question it could have answered.",
+            "AbstainBench contains 30 questions across science, math, geography, history, and fictional missing-evidence prompts."
+          ]
+        },
+        {
+          "title": "What I built",
+          "paragraphs": [
+            "I built the browser interface, fixed question set, scoring, and JSON and Markdown exports. The evaluation records answer accuracy, abstention accuracy, hallucinations, false abstentions, and results by category.",
+            "Two modes serve different purposes. A transparent offline baseline checks the labels, scoring, and export pipeline. An optional local model uses WebLLM and WebGPU to run quantized Llama 3.2 1B in the browser."
+          ]
+        },
+        {
+          "title": "Try it",
+          "paragraphs": [
+            "Start with the offline baseline to inspect how the evaluation works. It does not need an API key or model download.",
+            "The optional local-model mode downloads model weights on first use. It requires a compatible WebGPU browser and suitable hardware. Treat the resulting scores as a small experiment."
+          ]
+        },
+        {
+          "title": "The important limitation",
+          "paragraphs": [
+            "The offline baseline uses the known labels. Its score is not model performance. Thirty questions are also too few to support a general claim about a model's reliability.",
+            "A stronger evaluation would add independently reviewed labels, more models, and confidence intervals across repeated runs. The value of this version is that its assumptions and outputs are easy to inspect."
+          ]
+        }
       ],
       "sources": [
-        {"label": "Source code and documented limitations", "url": "https://github.com/suhaslord/AbstainBench"},
-        {"label": "Hosted benchmark", "url": "../demos/abstainbench/"}
-      ]
+        {
+          "label": "Source code and documented limitations",
+          "url": "https://github.com/suhaslord/AbstainBench"
+        },
+        {
+          "label": "Hosted benchmark",
+          "url": "../demos/abstainbench/"
+        }
+      ],
+      "image_width": 1348,
+      "image_height": 926
     }
   ]
 }

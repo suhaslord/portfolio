@@ -63,7 +63,7 @@
   const radiusText = document.querySelector('#approachValue');
   const turnText = document.querySelector('#turnValue');
   const play = document.querySelector('#playFlyby');
-  const MU = 126686534; // Jupiter GM, km^3 / s^2; illustrative model.
+  const MU = 126686531.9; // JPL Jupiter GM, km^3 / s^2; illustrative model.
   const RADIUS = 71492; // Jupiter reference equatorial radius, km.
   const V_INF = 16; // Chosen illustrative hyperbolic excess speed, km/s.
   let rp = Number(range.value), points = [], phase = .47, playing = false, frame = 0;
