@@ -86,7 +86,7 @@
   }
   if (!motion.matches && 'IntersectionObserver' in window) {
     const reveals = new IntersectionObserver(entries => entries.forEach(entry => {if (entry.isIntersecting) {entry.target.classList.add('is-visible');reveals.unobserve(entry.target);}}),{threshold:.08});
-    document.querySelectorAll('.featured-project,.project,.orbit-copy,.contribution-layout,.about-copy,.systems-heading,.system-card,.archive-heading,.archive-item,.contact-inner').forEach((el,index) => {el.classList.add('reveal-ready');el.style.setProperty('--reveal-delay', `${Math.min(index,5) * 55}ms`);reveals.observe(el);});
+    document.querySelectorAll('.featured-project,.project,.orbit-copy,.contribution-layout,.about-copy,.systems-heading,.system-card,.work-index-head,.work-index-note,.archive-heading,.archive-item,.contact-inner').forEach((el,index) => {el.classList.add('reveal-ready');el.style.setProperty('--reveal-delay', `${Math.min(index,5) * 55}ms`);reveals.observe(el);});
   }
 
   // A restrained pointer tilt gives the systems cards physicality without hijacking scrolling.
@@ -104,6 +104,45 @@
         card.style.setProperty('--tilt-y', '0deg');
       });
     });
+  }
+
+  // Keep the complete index useful without turning it into a dashboard: the
+  // filters are progressively enhanced, so every project remains visible
+  // when JavaScript is unavailable.
+  const workIndex = document.querySelector('.work-index');
+  if (workIndex) {
+    const toolbar = workIndex.querySelector('.work-index-toolbar');
+    const filters = [...workIndex.querySelectorAll('.work-filter')];
+    const items = [...workIndex.querySelectorAll('.work-index-item')];
+    const status = workIndex.querySelector('.work-index-status');
+    const labels = {all: 'all work', build: 'builds', research: 'research', experiment: 'experiments'};
+    if (toolbar && filters.length && items.length) {
+      toolbar.hidden = false;
+      function renderWork(filter, animate = true) {
+        let visible = 0;
+        items.forEach(item => {
+          const match = filter === 'all' || item.dataset.kind === filter;
+          item.hidden = !match;
+          item.classList.remove('is-filtering');
+          if (match) {
+            item.style.setProperty('--work-delay', `${Math.min(visible, 7) * 45}ms`);
+            visible += 1;
+            if (animate) {
+              void item.offsetWidth;
+              item.classList.add('is-filtering');
+            }
+          }
+        });
+        filters.forEach(button => {
+          const active = button.dataset.filter === filter;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-pressed', String(active));
+        });
+        if (status) status.textContent = `Showing ${visible} ${labels[filter]}`;
+      }
+      filters.forEach(button => button.addEventListener('click', () => renderWork(button.dataset.filter)));
+      renderWork('all', false);
+    }
   }
 
   const canvas = document.querySelector('#flybyCanvas');
