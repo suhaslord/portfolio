@@ -12,11 +12,12 @@ The reference was inspected in a browser: its photographic opening, compact floa
 - The image selector offers historical NASA photography and the author's actual Elodin demonstration. Each view has a source link. It changes on request, without automatic cycling.
 - The flyby has its own section. It is an explicitly illustrative two-body teaching model, separate from measured Voyager results. Playback starts on request and pauses offscreen or in background tabs.
 - Motion uses short menu transitions, image crossfades, a staged hero entrance, scroll-linked image drift where supported, pointer tilt on the systems cards, modest section reveals, and one scroll-directed Voyager sequence. Each cue is interruptible and the 3D section is intentionally short enough to preserve native scrolling. Reduced-motion preferences disable decorative movement and keep controls usable.
+- The complete-work area borrows the reference site's selected-work / explorations distinction as an editorial device, not a visual copy. It gives nine current threads a single scan surface with plain-text category filters, a visible count, and a short note about how to interpret public, team, and in-progress work.
 - The compact menu supports keyboard use, outside-click dismissal, and Escape. Essential navigation remains available without JavaScript.
 
 ## Content and hierarchy
 
-Visitors see Suhas's name, student background, cross-disciplinary focus, a first case-study link, and evidence of engineering work in the opening. Three substantial projects receive the main case-study space. Seagulls / OpenStage and independent astronomy work are surfaced as systems-level work; contributions stay compact near the end. A wider notebook lists the other public and explicitly shareable threads without making unsupported status claims.
+Visitors see Suhas's name, student background, cross-disciplinary focus, a first case-study link, and evidence of engineering work in the opening. Three substantial projects receive the main case-study space. The complete-work index then gives nine builds, research threads, and experiments a single, filterable map before Seagulls / OpenStage and independent astronomy work are surfaced as systems-level work. Contributions stay compact near the end. A wider notebook lists the other public and explicitly shareable threads without making unsupported status claims.
 
 Case studies explain individual contributions, technical decisions, results, status, and limitations. AegisLand's failed Phase 10R holdout remains explicit and now includes a separate educational camera/occlusion explainer; the AbstainBench offline baseline is not presented as model performance. The Voyager section uses the NASA 3D Resources model and Jupiter texture with local provenance notes, while its path is labeled illustrative. The archived ECHO / FIELD route and old homepage anchors remain supported.
 
@@ -55,6 +56,6 @@ Case-study facts and links are maintained in `content/projects.json`. Public rep
 
 ## Editing
 
-Edit `content/projects.json` for case studies, `templates/home.html` for the homepage, and `css/portfolio.css` for presentation. Run `python scripts/build.py` and `python scripts/check.py`. Generated pages are committed because GitHub Pages publishes the repository directly. Shared CSS and JavaScript URLs include content hashes to refresh cached assets after changes.
+Edit `content/projects.json` for case studies, `templates/home.html` for the homepage, and `css/portfolio.css` for presentation. The all-work index entries and category counts live beside the homepage markup so they are easy to update. Run `python scripts/build.py` and `python scripts/check.py`. Generated pages are committed because GitHub Pages publishes the repository directly. Shared CSS and JavaScript URLs include content hashes to refresh cached assets after changes.
 
 `scripts/export_assets.py` regenerates the résumé PDF and social preview using Pillow, fontTools, and reportlab. To update only the social preview, run `python -c 'from scripts.export_assets import social; social()'`.
