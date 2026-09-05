@@ -2,13 +2,15 @@
 
 [View the portfolio](https://suhaslord.github.io/portfolio/)
 
-I'm a student building across aerospace simulation, perception reliability, and language-model evaluation.
+I'm a student building across spacecraft simulation, reliable AI, research, and creative software. I like useful systems, honest evaluation, and interfaces that make technical work easier to understand.
 
 ## Selected work
 
 - [AegisLand](https://suhaslord.github.io/portfolio/work/aegisland.html): independent simulation research on unreliable landing-camera estimates. Includes promising early results and the limitations exposed by the failed Phase 10R holdout.
 - [Voyager / Elodin](https://suhaslord.github.io/portfolio/work/voyager.html): merged contributions for trajectory-error telemetry and heliocentric relative dynamics. A separate Jupiter validation PR remains open as of September 5, 2026.
 - [AbstainBench](https://suhaslord.github.io/portfolio/work/abstainbench.html): a small browser benchmark for answering and abstaining, with an offline pipeline check and optional WebLLM inference.
+
+The homepage also includes Seagulls/OpenStage engineering work, browser experiments, astronomy and climate research notes, and an interactive Voyager scene built from NASA's public 3D resources. Contributions and collaborations are credited compactly near the end so the projects stay central.
 
 Project pages link to code, PRs, evaluation records, and demos. The homepage flyby is an illustrative two-body model, separate from measured Voyager results.
 
@@ -19,7 +21,7 @@ The site uses static HTML, CSS, and JavaScript. There is no application server o
 1. Edit `content/projects.json` for project copy, links, and status.
 2. Edit `templates/home.html` for the introduction and homepage.
 3. Edit `scripts/build.py` for shared navigation, metadata, the HTML résumé, and page layouts.
-4. Edit `css/portfolio.css` and `js/portfolio.js` for presentation and interactions.
+4. Edit `css/portfolio.css`, `js/portfolio.js`, `js/voyager.js`, and `js/aegis.js` for presentation and interactions.
 5. Regenerate and check the committed HTML:
 
 ```sh
@@ -27,6 +29,8 @@ python scripts/build.py
 python scripts/check.py
 node --check js/portfolio.js
 node --check js/theme.js
+node --check js/voyager.js
+node --check js/aegis.js
 ```
 
 The generator and route check use the Python standard library. For a local preview, run `python -m http.server 8000` from the repository root and open the local server in a browser.

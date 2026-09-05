@@ -5,7 +5,7 @@ Reviewed September 5, 2026, including the 3D and broader-work revision inspired 
 ## Build and content
 
 - `python scripts/build.py`: static pages generated successfully.
-- `python scripts/check.py`: eight entry pages and 161 local references checked, including routes, anchors, image attributes, font files, and metadata.
+- `python scripts/check.py`: eight entry pages and 163 local references checked, including routes, anchors, image attributes, font files, and metadata.
 - `node --check js/portfolio.js` and `node --check js/theme.js`: passed.
 - `node --check js/voyager.js` and `node --check js/aegis.js`: passed.
 - `git diff --check`: passed.
