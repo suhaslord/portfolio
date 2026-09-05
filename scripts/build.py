@@ -15,20 +15,20 @@ def revision(path):
     """Keep repeat visitors from combining fresh HTML with cached assets."""
     return hashlib.sha256((ROOT/path).read_bytes()).hexdigest()[:10]
 
-def nav(prefix="", active=""):
+def nav(prefix="", active="", is_home=False):
     home = prefix + "index.html"
-    links = [("Work", home+"#work"), ("About", home+"#about"), ("Résumé", prefix+"resume.html"), ("Contact", home+"#contact")]
+    links = [("Home", home), ("Selected work", home+"#work"), ("About", home+"#about"), ("Résumé", prefix+"resume.html"), ("GitHub", "https://github.com/suhaslord")]
     items = "".join(f'<a href="{url}"' + (' aria-current="page"' if label == active else '') + f'>{label}</a>' for label, url in links)
     return f'''<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><nav class="nav wrap" aria-label="Primary">
-<a class="brand" href="{home}"><span class="monogram" aria-hidden="true">sb.</span><span>Suhas Beemineni</span></a>
-<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-<div class="nav-links" id="nav-links">{items}</div>
-<div class="theme-control"><label class="sr-only" for="theme">Color theme</label><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+<header class="site-header{' is-over-hero' if is_home else ''}"><nav class="nav" aria-label="Primary">
+<a class="brand" href="{home}" aria-label="Suhas Beemineni"><span class="brand-full">Suhas Beemineni</span><span class="brand-short" aria-hidden="true">Suhas B.</span></a>
+<div class="nav-dock"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span class="menu-symbol" aria-hidden="true"></span><span class="menu-label">Menu</span></button><a class="button dock-work" href="{home}#work">Selected work ↗</a>
+<div class="nav-links" id="nav-links">{items}<a class="nav-contact" href="{home}#contact">Get in touch ↗</a></div></div>
+<div class="header-actions"><a class="button header-resume" href="{prefix}resume.html">Résumé ↗</a><button class="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.7 8.7 0 0 1 9.8 4 8.7 8.7 0 1 0 20 14.2Z"/></svg></button></div>
 </nav></header>'''
 
 def footer(prefix=""):
-    return f'''<footer class="site-footer wrap"><span>© 2026 Suhas Beemineni</span><div><a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="{prefix}resume.html">Résumé ↗</a><a href="mailto:suhas.aug20@gmail.com">Contact ↗</a></div></footer>'''
+    return f'''<footer class="site-footer wrap"><span><span class="footer-brand">Suhas Beemineni</span><br>© 2026 · Aerospace &amp; AI</span><div><a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="{prefix}resume.html">Résumé ↗</a><a href="mailto:suhas.aug20@gmail.com">Contact ↗</a></div></footer>'''
 
 def page(path, title, description, body, active=""):
     prefix = "/portfolio/" if path == "404.html" else ("../" if "/" in path else "")
@@ -41,17 +41,17 @@ def page(path, title, description, body, active=""):
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{E(title)}</title><meta name="description" content="{E(description, quote=True)}">
 <meta name="author" content="Suhas Beemineni"><meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f3f4f4"><link rel="canonical" href="{canonical}">
+<meta name="theme-color" content="#ffffff"><link rel="canonical" href="{canonical}">
 <meta property="og:type" content="{kind}"><meta property="og:title" content="{E(title, quote=True)}">
 <meta property="og:description" content="{E(description, quote=True)}"><meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{BASE}assets/og/portfolio.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="Suhas Beemineni — aerospace and AI portfolio, over NASA Earthrise photography"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="{prefix}assets/fonts/space-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="{prefix}assets/fonts/space-semibold.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="{prefix}assets/fonts/lora.woff" as="font" type="font/woff" crossorigin>
 <script src="{prefix}js/theme.js?v={revision('js/theme.js')}"></script><link rel="stylesheet" href="{prefix}css/portfolio.css?v={revision('css/portfolio.css')}">
 <script type="application/ld+json">{json.dumps(structured)}</script>
-</head><body>{nav(prefix, active)}{body}{footer(prefix)}<script src="{prefix}js/portfolio.js?v={revision('js/portfolio.js')}" defer></script></body></html>'''
+</head><body>{nav(prefix, active, path == "index.html")}{body}{footer(prefix)}<script src="{prefix}js/portfolio.js?v={revision('js/portfolio.js')}" defer></script></body></html>'''
     (ROOT / path).write_text(markup)
 
 def project_link(p):
@@ -120,7 +120,7 @@ def fallback_flyby():
         x,y = r*math.cos(theta), r*math.sin(theta)
         coords.append(f'{cx+scale*(x*math.cos(rotation)-y*math.sin(rotation)):.2f},{cy+scale*(x*math.sin(rotation)+y*math.cos(rotation)):.2f}')
     path = "M"+" L".join(coords)
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440"><style>.line{{stroke:#b84427}} .planet{{stroke:#8a949c}} @media(prefers-color-scheme:dark){{.line{{stroke:#f28c6d}}.planet{{stroke:#83909a}}}}</style><g fill="none" class="planet" stroke-width="1"><circle cx="{cx}" cy="{cy}" r="{radius*scale}"/>'''
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440"><style>.line{{stroke:#694183}} .planet{{stroke:#8a949c}} @media(prefers-color-scheme:dark){{.line{{stroke:#dfbafa}}.planet{{stroke:#83909a}}}}</style><g fill="none" class="planet" stroke-width="1"><circle cx="{cx}" cy="{cy}" r="{radius*scale}"/>'''
     for ratio in (.25,.55,.82):
         svg += f'<ellipse cx="{cx}" cy="{cy}" rx="{radius*scale*ratio}" ry="{radius*scale}"/><ellipse cx="{cx}" cy="{cy}" rx="{radius*scale}" ry="{radius*scale*ratio}"/>'
     svg += f'</g><path d="{path}" class="line" fill="none" stroke-width="2"/></svg>'

@@ -2,9 +2,8 @@
 """Regenerate the precise social image and résumé PDF (Pillow, fontTools, reportlab)."""
 from pathlib import Path
 from io import BytesIO
-import math
 from fontTools.ttLib import TTFont as FontFile
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable, KeepTogether
@@ -21,42 +20,22 @@ def ttf(name):
     return out
 
 def social():
-    im = Image.new("RGB", (1200, 630), "#f3f4f4")
+    im = ImageOps.fit(Image.open(ROOT / "assets/space/earthrise.webp").convert("RGB"), (1200, 630), centering=(.5, .76))
+    shade = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    sd = ImageDraw.Draw(shade)
+    for y in range(630):
+        sd.line((0, y, 1200, y), fill=(0, 0, 0, int(24 + 150 * (y / 630) ** 1.8)))
+    im = Image.alpha_composite(im.convert("RGBA"), shade).convert("RGB")
     d = ImageDraw.Draw(im)
-    bold = lambda n: ImageFont.truetype(ttf("space-semibold"), n)
     regular = lambda n: ImageFont.truetype(ttf("space-regular"), n)
-    ink, accent, muted = "#242a2e", "#ad3f23", "#53616b"
-    d.text((66, 45), "sb.", font=bold(30), fill=accent)
-    d.text((66, 150), "Suhas", font=bold(94), fill=ink)
-    d.text((66, 243), "Beemineni.", font=bold(94), fill=ink)
-    d.text((70, 390), "I build aerospace simulations", font=regular(27), fill=ink)
-    d.text((70, 428), "and reliable AI systems.", font=regular(27), fill=ink)
-    d.line((70, 536, 1130, 536), fill="#ccd2d5", width=2)
-    d.text((70, 563), "Selected work / 2026", font=regular(19), fill=muted)
-    d.text((816, 563), "suhaslord.github.io/portfolio", font=regular(19), fill=muted)
-    cx, cy, r = 875, 260, 60
-    for q in [1, .25, .55, .82]:
-        d.ellipse((cx-r*q,cy-r,cx+r*q,cy+r), outline="#8e9aa2", width=1)
-        d.ellipse((cx-r,cy-r*q,cx+r,cy+r*q), outline="#8e9aa2", width=1)
-    rp, mu, vinf = 180000, 126686531.9, 16
-    e = 1+rp*vinf**2/mu
-    p = rp*(1+e)
-    limit=math.acos(-1/e)*.9
-    pts=[]
-    for i in range(501):
-        t=-limit+2*limit*i/500
-        rr=p/(1+e*math.cos(t))
-        x,y=rr*math.cos(t),rr*math.sin(t)
-        pts.append((cx+.00084*(x*math.cos(-.5)-y*math.sin(-.5)),cy+.00084*(x*math.sin(-.5)+y*math.cos(-.5))))
-    # Clip the mathematical path to the right illustration region.
-    last=None
-    for point in pts:
-        if 700<point[0]<1170 and 45<point[1]<505:
-            if last: d.line((last,point),fill=accent,width=3)
-            last=point
-        else: last=None
-    point=pts[247]
-    d.ellipse((point[0]-6,point[1]-6,point[0]+6,point[1]+6),fill=accent)
+    display = lambda n: ImageFont.truetype(ttf("lora"), n)
+    d.text((50, 35), "Suhas Beemineni", font=display(28), fill="white")
+    d.text((52, 303), "Aerospace & AI.", font=display(70), fill="white")
+    d.text((52, 381), "Built with curiosity.", font=display(70), fill="white")
+    d.line((415, 469, 684, 465), fill="#e8ceff", width=3)
+    d.text((54, 514), "A student building spacecraft simulations and reliable AI.", font=regular(22), fill="white")
+    d.text((54, 578), "suhaslord.github.io/portfolio", font=regular(17), fill="#e8ceff")
+    d.text((850, 585), "Earthrise: NASA / Bill Anders", font=regular(13), fill="white")
     im.save(ROOT/"assets/og/portfolio.png",optimize=True)
 
 def resume():

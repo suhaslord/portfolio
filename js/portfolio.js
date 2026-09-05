@@ -1,25 +1,28 @@
 (() => {
   'use strict';
   const root = document.documentElement;
-  const theme = document.querySelector('#theme');
+  const theme = document.querySelector('.theme-toggle');
   const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const menu = document.querySelector('.menu-toggle');
   const links = document.querySelector('#nav-links');
+  const header = document.querySelector('.site-header');
+  const hero = document.querySelector('.hero-stage');
   let redraw = () => {};
 
   function syncTheme() {
     const dark = root.dataset.theme === 'dark' || (!root.dataset.theme && systemTheme.matches);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = dark ? '#171c20' : '#f3f4f4';
+    if (meta) meta.content = dark ? '#1d1c1c' : '#ffffff';
+    theme?.setAttribute('aria-pressed', String(dark));
     redraw();
   }
   if (theme) {
-    theme.value = root.dataset.theme || 'system';
-    theme.addEventListener('change', () => {
-      if (theme.value === 'system') delete root.dataset.theme;
-      else root.dataset.theme = theme.value;
-      try { localStorage.setItem('suhas-theme', theme.value); } catch (_) {}
+    theme.hidden = false;
+    theme.addEventListener('click', () => {
+      const dark = root.dataset.theme === 'dark' || (!root.dataset.theme && systemTheme.matches);
+      root.dataset.theme = dark ? 'light' : 'dark';
+      try { localStorage.setItem('suhas-theme', root.dataset.theme); } catch (_) {}
       syncTheme();
     });
   }
@@ -29,7 +32,7 @@
   function closeMenu(returnFocus = false) {
     if (!menu || !links) return;
     menu.setAttribute('aria-expanded', 'false');
-    menu.textContent = 'Menu';
+    menu.querySelector('.menu-label').textContent = 'Menu';
     links.classList.remove('is-open');
     if (returnFocus) menu.focus();
   }
@@ -37,21 +40,50 @@
     menu.addEventListener('click', () => {
       const open = menu.getAttribute('aria-expanded') !== 'true';
       menu.setAttribute('aria-expanded', String(open));
-      menu.textContent = open ? 'Close' : 'Menu';
+      menu.querySelector('.menu-label').textContent = open ? 'Close' : 'Menu';
       links.classList.toggle('is-open', open);
     });
-    links.addEventListener('click', event => {
-      if (event.target.closest('a')) closeMenu();
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') closeMenu(true);
-    });
-    document.addEventListener('click', event => {
-      if (!event.target.closest('.nav') && menu.getAttribute('aria-expanded') === 'true') closeMenu();
-    });
-    window.matchMedia('(min-width: 768px)').addEventListener('change', () => closeMenu());
+    links.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') closeMenu(true); });
+    document.addEventListener('click', event => { if (!event.target.closest('.nav-dock') && menu.getAttribute('aria-expanded') === 'true') closeMenu(); });
+  }
+  if (hero && header) {
+    new IntersectionObserver(entries => header.classList.toggle('is-over-hero', entries[0].isIntersecting), {rootMargin:'-80px 0px 0px 0px',threshold:0}).observe(hero);
   }
   document.querySelector('.print-button')?.addEventListener('click', () => window.print());
+
+  const sceneButtons = [...document.querySelectorAll('.scene-button')];
+  const credits = {
+    earthrise: {label:'Earthrise · Apollo 8 · NASA / Bill Anders ↗',url:'https://science.nasa.gov/resource/apollo-8s-iconic-earthrise/'},
+    jupiter: {label:'Jupiter · Voyager 2 · NASA / JPL ↗',url:'https://science.nasa.gov/image-detail/amf-pia01370/'},
+    simulation: {label:'My Voyager / Elodin demo · PR #769 ↗',url:'https://github.com/elodin-sys/elodin/pull/769'}
+  };
+  function selectScene(button) {
+    const view = button.dataset.view;
+    document.querySelectorAll('.hero-scene').forEach(img => img.classList.toggle('is-active', img.dataset.scene === view));
+    sceneButtons.forEach(b => b.setAttribute('aria-pressed',String(b === button)));
+    const credit = document.querySelector('#scene-credit');
+    if (credit && credits[view]) {credit.textContent = credits[view].label;credit.href = credits[view].url;}
+  }
+  if (sceneButtons.length) {
+    document.querySelector('.scene-picker').hidden = false;
+    sceneButtons.forEach((button,index) => {
+      button.addEventListener('click', () => selectScene(button));
+      button.addEventListener('keydown', event => {
+        let next;
+        if (event.key === 'ArrowRight') next = (index+1)%sceneButtons.length;
+        if (event.key === 'ArrowLeft') next = (index+sceneButtons.length-1)%sceneButtons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = sceneButtons.length-1;
+        if (next !== undefined) {event.preventDefault();selectScene(sceneButtons[next]);sceneButtons[next].focus();}
+      });
+    });
+    selectScene(sceneButtons.find(button => button.getAttribute('aria-pressed') === 'true') || sceneButtons[0]);
+  }
+  if (!motion.matches && 'IntersectionObserver' in window) {
+    const reveals = new IntersectionObserver(entries => entries.forEach(entry => {if (entry.isIntersecting) {entry.target.classList.add('is-visible');reveals.unobserve(entry.target);}}),{threshold:.08});
+    document.querySelectorAll('.featured-project,.project,.orbit-copy,.contribution-layout,.about-copy').forEach(el => {el.classList.add('reveal-ready');reveals.observe(el);});
+  }
 
   const canvas = document.querySelector('#flybyCanvas');
   if (!canvas) return;

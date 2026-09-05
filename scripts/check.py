@@ -30,7 +30,7 @@ def main():
             if d.h1!=1:errors.append(f"{name}: expected one h1")
             if not d.title or not d.description:errors.append(f"{name}: missing metadata")
         for im in d.images:
-            if not im.get("alt"):errors.append(f"{name}: missing image description")
+            if "alt" not in im:errors.append(f"{name}: missing image description")
             if not im.get("width") or not im.get("height"):errors.append(f"{name}: missing image dimensions")
         for ref in d.refs:
             u=urlsplit(ref)
