@@ -116,7 +116,7 @@
     const titleFor = card => card.querySelector('strong')?.textContent?.trim() || 'Project';
     const kindFor = card => card.querySelector('.project-object-id')?.textContent?.replace(/^\d+\s*·\s*/, '').trim().toLowerCase() || 'work';
     const setStatus = card => {
-      if (status && card) status.textContent = `${titleFor(card)} · ${kindFor(card)} · open case study ↗`;
+      if (status && card) status.textContent = `${titleFor(card)} · ${kindFor(card)} · open project ↗`;
     };
     cards.forEach(card => {
       card.addEventListener('pointerenter', () => { card.classList.add('is-active'); setStatus(card); });
