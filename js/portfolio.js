@@ -10,6 +10,10 @@
   const hero = document.querySelector('.hero-stage');
   let redraw = () => {};
 
+  // Mark the first paint as ready only after the browser has a frame to compose.
+  // Content remains visible without JavaScript and reduced-motion users skip the entrance choreography.
+  requestAnimationFrame(() => root.classList.add('page-ready'));
+
   function syncTheme() {
     const dark = root.dataset.theme === 'dark' || (!root.dataset.theme && systemTheme.matches);
     const meta = document.querySelector('meta[name="theme-color"]');
@@ -82,7 +86,24 @@
   }
   if (!motion.matches && 'IntersectionObserver' in window) {
     const reveals = new IntersectionObserver(entries => entries.forEach(entry => {if (entry.isIntersecting) {entry.target.classList.add('is-visible');reveals.unobserve(entry.target);}}),{threshold:.08});
-    document.querySelectorAll('.featured-project,.project,.orbit-copy,.contribution-layout,.about-copy').forEach(el => {el.classList.add('reveal-ready');reveals.observe(el);});
+    document.querySelectorAll('.featured-project,.project,.orbit-copy,.contribution-layout,.about-copy,.systems-heading,.system-card,.archive-heading,.archive-item,.contact-inner').forEach((el,index) => {el.classList.add('reveal-ready');el.style.setProperty('--reveal-delay', `${Math.min(index,5) * 55}ms`);reveals.observe(el);});
+  }
+
+  // A restrained pointer tilt gives the systems cards physicality without hijacking scrolling.
+  if (!motion.matches && window.matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.system-card').forEach(card => {
+      card.addEventListener('pointermove', event => {
+        const box = card.getBoundingClientRect();
+        const x = (event.clientX - box.left) / box.width - .5;
+        const y = (event.clientY - box.top) / box.height - .5;
+        card.style.setProperty('--tilt-x', `${(-y * 2.3).toFixed(2)}deg`);
+        card.style.setProperty('--tilt-y', `${(x * 2.3).toFixed(2)}deg`);
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
+      });
+    });
   }
 
   const canvas = document.querySelector('#flybyCanvas');
