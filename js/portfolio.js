@@ -170,6 +170,13 @@
       }
     };
 
+    const stepRotation = delta => {
+      setPaused(true);
+      projectWall.classList.add('is-snapping');
+      setRotation(rotation + delta);
+      window.setTimeout(() => projectWall.classList.remove('is-snapping'), 820);
+    };
+
     cards.forEach(card => {
       card.addEventListener('pointerenter', () => { hovering = true; card.classList.add('is-active'); setStatus(card); });
       card.addEventListener('pointerleave', () => { hovering = false; card.classList.remove('is-active'); if (status) status.textContent = defaultStatus; });
@@ -198,8 +205,8 @@
       }
     }
 
-    if (prev) prev.addEventListener('click', () => { setPaused(true); setRotation(rotation + 60); });
-    if (next) next.addEventListener('click', () => { setPaused(true); setRotation(rotation - 60); });
+    if (prev) prev.addEventListener('click', () => stepRotation(60));
+    if (next) next.addEventListener('click', () => stepRotation(-60));
     if (toggle) toggle.addEventListener('click', () => setPaused(!paused));
 
     let pointerX = 0, pointerY = 0, tiltFrame = 0;
