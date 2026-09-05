@@ -2,6 +2,7 @@
 """Build committed static pages. Python standard library only."""
 from pathlib import Path
 import html
+import hashlib
 import json
 import math
 
@@ -9,6 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://suhaslord.github.io/portfolio/"
 DATA = json.loads((ROOT / "content/projects.json").read_text())
 E = html.escape
+
+def revision(path):
+    """Keep repeat visitors from combining fresh HTML with cached assets."""
+    return hashlib.sha256((ROOT/path).read_bytes()).hexdigest()[:10]
 
 def nav(prefix="", active=""):
     home = prefix + "index.html"
@@ -44,9 +49,9 @@ def page(path, title, description, body, active=""):
 <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="{prefix}assets/fonts/space-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="{prefix}assets/fonts/space-semibold.woff" as="font" type="font/woff" crossorigin>
-<script src="{prefix}js/theme.js"></script><link rel="stylesheet" href="{prefix}css/portfolio.css">
+<script src="{prefix}js/theme.js?v={revision('js/theme.js')}"></script><link rel="stylesheet" href="{prefix}css/portfolio.css?v={revision('css/portfolio.css')}">
 <script type="application/ld+json">{json.dumps(structured)}</script>
-</head><body>{nav(prefix, active)}{body}{footer(prefix)}<script src="{prefix}js/portfolio.js" defer></script></body></html>'''
+</head><body>{nav(prefix, active)}{body}{footer(prefix)}<script src="{prefix}js/portfolio.js?v={revision('js/portfolio.js')}" defer></script></body></html>'''
     (ROOT / path).write_text(markup)
 
 def project_link(p):
