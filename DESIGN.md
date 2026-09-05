@@ -8,10 +8,10 @@ The reference was inspected in a browser: its photographic opening, compact floa
 
 - Locally hosted Lora supplies the expressive serif headings. Space Grotesk handles practical reading; IBM Plex Mono is reserved for measurements and identifiers. Font licenses are included.
 - White and graphite define the main surfaces. Lilac (#e8ceff) connects navigation, actions, underlines, and the contact section. Dark theme preserves the same hierarchy.
-- A full-height photograph leads into a loose image index, one substantial AegisLand feature, then staggered Voyager and AbstainBench features. The broader systems section gives Seagulls / OpenStage and the astronomy work their own visual weight without flattening everything into equal cards. Their visual headers now use real project evidence: an adjacent AI interface capture and the author's public TESS transit-recovery plot, with captions that prevent either image from being misread as a different project's screenshot.
+- A full-height photograph leads into a loose image index, one substantial AegisLand feature, then staggered Voyager and AbstainBench features. The broader systems section gives Seagulls / OpenStage and the astronomy work their own visual weight without flattening everything into equal cards. The Seagulls header uses a cleaned, high-resolution version of the supplied crew mark, while the astronomy header uses the author's public TESS transit-recovery plot. Captions keep both pieces specific and honest.
 - The image selector offers historical NASA photography and the author's actual Elodin demonstration. Each view has a source link. It changes on request, without automatic cycling.
 - The flyby has its own section. It is an explicitly illustrative two-body teaching model, separate from measured Voyager results. Playback starts on request and pauses offscreen or in background tabs.
-- Motion uses short menu transitions, image crossfades, small hover responses, modest section reveals, and one scroll-directed Voyager sequence. The 3D section is intentionally short enough to preserve native scrolling. Reduced-motion preferences disable decorative movement and keep controls usable.
+- Motion uses short menu transitions, image crossfades, a staged hero entrance, scroll-linked image drift where supported, pointer tilt on the systems cards, modest section reveals, and one scroll-directed Voyager sequence. Each cue is interruptible and the 3D section is intentionally short enough to preserve native scrolling. Reduced-motion preferences disable decorative movement and keep controls usable.
 - The compact menu supports keyboard use, outside-click dismissal, and Escape. Essential navigation remains available without JavaScript.
 
 ## Content and hierarchy
@@ -35,6 +35,7 @@ Case-study facts and links are maintained in `content/projects.json`. Public rep
 - AegisLand: repository image; credit in `assets/aegisland/SOURCE.txt`.
 - Voyager: frame from the author's [public PR #769 demo](https://github.com/user-attachments/assets/f2d51b38-0943-48f1-bba0-229b4466c1b0).
 - AbstainBench: screenshot of the actual [hosted interface](https://suhaslord.github.io/portfolio/demos/abstainbench/).
+- Seagulls / OpenStage: `assets/seagulls/seagulls-mark.png` is a cleaned and upscaled version of the user's supplied crew-mark reference. `assets/seagulls/SOURCE.txt` records the processing boundary.
 - NASA photographs: sources and attribution in `assets/space/SOURCE.md`.
 - Fonts: Google Fonts distributions of Lora, Space Grotesk, and IBM Plex Mono; OFL licenses in `assets/fonts`.
 - Social preview: exact typesetting over credited Earthrise photography. Flyby geometry is calculated; no research data is generated for decoration.
@@ -50,6 +51,7 @@ Case-study facts and links are maintained in `content/projects.json`. Public rep
 | Seagulls as one paragraph in the About section | Dedicated systems card plus a wider work archive | Represents the team product work without overstating individual ownership or crowding the case studies. |
 | No visual explanation inside AegisLand | Adjustable camera angle and marker occlusion explainer | Makes the perception problem legible while clearly separating teaching geometry from measured results. |
 | Official-looking NASA badge | Plain NASA-linked attribution and provenance file | Respects NASA identifier restrictions and avoids implying sponsorship or endorsement. |
+| Static project cards | Staged hero rise, section reveals, scroll-linked media drift, and a restrained pointer tilt | Adds tactile feedback without turning every section into a spectacle; reduced motion keeps the reading path calm. |
 
 ## Editing
 
