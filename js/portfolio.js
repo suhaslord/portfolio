@@ -86,7 +86,7 @@
   }
   if (!motion.matches && 'IntersectionObserver' in window) {
     const reveals = new IntersectionObserver(entries => entries.forEach(entry => {if (entry.isIntersecting) {entry.target.classList.add('is-visible');reveals.unobserve(entry.target);}}),{threshold:.08});
-    document.querySelectorAll('.featured-project,.project,.orbit-copy,.contribution-layout,.about-copy,.systems-heading,.system-card,.work-index-head,.work-index-note,.archive-heading,.archive-item,.contact-inner').forEach((el,index) => {el.classList.add('reveal-ready');el.style.setProperty('--reveal-delay', `${Math.min(index,5) * 55}ms`);reveals.observe(el);});
+    document.querySelectorAll('.featured-project,.project,.orbit-copy,.contribution-layout,.about-copy,.systems-heading,.system-card,.work-wall-head,.work-wall-index,.archive-heading,.archive-item,.contact-inner').forEach((el,index) => {el.classList.add('reveal-ready');el.style.setProperty('--reveal-delay', `${Math.min(index,5) * 55}ms`);reveals.observe(el);});
   }
 
   // A restrained pointer tilt gives the systems cards physicality without hijacking scrolling.
@@ -106,42 +106,43 @@
     });
   }
 
-  // Keep the complete index useful without turning it into a dashboard: the
-  // filters are progressively enhanced, so every project remains visible
-  // when JavaScript is unavailable.
-  const workIndex = document.querySelector('.work-index');
-  if (workIndex) {
-    const toolbar = workIndex.querySelector('.work-index-toolbar');
-    const filters = [...workIndex.querySelectorAll('.work-filter')];
-    const items = [...workIndex.querySelectorAll('.work-index-item')];
-    const status = workIndex.querySelector('.work-index-status');
-    const labels = {all: 'all work', build: 'builds', research: 'research', experiment: 'experiments'};
-    if (toolbar && filters.length && items.length) {
-      toolbar.hidden = false;
-      function renderWork(filter, animate = true) {
-        let visible = 0;
-        items.forEach(item => {
-          const match = filter === 'all' || item.dataset.kind === filter;
-          item.hidden = !match;
-          item.classList.remove('is-filtering');
-          if (match) {
-            item.style.setProperty('--work-delay', `${Math.min(visible, 7) * 45}ms`);
-            visible += 1;
-            if (animate) {
-              void item.offsetWidth;
-              item.classList.add('is-filtering');
-            }
-          }
-        });
-        filters.forEach(button => {
-          const active = button.dataset.filter === filter;
-          button.classList.toggle('is-active', active);
-          button.setAttribute('aria-pressed', String(active));
-        });
-        if (status) status.textContent = `Showing ${visible} item${visible === 1 ? '' : 's'} · ${labels[filter]}`;
-      }
-      filters.forEach(button => button.addEventListener('click', () => renderWork(button.dataset.filter)));
-      renderWork('all', false);
+  // The project wall is a small spatial index: native links stay in the DOM,
+  // while a pointer moves the scene just enough to reveal its depth.
+  const projectWall = document.querySelector('[data-project-wall]');
+  if (projectWall) {
+    const cards = [...projectWall.querySelectorAll('[data-wall-card]')];
+    const status = projectWall.parentElement?.querySelector('.project-wall-status');
+    const finePointer = window.matchMedia('(pointer:fine)').matches;
+    const titleFor = card => card.querySelector('strong')?.textContent?.trim() || 'Project';
+    const kindFor = card => card.querySelector('.project-object-id')?.textContent?.replace(/^\d+\s*·\s*/, '').trim().toLowerCase() || 'work';
+    const setStatus = card => {
+      if (status && card) status.textContent = `${titleFor(card)} · ${kindFor(card)} · open case study ↗`;
+    };
+    cards.forEach(card => {
+      card.addEventListener('pointerenter', () => { card.classList.add('is-active'); setStatus(card); });
+      card.addEventListener('pointerleave', () => { card.classList.remove('is-active'); if (status) status.textContent = 'Hover a project to bring it forward.'; });
+      card.addEventListener('focus', () => { card.classList.add('is-active'); setStatus(card); });
+      card.addEventListener('blur', () => { card.classList.remove('is-active'); if (status) status.textContent = 'Hover a project to bring it forward.'; });
+    });
+    if (!motion.matches && finePointer) {
+      let pointerX = 0, pointerY = 0, frame = 0;
+      const renderWall = () => {
+        frame = 0;
+        projectWall.style.setProperty('--wall-rx', `${(-pointerY * 3.3).toFixed(2)}deg`);
+        projectWall.style.setProperty('--wall-ry', `${(pointerX * 4.2).toFixed(2)}deg`);
+        projectWall.style.setProperty('--wall-shift-x', `${(pointerX * 9).toFixed(1)}px`);
+        projectWall.style.setProperty('--wall-shift-y', `${(pointerY * 7).toFixed(1)}px`);
+      };
+      projectWall.addEventListener('pointermove', event => {
+        const box = projectWall.getBoundingClientRect();
+        pointerX = (event.clientX - box.left) / box.width - .5;
+        pointerY = (event.clientY - box.top) / box.height - .5;
+        if (!frame) frame = requestAnimationFrame(renderWall);
+      });
+      projectWall.addEventListener('pointerleave', () => {
+        pointerX = 0; pointerY = 0;
+        if (!frame) frame = requestAnimationFrame(renderWall);
+      });
     }
   }
 
