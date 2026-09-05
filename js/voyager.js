@@ -29,6 +29,18 @@
     message(text);
   }
 
+  function updateFallbackSequence() {
+    const rect = section.getBoundingClientRect();
+    const travel = Math.max(1, section.offsetHeight - window.innerHeight);
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    const label = progress < .34 ? 'Close inspection' : (progress < .68 ? 'Instrument geometry' : 'Planet + trajectory');
+    const count = progress < .34 ? '01' : (progress < .68 ? '02' : '03');
+    if (sequenceLabel) sequenceLabel.textContent = label;
+    if (sequenceCount) sequenceCount.textContent = count;
+  }
+  window.addEventListener('scroll', updateFallbackSequence, { passive: true });
+  updateFallbackSequence();
+
   const observer = new IntersectionObserver(entries => {
     visible = entries[0].isIntersecting;
     if (!visible && window.__voyagerStop) window.__voyagerStop();
