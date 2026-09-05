@@ -45,7 +45,7 @@ def page(path, title, description, body, active=""):
 <meta property="og:type" content="{kind}"><meta property="og:title" content="{E(title, quote=True)}">
 <meta property="og:description" content="{E(description, quote=True)}"><meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{BASE}assets/og/portfolio.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:alt" content="Suhas Beemineni — aerospace and AI portfolio, over NASA Earthrise photography"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="{prefix}assets/fonts/space-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="{prefix}assets/fonts/lora.woff" as="font" type="font/woff" crossorigin>
@@ -120,7 +120,7 @@ def fallback_flyby():
         x,y = r*math.cos(theta), r*math.sin(theta)
         coords.append(f'{cx+scale*(x*math.cos(rotation)-y*math.sin(rotation)):.2f},{cy+scale*(x*math.sin(rotation)+y*math.cos(rotation)):.2f}')
     path = "M"+" L".join(coords)
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440"><style>.line{{stroke:#b84427}} .planet{{stroke:#8a949c}} @media(prefers-color-scheme:dark){{.line{{stroke:#f28c6d}}.planet{{stroke:#83909a}}}}</style><g fill="none" class="planet" stroke-width="1"><circle cx="{cx}" cy="{cy}" r="{radius*scale}"/>'''
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440"><style>.line{{stroke:#694183}} .planet{{stroke:#8a949c}} @media(prefers-color-scheme:dark){{.line{{stroke:#dfbafa}}.planet{{stroke:#83909a}}}}</style><g fill="none" class="planet" stroke-width="1"><circle cx="{cx}" cy="{cy}" r="{radius*scale}"/>'''
     for ratio in (.25,.55,.82):
         svg += f'<ellipse cx="{cx}" cy="{cy}" rx="{radius*scale*ratio}" ry="{radius*scale}"/><ellipse cx="{cx}" cy="{cy}" rx="{radius*scale}" ry="{radius*scale*ratio}"/>'
     svg += f'</g><path d="{path}" class="line" fill="none" stroke-width="2"/></svg>'
