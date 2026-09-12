@@ -6,8 +6,8 @@ I'm a student building across spacecraft simulation, reliable AI, research, and 
 
 ## Selected work
 
-- [AegisLand](https://suhaslord.github.io/portfolio/work/aegisland.html): independent simulation research on unreliable landing-camera estimates. Includes promising early results and the limitations exposed by the failed Phase 10R holdout.
-- [Voyager / Elodin](https://suhaslord.github.io/portfolio/work/voyager.html): merged contributions for trajectory-error telemetry and heliocentric relative dynamics. A separate Jupiter validation PR remains open as of September 5, 2026.
+- [AegisLand](https://suhaslord.github.io/portfolio/work/aegisland.html): independent simulation research on unreliable landing-camera estimates. The portfolio case study covers early results and the failed Phase 10R holdout; the [research repository](https://github.com/suhaslord/uav-safety-research) now records the lineage through Phase 22, including later negative results and frozen context-transfer evaluations.
+- [Voyager / Elodin](https://suhaslord.github.io/portfolio/work/voyager.html): merged contributions for trajectory-error telemetry and heliocentric relative dynamics. The case study records a separate Jupiter validation PR as open on September 5, 2026; follow its linked PR for current status.
 - [AbstainBench](https://suhaslord.github.io/portfolio/work/abstainbench.html): a small browser benchmark for answering and abstaining, with an offline pipeline check and optional WebLLM inference.
 
 The homepage also includes Seagulls/OpenStage engineering work, browser experiments, astronomy and climate research notes, and an interactive Voyager scene built from NASA's public 3D resources. Contributions and collaborations are credited compactly near the end so the projects stay central.
