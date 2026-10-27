@@ -1,0 +1,39 @@
+{
+  "education": {"school": "River Islands High School", "location": "Lathrop, California", "class": "Class of 2029", "gpa": "Grade 9 weighted GPA: 4.49", "courses": ["AP Calculus AB", "AP Computer Science Principles", "AP Psychology", "AP World History", "Physics in the Universe Honors", "English 2 Honors", "Spanish 2 Honors"]},
+  "skills": {"Languages": "Python, JavaScript, Java, C++, MATLAB", "Engineering": "ROS 2, Gazebo, SPICE, simulation, computer vision", "Software": "Git/GitHub, pytest, NumPy, PyTorch, continuous integration", "Spoken languages": "English and Telugu; studying Spanish"},
+  "sections": [
+    {"id": "resume-research", "title": "Research & engineering", "entries": [
+      {"name": "UC Santa Cruz · AIEA Lab", "role": "Episodic memory research with Professor Leilani H. Gilpin", "date": "2026", "points": ["Set up training and evaluation on Nautilus for visual question-answering tasks on CLEVR and CLEVRER.", "Trained FiLM for 80 epochs on 70,000 images. The selected checkpoint scored 96.9552% on 149,991 validation questions; the full set includes checkpoint-selection images."], "url": "work/ucsc.html"},
+      {"name": "San Diego State University", "role": "Lunar navigation research with Professor Pablo Machuca", "date": "2026", "points": ["Developed and analyzed six-beacon navigation/EKF simulations with Jeremiah Symington, including measurement gaps and line-of-sight prediction.", "Compared first- and second-order predictions across lunar orbit cases; continuing work on crater-based navigation."], "url": "work/lunar-navigation.html"},
+      {"name": "Cal Poly Pomona · AVL", "role": "Autonomous vehicle simulation contributor", "date": "2026", "points": ["Contribute to the MARVIN rover's ROS 2/Gazebo simulation and preparation for comparisons with physical tests.", "Merged a coordinate-frame interface correction in the team's simulation repository."], "url": "work/avl.html"},
+      {"name": "Cal Poly Pomona · Professor Tamer Omar", "role": "Literature review: AI for digital twins", "date": "2026", "points": ["Review and summarize research papers, focusing on objectives, implementation, problem formulation and experimental analysis."]},
+      {"name": "University of Tulsa · Professor Joshua Schultz", "role": "Soft-robotics modeling", "date": "2026", "points": ["Work on mathematical models and geometry visualization for soft robotics, including the gamma, psi and phi parameters."]},
+      {"name": "AegisLand", "role": "Independent UAV perception research", "date": "2026", "points": ["Built Python evaluation workflows and a frame-level failure explorer for landing-camera perception under blur, darkness and occlusion.", "Documented simulation experiments, reproducibility checks and failure cases."], "url": "https://github.com/suhaslord/uav-safety-research"}
+    ]},
+    {"id": "resume-experience", "title": "Work experience", "entries": [
+      {"name": "Seagulls / OpenStage", "role": "Lead AI Engineer → Lead QA Tester", "date": "2026", "points": ["Contributed AI features, model routing, context selection, guardrails and app fixes.", "Now test user flows, investigate regressions and verify fixes as the team prepares for launch."], "url": "work/seagulls.html"},
+      {"name": "ExoVista", "role": "Growth intern", "date": "2026", "points": ["Supported outreach and promotion for the exoplanet explorer, including research into potential astronomy-community partnerships."]},
+      {"name": "Cruze", "role": "Fleet outreach & business development intern", "date": "2026", "points": ["Researched fleet companies, qualified prospects and prepared initial operational and fuel-use analyses."]},
+      {"name": "Venture Starters", "role": "Internship participation", "date": "2026", "points": []}
+    ]},
+    {"id": "resume-open-source", "title": "Open source & projects", "entries": [
+      {"name": "Elodin / Voyager", "role": "Open-source contributor", "date": "2026", "points": ["Merged trajectory-error telemetry and a heliocentric relative gravity correction.", "Compared two completed 144-step simulations against SPICE. Final position error in this case decreased from 28.179 km to 0.840 km."], "url": "work/voyager.html"},
+      {"name": "NASA · python_cmr", "role": "Open-source contributor", "date": "2026", "points": ["Merged multi-platform search support and tests in PR #119."], "url": "https://github.com/nasa/python_cmr/pull/119"},
+      {"name": "OpenMDAO · Aviary", "role": "Open-source contributor", "date": "2026", "points": ["Merged a minimal aircraft mission example and regression test in PR #1262."], "url": "https://github.com/OpenMDAO/Aviary/pull/1262"},
+      {"name": "OpenC3 · COSMOS", "role": "Open-source contributor", "date": "2026", "points": ["Merged historical telemetry timestamp support in PR #3720."], "url": "https://github.com/OpenC3/cosmos/pull/3720"},
+      {"name": "TennisRank AI", "role": "Independent software project", "date": "2026", "points": ["Built a school tennis-ranking application with team-aware doubles logic and persistent data storage."], "url": "https://github.com/suhaslord/tennisrank-ai"}
+    ]},
+    {"id": "resume-community", "title": "Leadership & volunteering", "entries": [
+      {"name": "RIAX · River Islands Aerospace", "role": "Student leadership", "date": "2026", "points": ["Help lead the student aerospace group, prepare meetings and activities, and organize plans for university visits and guest speakers."]},
+      {"name": "Steel City Codes", "role": "Volunteer computer-science instructor", "date": "Summer 2026", "points": ["Taught computer-science classes to elementary and middle-school students. Completed 31 volunteer service hours."]},
+      {"name": "STEM·E", "role": "Game design volunteer", "date": "2026", "points": ["Contributed to the STEM and entrepreneurship program. Completed 43 verified volunteer hours."]},
+      {"name": "Learn To Be", "role": "Volunteer tutor", "date": "2026", "points": ["Tutor students in math and English through one-on-one sessions."]},
+      {"name": "Adaptable Athletics", "role": "Volunteer assistant soccer coach", "date": "2026", "points": ["Help children with physical and cognitive differences participate in soccer through drills, coaching and individual support."]}
+    ]},
+    {"id": "resume-recognition", "title": "Recognition & athletics", "entries": [
+      {"name": "SkillsUSA", "role": "Regional 2nd place · 3D Visualization and Graphics", "date": "", "points": []},
+      {"name": "Math Kangaroo", "role": "Top 50 in California · Grade 7", "date": "", "points": []},
+      {"name": "Soccer & tennis", "role": "Athletics", "date": "", "points": ["Six years of soccer experience, including four years of club soccer. Also play tennis."]}
+    ]}
+  ]
+}

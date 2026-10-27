@@ -53,7 +53,7 @@ for route, doc in docs.items():
             assert url.fragment in parsed.ids, f'{route}: missing anchor {ref}'
 for route in ['index.html', 'resume.html']:
     s = (ROOT / route).read_text().lower()
-    for banned in ['abstainbench', 'echo / field', 'tennisrank', 'citizen astronomy', 'voyagercanvas', 'project-wall']:
+    for banned in ['abstainbench', 'echo / field', 'citizen astronomy', 'voyagercanvas', 'project-wall']:
         assert banned not in s, f'{route}: removed showcase item {banned}'
 assert len(projects) == 5
 print(f'Checked {len(routes)} pages: links, anchors, images, headings and showcase scope passed.')

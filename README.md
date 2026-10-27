@@ -4,7 +4,7 @@
 
 Selected research and engineering work at UC Santa Cruz, San Diego State, Cal Poly Pomona, Seagulls, and Elodin.
 
-The site is static HTML, CSS and JavaScript. Edit `content/projects.json`, `templates/home.html`, `css/site.css` and `js/site.js`, then run:
+The site is static HTML, CSS and JavaScript. Edit `content/projects.json`, `content/resume.json`, `templates/home.html`, `css/site.css` and `js/site.js`, then run:
 
 ```sh
 python scripts/build.py

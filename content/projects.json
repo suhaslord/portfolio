@@ -11,10 +11,34 @@
       "alt": "FiLM model-selection accuracy across 80 training epochs on CLEVR",
       "caption": "Saved FiLM training history. The right panel shows epochs 20–80.",
       "sections": [
-        {"title": "My work", "paragraphs": ["As part of the AIEA Lab's episodic memory research, I worked through visual question-answering tasks on CLEVR and CLEVRER. I set up the training and evaluation pipeline on Nautilus and trained FiLM for 80 epochs on 70,000 images."]},
-        {"title": "The results", "paragraphs": ["On the full validation set of 149,991 questions, the provided FiLM checkpoint scored 96.8431%. My selected trained checkpoint scored 96.9552%. The pretrained NS-VQA model scored 99.8133%.", "The full validation set includes questions used for checkpoint selection. These results are a comparison within this task, not evidence that I created a new state-of-the-art model."]}
+        {
+          "title": "My work",
+          "paragraphs": [
+            "As part of the AIEA Lab's episodic memory research, I worked through visual question-answering tasks on CLEVR and CLEVRER. I set up the training and evaluation pipeline on Nautilus and trained FiLM for 80 epochs on 70,000 images."
+          ]
+        },
+        {
+          "title": "The results",
+          "paragraphs": [
+            "On the full validation set of 149,991 questions, the provided FiLM checkpoint scored 96.8431%. My selected trained checkpoint scored 96.9552%. The pretrained NS-VQA model scored 99.8133%.",
+            "The full validation set includes questions used for checkpoint selection. These results are a comparison within this task, not evidence that I created a new state-of-the-art model."
+          ]
+        }
       ],
-      "facts": [["Training", "70,000 images"], ["Run", "80 epochs"], ["Evaluation", "149,991 questions"]],
+      "facts": [
+        [
+          "Training",
+          "70,000 images"
+        ],
+        [
+          "Run",
+          "80 epochs"
+        ],
+        [
+          "Evaluation",
+          "149,991 questions"
+        ]
+      ],
       "links": []
     },
     {
@@ -28,10 +52,34 @@
       "alt": "Three circular lunar orbit test cases at 10,000, 20,000 and 30,000 kilometers from the Moon's center",
       "caption": "The three higher-orbit cases from the saved simulation study. Distances are from the Moon's center.",
       "sections": [
-        {"title": "My work", "paragraphs": ["I work on lunar optical navigation, measurement gaps, and crater-based estimates. The project builds on the team's source models and compares first- and second-order predictions as the time between observations grows."]},
-        {"title": "The study", "paragraphs": ["The higher-orbit study tested 10,000, 20,000 and 30,000 km from the Moon's center. Second-order prediction had lower RMS angular error in all 33 tested orbit-and-gap combinations.", "That result applies to these circular, two-body simulations. Camera pointing, lighting and the full navigation filter are outside this test."]}
+        {
+          "title": "My work",
+          "paragraphs": [
+            "I work on lunar optical navigation, measurement gaps, and crater-based estimates. The project builds on the team's source models and compares first- and second-order predictions as the time between observations grows."
+          ]
+        },
+        {
+          "title": "The study",
+          "paragraphs": [
+            "The higher-orbit study tested 10,000, 20,000 and 30,000 km from the Moon's center. Second-order prediction had lower RMS angular error in all 33 tested orbit-and-gap combinations.",
+            "That result applies to these circular, two-body simulations. Camera pointing, lighting and the full navigation filter are outside this test."
+          ]
+        }
       ],
-      "facts": [["Test cases", "3 orbit radii"], ["Comparison", "33 orbit/gap combinations"], ["Scope", "Simulation"]],
+      "facts": [
+        [
+          "Test cases",
+          "3 orbit radii"
+        ],
+        [
+          "Comparison",
+          "33 orbit/gap combinations"
+        ],
+        [
+          "Scope",
+          "Simulation"
+        ]
+      ],
       "extra_image": "assets/results/lunar-errors.png",
       "extra_alt": "First- and second-order angular prediction errors across lunar orbit radii and measurement gaps",
       "links": []
@@ -44,11 +92,44 @@
       "role": "Contributor to the AVL autonomy simulation team",
       "intro": "Helping the team compare its MARVIN rover simulation with physical tests.",
       "sections": [
-        {"title": "My work", "paragraphs": ["I'm helping the Autonomous Vehicle Lab develop and check the Gazebo digital twin of its MARVIN tracked rover. My current work supports the comparison between recorded physical tests and the simulation."]},
-        {"title": "Also at Cal Poly Pomona", "paragraphs": ["Separately, I review research on AI for digital twins with Professor Tamer Omar, focusing on how the models are implemented and evaluated."]}
+        {
+          "title": "My work",
+          "paragraphs": [
+            "I'm helping the Autonomous Vehicle Lab develop and check the Gazebo digital twin of its MARVIN tracked rover. My current work supports the comparison between recorded physical tests and the simulation."
+          ]
+        },
+        {
+          "title": "Also at Cal Poly Pomona",
+          "paragraphs": [
+            "Separately, I review research on AI for digital twins with Professor Tamer Omar, focusing on how the models are implemented and evaluated."
+          ]
+        }
       ],
-      "facts": [["Platform", "MARVIN rover"], ["Environment", "Gazebo"], ["Focus", "Simulation and test comparison"]],
-      "links": []
+      "facts": [
+        [
+          "Platform",
+          "MARVIN rover"
+        ],
+        [
+          "Environment",
+          "Gazebo"
+        ],
+        [
+          "Focus",
+          "Simulation and test comparison"
+        ]
+      ],
+      "links": [
+        {
+          "label": "Merged frame correction",
+          "url": "https://github.com/Ryan-Simpson/AVL_Autonomy_Sim/pull/3"
+        }
+      ],
+      "image": "assets/avl/marvin-lab.webp",
+      "alt": "MARVIN rover in the Cal Poly Pomona Autonomous Vehicle Lab",
+      "photo": true,
+      "caption": "MARVIN in the lab. Photo: Cal Poly Pomona Autonomous Vehicle Laboratory.",
+      "credit_url": "https://autovehiclelab.com/projects.html"
     },
     {
       "slug": "seagulls",
@@ -62,10 +143,29 @@
       "logo": true,
       "caption": "Seagulls / OpenStage team identity.",
       "sections": [
-        {"title": "My work", "paragraphs": ["I started by working on AI features. I'm now testing the app, checking user flows and finding bugs before launch."]}
+        {
+          "title": "My work",
+          "paragraphs": [
+            "I started by working on AI features. I'm now testing the app, checking user flows and finding bugs before launch."
+          ]
+        }
       ],
-      "facts": [["Product", "OpenStage"], ["Current focus", "Launch testing"]],
-      "links": [{"label": "Project repository", "url": "https://github.com/aiospathfinder/Seagulls_openstage"}]
+      "facts": [
+        [
+          "Product",
+          "OpenStage"
+        ],
+        [
+          "Current focus",
+          "Launch testing"
+        ]
+      ],
+      "links": [
+        {
+          "label": "Project repository",
+          "url": "https://github.com/aiospathfinder/Seagulls_openstage"
+        }
+      ]
     },
     {
       "slug": "voyager",
@@ -78,11 +178,44 @@
       "alt": "Voyager 1 position error against SPICE over 144 hourly steps for two simulation chapters",
       "caption": "Plotted from the saved hourly error CSVs for the two completed simulation runs.",
       "sections": [
-        {"title": "My contributions", "paragraphs": ["I added position- and velocity-error telemetry to Elodin's Voyager example, then contributed an optional heliocentric relative gravity model. Those changes were merged in PRs #769 and #789."]},
-        {"title": "The comparison", "paragraphs": ["Both saved runs completed 144 hourly steps. In this case, final position error against SPICE fell from 28.179 km in Chapter 1 to 0.840 km in Chapter 2.", "The comparison uses the physical completed-step times; the database timestamps were one hour early. These are results for one simulation case, not a claim of navigation-grade accuracy."]}
+        {
+          "title": "My contributions",
+          "paragraphs": [
+            "I added position- and velocity-error telemetry to Elodin's Voyager example, then contributed an optional heliocentric relative gravity model. Those changes were merged in PRs #769 and #789."
+          ]
+        },
+        {
+          "title": "The comparison",
+          "paragraphs": [
+            "Both saved runs completed 144 hourly steps. In this case, final position error against SPICE fell from 28.179 km in Chapter 1 to 0.840 km in Chapter 2.",
+            "The comparison uses the physical completed-step times; the database timestamps were one hour early. These are results for one simulation case, not a claim of navigation-grade accuracy."
+          ]
+        }
       ],
-      "facts": [["Runs", "144 steps each"], ["Chapter 1 final error", "28.179 km"], ["Chapter 2 final error", "0.840 km"]],
-      "links": [{"label": "Telemetry contribution", "url": "https://github.com/elodin-sys/elodin/pull/769"}, {"label": "Dynamics contribution", "url": "https://github.com/elodin-sys/elodin/pull/789"}]
+      "facts": [
+        [
+          "Runs",
+          "144 steps each"
+        ],
+        [
+          "Chapter 1 final error",
+          "28.179 km"
+        ],
+        [
+          "Chapter 2 final error",
+          "0.840 km"
+        ]
+      ],
+      "links": [
+        {
+          "label": "Telemetry contribution",
+          "url": "https://github.com/elodin-sys/elodin/pull/769"
+        },
+        {
+          "label": "Dynamics contribution",
+          "url": "https://github.com/elodin-sys/elodin/pull/789"
+        }
+      ]
     }
   ]
 }

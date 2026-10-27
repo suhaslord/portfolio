@@ -12,6 +12,14 @@ The reference's full-height portrait is not reproduced: no real portrait of Suha
 
 Homepage scope: UCSC AIEA, SDSU lunar navigation, CPP AVL, Seagulls and Voyager. Smaller experiments are removed from navigation, homepage, résumé and sitemap. Old experiment URLs return to selected work.
 
-Runtime layers: header 3, menu backdrop 4, menu 5, navigation button 6. The preview sits at layer 2 and cannot intercept pointer events. No page load gate or WebGL requirement.
+Runtime layers: header 3, menu backdrop 4, menu 5, navigation button 6. The preview sits at layer 2 and cannot intercept pointer events. No WebGL requirement. The short entry curtain is applied only after the animation code is ready; the page stays accessible without JavaScript.
 
 Design read: a full portfolio overhaul for research mentors and engineering teams, using a kinetic sans-serif composition. Dials: variance 8, motion 7, density 2. Native CSS/JS retains the static stack. Hero gray is slightly darker than the reference to keep the large white type readable; header text is dark. Typography, a dark footer and location badge follow the explicitly requested reference rather than the generic skill defaults.
+
+## Motion refinement
+
+A second live inspection measured the reference's name at 15vw, work names at 5.25vw, 8vw work-list margins, 16vw introduction/footer margins, and a 37.5vw navigation panel. The refined site uses those proportions. It uses a system grotesque fallback instead of redistributing the reference's proprietary Neue Montreal font.
+
+GSAP and ScrollTrigger sequence the menu, word reveals, page curtain and footer curve. Lenis supplies wheel interpolation on the same clock. Preview media follows with 0.75-second easing; the separate View badge follows faster. Previews use a vertical image rail, and Seagulls' logo occupies half the frame. The Cal Poly photo is the actual MARVIN lab image, credited on its project page.
+
+Reduced motion uses native scrolling, static content and an instant menu. No content depends on a successful intro animation. The résumé is populated from content/resume.json and includes research, work, open source, leadership, volunteering, education, skills, recognition and athletics. It is intentionally more complete than the homepage.
