@@ -21,7 +21,7 @@
   const scrim = document.querySelector('.menu-scrim');
   const background = [...document.querySelectorAll('.site-header,#main,.contact-section')];
   let menuOpen = false, menuTimeline, returnFocus;
-  if (animate && panel) gsap.set(panel,{xPercent:115});
+  if (animate && panel) gsap.set(panel,{x:0,xPercent:115});
   function closeMenu() {
     if (!panel || !menuOpen) return;
     menuOpen = false;
