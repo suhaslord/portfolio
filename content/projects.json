@@ -1,256 +1,88 @@
 {
-  "verified": "2026-09-05",
   "projects": [
     {
-      "slug": "aegisland",
-      "name": "AegisLand",
-      "category": "Perception reliability",
-      "headline": "When a confident camera is wrong.",
-      "summary": "I built a simulation study to test whether an independent estimate can catch a landing camera's mistakes before touchdown.",
-      "role": "Independent research",
-      "status": "Phase 10R: evaluation complete, gates failed",
-      "stack": "Python, computer vision, PX4/Gazebo",
-      "image": "assets/aegisland/exhibit-still.jpg",
-      "alt": "Simulated landing-marker geometry from the AegisLand research archive",
-      "caption": "Landing-marker geometry from the simulation archive.",
-      "links": [
-        {
-          "label": "GitHub",
-          "url": "https://github.com/suhaslord/uav-safety-research"
-        },
-        {
-          "label": "Result archive",
-          "url": "https://aegisland-research-cockpit.vercel.app/"
-        }
-      ],
+      "slug": "ucsc",
+      "name": "UC Santa Cruz",
+      "short": "AIEA Lab",
+      "type": "AI research",
+      "role": "Episodic memory research with Professor Leilani H. Gilpin",
+      "intro": "Training and evaluating models that answer questions about images.",
+      "image": "assets/results/clevr-training.png",
+      "alt": "FiLM model-selection accuracy across 80 training epochs on CLEVR",
+      "caption": "Saved FiLM training history. The right panel shows epochs 20–80.",
       "sections": [
-        {
-          "title": "The problem",
-          "paragraphs": [
-            "A camera can produce a consistent position estimate and still be wrong. I wanted to test whether a second, imperfect source of evidence could expose that error, and when the system should decline to continue.",
-            "The project started with synthetic landing experiments. Later evaluations introduced genuine Gazebo camera frames, partial views, appearance changes, and new geometry."
-          ]
-        },
-        {
-          "title": "What I built",
-          "paragraphs": [
-            "I built the simulation experiments, supervisory variants, evaluation protocols, and result archive. I compared image-only estimation with temporal checks, an independent estimate, uncertainty calibration, and abstention.",
-            "I froze each candidate before evaluating its holdout. That separation mattered: changing the model after seeing the test would make the same examples less useful as evidence."
-          ]
-        },
-        {
-          "title": "The early result",
-          "paragraphs": [
-            "On the Phase 6B synthetic benchmark, selective intervention reduced unsafe touchdowns from 43% to 1%, with a reported 3% timeout cost. That was evidence within a simplified experiment.",
-            "The next question was whether the approach would survive more difficult camera evidence. The answer was mixed."
-          ]
-        },
-        {
-          "title": "The harder test",
-          "paragraphs": [
-            "Phase 10R evaluated a frozen candidate on 36 sequences, covering 12 new geometry trajectories across three appearance conditions: 1,440 truth-visible frames.",
-            "Average error improved on ambiguous views. The candidate still failed the preregistered all-gates rule: tail error, missed observations, and uncertainty coverage did not meet their targets."
-          ]
-        },
-        {
-          "title": "What I learned",
-          "paragraphs": [
-            "Improving the average did not solve the difficult failures. Calibration that looked good during development became overconfident after the appearance and geometry changed.",
-            "I kept the failed holdout result in the public record. My next question is whether an estimator can recognize when its uncertainty calibration has stopped transferring."
-          ]
-        },
-        {
-          "title": "Scope",
-          "paragraphs": [
-            "This is simulation research. I have not validated it on a physical aircraft or hardware camera. The Phase 10R holdout has been seen and cannot be reused as an unseen test."
-          ]
-        }
+        {"title": "My work", "paragraphs": ["As part of the AIEA Lab's episodic memory research, I worked through visual question-answering tasks on CLEVR and CLEVRER. I set up the training and evaluation pipeline on Nautilus and trained FiLM for 80 epochs on 70,000 images."]},
+        {"title": "The results", "paragraphs": ["On the full validation set of 149,991 questions, the provided FiLM checkpoint scored 96.8431%. My selected trained checkpoint scored 96.9552%. The pretrained NS-VQA model scored 99.8133%.", "The full validation set includes questions used for checkpoint selection. These results are a comparison within this task, not evidence that I created a new state-of-the-art model."]}
       ],
-      "results": [
-        [
-          "Ambiguous lateral mean-error improvement",
-          "79.2%",
-          "Passed"
-        ],
-        [
-          "Ambiguous altitude mean-error improvement",
-          "73.7%",
-          "Passed"
-        ],
-        [
-          "Truth-visible miss rate",
-          "20.0%",
-          "Failed"
-        ],
-        [
-          "Lateral 95% uncertainty coverage",
-          "84.3%",
-          "Failed"
-        ],
-        [
-          "Altitude 95% uncertainty coverage",
-          "79.7%",
-          "Failed"
-        ]
+      "facts": [["Training", "70,000 images"], ["Run", "80 epochs"], ["Evaluation", "149,991 questions"]],
+      "links": []
+    },
+    {
+      "slug": "lunar-navigation",
+      "name": "San Diego State",
+      "short": "Lunar navigation",
+      "type": "Navigation research",
+      "role": "Research with Professor Pablo Machuca and Jeremiah Symington",
+      "intro": "Studying what happens to lunar navigation estimates when measurements are farther apart.",
+      "image": "assets/results/lunar-orbits.png",
+      "alt": "Three circular lunar orbit test cases at 10,000, 20,000 and 30,000 kilometers from the Moon's center",
+      "caption": "The three higher-orbit cases from the saved simulation study. Distances are from the Moon's center.",
+      "sections": [
+        {"title": "My work", "paragraphs": ["I work on lunar optical navigation, measurement gaps, and crater-based estimates. The project builds on the team's source models and compares first- and second-order predictions as the time between observations grows."]},
+        {"title": "The study", "paragraphs": ["The higher-orbit study tested 10,000, 20,000 and 30,000 km from the Moon's center. Second-order prediction had lower RMS angular error in all 33 tested orbit-and-gap combinations.", "That result applies to these circular, two-body simulations. Camera pointing, lighting and the full navigation filter are outside this test."]}
       ],
-      "sources": [
-        {
-          "label": "Project README and result summary",
-          "url": "https://github.com/suhaslord/uav-safety-research/blob/main/README.md"
-        },
-        {
-          "label": "Frozen Phase 10R result",
-          "url": "https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_result.md"
-        },
-        {
-          "label": "Preregistered evaluation protocol",
-          "url": "https://github.com/suhaslord/uav-safety-research/blob/main/docs/phase10r_frozen_holdout_protocol.md"
-        }
+      "facts": [["Test cases", "3 orbit radii"], ["Comparison", "33 orbit/gap combinations"], ["Scope", "Simulation"]],
+      "extra_image": "assets/results/lunar-errors.png",
+      "extra_alt": "First- and second-order angular prediction errors across lunar orbit radii and measurement gaps",
+      "links": []
+    },
+    {
+      "slug": "avl",
+      "name": "Cal Poly Pomona",
+      "short": "Autonomous Vehicle Lab",
+      "type": "Robotics",
+      "role": "Contributor to the AVL autonomy simulation team",
+      "intro": "Helping the team compare its MARVIN rover simulation with physical tests.",
+      "sections": [
+        {"title": "My work", "paragraphs": ["I'm helping the Autonomous Vehicle Lab develop and check the Gazebo digital twin of its MARVIN tracked rover. My current work supports the comparison between recorded physical tests and the simulation."]},
+        {"title": "Also at Cal Poly Pomona", "paragraphs": ["Separately, I review research on AI for digital twins with Professor Tamer Omar, focusing on how the models are implemented and evaluated."]}
       ],
-      "image_width": 900,
-      "image_height": 840
+      "facts": [["Platform", "MARVIN rover"], ["Environment", "Gazebo"], ["Focus", "Simulation and test comparison"]],
+      "links": []
+    },
+    {
+      "slug": "seagulls",
+      "name": "Seagulls",
+      "short": "OpenStage",
+      "type": "Product engineering & QA",
+      "role": "AI engineering and app testing",
+      "intro": "Working on OpenStage and testing the app as the team prepares for launch.",
+      "image": "assets/seagulls/seagulls-mark.png",
+      "alt": "Seagulls OpenStage team logo",
+      "logo": true,
+      "caption": "Seagulls / OpenStage team identity.",
+      "sections": [
+        {"title": "My work", "paragraphs": ["I started by working on AI features. I'm now testing the app, checking user flows and finding bugs before launch."]}
+      ],
+      "facts": [["Product", "OpenStage"], ["Current focus", "Launch testing"]],
+      "links": [{"label": "Project repository", "url": "https://github.com/aiospathfinder/Seagulls_openstage"}]
     },
     {
       "slug": "voyager",
       "name": "Voyager / Elodin",
-      "category": "Spacecraft simulation",
-      "headline": "Put a number on the drift.",
-      "summary": "I contributed trajectory-error telemetry and a heliocentric gravity correction to Elodin's Voyager example.",
+      "short": "Open source",
+      "type": "Spacecraft simulation",
       "role": "Open-source contributor",
-      "status": "Two contributions merged; Jupiter validation PR closed",
-      "stack": "Python, Elodin, SPICE, numerical dynamics",
-      "image": "assets/voyager/telemetry.jpg",
-      "alt": "Elodin Voyager example showing simulated trajectories and numerical error telemetry",
-      "caption": "The running Voyager example, from my public pull-request demo.",
-      "links": [
-        {
-          "label": "Merged dynamics PR",
-          "url": "https://github.com/elodin-sys/elodin/pull/789"
-        },
-        {
-          "label": "Merged telemetry PR",
-          "url": "https://github.com/elodin-sys/elodin/pull/769"
-        }
-      ],
+      "intro": "Measuring trajectory error and checking a heliocentric gravity correction against NASA SPICE.",
+      "image": "assets/results/voyager-error.png",
+      "alt": "Voyager 1 position error against SPICE over 144 hourly steps for two simulation chapters",
+      "caption": "Plotted from the saved hourly error CSVs for the two completed simulation runs.",
       "sections": [
-        {
-          "title": "The problem",
-          "paragraphs": [
-            "Elodin's Voyager example already displayed simulated and SPICE reference trajectories. Visual separation showed that they diverged, but it did not quantify the error.",
-            "A separate modeling issue came from the reference frame: the example integrated Sun-relative states while applying only direct planetary gravity."
-          ]
-        },
-        {
-          "title": "Making error visible",
-          "paragraphs": [
-            "I added position error in kilometers and velocity error in meters per second for Voyager 1 and Voyager 2, with four corresponding plots in the editor.",
-            "The important detail was timing. The SPICE lookup must match the completed integration tick. I also marked the diagnostic components for external control so the normal world commit would not overwrite the post-step values.",
-            "This contribution was merged as PR #769. It added diagnostics without changing the physics model."
-          ]
-        },
-        {
-          "title": "Correcting the reference frame",
-          "paragraphs": [
-            "In PR #789, I added an optional heliocentric relative gravity model. In addition to a planet's pull on the spacecraft, it subtracts that planet's acceleration of the Sun, which is the origin of the frame.",
-            "I kept the existing chapter as the default. The new chapter reused the kernels, masses, RK4 integrator, and timestep, keeping the change focused and independently reviewable. This contribution was merged."
-          ]
-        },
-        {
-          "title": "The next validation case",
-          "paragraphs": [
-            "PR #805 adds a reconstructed Voyager 1 Jupiter case using the February 22-28, 1979 window, with checkpoints on February 24, 26, and 28.",
-            "The work compares both chapters against the same SPICE reference and uses Elodin's own integration path. The original PR was closed. See GitHub for its current history."
-          ]
-        },
-        {
-          "title": "What this establishes",
-          "paragraphs": [
-            "These are contributions to a simulation example: measurable divergence and an explicit frame correction. They do not establish navigation-grade accuracy or a validated reconstruction of the gravity assist.",
-            "The flyby illustration on the homepage is a separate two-body teaching model. It is not a visualization of the PR's measured results."
-          ]
-        }
+        {"title": "My contributions", "paragraphs": ["I added position- and velocity-error telemetry to Elodin's Voyager example, then contributed an optional heliocentric relative gravity model. Those changes were merged in PRs #769 and #789."]},
+        {"title": "The comparison", "paragraphs": ["Both saved runs completed 144 hourly steps. In this case, final position error against SPICE fell from 28.179 km in Chapter 1 to 0.840 km in Chapter 2.", "The comparison uses the physical completed-step times; the database timestamps were one hour early. These are results for one simulation case, not a claim of navigation-grade accuracy."]}
       ],
-      "sources": [
-        {
-          "label": "PR #769: trajectory error telemetry (merged)",
-          "url": "https://github.com/elodin-sys/elodin/pull/769"
-        },
-        {
-          "label": "PR #789: heliocentric relative dynamics (merged)",
-          "url": "https://github.com/elodin-sys/elodin/pull/789"
-        },
-        {
-          "label": "PR #805: Jupiter validation (closed)",
-          "url": "https://github.com/elodin-sys/elodin/pull/805"
-        }
-      ],
-      "image_width": 1440,
-      "image_height": 795
-    },
-    {
-      "slug": "abstainbench",
-      "name": "AbstainBench",
-      "category": "Language-model evaluation",
-      "headline": "An answer isn't always the right output.",
-      "summary": "I built a small browser benchmark for a specific failure: answering a question when the evidence is missing.",
-      "role": "Independent project",
-      "status": "Public demo and source available",
-      "stack": "JavaScript, WebLLM, WebGPU",
-      "image": "assets/abstain/demo.jpg",
-      "alt": "AbstainBench browser interface with evaluation controls and results",
-      "caption": "The actual benchmark interface. The offline baseline checks the pipeline, not a language model.",
-      "links": [
-        {
-          "label": "Run the demo",
-          "url": "../demos/abstainbench/"
-        },
-        {
-          "label": "GitHub",
-          "url": "https://github.com/suhaslord/AbstainBench"
-        }
-      ],
-      "sections": [
-        {
-          "title": "The question",
-          "paragraphs": [
-            "A fluent answer can hide missing evidence. I wanted a small, inspectable way to measure when a system answers correctly, invents an answer, or declines a question it could have answered.",
-            "AbstainBench contains 30 questions across science, math, geography, history, and fictional missing-evidence prompts."
-          ]
-        },
-        {
-          "title": "What I built",
-          "paragraphs": [
-            "I built the browser interface, fixed question set, scoring, and JSON and Markdown exports. The evaluation records answer accuracy, abstention accuracy, hallucinations, false abstentions, and results by category.",
-            "Two modes serve different purposes. A transparent offline baseline checks the labels, scoring, and export pipeline. An optional local model uses WebLLM and WebGPU to run quantized Llama 3.2 1B in the browser."
-          ]
-        },
-        {
-          "title": "Try it",
-          "paragraphs": [
-            "Start with the offline baseline to inspect how the evaluation works. It does not need an API key or model download.",
-            "The optional local-model mode downloads model weights on first use. It requires a compatible WebGPU browser and suitable hardware. Treat the resulting scores as a small experiment."
-          ]
-        },
-        {
-          "title": "The important limitation",
-          "paragraphs": [
-            "The offline baseline uses the known labels. Its score is not model performance. Thirty questions are also too few to support a general claim about a model's reliability.",
-            "A stronger evaluation would add independently reviewed labels, more models, and confidence intervals across repeated runs. The value of this version is that its assumptions and outputs are easy to inspect."
-          ]
-        }
-      ],
-      "sources": [
-        {
-          "label": "Source code and documented limitations",
-          "url": "https://github.com/suhaslord/AbstainBench"
-        },
-        {
-          "label": "Hosted benchmark",
-          "url": "../demos/abstainbench/"
-        }
-      ],
-      "image_width": 1348,
-      "image_height": 926
+      "facts": [["Runs", "144 steps each"], ["Chapter 1 final error", "28.179 km"], ["Chapter 2 final error", "0.840 km"]],
+      "links": [{"label": "Telemetry contribution", "url": "https://github.com/elodin-sys/elodin/pull/769"}, {"label": "Dynamics contribution", "url": "https://github.com/elodin-sys/elodin/pull/789"}]
     }
   ]
 }

@@ -1,48 +1,15 @@
 # Suhas Beemineni
 
-[View the portfolio](https://suhaslord.github.io/portfolio/)
+[Portfolio](https://suhaslord.github.io/portfolio/)
 
-I'm a student building across spacecraft simulation, reliable AI, research, and creative software. I like useful systems, honest evaluation, and interfaces that make technical work easier to understand.
+Selected research and engineering work at UC Santa Cruz, San Diego State, Cal Poly Pomona, Seagulls, and Elodin.
 
-## Selected work
-
-- [AegisLand](https://suhaslord.github.io/portfolio/work/aegisland.html): independent simulation research on unreliable landing-camera estimates. The portfolio case study covers early results and the failed Phase 10R holdout; the [research repository](https://github.com/suhaslord/uav-safety-research) now records the lineage through Phase 22, including later negative results and frozen context-transfer evaluations.
-- [Voyager / Elodin](https://suhaslord.github.io/portfolio/work/voyager.html): merged contributions for trajectory-error telemetry and heliocentric relative dynamics. The case study records a separate Jupiter validation PR as open on September 5, 2026; follow its linked PR for current status.
-- [AbstainBench](https://suhaslord.github.io/portfolio/work/abstainbench.html): a small browser benchmark for answering and abstaining, with an offline pipeline check and optional WebLLM inference.
-
-The homepage also includes Seagulls/OpenStage engineering work, browser experiments, astronomy and climate research notes, and an interactive Voyager scene built from NASA's public 3D resources. Contributions and collaborations are credited compactly near the end so the projects stay central.
-
-Project pages link to code, PRs, evaluation records, and demos. The homepage flyby is an illustrative two-body model, separate from measured Voyager results.
-
-## Update the site
-
-The site uses static HTML, CSS, and JavaScript. There is no application server or JavaScript build toolchain.
-
-1. Edit `content/projects.json` for project copy, links, and status.
-2. Edit `templates/home.html` for the introduction and homepage.
-3. Edit `scripts/build.py` for shared navigation, metadata, the HTML résumé, and page layouts.
-4. Edit `css/portfolio.css`, `js/portfolio.js`, `js/voyager.js`, and `js/aegis.js` for presentation and interactions.
-5. Regenerate and check the committed HTML:
+The site is static HTML, CSS and JavaScript. Edit `content/projects.json`, `templates/home.html`, `css/site.css` and `js/site.js`, then run:
 
 ```sh
 python scripts/build.py
 python scripts/check.py
-node --check js/portfolio.js
-node --check js/theme.js
-node --check js/voyager.js
-node --check js/aegis.js
+node --check js/site.js
 ```
 
-The generator and route check use the Python standard library. For a local preview, run `python -m http.server 8000` from the repository root and open the local server in a browser.
-
-The optional `scripts/export_assets.py` regenerates the PDF résumé and social preview. It requires Pillow, fontTools, and reportlab. Update its résumé text alongside the HTML résumé when project facts change. Font licenses are included in `assets/fonts/`.
-
-## Publishing
-
-GitHub Pages publishes the committed files from `main` using this repository's existing Pages deployment. Commit generated HTML together with its source changes. Keep the `/portfolio/` base path, case-study `.html` URLs, and existing domain settings.
-
-[Design notes and sources](DESIGN.md) explain the visual and editorial choices. [Verification notes](VERIFICATION.md) record the checks and their limits.
-
-## Contact
-
-[GitHub](https://github.com/suhaslord) · [Email](mailto:suhas.aug20@gmail.com)
+Commit source and generated HTML together. GitHub Pages publishes `main` at the existing `/portfolio/` path. Project images are actual saved outputs; notes on provenance and the reference design are in `DESIGN.md`.
