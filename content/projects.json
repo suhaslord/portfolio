@@ -117,7 +117,7 @@
       "headline": "Put a number on the drift.",
       "summary": "I contributed trajectory-error telemetry and a heliocentric gravity correction to Elodin's Voyager example.",
       "role": "Open-source contributor",
-      "status": "Two contributions merged; Jupiter validation in review",
+      "status": "Two contributions merged; Jupiter validation PR closed",
       "stack": "Python, Elodin, SPICE, numerical dynamics",
       "image": "assets/voyager/telemetry.jpg",
       "alt": "Elodin Voyager example showing simulated trajectories and numerical error telemetry",
@@ -159,7 +159,7 @@
           "title": "The next validation case",
           "paragraphs": [
             "PR #805 adds a reconstructed Voyager 1 Jupiter case using the February 22-28, 1979 window, with checkpoints on February 24, 26, and 28.",
-            "The work compares both chapters against the same SPICE reference and uses Elodin's own integration path. The PR remains open as of September 5, 2026; I am not presenting it as merged work."
+            "The work compares both chapters against the same SPICE reference and uses Elodin's own integration path. The original PR was closed. See GitHub for its current history."
           ]
         },
         {
@@ -180,7 +180,7 @@
           "url": "https://github.com/elodin-sys/elodin/pull/789"
         },
         {
-          "label": "PR #805: Jupiter validation (open)",
+          "label": "PR #805: Jupiter validation (closed)",
           "url": "https://github.com/elodin-sys/elodin/pull/805"
         }
       ],
