@@ -1,10 +1,28 @@
 <main id="main">
   <section class="hero" id="top" aria-label="Suhas Beemineni">
     <div class="hero-monogram" aria-hidden="true">sb</div>
-    <div class="location"><span>Based in<br>California</span><span class="location-orb" aria-hidden="true"><span class="globe-tilt"><svg class="globe-frame" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18"></circle><ellipse cx="20" cy="20" rx="18" ry="6.5"></ellipse></svg><span class="globe-sphere"><span class="globe-meridian"></span><span class="globe-meridian"></span><span class="globe-meridian"></span><span class="globe-meridian"></span></span></span></span></div>
-    <div class="hero-role"><span class="hero-arrow" aria-hidden="true">↘</span><p>Student &amp;<br>aspiring electrical engineer</p></div>
+    <div class="location">
+      <svg class="location-shape" viewBox="0 0 300 120" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M0 0H240a60 60 0 0 1 0 120H0Z M240 18a42 42 0 1 0 0 84a42 42 0 1 0 0-84Z"></path></svg>
+      <span class="location-label">Located<br>in<br>California</span>
+      <span class="location-orb" aria-hidden="true">
+        <svg class="location-globe" viewBox="0 0 100 100" focusable="false">
+          <defs><clipPath id="globe-window"><circle cx="50" cy="50" r="47"></circle></clipPath></defs>
+          <g class="globe-sphere">
+            <circle class="globe-wire" cx="50" cy="50" r="47"></circle>
+            <g clip-path="url(#globe-window)">
+              <ellipse class="globe-wire globe-meridian" cx="50" cy="50" rx="47" ry="47"></ellipse>
+              <ellipse class="globe-wire globe-meridian" cx="50" cy="50" rx="47" ry="47"></ellipse>
+              <ellipse class="globe-wire globe-meridian" cx="50" cy="50" rx="47" ry="47"></ellipse>
+              <ellipse class="globe-wire" cx="50" cy="50" rx="75" ry="27.5"></ellipse>
+              <path class="globe-wire" d="M-25 50H125"></path>
+            </g>
+          </g>
+        </svg>
+      </span>
+    </div>
+    <div class="hero-role"><svg class="hero-arrow" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M6 6L26 26M26 6V26H6" stroke="currentColor" stroke-width="1.5"></path></svg><p>Student &amp;<br>aspiring engineer</p></div>
     <h1 class="sr-only">Suhas Beemineni</h1>
-    <div class="name-marquee" aria-hidden="true"><div class="name-track"><span>Suhas Beemineni -&nbsp;</span><span>Suhas Beemineni -&nbsp;</span></div></div>
+    <div class="name-marquee" aria-hidden="true"><div class="name-track"><span>Suhas Beemineni —&nbsp;</span><span>Suhas Beemineni —&nbsp;</span></div></div>
     <a class="hero-scroll" href="#work" aria-label="View work">↓</a>
   </section>
 
