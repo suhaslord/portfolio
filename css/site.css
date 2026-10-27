@@ -37,3 +37,7 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(15p
 }
 @media(prefers-reduced-motion:reduce){.page-transition,.work-preview,.work-preview-action{display:none!important}.name-track{transform:translateX(-3%)}.menu-curve{display:none}.contact-curve{transform:scaleY(0)}.word-mask span{transform:none!important;opacity:1!important}.reveal,.intro-side,.contact-inner{opacity:1!important;transform:none!important}.menu-panel{transition:none}.magnetic{will-change:auto}}
 @media print{.resume-sidebar{position:static;max-height:none;overflow:visible}.resume-index,.resume-contact .print-button,.page-transition,.work-preview,.work-preview-action{display:none!important}.resume-grid{display:grid;grid-template-columns:1fr 2fr;gap:24px}.resume-group>h2{font-size:18px;margin-bottom:12px}.resume-entry-title h3{font-size:15px}.resume-entry ul{font-size:11px}.resume-entry .resume-role{font-size:11px}.resume-entry{padding:12px 0}.resume-date{font-size:10px}.resume-group{margin-bottom:22px}.resume-sidebar p{font-size:10px}.resume-contact{font-size:10px}}
+/* Keep preview panes tied to the frame, independent of their image dimensions. */
+.work-preview{display:block}
+.preview-rail{position:absolute;inset:0;height:100%;min-height:0}
+.contact-section{overflow:hidden}
