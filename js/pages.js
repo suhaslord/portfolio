@@ -11,7 +11,7 @@
     const fill = button.querySelector('.button-fill');
     if (!fill) return;
     let exit;
-    gsap.set(fill, {yPercent:110});
+    gsap.set(fill, {y:0,yPercent:110});
     button.addEventListener('pointerenter', () => {
       if (!canMove() || !desktop.matches) return;
       exit?.kill();
@@ -22,7 +22,7 @@
       exit = gsap.to(fill, {yPercent:-110, duration:.45, ease:'power3.inOut', overwrite:'auto', onComplete:() => gsap.set(fill, {yPercent:110})});
     });
     button.addEventListener('focus', () => {
-      if (button.matches(':focus-visible')) {exit?.kill();gsap.set(fill, {yPercent:0});}
+      if (button.matches(':focus-visible')) {exit?.kill();gsap.set(fill, {y:0,yPercent:0});}
     });
     button.addEventListener('blur', () => gsap.set(fill, {yPercent:110}));
   });

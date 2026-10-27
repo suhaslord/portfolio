@@ -83,9 +83,10 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 [hidden]{display:none!important}
 .wide-wrap{width:84%;margin-inline:auto}
 .page-hero{padding-top:19.2vw}
-.page-heading{font-size:6.125vw;line-height:1.065;font-weight:400;letter-spacing:-.035em}
+.page-heading{font-size:6.125vw;line-height:1.065;font-weight:400;letter-spacing:normal}
 .page-heading sup{font-size:.32em;vertical-align:top;line-height:1.4;letter-spacing:normal}
 .desktop-nav a[aria-current=page]::after{transform:scale(1)}
+.menu-toggle{border:1px solid #ffffff33}
 .menu-panel nav a[aria-current=page]{position:relative}
 .menu-panel nav a[aria-current=page]::before{content:'';position:absolute;left:-30px;top:50%;width:9px;height:9px;border-radius:50%;background:currentColor}
 .page-cover-ready .page-transition{visibility:visible;transform:none}
@@ -115,7 +116,7 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 .contact-section,.case-ending{position:relative;background:var(--ink);color:#fff;overflow:hidden;isolation:isolate;padding:0;border-radius:0}
 .contact-curve{z-index:2;top:-1px;left:-25%;width:150%;height:clamp(100px,12vw,220px);border-radius:0 0 50% 50%;background:var(--paper);transform-origin:center top}
 .footer-content{position:relative;padding-top:14.4vw;will-change:transform}
-.contact-title{font-size:6.125vw;line-height:1.065;letter-spacing:-.035em;max-width:none}
+.contact-title{font-size:6.125vw;line-height:1.065;letter-spacing:normal;max-width:none}
 .contact-title>span{display:flex;align-items:center;gap:.32em}
 .contact-avatar{display:inline-grid;place-items:center;width:72px;height:72px;border-radius:50%;background:var(--hero);color:#fff;flex:none;font-size:32px;font-family:'DM Sans',Arial,sans-serif;font-weight:300;line-height:1;letter-spacing:-.07em;transform:translateY(.035em)}
 .contact-title .contact-avatar{font-size:.37em;width:2.3em;height:2.3em;margin-right:.12em}
@@ -129,7 +130,7 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 .footer-meta{display:flex;gap:3vw}
 .footer-meta>div{display:flex;flex-direction:column;gap:1.1vw}
 .footer-label{display:block;color:#98999c;text-transform:uppercase;font-size:.72vw;font-weight:400;line-height:1.5}
-.footer-links{display:block}
+.site-footer .footer-links{display:block}
 .footer-links>div{display:flex;align-items:center;gap:2.2vw;margin-top:1.1vw}
 .footer-links a{display:inline-block;position:relative;text-decoration:none}
 .footer-links a:hover{text-decoration:none}
@@ -194,7 +195,7 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 .about-school .outline-link{font-size:1vw;min-height:4.1vw;padding-inline:1.6vw}
 
 /* Case pages: wide evidence and a large, image-led next-case ending. */
-.case-page .case-heading h1{font-size:7vw;line-height:1.1;letter-spacing:-.035em;max-width:none}
+.case-page .case-heading h1{font-size:7vw;line-height:1.1;letter-spacing:normal;max-width:none}
 .case-page .case-meta{grid-template-columns:repeat(3,minmax(0,1fr));gap:4.5vw;border:0;padding:0;margin-top:8vw;font-size:1.2vw}
 .case-page .case-meta span{font-size:.72vw;color:var(--muted);text-transform:uppercase;padding-bottom:2vw;border-bottom:1px solid var(--line);margin-bottom:2vw}
 .case-primary{position:relative;margin-top:10.9vw}
@@ -209,7 +210,7 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 .case-lead{font-size:1.65vw!important;line-height:1.5!important;margin-bottom:3.5vw!important}
 .case-ending .next-case{position:relative;display:flex;align-items:center;flex-direction:column;min-height:24.5vw;border-bottom:1px solid #ffffff33;overflow:hidden}
 .next-label{font-size:1.2vw;line-height:1.6}
-.next-title{font-size:7vw;line-height:1.1;letter-spacing:-.035em;text-align:center;margin-top:3.7vw;transition:color .4s}
+.next-title{font-size:7vw;line-height:1.1;letter-spacing:normal;text-align:center;margin-top:3.7vw;transition:color .4s}
 .next-case-image{position:absolute;bottom:0;display:flex;align-items:center;justify-content:center;width:25vw;height:17vw;background:#e7e7e5;padding:1.8vw;transform:translateY(65%);transition:transform .7s cubic-bezier(.22,1,.36,1)}
 .next-case-image img{width:100%;height:100%;object-fit:contain}
 .next-case-image.is-photo{padding:0}
