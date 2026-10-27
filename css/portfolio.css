@@ -223,3 +223,35 @@ html:not(.js) .site-header .brand{color:var(--ink)}
 }
 @media(prefers-reduced-motion:reduce){
   .project-wall{cursor:default}.project-wall-orbit{transform:rotateX(0deg) rotateY(0deg)!important;transition:none}.project-wall-track{transform:translate(-50%,-50%) rotateX(72deg) translateZ(-105px)!important}.project-object,.project-object:hover,.project-object:focus-visible,.project-object.is-active{animation:none!important;transform:translate(-50%,-50%) rotateY(var(--angle)) translateZ(var(--radius)) rotateZ(var(--rz))!important;filter:none;transition:none}.project-object::before,.project-object:hover::before,.project-object:focus-visible::before,.project-object.is-active::before{transform:translateZ(-22px)!important;transition:none}.project-object-media,.project-object:hover .project-object-media,.project-object:focus-visible .project-object-media,.project-object.is-active .project-object-media,.project-object-meta,.project-object:hover .project-object-meta,.project-object:focus-visible .project-object-meta,.project-object.is-active .project-object-meta{transform:none;transition:none}.project-object-media img,.project-object:hover .project-object-media img,.project-object:focus-visible .project-object-media img,.project-object.is-active .project-object-media img,.project-object-logo img,.project-object:hover .project-object-logo img,.project-object:focus-visible .project-object-logo img,.project-object.is-active .project-object-logo img,.work-wall-index a span{transform:none;transition:none}}
+
+/* Research results and project carousel */
+.result-image{background:#f7f5f1}
+.result-image img{object-fit:contain!important}
+.project-wall{height:clamp(560px,52vw,700px);margin-top:38px;perspective:1400px;background:var(--surface);border:1px solid var(--line)}
+.project-wall::before,.project-wall::after,.project-wall-light,.project-wall-grid{display:none}
+.project-wall-orbit{transform-origin:50% 44%;transform:rotateY(var(--orbit-rotation))}
+.project-wall-track{top:44%;width:66%;height:50%;border-color:#76528d28;box-shadow:none}
+.project-wall-track::before,.project-wall-track::after{display:none}
+.project-object{--radius:clamp(300px,27vw,400px);top:44%;width:clamp(270px,31vw,410px);--rz:0deg;animation:none;filter:none}
+.project-object::before,.project-object::after{display:none}
+.project-object-media,.object-aegis .project-object-media,.object-voyager .project-object-media,.object-abstain .project-object-media,.object-seagulls .project-object-media,.object-astronomy .project-object-media,.object-echo .project-object-media{aspect-ratio:1.45;background:#f7f5f1;box-shadow:0 22px 55px #20172b24;transform:none}
+.project-object-media::after{display:none}
+.project-object-media img{object-fit:contain;filter:none}
+.project-object-logo{background:#2c2435!important}
+.project-object-meta{display:block;padding:16px 2px 0;transform:none}
+.project-object-meta strong{font-size:clamp(22px,2vw,30px)}
+.project-object:hover,.project-object:focus-visible,.project-object.is-active{transform:translate(-50%,-50%) rotateY(var(--angle)) translateZ(calc(var(--radius) + 18px)) scale(1.015);filter:none}
+.project-object:hover .project-object-media,.project-object:focus-visible .project-object-media,.project-object.is-active .project-object-media{transform:none}
+.project-object:hover .project-object-media img,.project-object:focus-visible .project-object-media img,.project-object.is-active .project-object-media img{transform:none;filter:none}
+.project-wall-controls{bottom:22px}
+.project-wall-status{text-transform:none;letter-spacing:0}
+.floating-project.float-a img,.floating-project.float-b img{object-fit:contain;background:#f7f5f1}
+@media(max-width:767px){.project-wall{height:510px;perspective:850px}.project-object{top:43%;width:68vw;--radius:48vw}.project-wall-track{top:43%;width:90%}.project-object-meta strong{font-size:21px}}
+@media(prefers-reduced-motion:reduce){
+ .project-wall{height:auto;overflow:visible;border:0;background:transparent}
+ .project-wall-orbit{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px;transform:none!important}
+ .project-wall-track,.project-wall-controls{display:none}
+ .project-object,.project-object:hover,.project-object:focus-visible,.project-object.is-active{position:static;width:auto;transform:none!important;backface-visibility:visible}
+ .project-object-meta{padding-top:10px}
+}
+@media(max-width:480px) and (prefers-reduced-motion:reduce){.project-wall-orbit{grid-template-columns:1fr}}

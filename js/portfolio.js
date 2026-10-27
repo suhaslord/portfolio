@@ -118,7 +118,7 @@
     const toggle = projectWall.querySelector('[data-wall-toggle]');
     const finePointer = window.matchMedia('(pointer:fine)').matches;
     const titleFor = card => card.querySelector('strong')?.textContent?.trim() || 'Project';
-    const kindFor = card => card.querySelector('.project-object-id')?.textContent?.replace(/^\d+\s*·\s*/, '').trim().toLowerCase() || 'work';
+    
     const angleFor = card => Number.parseFloat(card.style.getPropertyValue('--angle')) || 0;
     let rotation = 0;
     let velocity = 0;
@@ -137,7 +137,7 @@
 
     const defaultStatus = 'Drag to rotate · click a project to open';
     const setStatus = card => {
-      if (status && card) status.textContent = `${titleFor(card)} · ${kindFor(card)} · open project ↗`;
+      if (status && card) status.textContent = `${titleFor(card)} · open project ↗`;
     };
 
     const setRotation = value => {
@@ -189,7 +189,7 @@
         const delta = Math.min(40, lastTime ? time - lastTime : 16);
         lastTime = time;
         if (wallVisible) {
-          if (!paused && !dragging && !hovering) rotation += delta * .0026;
+          if (!paused && !dragging && !hovering) rotation += delta * .0015;
           if (!dragging && Math.abs(velocity) > .01) {
             rotation += velocity * (delta / 16);
             velocity *= Math.pow(.88, delta / 16);
@@ -212,8 +212,8 @@
     let pointerX = 0, pointerY = 0, tiltFrame = 0;
     const renderTilt = () => {
       tiltFrame = 0;
-      projectWall.style.setProperty('--wall-rx', `${(-pointerY * 6.5).toFixed(2)}deg`);
-      projectWall.style.setProperty('--wall-ry', `${(pointerX * 8).toFixed(2)}deg`);
+      projectWall.style.setProperty('--wall-rx', '0deg');
+      projectWall.style.setProperty('--wall-ry', '0deg');
       projectWall.style.setProperty('--wall-shift-x', `${(pointerX * 12).toFixed(1)}px`);
       projectWall.style.setProperty('--wall-shift-y', `${(pointerY * 9).toFixed(1)}px`);
     };
