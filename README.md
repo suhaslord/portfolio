@@ -4,7 +4,7 @@
 
 Selected research and engineering work at UC Santa Cruz, San Diego State, Cal Poly Pomona, Seagulls, and Elodin.
 
-The site is static HTML, CSS and JavaScript. Home, Work, About, Contact, Archive and the résumé have separate routes. Edit `content/projects.json`, `content/resume.json`, `templates/home.html`, `scripts/site_parts.py`, `css/site.css`, `js/site.js` and `js/pages.js`, then run:
+The site is static HTML, CSS and JavaScript, with persistent Barba page transitions and a single Lenis/GSAP clock. Home, Work, About, Contact and the résumé have separate routes. Ten case pages include the main research and merged open-source contributions. The old archive route forwards to Work. Edit `content/projects.json`, `content/resume.json`, `templates/home.html`, `scripts/site_parts.py`, `css/site.css`, `js/site.js` and `js/pages.js`, then run:
 
 ```sh
 python scripts/build.py

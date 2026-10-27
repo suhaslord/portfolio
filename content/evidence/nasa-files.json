@@ -1,0 +1,18 @@
+[
+  {
+    "filename": "CHANGELOG.md",
+    "patch": "@@ -11,6 +11,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n ### Added\n \n - Add method `Query.results` for returning results as an iterator instead of sequence ([#37](https://github.com/nasa/python_cmr/issues/37))\n+- Support searching by multiple platforms for collections and granules ([#80](https://github.com/nasa/python_cmr/issues/80))\n \n ### Changed\n "
+  },
+  {
+    "filename": "cmr/queries.py",
+    "patch": "@@ -781,18 +781,21 @@ def entry_title(self, entry_title: str) -> Self:\n \n         return self\n \n-    def platform(self, platform: str) -> Self:\n+    def platform(self, platform: Union[str, Sequence[str]]) -> Self:\n         \"\"\"\n         Filter by the satellite platform the granule came from.\n \n-        :param platform: name of the satellite\n+        :param platform: name of the satellite (single string) or sequence of satellite names\n         :returns: self\n         \"\"\"\n \n         if not platform:\n             raise ValueError(\"Please provide a value for platform\")\n \n-        self.params['platform'] = platform\n+        self.params['platform'] = (\n+            platform if isinstance(platform, str) else list(platform)\n+        )\n+\n         return self\n \n "
+  },
+  {
+    "filename": "tests/test_collection.py",
+    "patch": "@@ -144,12 +144,26 @@ def test_platform(self):\n         self.assertIn(\"platform\", query.params)\n         self.assertEqual(query.params[\"platform\"], \"1B\")\n \n+    def test_multiple_platforms(self):\n+        query = CollectionQuery()\n+\n+        query.platform([\"Terra\", \"Aqua\"])\n+\n+        self.assertIn(\"platform\", query.params)\n+        self.assertEqual(query.params[\"platform\"], [\"Terra\", \"Aqua\"])\n+\n     def test_empty_platform(self):\n         query = CollectionQuery()\n \n         with self.assertRaises(ValueError):\n             query.platform(None)  # type: ignore[arg-type]\n \n+    def test_empty_platform_list(self):\n+        query = CollectionQuery()\n+\n+        with self.assertRaises(ValueError):\n+            query.platform([])\n+\n     def test_revision_date(self):\n         query = CollectionQuery()\n         collections = query.short_name(\"SWOT_L2_HR_RiverSP_reach_2.0\").revision_date(\"2022-05-16\", \"2024-06-30\").get_all()"
+  },
+  {
+    "filename": "tests/test_granule.py",
+    "patch": "@@ -344,6 +344,14 @@ def test_platform(self):\n         self.assertIn(self.platform, query.params)\n         self.assertEqual(query.params[self.platform], \"1B\")\n \n+    def test_multiple_platforms(self):\n+        query = GranuleQuery()\n+\n+        query.platform([\"Terra\", \"Aqua\"])\n+\n+        self.assertIn(self.platform, query.params)\n+        self.assertEqual(query.params[self.platform], [\"Terra\", \"Aqua\"])\n+\n     def test_sort_key(self):\n         query = GranuleQuery()\n         # Various sort keys using this as an example\n@@ -363,6 +371,12 @@ def test_empty_platform(self):\n         with self.assertRaises(ValueError):\n             query.platform(None)  # type: ignore[arg-type]\n \n+    def test_empty_platform_list(self):\n+        query = GranuleQuery()\n+\n+        with self.assertRaises(ValueError):\n+            query.platform([])\n+\n     def test_granule_ur(self):\n         query = GranuleQuery()\n "
+  }
+]

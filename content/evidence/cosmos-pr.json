@@ -1,0 +1,7 @@
+{
+  "title": "feat: add received_time to inject_tlm",
+  "body": "Adds an optional received_time parameter to Python inject_tlm so scripts can inject historical telemetry while still using the normal COSMOS packet path instead of modifying TSDB data directly.\r\n\r\nreceived_time is represented as nanoseconds since the Unix epoch, matching COSMOS's existing packet timestamp serialization. When omitted, behavior is unchanged and the receive time is still set to the current UTC time.\r\n\r\nImplementation:\r\n- thread received_time through the public inject_tlm API\r\n- forward it through InterfaceTopic and DecomInterfaceTopic\r\n- convert nanoseconds back to a UTC datetime in handle_inject_tlm\r\n- expose the option through the Python Script Runner wrapper\r\n- preserve 0 as a valid Unix-epoch timestamp\r\n- add regression coverage for both routing paths, conversion, epoch zero, and Script Runner forwarding\r\n\r\nCompatibility:\r\nExisting callers remain unchanged because the new argument is optional and appended after scope. The Script Runner wrapper only forwards the new keyword when explicitly supplied.\r\n\r\nCloses #3521",
+  "merged": true,
+  "merged_at": "2026-08-19T00:07:57Z",
+  "html_url": "https://github.com/OpenC3/cosmos/pull/3720"
+}

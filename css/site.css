@@ -108,6 +108,9 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 .more-work-link{min-height:5.1vw;min-width:12vw;padding:0 2.7vw;font-size:1.2vw}
 @media(hover:hover) and (pointer:fine) and (min-width:768px){.liquid:hover{color:#fff;border-color:transparent}.liquid:hover>.button-fill{transform:translateY(0)}.footer-links a:hover::after{transform:scaleX(1)}}
 .motion-ready .liquid>.button-fill{transition:none}
+.motion-ready .magnetic{transition-property:color,background-color,border-color,opacity}
+.motion-ready .menu-panel,.motion-ready .menu-curve,.motion-ready .menu-scrim{transition:none}
+.motion-ready .reveal{opacity:1;transform:none;transition:none}
 .liquid:focus-visible>.button-fill{transform:translateY(0)}
 .liquid:focus-visible{color:#fff;border-color:transparent}
 .is-offscreen .globe-sphere,.is-offscreen .globe-meridian{animation-play-state:paused}
@@ -375,3 +378,85 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 @media(max-width:374px){.filter-button{font-size:12px;padding-inline:13px}.contact-details .outline-link{width:100%;padding-inline:12px}.next-title{font-size:10.5vw}}
 @media(prefers-reduced-motion:reduce){.page-cover-ready .page-transition{display:none!important}.footer-content{transform:none!important;will-change:auto}.liquid>.button-fill,.next-case-image{transition:none}.liquid:hover>.button-fill{transform:translateY(0)!important}.work-browser .work-item,.work-browser .work-item h3,.work-browser .work-item p{transform:none!important}}
 @media print{.work-controls,.cursor-badge,.case-ending,.site-footer,.contact-identity{display:none!important}.page-hero,.contact-page-main{padding-top:0}}
+
+/* Continuous page handoff and evidence-led secondary work. */
+.site-shell{min-height:100svh}
+.is-transitioning{cursor:wait}
+.is-transitioning .site-shell{pointer-events:none}
+#main:focus{outline:none}
+.work-preview{width:26vw;height:26vw;min-width:300px;min-height:300px;max-width:420px;max-height:420px}
+.transition-curve{height:20svh}
+.transition-curve-top{top:-10svh}
+.transition-curve-bottom{bottom:-10svh}
+.evidence-gallery{padding:0 0 10vw;overflow:hidden}
+.evidence-gallery .small-heading{margin-bottom:3vw}
+.evidence-track{display:flex;gap:2vw;width:max-content;margin-left:1.5vw;margin-bottom:3.5vw;will-change:transform}
+.evidence-tile{display:block;flex:0 0 31vw;width:31vw;min-width:0}
+.evidence-image{display:flex;width:100%;aspect-ratio:1.45;background:#e7e8e9;padding:1.7vw;overflow:hidden}
+.evidence-media{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.evidence-media img{height:100%;width:100%;object-fit:contain}
+.evidence-caption{display:flex;justify-content:space-between;align-items:baseline;gap:15px;font-size:1.2vw;line-height:1.5;padding-top:1.1vw}
+.evidence-caption>span:last-child{font-size:.85vw;color:var(--muted);text-align:right}
+.evidence-tile:focus-visible{outline-offset:-3px}
+.section-heading{font-size:4vw;line-height:1.1;font-weight:400;letter-spacing:-.025em}
+.recognition-section{padding:9vw 0 12vw;background:#fff}
+.recognition-section.is-compact{padding-top:3vw}
+.recognition-section .section-heading{margin-bottom:6vw}
+.achievement-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3vw}
+.achievement{border-top:1px solid var(--line);padding-top:2vw}
+.achievement-value{font-size:6vw;line-height:1.18;letter-spacing:-.055em;overflow:hidden;margin-bottom:2.5vw;white-space:nowrap}
+.achievement-value>span{display:inline-block;transform-origin:left bottom}
+.achievement h3{font-size:1.2vw;line-height:1.5}
+.achievement p{font-size:.95vw;color:var(--muted);margin-top:.3em}
+.recognition-link{display:flex;justify-content:center;margin-top:6vw}
+.community-section,.experience-section{padding-bottom:12vw;scroll-margin-top:90px}
+.section-heading-row{position:relative;margin-bottom:6vw}
+.section-arrow{position:absolute;right:8vw;bottom:.4vw;width:3vw;height:3vw}
+.experience-list{border-bottom:1px solid var(--line)}
+.experience-row{display:grid;grid-template-columns:7% 43% 50%;gap:0;align-items:baseline;border-top:1px solid var(--line);padding:2.8vw 2vw}
+.experience-index{font-size:.8vw;color:var(--muted)}
+.experience-row h3{font-size:2.45vw;line-height:1.2;letter-spacing:-.025em;padding-right:2vw}
+.experience-row p{font-size:1.2vw;line-height:1.6}
+.experience-row div>span{display:block;font-size:1vw;color:var(--muted);max-width:29em;line-height:1.6;margin-top:.3em}
+.experience-section>.section-heading{margin-bottom:6vw}
+.jobs-list .experience-row{grid-template-columns:50% 50%;padding-left:8vw}
+.education-section{padding-bottom:14.4vw}
+.education-section>.small-heading{display:block;margin-bottom:3vw}
+.education-section h2{font-size:4vw;line-height:1.1;letter-spacing:-.025em;margin-bottom:3vw}
+.education-section p{font-size:1.2vw;margin-bottom:.4em}
+.education-section .outline-link{margin-top:2vw;font-size:1.1vw}
+.discipline-grid .outline-link{font-size:1vw;min-height:4.1vw;padding:0 1.6vw;margin-top:2vw}
+.work-page .more-work{padding-bottom:13vw}
+.next-case-image{transition:transform .6s cubic-bezier(.22,1,.36,1)}
+@media(max-width:1024px) and (min-width:768px){
+ .evidence-caption{font-size:16px;display:block}.evidence-caption>span{display:block}.evidence-caption>span:last-child{font-size:12px;text-align:left;margin-top:4px}
+ .achievement h3{font-size:15px}.achievement p{font-size:12px}.experience-row p{font-size:14px}.experience-row div>span{font-size:12px}
+}
+@media(max-width:767px){
+ .evidence-gallery{padding:10px 0 65px}.evidence-gallery .small-heading{margin-bottom:25px}
+ .evidence-track{width:100%;padding:0 24px;margin:0 0 30px;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;will-change:auto;overscroll-behavior-x:contain}
+ .evidence-track::-webkit-scrollbar{display:none}.evidence-tile{flex:0 0 83vw;width:83vw;scroll-snap-align:center}
+ .evidence-image{padding:16px;aspect-ratio:1.35}.evidence-caption{font-size:16px;display:block;padding-top:14px}
+ .evidence-caption>span{display:block}.evidence-caption>span:last-child{font-size:12px;text-align:left;margin-top:3px}
+ .section-heading{font-size:35px;line-height:1.12}
+ .recognition-section,.recognition-section.is-compact{padding:40px 0 90px}.recognition-section .section-heading{margin-bottom:40px}
+ .achievement-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:35px 22px}.achievement{padding-top:18px}
+ .achievement-value{font-size:13vw;margin-bottom:16px}.achievement h3{font-size:14px}.achievement p{font-size:12px;line-height:1.5}
+ .recognition-link{margin-top:45px}.recognition-link .outline-link{font-size:14px;padding:0 25px}
+ .community-section,.experience-section{padding-bottom:90px}.section-heading-row{margin-bottom:40px}
+ .section-arrow{right:6px;bottom:6px;width:27px;height:27px}
+ .experience-row{grid-template-columns:26px 1fr;gap:9px 5px;padding:25px 0}
+ .experience-index{font-size:11px}.experience-row h3{font-size:25px;padding:0}.experience-row>div{grid-column:2}
+ .experience-row p{font-size:14px}.experience-row div>span{font-size:12px;max-width:26em}
+ .experience-section>.section-heading{margin-bottom:35px}.jobs-list .experience-row{display:block;padding:25px 0}
+ .jobs-list .experience-row p{margin-top:12px}
+ .education-section{padding-bottom:100px}.education-section>.small-heading{margin-bottom:24px}
+ .education-section h2{font-size:35px;margin-bottom:25px}.education-section p{font-size:14px}
+ .education-section .outline-link{margin-top:25px;font-size:14px;padding-inline:25px}
+ .discipline-grid .outline-link{font-size:13px;min-height:50px;padding:0 22px;margin-top:22px}
+ .work-page .more-work{padding-bottom:95px}.work-page .more-work .outline-link{white-space:normal;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+ .evidence-track{transform:none!important;will-change:auto}.achievement-value>span{transform:none!important}
+ .experience-row>*{opacity:1!important;transform:none!important}
+}

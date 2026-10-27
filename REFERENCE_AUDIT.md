@@ -20,3 +20,18 @@ The footer has a 0.85em portrait beside the first title line, a small down-left 
 About uses a two-line title, a blue globe on a separator, an asymmetric text/photo section, three numbered columns on gray, a second split section, and the shared contact ending. Contact uses a charcoal surface, a numbered five-field form, a right-side contact column, a large circular submit control, and the same bottom metadata.
 
 Adaptation constraints: use Suhas's verified content and real output images. No invented portraits, phone number, client list, research accomplishments, or social accounts. Keep AbstainBench and ECHO out. DM Sans is the bundled open-source substitute for the reference's licensed typeface. Native touch scrolling, readable mobile type, direct media cards, accessible filters and reduced-motion behavior are required.
+
+## October 27: continuity and achievement presentation
+
+| Before | After | Why |
+| --- | --- | --- |
+| Full document reload behind each curtain | Persistent Barba container handoff, route prefetch and a persistent scroll clock | Remove the reload gap and keep the transition continuous |
+| CSS transform transitions and GSAP on the same buttons | GSAP owns motion; CSS owns color | Remove the second layer of smoothing |
+| Hover images gated by scroll velocity and hidden on scroll | Time-based cursor following and hit-testing during scrolling | Keep the preview connected to the row under the pointer |
+| Additional research and merged contributions relegated to Archive | Ten complete case pages and a six-tile homepage evidence gallery | Give the additional work its own presentation and actual output |
+| Achievements only discoverable in the résumé | Animated award/teaching figures on Home; full community and experience sections on About | Make substantial achievements visible during normal browsing |
+| Scroll-linked effects had a second scrub delay | Direct scrub from the common scroll clock | Stop stacking smoothing delays |
+
+Motion behavior was compared with the reference's public runtime: a 0.5 second incoming curtain, 0.8 second outgoing curtain, staggered exponential content entrance, delayed image/button cursor layers, 0.6 second image-rail changes, magnetic controls, and through-travelling button fills. This implementation is original; the reference's proprietary runtime, photos, and typefaces are not redistributed.
+
+New evidence: the saved September 29 Cal Poly update; the saved Tulsa edge-anchor geometry package; merged NASA python_cmr #119, OpenMDAO Aviary #1262, and OpenC3 COSMOS #3720. Replotted charts are labeled. Tulsa is explicitly a synthetic geometry check with no experimental data. No meeting slides, private correspondence, or certificates are published.

@@ -1,0 +1,7 @@
+{
+  "title": "Support searching by multiple platforms",
+  "body": "## Summary\r\n\r\nImplements support for searching by multiple platforms for both `CollectionQuery` and `GranuleQuery`, as requested in issue #80.\r\n\r\n## Changes\r\n\r\n### Code\r\n- **`cmr/queries.py`**: Updated `platform()` in `GranuleCollectionBaseQuery` to accept `Union[str, Sequence[str]]`\r\n  - Single string: keeps existing behavior (`params['platform'] = platform`)\r\n  - Sequence of strings: list \u2192 repeated `platform[]=` query params\r\n  - Empty/falsy values still raise `ValueError`\r\n\r\n### Tests\r\n- **`tests/test_collection.py`** / **`tests/test_granule.py`**: multi-platform + empty-list tests; existing single-platform tests still pass\r\n\r\n### Docs\r\n- **`CHANGELOG.md`**: Unreleased entry for multi-platform support\r\n\r\n## Behavior\r\n\r\n```python\r\n# single (unchanged)\r\nCollectionQuery().platform(\"Terra\")\r\n# ...platform=Terra...\r\n\r\n# multiple (new)\r\nCollectionQuery().platform([\"Terra\", \"Aqua\"])\r\n# ...platform[]=Terra&platform[]=Aqua...\r\n```\r\n\r\nAll 129 tests pass.\r\n\r\nCloses #80\r\n\r\nSubmitted from fork as requested by @chuckwondo.",
+  "merged": true,
+  "merged_at": "2026-08-23T12:35:32Z",
+  "html_url": "https://github.com/nasa/python_cmr/pull/119"
+}

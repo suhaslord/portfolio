@@ -7,7 +7,7 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 projects = json.loads((ROOT / 'content/projects.json').read_text())['projects']
-routes = ['index.html', 'work.html', 'about.html', 'contact.html', 'archive.html', 'resume.html', '404.html'] + ['work/' + p['slug'] + '.html' for p in projects]
+routes = ['index.html', 'work.html', 'about.html', 'contact.html', 'resume.html', '404.html'] + ['work/' + p['slug'] + '.html' for p in projects]
 
 
 class Document(HTMLParser):
@@ -55,5 +55,5 @@ for route in ['index.html', 'resume.html']:
     s = (ROOT / route).read_text().lower()
     for banned in ['abstainbench', 'echo / field', 'citizen astronomy', 'voyagercanvas', 'project-wall']:
         assert banned not in s, f'{route}: removed showcase item {banned}'
-assert len(projects) == 5
+assert len(projects) == 10
 print(f'Checked {len(routes)} pages: links, anchors, images, headings and showcase scope passed.')

@@ -10,6 +10,11 @@ META = {
     'avl': ('California', 'Simulation contributor', 'research engineering'),
     'seagulls': ('Remote', 'AI engineering & QA', 'engineering'),
     'voyager': ('Remote', 'Open-source contributor', 'engineering'),
+    'network-recovery': ('California', 'Student researcher', 'research'),
+    'soft-robotics': ('Oklahoma / remote', 'Student researcher', 'research engineering'),
+    'nasa-cmr': ('Remote', 'Open-source contributor', 'engineering'),
+    'aviary': ('Remote', 'Open-source contributor', 'engineering'),
+    'cosmos': ('Remote', 'Open-source contributor', 'engineering'),
 }
 
 
@@ -40,7 +45,11 @@ def navigation(prefix='', active='', label='Home'):
 <header class="site-header"><a class="brand magnetic" href="{prefix}index.html" data-transition-title="Home"><span class="brand-mark" aria-hidden="true">©</span><span>Suhas Beemineni</span></a><nav class="desktop-nav" aria-label="Primary">{top}</nav></header>
 <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-panel"><span></span><span></span></button>
 <div class="menu-scrim" aria-hidden="true"></div><aside class="menu-panel" id="menu-panel" data-lenis-prevent role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true" inert><div class="menu-curve" aria-hidden="true"></div><p class="menu-label">Navigation</p><nav>{menu}</nav><div class="menu-bottom">{link('Résumé', 'resume.html')}<a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></aside>
-<div class="page-transition" aria-hidden="true"><div class="transition-curve transition-curve-top"></div><span class="transition-label" lang="en">{E(label)}</span><div class="transition-curve transition-curve-bottom"></div></div>'''
+'''
+
+
+def transition(label='Hello'):
+    return f'<div class="page-transition" aria-hidden="true"><div class="transition-curve transition-curve-top"></div><span class="transition-label" lang="en">{E(label)}</span><div class="transition-curve transition-curve-bottom"></div></div><p class="sr-only" aria-live="polite" data-page-announcement></p>'
 
 
 def bottom(prefix=''):
@@ -80,11 +89,39 @@ def work(projects):
     filters = ''.join(f'<button type="button" class="filter-button liquid magnetic" data-work-filter="{key}" aria-pressed="{str(key == "all").lower()}">{fill(name + (f"<sup>{count}</sup>" if count else ""))}</button>' for key, name, count in [('all', 'All', 0), ('research', 'Research', research), ('engineering', 'Engineering', engineering)])
     list_icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4H22M2 9H22M2 14H22M2 19H22"/></svg>'
     grid_icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2H9V9H2ZM15 2H22V9H15ZM2 15H9V22H2ZM15 15H22V22H15Z"/></svg>'
-    return f'''<main id="main" class="work-page"><header class="page-hero wrap"><h1 class="page-heading">Research &amp;<br>engineering.</h1><div class="work-controls"><div class="work-filters" role="group" aria-label="Filter projects">{filters}</div><div class="view-controls" role="group" aria-label="Project layout"><button type="button" class="view-button liquid magnetic" data-work-view="list" aria-label="List view" aria-pressed="true">{fill(list_icon)}</button><button type="button" class="view-button liquid magnetic" data-work-view="grid" aria-label="Grid view" aria-pressed="false">{fill(grid_icon)}</button></div></div></header><section class="work-browser wide-wrap" aria-label="Selected projects"><p class="sr-only" role="status" data-work-status>{len(projects)} projects</p>{table_head()}<div class="project-collection">{''.join(project_row(p, i) for i, p in enumerate(projects))}</div></section><div class="more-work wrap">{pill('archive.html', 'Archive <sup>12</sup>', title='Archive')}</div></main>{previews(projects)}'''
+    return f'''<main id="main" class="work-page"><header class="page-hero wrap"><h1 class="page-heading">Research &amp;<br>engineering.</h1><div class="work-controls"><div class="work-filters" role="group" aria-label="Filter projects">{filters}</div><div class="view-controls" role="group" aria-label="Project layout"><button type="button" class="view-button liquid magnetic" data-work-view="list" aria-label="List view" aria-pressed="true">{fill(list_icon)}</button><button type="button" class="view-button liquid magnetic" data-work-view="grid" aria-label="Grid view" aria-pressed="false">{fill(grid_icon)}</button></div></div></header><section class="work-browser wide-wrap" aria-label="Selected projects"><p class="sr-only" role="status" data-work-status>{len(projects)} projects</p>{table_head()}<div class="project-collection">{''.join(project_row(p, i) for i, p in enumerate(projects))}</div></section><div class="more-work wrap">{pill('about.html#community', 'Teaching & recognition', title='About')}</div></main>{previews(projects)}'''
+
+
+def recognition(compact=False):
+    items = [('2nd', 'SkillsUSA regionals', '3D Visualization & Graphics'), ('Top 50', 'Math Kangaroo · California', 'Grade 7'), ('31h', 'Steel City Codes', 'Summer 2026 · CS instructor'), ('43h', 'STEM·E', 'Game-design volunteer')]
+    cells = ''.join(f'<article class="achievement"><div class="achievement-value"><span>{E(value)}</span></div><h3>{E(name)}</h3><p>{E(detail)}</p></article>' for value, name, detail in items)
+    return f'<section class="recognition-section{" is-compact" if compact else ""}" aria-labelledby="recognition-title"><div class="wide-wrap"><h2 id="recognition-title" class="section-heading">Teaching &amp;<br>recognition.</h2><div class="achievement-grid">{cells}</div>' + (f'<div class="recognition-link">{pill("about.html#community", "Outside my projects", title="About")}</div>' if compact else '') + '</div></section>'
+
+
+def gallery(projects):
+    by_slug = {p['slug']: p for p in projects}
+    rows = []
+    for slugs in [('nasa-cmr', 'soft-robotics', 'network-recovery'), ('aviary', 'cosmos', 'voyager')]:
+        cells = []
+        for slug in slugs:
+            p = by_slug[slug]
+            cells.append(f'<a class="evidence-tile" href="work/{slug}.html" data-transition-title="{E(p["name"])}" data-cursor-only="View"><span class="evidence-image">{thumb(p, cls="evidence-media")}</span><span class="evidence-caption"><span>{E(p["name"])}</span><span>{E(p["type"])}</span></span></a>')
+        rows.append('<div class="evidence-track">' + ''.join(cells) + '</div>')
+    return '<section class="evidence-gallery" aria-labelledby="evidence-title"><div class="wide-wrap"><h2 id="evidence-title" class="small-heading">Research &amp; merged contributions</h2></div>' + ''.join(rows) + '</section>'
 
 
 def about():
-    return f'''<main id="main" class="about-page"><header class="page-hero wrap"><h1 class="page-heading">I’m Suhas,<br>a student in California.</h1><div class="about-divider"><div class="about-orb" aria-hidden="true">{globe()}</div></div></header><section class="about-intro wide-wrap"><div class="about-copy"><p>I’m a sophomore at River Islands High School. I work with research teams at UC Santa Cruz, San Diego State, and Cal Poly Pomona.</p><p>Outside that, I teach, tutor, and coach soccer.</p>{pill('resume.html', 'Full résumé', title='Résumé')}</div><figure class="about-image"><div class="about-image-frame"><img src="assets/avl/marvin-lab.webp" alt="MARVIN rover in the Cal Poly Pomona Autonomous Vehicle Lab" decoding="async"></div><figcaption>MARVIN · Cal Poly Pomona AVL. <a href="https://autovehiclelab.com/projects.html" target="_blank" rel="noopener noreferrer">Photo source ↗</a></figcaption></figure></section><section class="about-disciplines" id="research"><div class="wide-wrap"><h2>What I work on</h2><div class="discipline-grid"><article><span class="discipline-number">01</span><h3>Research</h3><p>Visual question answering, lunar navigation, rover simulation, digital twins, and soft-robotics models.</p></article><article><span class="discipline-number">02</span><h3>Software</h3><p>AI features and launch testing at Seagulls, plus open-source contributions to engineering tools.</p></article><article><span class="discipline-number">03</span><h3>Community</h3><p>Teaching computer science, tutoring math and English, and coaching accessible soccer.</p></article></div></div></section><section class="about-school wrap"><div class="school-year" aria-label="Graduating class of 2029">20<br>29</div><div><h2>River Islands<br>High School.</h2><p>Class of 2029. Studying calculus, physics, computer science, psychology, and world history.</p><p>I speak English and Telugu, and I’m learning Spanish.</p>{pill('resume.html', 'See my résumé', title='Résumé')}</div></section></main>'''
+    community = [
+        ('Steel City Codes', 'Computer-science instructor', '31 verified hours · summer 2026'),
+        ('STEM·E', 'Game-design volunteer', '43 verified hours'),
+        ('LearnToBe', 'Math & English tutor', ''),
+        ('Adaptable Athletics', 'Volunteer soccer coach', 'Coaching children with physical and cognitive differences'),
+        ('RIAX', 'Aerospace club leadership', 'Planning university visits and club activities'),
+        ('Tennis & soccer', 'School tennis · six years of soccer', 'Four years of club soccer'),
+    ]
+    rows = ''.join(f'<article class="experience-row"><span class="experience-index">0{i}</span><h3>{E(name)}</h3><div><p>{E(role)}</p>' + (f'<span>{E(detail)}</span>' if detail else '') + '</div></article>' for i, (name, role, detail) in enumerate(community, 1))
+    jobs = ''.join(f'<article class="experience-row"><h3>{E(name)}</h3><p>{E(role)}</p></article>' for name, role in [('Seagulls / OpenStage', 'Lead AI Engineer → Lead QA Tester'), ('ExoVista', 'Growth intern'), ('Cruze', 'Fleet outreach & business development intern'), ('Venture Starters', 'Internship participation')])
+    return f'''<main id="main" class="about-page"><header class="page-hero wrap"><h1 class="page-heading">I’m Suhas,<br>a student in California.</h1><div class="about-divider"><div class="about-orb" aria-hidden="true">{globe()}</div></div></header><section class="about-intro wide-wrap"><div class="about-copy"><p>I’m a sophomore at River Islands High School. I work with research teams on AI, navigation, robotics, and network recovery.</p><p>Outside that, I teach, tutor, and coach soccer.</p>{pill('resume.html', 'Full résumé', title='Résumé')}</div><figure class="about-image"><div class="about-image-frame"><img src="assets/avl/marvin-lab.webp" alt="MARVIN rover in the Cal Poly Pomona Autonomous Vehicle Lab" decoding="async"></div><figcaption>MARVIN · Cal Poly Pomona AVL. <a href="https://autovehiclelab.com/projects.html" target="_blank" rel="noopener noreferrer">Photo source ↗</a></figcaption></figure></section><section class="about-disciplines" id="research"><div class="wide-wrap"><h2>What I work on</h2><div class="discipline-grid"><article><span class="discipline-number">01</span><h3>Research</h3><p>UC Santa Cruz, San Diego State, Cal Poly Pomona, and the University of Tulsa.</p>{pill('work.html', 'See the work', title='Work')}</article><article><span class="discipline-number">02</span><h3>Engineering</h3><p>AI and testing at Seagulls. Merged contributions to NASA, Aviary, COSMOS, and Elodin.</p></article><article><span class="discipline-number">03</span><h3>TennisRank</h3><p>I built a school tennis-ranking app with a challenge ladder and team-aware doubles logic.</p>{pill('https://github.com/suhaslord/tennisrank-ai', 'View project ↗', 'target="_blank" rel="noopener noreferrer"')}</article></div></div></section>{recognition()}<section class="community-section wide-wrap" id="community"><header class="section-heading-row"><h2 class="section-heading">Outside<br>my projects.</h2>{arrow('down-left', 'section-arrow')}</header><div class="experience-list">{rows}</div></section><section class="experience-section wide-wrap"><h2 class="section-heading">Work experience.</h2><div class="experience-list jobs-list">{jobs}</div></section><section class="education-section wrap"><span class="small-heading">Education</span><h2>River Islands<br>High School.</h2><div><p>Class of 2029 · Lathrop, California</p><p>Grade 9 weighted GPA: 4.49</p><p>English &amp; Telugu. Learning Spanish.</p>{pill('resume.html', 'Courses & full résumé', title='Résumé')}</div></section></main>'''
 
 
 def contact():
@@ -102,21 +139,8 @@ def contact():
     return f'''<main id="main" class="contact-page-main wrap"><header class="contact-heading"><h1 class="page-heading">Let’s start a<br>conversation.</h1><div class="contact-identity"><span class="contact-avatar" aria-hidden="true">sb</span>{arrow('up-right')}</div></header><div class="contact-layout"><form class="contact-form" action="mailto:{EMAIL}" method="get" data-contact-form>{''.join(rows)}<div class="contact-field"><span class="field-number" aria-hidden="true">05</span><label for="contact-message">Your message</label><textarea id="contact-message" name="message" rows="5" placeholder="Hi Suhas, ... *" required></textarea></div><div class="contact-send"><button class="circle-button liquid magnetic" type="submit" data-magnet=".45">{fill('Send email')}</button><p class="contact-form-note">Opens a draft in your email app.</p></div><p class="contact-form-status" role="status" data-contact-status></p><a class="contact-draft-link" data-contact-draft hidden>Open email draft ↗</a></form><aside class="contact-aside"><div><h2>Contact details</h2><a href="mailto:{EMAIL}">{EMAIL}</a></div><div><h2>Based in</h2><p>California, United States</p></div><div><h2>Links</h2><a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="resume.html" data-transition-title="Résumé">Résumé</a></div></aside></div></main>'''
 
 
-def archive(projects, resume_data):
-    rows = [project_row(p, i, True) for i, p in enumerate(projects)]
-    extras = [('AI for digital twins', 'Cal Poly Pomona', 'Literature review', 'about.html#research'), ('Soft-robotics modeling', 'University of Tulsa', 'Research', 'about.html#research')]
-    for group in resume_data['sections']:
-        for item in group['entries']:
-            if item['name'] == 'AegisLand' or (group['id'] == 'resume-open-source' and item['name'] != 'Elodin / Voyager'):
-                extras.append((item['name'], 'Remote', item['role'], item['url']))
-    for name, location, role, href in extras:
-        external = ' target="_blank" rel="noopener noreferrer"' if href.startswith('https:') else ''
-        rows.append(f'<a class="work-row work-item archive-item" href="{E(href)}"{external} data-cursor-only="View"><h3>{E(name)}</h3><span class="work-location">{E(location)}</span><p>{E(role)}</p><span class="work-year">2026</span></a>')
-    return f'''<main id="main" class="archive-page"><header class="page-hero wrap"><h1 class="page-heading">Archive <sup>({len(rows)})</sup></h1></header><section class="work-browser archive-browser wide-wrap" aria-label="Project archive">{table_head()}<div class="project-collection">{''.join(rows)}</div></section></main><div class="cursor-badge" aria-hidden="true">View ↗</div>'''
-
-
-def case_ending(p, prefix='../'):
-    return f'''<section class="case-ending" data-footer-reveal><div class="contact-curve" aria-hidden="true"></div><div class="footer-content"><div class="wrap"><a class="next-case" href="{prefix}work/{p['slug']}.html" data-transition-title="{E(p['name'])}" data-cursor-only="Next case"><span class="next-label">Next case</span><span class="next-title">{E(p['name'])}</span>{thumb(p, prefix, 'next-case-image')}</a><div class="all-work-link">{pill(prefix + 'work.html', 'All work <sup>5</sup>', title='Work')}</div></div>{bottom(prefix)}</div></section><div class="cursor-badge" aria-hidden="true">Next case</div>'''
+def case_ending(p, prefix='../', count=10):
+    return f'''<section class="case-ending" data-footer-reveal><div class="contact-curve" aria-hidden="true"></div><div class="footer-content"><div class="wrap"><a class="next-case" href="{prefix}work/{p['slug']}.html" data-transition-title="{E(p['name'])}" data-cursor-only="Next case"><span class="next-label">Next case</span><span class="next-title">{E(p['name'])}</span>{thumb(p, prefix, 'next-case-image')}</a><div class="all-work-link">{pill(prefix + 'work.html', f'All work <sup>{count}</sup>', title='Work')}</div></div>{bottom(prefix)}</div></section><div class="cursor-badge" aria-hidden="true">Next case</div>'''
 
 
 def project(p, next_project):

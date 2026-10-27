@@ -29,10 +29,11 @@ def page(path, title, description, body, home=False, kind='', ending=None):
     ending = parts.footer(prefix) if ending is None else ending
     theme = '#1c1d20' if kind == 'contact' else '#999d9e' if home else '#ffffff'
     person = json.dumps({'@context': 'https://schema.org', '@type': 'Person', 'name': 'Suhas Beemineni', 'url': BASE, 'sameAs': ['https://github.com/suhaslord'], 'description': 'Student interested in electrical engineering, AI, and robotics.'})
-    vendors = ''.join(f'<script src="{prefix}js/vendor/{name}" defer></script>' for name in ['gsap.min.js', 'ScrollTrigger.min.js', 'lenis.min.js'])
-    bootstrap = "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&(sessionStorage.getItem('portfolio:transition')==='1'||!location.hash)){document.documentElement.classList.add('page-cover-ready');setTimeout(()=>document.documentElement.classList.remove('page-cover-ready'),4000)}}catch{}"
+    vendors = ''.join(f'<script src="{prefix}js/vendor/{name}" defer></script>' for name in ['gsap.min.js', 'ScrollTrigger.min.js', 'lenis.min.js', 'barba.umd.js'])
+    bootstrap = "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!location.hash){document.documentElement.classList.add('page-cover-ready');setTimeout(()=>document.documentElement.classList.remove('page-cover-ready'),6000)}}catch{}"
+    body_class = f'{"home" if home else "interior"} page-{kind}'
     document = f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>{bootstrap}</script><title>{E(title)}</title><meta name="description" content="{E(description)}"><meta name="author" content="Suhas Beemineni"><meta name="theme-color" content="{theme}"><meta name="color-scheme" content="light"><link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{BASE}assets/results/clevr-training.png"><meta property="og:image:alt" content="FiLM training results from my UC Santa Cruz research"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="{prefix}assets/fonts/dm-sans-variable.woff" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="{prefix}css/site.css?v={rev('css/site.css')}"><script type="application/ld+json">{person}</script><noscript><style>.menu-toggle,.work-controls{{display:none}}.desktop-nav{{display:flex!important;gap:16px}}.site-header{{padding-right:24px}}.reveal{{opacity:1;transform:none}}</style></noscript></head><body class="{'home' if home else 'interior'} page-{kind}" data-page-title="{E(label)}">{parts.navigation(prefix, active, 'Hello' if home else label)}{body}{ending}{vendors}<script src="{prefix}js/site.js?v={rev('js/site.js')}" defer></script><script src="{prefix}js/pages.js?v={rev('js/pages.js')}" defer></script></body></html>'''
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>{bootstrap}</script><title>{E(title)}</title><meta name="description" content="{E(description)}"><meta name="author" content="Suhas Beemineni"><meta name="theme-color" content="{theme}"><meta name="color-scheme" content="light"><link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{BASE}assets/results/clevr-training.png"><meta property="og:image:alt" content="FiLM training results from my UC Santa Cruz research"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="{prefix}assets/fonts/dm-sans-variable.woff" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="{prefix}css/site.css?v={rev('css/site.css')}"><script type="application/ld+json">{person}</script><noscript><style>.menu-toggle,.work-controls{{display:none}}.desktop-nav{{display:flex!important;gap:16px}}.site-header{{padding-right:24px}}.reveal{{opacity:1;transform:none}}</style></noscript></head><body class="{body_class}" data-page-title="{E(label)}" data-barba="wrapper">{parts.transition('Hello' if home else label)}<div class="site-shell" data-barba="container" data-barba-namespace="{kind}" data-body-class="{body_class}" data-page-title="{E(label)}">{parts.navigation(prefix, active, 'Hello' if home else label)}{body}{ending}</div>{vendors}<script src="{prefix}js/pages.js?v={rev('js/pages.js')}" defer></script><script src="{prefix}js/site.js?v={rev('js/site.js')}" defer></script></body></html>'''
     dest = ROOT / path
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(document)
@@ -40,7 +41,8 @@ def page(path, title, description, body, home=False, kind='', ending=None):
 
 def home():
     rows = []
-    for i, p in enumerate(DATA['projects']):
+    selected = DATA['projects'][:5]
+    for i, p in enumerate(selected):
         preview = ''
         if p.get('image'):
             preview = f' data-preview="{p["image"]}" data-preview-index="{i}" data-alt="{E(p["alt"])}"'
@@ -48,8 +50,8 @@ def home():
                 preview += ' data-logo="true"'
         thumb = f'<span class="work-thumb{ " is-logo" if p.get("logo") else ""}"><img src="{p["image"]}" alt="{E(p["alt"])}" loading="lazy"></span>' if p.get('image') else ''
         rows.append(f'''<a class="work-row" href="work/{p['slug']}.html" data-transition-title="{E(p['name'])}"{preview}>{thumb}<h3>{E(p['name'])}</h3><p>{E(p['type'])}</p><span class="work-arrow" aria-hidden="true">↗</span></a>''')
-    body = (ROOT / 'templates/home.html').read_text().replace('{{work_rows}}', '\n'.join(rows))
-    body += parts.previews(DATA['projects'])
+    body = (ROOT / 'templates/home.html').read_text().replace('{{work_rows}}', '\n'.join(rows)).replace('{{work_count}}', str(len(DATA['projects']))).replace('{{evidence_gallery}}', parts.gallery(DATA['projects'])).replace('{{recognition}}', parts.recognition(True))
+    body += parts.previews(selected) + '<div class="cursor-badge" aria-hidden="true">View</div>'
     page('index.html', 'Suhas Beemineni | Engineering & Research', 'Student interested in electrical engineering, AI, and robotics. Selected research and engineering work.', body, True)
 
 
@@ -90,15 +92,15 @@ def main():
     page('about.html', 'About | Suhas Beemineni', 'A student in California working on AI, robotics, and spacecraft simulation.', parts.about(), kind='about')
     page('contact.html', 'Contact | Suhas Beemineni', 'Get in touch with Suhas Beemineni.', parts.contact(), kind='contact', ending=parts.bottom())
     resume_data = json.loads((ROOT / 'content/resume.json').read_text())
-    page('archive.html', 'Archive | Suhas Beemineni', 'Research, software, and open-source contributions.', parts.archive(projects, resume_data), kind='archive')
+    (ROOT / 'archive.html').write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=work.html"><title>Work | Suhas Beemineni</title><link rel="canonical" href="' + BASE + 'work.html"><p><a href="work.html">View all work</a></p></html>')
     resume()
     for p in ['work/abstainbench.html', 'work/echo-field.html']:
         redirect(p)
     page('404.html', 'Page not found | Suhas Beemineni', 'Return to my portfolio.', '<main id="main" class="not-found wrap"><h1>This page has moved.</h1><a href="/portfolio/">Back to the portfolio ↗</a></main>')
-    paths = ['', 'work.html', 'about.html', 'contact.html', 'archive.html', 'resume.html'] + ['work/' + p['slug'] + '.html' for p in projects]
+    paths = ['', 'work.html', 'about.html', 'contact.html', 'resume.html'] + ['work/' + p['slug'] + '.html' for p in projects]
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join('<url><loc>' + BASE + p + '</loc></url>' for p in paths) + '</urlset>')
     (ROOT / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + BASE + 'sitemap.xml\n')
-    print('Built Home, Work, About, Contact, Archive, résumé, five case pages and supporting routes.')
+    print(f'Built Home, Work, About, Contact, résumé, {len(projects)} case pages and supporting routes.')
 
 
 if __name__ == '__main__':
