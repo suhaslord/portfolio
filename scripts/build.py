@@ -16,16 +16,8 @@ def rev(path):
     return hashlib.sha256((ROOT / path).read_bytes()).hexdigest()[:10]
 
 
-def navigation(prefix='', home=False):
-    href = prefix + 'index.html'
-    return f'''<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><a class="brand magnetic" href="{href}"><span class="brand-mark" aria-hidden="true">©</span><span>Suhas Beemineni</span></a><nav class="desktop-nav" aria-label="Primary"><a class="magnetic" href="{href}#work">Work</a><a class="magnetic" href="{href}#about">About</a><a class="magnetic" href="#contact">Contact</a></nav></header>
-<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-panel"><span></span><span></span></button>
-<div class="menu-scrim" aria-hidden="true"></div><aside class="menu-panel" id="menu-panel" data-lenis-prevent role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true" inert><div class="menu-curve" aria-hidden="true"></div><p class="menu-label">Navigation</p><nav><a class="magnetic" href="{href}">Home</a><a class="magnetic" href="{href}#work">Work</a><a class="magnetic" href="{href}#about">About</a><a class="magnetic" href="#contact">Contact</a></nav><div class="menu-bottom"><a href="{prefix}resume.html">Résumé</a><a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></aside><div class="page-transition" aria-hidden="true"><span class="transition-label" lang="en">Hello</span><div class="transition-curve"></div></div>'''
 
 
-def footer(prefix=''):
-    return f'''<section class="contact-section" id="contact" aria-labelledby="contact-title"><div class="contact-curve" aria-hidden="true"></div><div class="contact-inner wrap"><h2 class="contact-title" id="contact-title">Let's make<br>something useful.</h2><div class="contact-line"><a class="circle-button magnetic" href="mailto:suhas.aug20@gmail.com"><span>Get in touch</span><span aria-hidden="true">↗</span></a><div class="contact-details"><a class="outline-link" href="mailto:suhas.aug20@gmail.com">suhas.aug20@gmail.com</a></div></div></div><footer class="site-footer"><span class="copyright">© 2026 Suhas Beemineni</span><nav aria-label="Links"><a href="https://github.com/suhaslord" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="{prefix}resume.html">Résumé</a><a href="{prefix}index.html#work">Work</a></nav></footer></section>'''
 
 
 def page(path, title, description, body, home=False, kind='', ending=None):
@@ -48,7 +40,6 @@ def page(path, title, description, body, home=False, kind='', ending=None):
 
 def home():
     rows = []
-    panes = []
     for i, p in enumerate(DATA['projects']):
         preview = ''
         if p.get('image'):
@@ -57,26 +48,11 @@ def home():
                 preview += ' data-logo="true"'
         thumb = f'<span class="work-thumb{ " is-logo" if p.get("logo") else ""}"><img src="{p["image"]}" alt="{E(p["alt"])}" loading="lazy"></span>' if p.get('image') else ''
         rows.append(f'''<a class="work-row" href="work/{p['slug']}.html" data-transition-title="{E(p['name'])}"{preview}>{thumb}<h3>{E(p['name'])}</h3><p>{E(p['type'])}</p><span class="work-arrow" aria-hidden="true">↗</span></a>''')
-        kind = ' is-logo' if p.get('logo') else (' is-photo' if p.get('photo') else '')
-        panes.append(f'<div class="preview-pane{kind}"><img src="{p["image"]}" alt=""></div>')
     body = (ROOT / 'templates/home.html').read_text().replace('{{work_rows}}', '\n'.join(rows))
     body += parts.previews(DATA['projects'])
     page('index.html', 'Suhas Beemineni | Engineering & Research', 'Student interested in electrical engineering, AI, and robotics. Selected research and engineering work.', body, True)
 
 
-def project(p, next_project):
-    image = ''
-    if p.get('image'):
-        credit = f' <a href="{p["credit_url"]}" target="_blank" rel="noopener noreferrer">Source ↗</a>' if p.get('credit_url') else ''
-        image = f'''<figure class="case-figure"><div class="case-image{' is-logo' if p.get('logo') else ''}"><img src="../{p['image']}" alt="{E(p['alt'])}"></div><figcaption>{E(p.get('caption', ''))}{credit}</figcaption></figure>'''
-    sections = ''.join('<section><h2>' + E(s['title']) + '</h2>' + ''.join('<p>' + E(t) + '</p>' for t in s['paragraphs']) + '</section>' for s in p['sections'])
-    facts = ''.join(f'<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>' for k, v in p.get('facts', []))
-    links = ''.join(f'<a href="{E(l["url"])}" target="_blank" rel="noopener noreferrer">{E(l["label"])} ↗</a>' for l in p.get('links', []))
-    extra = ''
-    if p.get('extra_image'):
-        extra = f'<figure class="case-figure"><div class="case-image"><img src="../{p["extra_image"]}" alt="{E(p["extra_alt"])}" loading="lazy"></div></figure>'
-    body = f'''<main id="main" class="page-main"><div class="wrap"><header class="case-heading"><a class="back-link" href="../index.html#work">← Selected work</a><h1>{E(p['name'])}</h1><p class="case-intro">{E(p['intro'])}</p><div class="case-meta"><p><span>My role</span>{E(p['role'])}</p><p><span>Work</span>{E(p['type'])}</p></div></header>{image}<div class="case-content"><dl class="case-facts">{facts}</dl><article class="case-body">{sections}<div class="case-links">{links}</div>{extra}</article></div><div class="case-next"><span>Next project</span><a href="{next_project['slug']}.html">{E(next_project['name'])} ↗</a></div></div></main>'''
-    page('work/' + p['slug'] + '.html', p['name'] + ' | Suhas Beemineni', p['intro'], body)
 
 
 def resume():
