@@ -95,7 +95,7 @@
   if (animate && ST) {
     if (hero) {
       ST.create({trigger:hero,start:'top top',end:'42% top',onLeave:()=>root.classList.add('has-scrolled'),onEnterBack:()=>root.classList.remove('has-scrolled')});
-      gsap.to('.hero-monogram',{yPercent:-15,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:1}});
+      gsap.to('.hero-monogram',{yPercent:-65,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:1}});
     }
     if (!hero) ST.create({start:100,onEnter:()=>root.classList.add('has-scrolled'),onLeaveBack:()=>root.classList.remove('has-scrolled')});
     document.querySelectorAll('.reveal').forEach(el=>{
@@ -159,7 +159,7 @@
     let internal=false,seen=false;
     try {internal=sessionStorage.getItem('portfolio:transition')==='1';seen=sessionStorage.getItem('portfolio:seen')==='1';sessionStorage.removeItem('portfolio:transition');sessionStorage.setItem('portfolio:seen','1');}catch{}
     if(curtain && (internal || (hero&&!seen&&!location.hash))){
-      gsap.set(curtain,{yPercent:0,visibility:'visible'});
+      gsap.set(curtain,{y:0,yPercent:0,visibility:'visible'});
       if(internal)curtain.querySelector('span').textContent='';
       gsap.to(curtain,{yPercent:-115,duration:.95,delay:internal ? 0.1 : 0.35,ease:'power4.inOut',onComplete:()=>gsap.set(curtain,{visibility:'hidden'})});
     }
@@ -182,10 +182,10 @@
     if(!animate||reduce.matches||!curtain||navigating)return;
     event.preventDefault();navigating=true;lenis?.stop();
     curtain.querySelector('span').textContent='';
-    gsap.set(curtain,{yPercent:115,visibility:'visible'});
+    gsap.set(curtain,{y:0,yPercent:115,visibility:'visible'});
     gsap.to(curtain,{yPercent:0,duration:.65,ease:'power4.inOut',onComplete:()=>{try{sessionStorage.setItem('portfolio:transition','1');}catch{}location.href=url.href;}});
   });
-  window.addEventListener('pageshow',event=>{if(event.persisted){navigating=false;lenis?.start();if(gsap&&curtain)gsap.set(curtain,{yPercent:-115,visibility:'hidden'});}});
+  window.addEventListener('pageshow',event=>{if(event.persisted){navigating=false;lenis?.start();if(gsap&&curtain)gsap.set(curtain,{y:0,yPercent:-115,visibility:'hidden'});}});
   reduce.addEventListener('change',event=>{
     if(!event.matches||!gsap)return;
     ST?.getAll().forEach(t=>t.kill(true));gsap.killTweensOf('*');root.classList.remove('motion-ready');
