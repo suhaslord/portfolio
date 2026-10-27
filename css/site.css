@@ -462,3 +462,5 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 }
 .case-image>a{display:flex;align-items:center;justify-content:center;width:100%;cursor:zoom-in}
 .recognition-section{scroll-margin-top:70px}
+html{scroll-padding-top:0}
+:where(main [id]){scroll-margin-top:65px}

@@ -21,7 +21,7 @@
   configureScroll();
   if(gsap){gsap.ticker.add(t=>lenis?.raf(t*1000));gsap.ticker.lagSmoothing(0);}
   function moveScroll(target=0,immediate=true){
-    if(lenis)lenis.scrollTo(target,{immediate,force:true,offset:typeof target==='number'?0:-65,duration:1});
+    if(lenis)lenis.scrollTo(target,{immediate,force:true,offset:0,duration:1});
     else if(typeof target==='number')window.scrollTo({top:target,behavior:immediate?'instant':'smooth'});
     else target.scrollIntoView({behavior:immediate?'instant':'smooth'});
   }
