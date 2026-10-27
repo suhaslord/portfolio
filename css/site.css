@@ -41,3 +41,5 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(15p
 .work-preview{display:block}
 .preview-rail{position:absolute;inset:0;height:100%;min-height:0}
 .contact-section{overflow:hidden}
+
+@media(min-width:768px){.motion-ready body.interior .menu-toggle{scale:0;opacity:0;pointer-events:none}.motion-ready.has-scrolled body.interior .menu-toggle,.motion-ready.menu-open body.interior .menu-toggle{scale:1;opacity:1;pointer-events:auto}}

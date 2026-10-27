@@ -97,6 +97,7 @@
       ST.create({trigger:hero,start:'top top',end:'42% top',onLeave:()=>root.classList.add('has-scrolled'),onEnterBack:()=>root.classList.remove('has-scrolled')});
       gsap.to('.hero-monogram',{yPercent:-15,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:1}});
     }
+    if (!hero) ST.create({start:100,onEnter:()=>root.classList.add('has-scrolled'),onLeaveBack:()=>root.classList.remove('has-scrolled')});
     document.querySelectorAll('.reveal').forEach(el=>{
       const text=el.textContent.trim();el.setAttribute('aria-label',text);el.replaceChildren();
       text.split(/\s+/).forEach((word,i)=>{const mask=document.createElement('span');mask.className='word-mask';mask.setAttribute('aria-hidden','true');const span=document.createElement('span');span.textContent=word;mask.append(span);el.append(mask,document.createTextNode(' '));});
