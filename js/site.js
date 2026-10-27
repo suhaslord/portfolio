@@ -95,17 +95,9 @@
           gsap.to($('.hero-monogram'),{yPercent:-65,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
           gsap.to($('.hero-arrow'),{rotation:90,ease:'none',scrollTrigger:{trigger:hero,start:'bottom bottom',end:'bottom top',scrub:true}});
         }else ST.create({start:100,onEnter:()=>root.classList.add('has-scrolled'),onLeaveBack:()=>root.classList.remove('has-scrolled')});
-        $$('.reveal').forEach(el=>{
-          if(!el.querySelector('.word-mask')){
-            const text=el.textContent.trim();el.setAttribute('aria-label',text);el.replaceChildren();
-            text.split(/\s+/).forEach(word=>{const mask=document.createElement('span'),inner=document.createElement('span');mask.className='word-mask';mask.setAttribute('aria-hidden','true');inner.textContent=word;mask.append(inner);el.append(mask,document.createTextNode(' '));});
-          }
-          el.classList.add('is-visible');
-          gsap.from(el.querySelectorAll('.word-mask span'),{yPercent:105,duration:1,stagger:.012,ease:'power3.out',scrollTrigger:{trigger:el,start:'top bottom',once:true}});
-        });
         if($('.intro-side')){
-          gsap.from($('.intro-side'),{y:45,opacity:0,duration:1.3,ease:'expo.out',scrollTrigger:{trigger:$('.introduction'),start:'top 95%',once:true}});
-          gsap.from($('.intro-side .circle-button'),{y:80,ease:'none',scrollTrigger:{trigger:$('.introduction'),start:'top bottom',end:'bottom top',scrub:true}});
+          gsap.from($('.intro-side'),{y:26,opacity:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:$('.introduction'),start:'top 95%',once:true}});
+          if(fine.matches)gsap.from($('.intro-circle-wrap'),{y:60,ease:'none',scrollTrigger:{trigger:$('.introduction'),start:'top bottom',end:'bottom top',scrub:true}});
         }
         $$('[data-footer-reveal]').forEach(footer=>{
           const st={trigger:footer,start:'top bottom',end:'bottom bottom',scrub:true};
@@ -115,18 +107,11 @@
           if(cta)gsap.from(cta,{x:fine.matches?-55:-20,ease:'none',scrollTrigger:st});
           if(arrow)gsap.from(arrow,{rotation:15,ease:'none',scrollTrigger:st});
         });
-        $$('.evidence-track').forEach((track,i)=>{if(fine.matches)gsap.fromTo(track,{x:i%2?'4vw':'-4vw'},{x:i%2?'-4vw':'4vw',ease:'none',scrollTrigger:{trigger:$('.evidence-gallery'),start:'top bottom',end:'bottom top',scrub:true}});});
-        $$('.achievement').forEach(el=>{
-          gsap.from(el.querySelector('.achievement-value span'),{yPercent:110,rotation:4,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 92%',once:true}});
-          gsap.from(el.querySelectorAll('h3,p'),{y:25,opacity:0,duration:1,stagger:.06,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}});
-        });
-        $$('.experience-row').forEach(el=>gsap.from(el.children,{y:40,opacity:0,duration:1,stagger:.035,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 96%',once:true}}));
-        $$('.discipline-grid article,.about-copy,.education-section>*,.section-heading').forEach(el=>gsap.from(el,{y:45,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 96%',once:true}}));
         const image=$('.about-image img');
         if(image)gsap.fromTo(image,{yPercent:-5,scale:1.12},{yPercent:5,scale:1.12,ease:'none',scrollTrigger:{trigger:image.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
         if($('.about-disciplines'))gsap.fromTo($('.about-disciplines'),{backgroundColor:'#fff'},{backgroundColor:'#e7e8e9',ease:'none',scrollTrigger:{trigger:$('.about-disciplines'),start:'top bottom',end:'bottom bottom',scrub:true}});
         const orb=$('.about-orb');if(orb)gsap.to(orb,{rotation:90,ease:'none',scrollTrigger:{trigger:$('.about-divider'),start:'top bottom',end:'top top',scrub:true}});
-        $$('.case-image').forEach(el=>gsap.from(el,{y:45,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 98%',once:true}}));
+
       }else $$('.reveal').forEach(el=>el.classList.add('is-visible'));
 
       if(canMove()&&fine.matches){
@@ -173,6 +158,7 @@
           gsap.ticker.add(tick);cleanup(()=>gsap.ticker.remove(tick));lenis?.on('scroll',sample);cleanup(()=>lenis?.off('scroll',sample));
         }
       }
+      window.mountPortfolioFlow?.({scope,gsap,ST,reduce,fine,on,cleanup});
       window.mountPortfolioPage?.({scope,gsap,ST,reduce,fine,on,cleanup});
     };
     let context;

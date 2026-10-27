@@ -9,6 +9,6 @@
   },
   "scripts": {
     "build": "python scripts/build.py",
-    "check": "python scripts/check.py && node --check js/site.js && node --check js/pages.js"
+    "check": "python scripts/check.py && node --check js/site.js && node --check js/pages.js && node --check js/flow.js"
   }
 }

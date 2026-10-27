@@ -62,7 +62,18 @@ def footer(prefix=''):
 
 def thumb(p, prefix='', cls='work-thumb'):
     kind = ' is-logo' if p.get('logo') else (' is-photo' if p.get('photo') else '')
-    return f'<span class="{cls}{kind}"><img src="{prefix}{p["image"]}" alt="{E(p["alt"])}" loading="lazy" decoding="async"></span>'
+    dimensions = f' width="{p["image_width"]}" height="{p["image_height"]}"' if p.get('image_width') else ''
+    return f'<span class="{cls}{kind}"><img src="{prefix}{p["image"]}" alt="{E(p["alt"])}"{dimensions} loading="lazy" decoding="async"></span>'
+
+
+def featured_work(projects):
+    rows, panels = [], []
+    for i, p in enumerate(projects):
+        kind = ' is-logo' if p.get('logo') else ' is-photo' if p.get('photo') else ''
+        rows.append(f'''<a class="feature-row{' is-active' if i == 0 else ''}" href="work/{p['slug']}.html" id="featured-{p['slug']}" data-feature-index="{i}" data-feature-label="{E(p['short'])}" data-transition-title="{E(p['name'])}"><span class="feature-number" aria-hidden="true">0{i+1}</span><div class="feature-copy"><h3>{E(p['name'])}</h3><p>{E(p['headline'])}</p><span class="feature-outcome">{E(p['outcome'])}</span></div>{arrow(cls='feature-arrow')}{thumb(p, cls='feature-thumb')}</a>''')
+        source = f'src="{p["image"]}" loading="lazy"' if i == 0 else f'data-src="{p["image"]}"'
+        panels.append(f'<div class="feature-panel{kind}{" is-active" if i == 0 else ""}" data-feature-panel="{i}"><img {source} alt="" width="{p["image_width"]}" height="{p["image_height"]}" decoding="async"></div>')
+    return f'''<section class="featured-work wide-wrap" id="work" aria-labelledby="work-title"><span id="all-work"></span><span id="current-work"></span><header class="feature-heading"><h2 id="work-title" class="small-heading">Selected work</h2></header><div class="feature-layout"><div class="feature-list">{''.join(rows)}</div><figure class="feature-display" aria-hidden="true"><div class="feature-stage">{''.join(panels)}</div><figcaption><span class="feature-stage-label">{E(projects[0]['short'])}</span><span><span data-feature-count>01</span> / {len(projects):02}</span></figcaption></figure></div></section>'''
 
 
 def previews(projects, prefix=''):
@@ -95,19 +106,21 @@ def work(projects):
 def recognition(compact=False):
     items = [('2nd', 'SkillsUSA regionals', '3D Visualization & Graphics'), ('Top 50', 'Math Kangaroo · California', 'Grade 7'), ('31h', 'Steel City Codes', 'Summer 2026 · CS instructor'), ('43h', 'STEM·E', 'Game-design volunteer')]
     cells = ''.join(f'<article class="achievement"><div class="achievement-value"><span>{E(value)}</span></div><h3>{E(name)}</h3><p>{E(detail)}</p></article>' for value, name, detail in items)
-    return f'<section class="recognition-section{" is-compact" if compact else ""}" id="recognition" aria-labelledby="recognition-title"><div class="wide-wrap"><h2 id="recognition-title" class="section-heading">Teaching &amp;<br>recognition.</h2><div class="achievement-grid">{cells}</div>' + (f'<div class="recognition-link">{pill("about.html#community", "Outside my projects", title="About")}</div>' if compact else '') + '</div></section>'
+    title = '<h2 id="recognition-title" class="section-heading flow-heading" data-flow-heading><span class="flow-line"><span>Teaching &amp;</span></span><span class="flow-line"><span>recognition.</span></span></h2>'
+    intro = '<div class="recognition-note"><p>I also teach, tutor, and coach soccer.</p>' + pill('about.html#community', 'Community work', title='About') + '</div>' if compact else ''
+    return f'<section class="recognition-section{" is-compact" if compact else ""}" id="recognition" aria-labelledby="recognition-title"><div class="wide-wrap"><header class="recognition-heading">{title}{intro}</header><div class="achievement-grid">{cells}</div>' + '</div></section>'
 
 
 def gallery(projects):
     by_slug = {p['slug']: p for p in projects}
     rows = []
-    for slugs in [('nasa-cmr', 'soft-robotics', 'network-recovery'), ('aviary', 'cosmos', 'voyager')]:
+    for slugs in [('soft-robotics', 'network-recovery'), ('nasa-cmr', 'aviary', 'cosmos')]:
         cells = []
         for slug in slugs:
             p = by_slug[slug]
             cells.append(f'<a class="evidence-tile" href="work/{slug}.html" data-transition-title="{E(p["name"])}" data-cursor-only="View"><span class="evidence-image">{thumb(p, cls="evidence-media")}</span><span class="evidence-caption"><span>{E(p["name"])}</span><span>{E(p["type"])}</span></span></a>')
-        rows.append('<div class="evidence-track">' + ''.join(cells) + '</div>')
-    return '<section class="evidence-gallery" aria-labelledby="evidence-title"><div class="wide-wrap"><h2 id="evidence-title" class="small-heading">Research &amp; merged contributions</h2></div>' + ''.join(rows) + '</section>'
+        rows.append('<div class="evidence-track' + (' is-pair' if len(slugs) == 2 else '') + '">' + ''.join(cells) + '</div>')
+    return '<section class="evidence-gallery" aria-labelledby="evidence-title"><header class="evidence-heading wide-wrap"><h2 id="evidence-title" class="section-heading flow-heading" data-flow-heading><span class="flow-line"><span>More of</span></span><span class="flow-line"><span>the work.</span></span></h2></header>' + ''.join(rows) + '</section>'
 
 
 def about():
@@ -151,12 +164,12 @@ def project(p, next_project):
     href = primary[0]['url'] if primary else '#results'
     external = ' target="_blank" rel="noopener noreferrer"' if primary else ''
     visit = f'<a class="circle-button liquid magnetic case-visit" href="{E(href)}"{external}>{fill("View source ↗" if primary else "See results")}</a>'
-    image = f'<figure class="case-figure case-primary wide-wrap" id="results">{visit}<div class="case-image{kind}"><a href="../{p["image"]}" target="_blank" rel="noopener" aria-label="Open full-size result image"><img src="../{p["image"]}" alt="{E(p["alt"])}" decoding="async"></a></div><figcaption>{E(p.get("caption", ""))}{credit}</figcaption></figure>'
-    sections = ''.join('<section><h2>' + E(s['title']) + '</h2>' + ''.join('<p>' + E(t) + '</p>' for t in s['paragraphs']) + '</section>' for s in p['sections'])
+    image = f'<figure class="case-figure case-primary wide-wrap" id="results">{visit}<div class="case-image{kind}"><a href="../{p["image"]}" target="_blank" rel="noopener" aria-label="Open full-size result image"><img src="../{p["image"]}" alt="{E(p["alt"])}" width="{p["image_width"]}" height="{p["image_height"]}" decoding="async"></a></div><figcaption>{E(p.get("caption", ""))}{credit}</figcaption></figure>'
+    sections = ''.join('<section data-flow-group><h2>' + E(s['title']) + '</h2>' + ''.join('<p>' + E(t) + '</p>' for t in s['paragraphs']) + '</section>' for s in p['sections'])
     facts = ''.join(f'<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>' for k, v in p.get('facts', []))
     links = ''.join(f'<a href="{E(l["url"])}" target="_blank" rel="noopener noreferrer">{E(l["label"])} ↗</a>' for l in primary)
     extra = ''
     if p.get('extra_image'):
-        extra = f'<figure class="case-figure wide-wrap"><div class="case-image"><img src="../{p["extra_image"]}" alt="{E(p["extra_alt"])}" loading="lazy" decoding="async"></div></figure>'
+        extra = f'<figure class="case-figure wide-wrap"><div class="case-image"><img src="../{p["extra_image"]}" alt="{E(p["extra_alt"])}" width="{p["extra_width"]}" height="{p["extra_height"]}" loading="lazy" decoding="async"></div></figure>'
     body = f'''<main id="main" class="case-page"><header class="page-hero case-heading wrap"><h1>{E(p['name'])}</h1><div class="case-meta"><p><span>Role</span>{E(role)}</p><p><span>Work</span>{E(p['type'])}</p><p><span>Year</span>2026</p></div></header>{image}<div class="case-content wrap"><dl class="case-facts">{facts}</dl><article class="case-body"><p class="case-lead">{E(p['intro'])}</p>{sections}<div class="case-links">{links}</div></article></div>{extra}</main>'''
     return body, case_ending(next_project)

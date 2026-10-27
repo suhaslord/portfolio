@@ -35,3 +35,18 @@ Adaptation constraints: use Suhas's verified content and real output images. No 
 Motion behavior was compared with the reference's public runtime: a 0.5 second incoming curtain, 0.8 second outgoing curtain, staggered exponential content entrance, delayed image/button cursor layers, 0.6 second image-rail changes, magnetic controls, and through-travelling button fills. This implementation is original; the reference's proprietary runtime, photos, and typefaces are not redistributed.
 
 New evidence: the saved September 29 Cal Poly update; the saved Tulsa edge-anchor geometry package; merged NASA python_cmr #119, OpenMDAO Aviary #1262, and OpenC3 COSMOS #3720. Replotted charts are labeled. Tulsa is explicitly a synthetic geometry check with no experimental data. No meeting slides, private correspondence, or certificates are published.
+
+## Content flow pass
+
+| Before | After | Why |
+| --- | --- | --- |
+| Lead project images required hover | One sticky result panel follows the project being read | Keep the work visible through the whole sequence |
+| Button separated the lead work from additional evidence | All work follows one sequence, then the Work link | Remove the premature stopping point |
+| Voyager repeated in two places | Five lead projects, then five additional projects | Give every project a clear place |
+| Intro used a general statement about building things | Short, specific introduction to AI, robots, and navigation | Let the work explain the motivation |
+| Intro button scroll and pointer motion targeted the same transform | Scroll moves its wrapper; pointer motion moves the button | Avoid competing transform updates |
+| Sections revealed at different speeds | Shared line reveals and group entrances | Connect the reading rhythm across Home, About, and case pages |
+| Case images had no intrinsic dimensions | Images reserve their real aspect ratio | Avoid layout shifts while the page loads |
+| Community and experience were independent full-width tables | Persistent section titles beside the entries | Keep context while moving through the details |
+
+The flow uses ordinary document scrolling and native CSS sticky positioning. No scroll locking, snapping between projects, synthetic counter totals, or fabricated project pictures are introduced. Touch layouts remain ordinary vertical content. Keyboard focus changes the result immediately; reduced motion changes the result without a transition.

@@ -39,7 +39,11 @@
           "149,991 questions"
         ]
       ],
-      "links": []
+      "links": [],
+      "image_width": 2070,
+      "image_height": 774,
+      "headline": "Visual question answering.",
+      "outcome": "80 epochs · 70,000 training images"
     },
     {
       "slug": "lunar-navigation",
@@ -82,7 +86,13 @@
       ],
       "extra_image": "assets/results/lunar-errors.png",
       "extra_alt": "First- and second-order angular prediction errors across lunar orbit radii and measurement gaps",
-      "links": []
+      "links": [],
+      "image_width": 1920,
+      "image_height": 640,
+      "headline": "Lunar optical navigation.",
+      "outcome": "3 orbit radii · 33 simulated combinations",
+      "extra_width": 2160,
+      "extra_height": 672
     },
     {
       "slug": "avl",
@@ -129,7 +139,11 @@
       "alt": "MARVIN rover in the Cal Poly Pomona Autonomous Vehicle Lab",
       "photo": true,
       "caption": "MARVIN in the lab. Photo: Cal Poly Pomona Autonomous Vehicle Laboratory.",
-      "credit_url": "https://autovehiclelab.com/projects.html"
+      "credit_url": "https://autovehiclelab.com/projects.html",
+      "image_width": 1200,
+      "image_height": 1139,
+      "headline": "The MARVIN rover’s digital twin.",
+      "outcome": "ROS 2 · Gazebo"
     },
     {
       "slug": "seagulls",
@@ -165,7 +179,11 @@
           "label": "Project repository",
           "url": "https://github.com/aiospathfinder/Seagulls_openstage"
         }
-      ]
+      ],
+      "image_width": 768,
+      "image_height": 768,
+      "headline": "AI features and launch testing.",
+      "outcome": "OpenStage"
     },
     {
       "slug": "voyager",
@@ -215,7 +233,11 @@
           "label": "Dynamics contribution",
           "url": "https://github.com/elodin-sys/elodin/pull/789"
         }
-      ]
+      ],
+      "image_width": 1800,
+      "image_height": 1050,
+      "headline": "Checking spacecraft dynamics against SPICE.",
+      "outcome": "144 hourly steps per run"
     },
     {
       "slug": "network-recovery",
@@ -228,11 +250,37 @@
       "alt": "Saved outage-test comparison: current path moved 0 of 45 users, legacy path 29, reset control 28",
       "caption": "Replotted from my September 29 research update. This is a simulator test; the reset control was diagnostic, not a confirmed fix.",
       "sections": [
-        {"title": "The test", "paragraphs": ["I let a seven-base-station network settle, then forced BS0 down at tick 100. The simulator detected the failure at tick 111, but the current path moved none of the 45 affected users."]},
-        {"title": "What I checked", "paragraphs": ["The legacy path moved 29 users. A control that reset the healing state moved 28. That suggests a state issue worth investigating; it does not establish the cause or a completed fix.", "Alongside the tests, I review work on network self-healing, O-RAN control, and digital twins with Professor Tamer Omar."]}
+        {
+          "title": "The test",
+          "paragraphs": [
+            "I let a seven-base-station network settle, then forced BS0 down at tick 100. The simulator detected the failure at tick 111, but the current path moved none of the 45 affected users."
+          ]
+        },
+        {
+          "title": "What I checked",
+          "paragraphs": [
+            "The legacy path moved 29 users. A control that reset the healing state moved 28. That suggests a state issue worth investigating; it does not establish the cause or a completed fix.",
+            "Alongside the tests, I review work on network self-healing, O-RAN control, and digital twins with Professor Tamer Omar."
+          ]
+        }
       ],
-      "facts": [["Network", "7 base stations"], ["Affected users", "45"], ["Failure detected", "11 ticks later"]],
-      "links": []
+      "facts": [
+        [
+          "Network",
+          "7 base stations"
+        ],
+        [
+          "Affected users",
+          "45"
+        ],
+        [
+          "Failure detected",
+          "11 ticks later"
+        ]
+      ],
+      "links": [],
+      "image_width": 1690,
+      "image_height": 1040
     },
     {
       "slug": "soft-robotics",
@@ -245,13 +293,40 @@
       "alt": "Saved mild three-dimensional disc-and-thread geometry with a fitted three-section constant-curvature model",
       "caption": "A geometry visualization from my saved Tulsa modeling update. Synthetic alpha/beta test; gamma, psi, and phi are fixed at zero. No experimental robot data is used.",
       "sections": [
-        {"title": "My work", "paragraphs": ["I work on mathematical models and geometry visualization for soft robotics. This update places each disc frame at the shared thread anchor and fits three piecewise constant-curvature sections to the non-root frame origins."]},
-        {"title": "Scope", "paragraphs": ["The saved run checks four synthetic geometries, including planar and three-dimensional cases. The drawing uses a 12 mm disc radius as a scale. It is an early geometry check, not experimental validation of a physical robot."]}
+        {
+          "title": "My work",
+          "paragraphs": [
+            "I work on mathematical models and geometry visualization for soft robotics. This update places each disc frame at the shared thread anchor and fits three piecewise constant-curvature sections to the non-root frame origins."
+          ]
+        },
+        {
+          "title": "Scope",
+          "paragraphs": [
+            "The saved run checks four synthetic geometries, including planar and three-dimensional cases. The drawing uses a 12 mm disc radius as a scale. It is an early geometry check, not experimental validation of a physical robot."
+          ]
+        }
       ],
-      "facts": [["Model", "3 PCC sections"], ["Saved cases", "4 geometries"], ["Stage", "Geometry checks"]],
+      "facts": [
+        [
+          "Model",
+          "3 PCC sections"
+        ],
+        [
+          "Saved cases",
+          "4 geometries"
+        ],
+        [
+          "Stage",
+          "Geometry checks"
+        ]
+      ],
       "extra_image": "assets/results/tulsa-errors.png",
       "extra_alt": "Saved frame-origin and tip fitting errors for the four synthetic geometry checks",
-      "links": []
+      "links": [],
+      "image_width": 1102,
+      "image_height": 1165,
+      "extra_width": 1690,
+      "extra_height": 851
     },
     {
       "slug": "nasa-cmr",
@@ -264,11 +339,41 @@
       "alt": "Actual platform method excerpt from the merged NASA python_cmr contribution",
       "caption": "Code excerpt from my merged change in cmr/queries.py, PR #119.",
       "sections": [
-        {"title": "The change", "paragraphs": ["I added multi-platform support to collection and granule queries. A single platform keeps its existing behavior; a sequence becomes repeated platform query parameters."]},
-        {"title": "Checks", "paragraphs": ["The contribution includes collection and granule tests for multiple platforms and empty lists, plus the changelog entry. It was merged on August 23, 2026."]}
+        {
+          "title": "The change",
+          "paragraphs": [
+            "I added multi-platform support to collection and granule queries. A single platform keeps its existing behavior; a sequence becomes repeated platform query parameters."
+          ]
+        },
+        {
+          "title": "Checks",
+          "paragraphs": [
+            "The contribution includes collection and granule tests for multiple platforms and empty lists, plus the changelog entry. It was merged on August 23, 2026."
+          ]
+        }
       ],
-      "facts": [["Pull request", "#119 · merged"], ["Applies to", "Collections & granules"], ["Language", "Python"]],
-      "links": [{"label": "Merged contribution", "url": "https://github.com/nasa/python_cmr/pull/119"}]
+      "facts": [
+        [
+          "Pull request",
+          "#119 · merged"
+        ],
+        [
+          "Applies to",
+          "Collections & granules"
+        ],
+        [
+          "Language",
+          "Python"
+        ]
+      ],
+      "links": [
+        {
+          "label": "Merged contribution",
+          "url": "https://github.com/nasa/python_cmr/pull/119"
+        }
+      ],
+      "image_width": 1600,
+      "image_height": 1000
     },
     {
       "slug": "aviary",
@@ -281,11 +386,41 @@
       "alt": "Aviary input-deck comparison: 476 advanced-deck rows versus 42 minimum-deck input rows, as reported in merged PR 1262",
       "caption": "Replotted from the measurements reported in my merged Aviary PR #1262. The advanced deck includes 194 converted inputs and 282 unconverted legacy rows.",
       "sections": [
-        {"title": "The change", "paragraphs": ["I reduced the advanced single-aisle example to a generic 42-input FLOPS aircraft deck, updated the beginner documentation, and added an end-to-end mission regression test."]},
-        {"title": "The result", "paragraphs": ["The reported minimum-aircraft run converged with SLSQP in 12 iterations for a 1,906 nmi mission. The merged example is a starting point, not a calibration to a particular aircraft."]}
+        {
+          "title": "The change",
+          "paragraphs": [
+            "I reduced the advanced single-aisle example to a generic 42-input FLOPS aircraft deck, updated the beginner documentation, and added an end-to-end mission regression test."
+          ]
+        },
+        {
+          "title": "The result",
+          "paragraphs": [
+            "The reported minimum-aircraft run converged with SLSQP in 12 iterations for a 1,906 nmi mission. The merged example is a starting point, not a calibration to a particular aircraft."
+          ]
+        }
       ],
-      "facts": [["Pull request", "#1262 · merged"], ["Minimum deck", "42 inputs"], ["Reported mission", "1,906 nmi"]],
-      "links": [{"label": "Merged contribution", "url": "https://github.com/OpenMDAO/Aviary/pull/1262"}]
+      "facts": [
+        [
+          "Pull request",
+          "#1262 · merged"
+        ],
+        [
+          "Minimum deck",
+          "42 inputs"
+        ],
+        [
+          "Reported mission",
+          "1,906 nmi"
+        ]
+      ],
+      "links": [
+        {
+          "label": "Merged contribution",
+          "url": "https://github.com/OpenMDAO/Aviary/pull/1262"
+        }
+      ],
+      "image_width": 1690,
+      "image_height": 1040
     },
     {
       "slug": "cosmos",
@@ -298,11 +433,41 @@
       "alt": "Timestamp-handling code from the merged OpenC3 COSMOS historical telemetry contribution",
       "caption": "Code excerpt from my merged received_time contribution, PR #3720. The formatting is condensed for readability.",
       "sections": [
-        {"title": "The change", "paragraphs": ["I added optional historical receive timestamps to inject_tlm through the normal packet path. Existing calls keep the current UTC receive time; explicitly supplied timestamps are converted from nanoseconds since the Unix epoch."]},
-        {"title": "Checks", "paragraphs": ["Regression coverage checks both routing paths, timestamp conversion, Unix epoch zero, and Script Runner forwarding. The contribution was merged on August 19, 2026."]}
+        {
+          "title": "The change",
+          "paragraphs": [
+            "I added optional historical receive timestamps to inject_tlm through the normal packet path. Existing calls keep the current UTC receive time; explicitly supplied timestamps are converted from nanoseconds since the Unix epoch."
+          ]
+        },
+        {
+          "title": "Checks",
+          "paragraphs": [
+            "Regression coverage checks both routing paths, timestamp conversion, Unix epoch zero, and Script Runner forwarding. The contribution was merged on August 19, 2026."
+          ]
+        }
       ],
-      "facts": [["Pull request", "#3720 · merged"], ["Time format", "Unix nanoseconds"], ["Compatibility", "Optional parameter"]],
-      "links": [{"label": "Merged contribution", "url": "https://github.com/OpenC3/cosmos/pull/3720"}]
+      "facts": [
+        [
+          "Pull request",
+          "#3720 · merged"
+        ],
+        [
+          "Time format",
+          "Unix nanoseconds"
+        ],
+        [
+          "Compatibility",
+          "Optional parameter"
+        ]
+      ],
+      "links": [
+        {
+          "label": "Merged contribution",
+          "url": "https://github.com/OpenC3/cosmos/pull/3720"
+        }
+      ],
+      "image_width": 1600,
+      "image_height": 1000
     }
   ]
 }
