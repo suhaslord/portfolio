@@ -29,3 +29,13 @@ The globe is an SVG wireframe with three rolling meridians, clipped latitude lin
 The name marquee eases into direction changes, buttons have a restrained elastic release, and scroll-linked sections use short scrub values so they stay close to the scroll position. Native touch scrolling is retained.
 
 Reduced motion uses native scrolling, static content and an instant menu. No content depends on a successful intro animation. The résumé is populated from content/resume.json and includes research, work, open source, leadership, volunteering, education, skills, recognition and athletics. It is intentionally more complete than the homepage.
+
+## Complete page flow
+
+The reference audit is recorded in `REFERENCE_AUDIT.md`. Home now leads to a dedicated Work page with category filters and a compact four-column list, an alternate two-column image grid, and a twelve-entry archive. About and Contact are distinct compositions. The full résumé remains directly accessible. Case pages use wide real-result media, three metadata columns, and an image-led Next case ending.
+
+Page covers include the destination title and curved leading/trailing edges. A small pre-paint bootstrap preserves the cover during document navigation, avoiding a flash of the incoming content. Pointer or keyboard input can complete the entry immediately. Project previews wait for pointer intent and decoded media, then use a 460ms entrance; tracking stays responsive and adjacent images glide through the rail.
+
+The shared ending has a white rounded cover, opposing footer parallax, a title avatar made from initials until a portrait is supplied, a magnetic contact circle, rising button fills, and Version/California local time/Links groups. No phone number or social account is invented. The Contact page's form creates an email draft rather than pretending to have a mail backend.
+
+Mobile uses direct image cards, native touch scrolling, 48px filter targets, stacked case metadata, a single-column About/Contact layout, 18px form inputs and a scrollable full-height menu. Pointer effects and desktop preview downloads are omitted. The résumé, actual result images and their qualifications are retained.

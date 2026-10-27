@@ -7,7 +7,7 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 projects = json.loads((ROOT / 'content/projects.json').read_text())['projects']
-routes = ['index.html', 'resume.html', '404.html'] + ['work/' + p['slug'] + '.html' for p in projects]
+routes = ['index.html', 'work.html', 'about.html', 'contact.html', 'archive.html', 'resume.html', '404.html'] + ['work/' + p['slug'] + '.html' for p in projects]
 
 
 class Document(HTMLParser):
