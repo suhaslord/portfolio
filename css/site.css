@@ -43,3 +43,27 @@ body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(15p
 .contact-section{overflow:hidden}
 
 @media(min-width:768px){.motion-ready body.interior .menu-toggle{scale:0;opacity:0;pointer-events:none}.motion-ready.has-scrolled body.interior .menu-toggle,.motion-ready.menu-open body.interior .menu-toggle{scale:1;opacity:1;pointer-events:auto}}
+
+/* Responsive, continuous motion rather than long interaction delays. */
+.globe-tilt{position:absolute;inset:15px;transform:rotate(-18deg);transform-style:preserve-3d}
+.globe-frame{position:absolute;inset:0;width:100%;height:100%;stroke:currentColor;stroke-width:1.35;overflow:visible}
+.globe-sphere{position:absolute;inset:5%;transform-style:preserve-3d;animation:globe-turn 12s linear infinite;will-change:transform}
+.globe-meridian{position:absolute;inset:0;border:1.15px solid currentColor;border-radius:50%;backface-visibility:visible}
+.globe-meridian:nth-child(2){transform:rotateY(45deg)}
+.globe-meridian:nth-child(3){transform:rotateY(90deg)}
+.globe-meridian:nth-child(4){transform:rotateY(135deg)}
+.hero.is-offscreen .globe-sphere{animation-play-state:paused}
+@keyframes globe-turn{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.menu-toggle{transition:background .2s,opacity .25s,scale .3s var(--ease)}
+.menu-toggle span{transition:transform .22s var(--ease)}
+.work-row{transition:color .24s}
+.circle-button::before{transition:transform .38s cubic-bezier(.22,1,.36,1)}
+.more-work-link::before{transition:transform .35s var(--ease),border-radius .35s var(--ease)}
+.outline-link{transition:background .18s,border-color .18s}
+.work-preview{transform-origin:center center}
+.transition-label{display:inline-flex;align-items:center;gap:.45em;white-space:nowrap;line-height:1.5}
+.transition-label:not(:empty)::before{content:'';width:.18em;height:.18em;border-radius:50%;background:currentColor;flex:none}
+.transition-label:empty{display:none}
+.transition-curve{transform-origin:center top}
+@media(max-width:767px){.globe-tilt{inset:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.globe-sphere{animation:none;will-change:auto}.globe-meridian{backface-visibility:hidden}}
