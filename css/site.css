@@ -257,7 +257,7 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 .contact-form-status,.contact-draft-link{font-size:14px;margin-top:20px}
 .contact-draft-link{text-decoration:underline;text-underline-offset:4px}
 .contact-form-status:empty{display:none}
-.page-contact>.site-footer{padding-top:6vw}
+.page-contact .site-shell>.site-footer{padding-top:6vw}
 
 @media(max-width:1100px) and (min-width:768px){
  .about-copy{padding-left:0;font-size:15px}.about-intro{grid-template-columns:30% 1fr;gap:8%}
@@ -373,7 +373,7 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
  .contact-send{padding-top:22px;margin-top:30px;min-height:140px}
  .contact-send .circle-button{width:110px;height:110px;min-width:0;min-height:0;font-size:13px}
  .contact-form-note{font-size:11px;max-width:135px;line-height:1.6}
- .page-contact>.site-footer{padding-top:80px}
+ .page-contact .site-shell>.site-footer{padding-top:80px}
 }
 @media(max-width:374px){.filter-button{font-size:12px;padding-inline:13px}.contact-details .outline-link{width:100%;padding-inline:12px}.next-title{font-size:10.5vw}}
 @media(prefers-reduced-motion:reduce){.page-cover-ready .page-transition{display:none!important}.footer-content{transform:none!important;will-change:auto}.liquid>.button-fill,.next-case-image{transition:none}.liquid:hover>.button-fill{transform:translateY(0)!important}.work-browser .work-item,.work-browser .work-item h3,.work-browser .work-item p{transform:none!important}}

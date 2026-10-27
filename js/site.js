@@ -6,7 +6,7 @@
   const curtain=document.querySelector('.page-transition'), label=curtain?.querySelector('.transition-label');
   const topCurve=curtain?.querySelector('.transition-curve-top'), bottomCurve=curtain?.querySelector('.transition-curve-bottom');
   const canMove=()=>Boolean(gsap&&!reduce.matches);
-  let lenis,page,entering,changing=false,keyboardRoute=false;
+  let lenis,page,entering,requestedURL,transitionURL,changing=false,keyboardRoute=false;
   if(curtain)curtain.dataset.navigationCount='0';
   if(gsap&&ST)gsap.registerPlugin(ST);
   if('scrollRestoration' in history)history.scrollRestoration='manual';
@@ -222,7 +222,7 @@
     const anchor=event.target.closest('a[href]');
     if(!anchor||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||anchor.target==='_blank'||anchor.hasAttribute('download'))return;
     const url=new URL(anchor.href,location.href);if(url.origin!==location.origin)return;keyboardRoute=event.detail===0;
-    if(normalize(url.pathname)!==normalize(location.pathname))return;
+    if(normalize(url.pathname)!==normalize(location.pathname)){requestedURL=url;return;}
     const target=url.hash?document.getElementById(decodeURIComponent(url.hash.slice(1))):0;if(url.hash&&!target)return;
     event.preventDefault();event.stopPropagation();entering?.progress(1);page.closeMenu({instant:true,restoreFocus:false});
     if(url.hash&&location.hash!==url.hash){
@@ -231,10 +231,12 @@
     moveScroll(target,!canMove()||keyboardRoute);
     if(keyboardRoute&&target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});}
   },true);
+  window.addEventListener('popstate',()=>{requestedURL=new URL(location.href);},{capture:true});
 
   if(window.barba)window.barba.init({timeout:8000,preventRunning:true,prevent:({href})=>new URL(href,location.href).pathname.endsWith('/archive.html'),transitions:[{
     name:'continuous-curtain',
     async leave(data){
+      transitionURL=requestedURL;requestedURL=null;
       changing=true;root.classList.add('is-transitioning');entering?.progress(1);page.closeMenu({instant:true,restoreFocus:false});lenis?.stop();
       if(canMove()&&!keyboardRoute&&curtain){
         label.textContent=data.trigger?.dataset?.transitionTitle||'Work';label.lang='en';gsap.set(curtain,{y:0,yPercent:115,visibility:'visible'});gsap.set(label,{y:35,opacity:0});gsap.set(topCurve,{scaleY:1});
@@ -246,13 +248,24 @@
     async enter(data){await reveal(data.next.container,{instant:keyboardRoute});},
     after(data){
       changing=false;keyboardRoute=false;root.classList.remove('is-transitioning');
-      const hash=data.next.url.hash?.replace(/^#/,''),target=hash?document.getElementById(decodeURIComponent(hash)):document.getElementById('main');
+      // An XHR response URL omits its fragment. Restore the clicked section target.
+      const hash=transitionURL?.hash.slice(1)||data.next.url.hash?.replace(/^#/,'');
+      if(hash){
+        const destination=new URL(data.next.url.href||location.href);destination.hash=hash;
+        window.barba.history.add(destination.href,data.trigger,'replace');
+        window.barba.history.update({ns:data.next.namespace});
+        data.next.url.hash=hash;data.next.url.href=destination.href;
+      }
+      const target=hash?document.getElementById(decodeURIComponent(hash)):document.getElementById('main');
       if(hash&&target)moveScroll(target,true);if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});}
       document.querySelector('[data-page-announcement]').textContent=data.next.container.dataset.pageTitle;
       if(curtain)curtain.dataset.navigationCount=String(Number(curtain.dataset.navigationCount)+1);
       lenis?.resize();ST?.refresh();
+      transitionURL=null;
     },
   }]});
+  // Validate browser-cached HTML after a deployment, while retaining Barba prefetching.
+  window.barba?.headers?.set('Cache-Control','no-cache');
   window.addEventListener('wheel',()=>{if(!changing&&entering?.isActive())entering.progress(1);},{passive:true});
   document.addEventListener('keydown',event=>{if(!changing&&['Tab','PageDown','PageUp','End','Home','ArrowDown','ArrowUp'].includes(event.key))entering?.progress(1);});
   reduce.addEventListener('change',()=>{entering?.progress(1);page.destroy();configureScroll();page=mount(document.querySelector('[data-barba="container"]'));ST?.refresh();});
