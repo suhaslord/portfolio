@@ -66,15 +66,6 @@ def thumb(p, prefix='', cls='work-thumb'):
     return f'<span class="{cls}{kind}"><img src="{prefix}{p["image"]}" alt="{E(p["alt"])}"{dimensions} loading="lazy" decoding="async"></span>'
 
 
-def featured_work(projects):
-    rows, panels = [], []
-    for i, p in enumerate(projects):
-        kind = ' is-logo' if p.get('logo') else ' is-photo' if p.get('photo') else ''
-        rows.append(f'''<a class="feature-row{' is-active' if i == 0 else ''}" href="work/{p['slug']}.html" id="featured-{p['slug']}" data-feature-index="{i}" data-feature-label="{E(p['short'])}" data-transition-title="{E(p['name'])}"><span class="feature-number" aria-hidden="true">0{i+1}</span><div class="feature-copy"><h3>{E(p['name'])}</h3><p>{E(p['headline'])}</p><span class="feature-outcome">{E(p['outcome'])}</span></div>{arrow(cls='feature-arrow')}{thumb(p, cls='feature-thumb')}</a>''')
-        source = f'src="{p["image"]}" loading="lazy"' if i == 0 else f'data-src="{p["image"]}"'
-        panels.append(f'<div class="feature-panel{kind}{" is-active" if i == 0 else ""}" data-feature-panel="{i}"><img {source} alt="" width="{p["image_width"]}" height="{p["image_height"]}" decoding="async"></div>')
-    return f'''<section class="featured-work wide-wrap" id="work" aria-labelledby="work-title"><span id="all-work"></span><span id="current-work"></span><header class="feature-heading"><h2 id="work-title" class="small-heading">Selected work</h2></header><div class="feature-layout"><div class="feature-list">{''.join(rows)}</div><figure class="feature-display" aria-hidden="true"><div class="feature-stage">{''.join(panels)}</div><figcaption><span class="feature-stage-label">{E(projects[0]['short'])}</span><span><span data-feature-count>01</span> / {len(projects):02}</span></figcaption></figure></div></section>'''
-
 
 def previews(projects, prefix=''):
     panes = []
@@ -114,13 +105,13 @@ def recognition(compact=False):
 def gallery(projects):
     by_slug = {p['slug']: p for p in projects}
     rows = []
-    for slugs in [('soft-robotics', 'network-recovery'), ('nasa-cmr', 'aviary', 'cosmos')]:
+    for slugs in [('nasa-cmr', 'soft-robotics', 'network-recovery'), ('aviary', 'cosmos', 'voyager')]:
         cells = []
         for slug in slugs:
             p = by_slug[slug]
             cells.append(f'<a class="evidence-tile" href="work/{slug}.html" data-transition-title="{E(p["name"])}" data-cursor-only="View"><span class="evidence-image">{thumb(p, cls="evidence-media")}</span><span class="evidence-caption"><span>{E(p["name"])}</span><span>{E(p["type"])}</span></span></a>')
-        rows.append('<div class="evidence-track' + (' is-pair' if len(slugs) == 2 else '') + '">' + ''.join(cells) + '</div>')
-    return '<section class="evidence-gallery" aria-labelledby="evidence-title"><header class="evidence-heading wide-wrap"><h2 id="evidence-title" class="section-heading flow-heading" data-flow-heading><span class="flow-line"><span>More of</span></span> <span class="flow-line"><span>the work.</span></span></h2></header>' + ''.join(rows) + '</section>'
+        rows.append('<div class="evidence-track">' + ''.join(cells) + '</div>')
+    return '<section class="evidence-gallery" aria-labelledby="evidence-title"><div class="wide-wrap"><h2 id="evidence-title" class="small-heading">Research &amp; merged contributions</h2></div>' + ''.join(rows) + '</section>'
 
 
 def about():
@@ -173,3 +164,9 @@ def project(p, next_project):
         extra = f'<figure class="case-figure wide-wrap"><div class="case-image"><img src="../{p["extra_image"]}" alt="{E(p["extra_alt"])}" width="{p["extra_width"]}" height="{p["extra_height"]}" loading="lazy" decoding="async"></div></figure>'
     body = f'''<main id="main" class="case-page"><header class="page-hero case-heading wrap"><h1>{E(p['name'])}</h1><div class="case-meta"><p><span>Role</span>{E(role)}</p><p><span>Work</span>{E(p['type'])}</p><p><span>Year</span>2026</p></div></header>{image}<div class="case-content wrap"><dl class="case-facts">{facts}</dl><article class="case-body"><p class="case-lead">{E(p['intro'])}</p>{sections}<div class="case-links">{links}</div></article></div>{extra}</main>'''
     return body, case_ending(next_project)
+
+
+def home_recognition(compact=False):
+    items = [('2nd', 'SkillsUSA regionals', '3D Visualization & Graphics'), ('Top 50', 'Math Kangaroo · California', 'Grade 7'), ('31h', 'Steel City Codes', 'Summer 2026 · CS instructor'), ('43h', 'STEM·E', 'Game-design volunteer')]
+    cells = ''.join(f'<article class="achievement"><div class="achievement-value"><span>{E(value)}</span></div><h3>{E(name)}</h3><p>{E(detail)}</p></article>' for value, name, detail in items)
+    return f'<section class="recognition-section{" is-compact" if compact else ""}" id="recognition" aria-labelledby="recognition-title"><div class="wide-wrap"><h2 id="recognition-title" class="section-heading">Teaching &amp;<br>recognition.</h2><div class="achievement-grid">{cells}</div>' + (f'<div class="recognition-link">{pill("about.html#community", "Outside my projects", title="About")}</div>' if compact else '') + '</div></section>'

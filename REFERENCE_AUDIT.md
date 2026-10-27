@@ -36,7 +36,7 @@ Motion behavior was compared with the reference's public runtime: a 0.5 second i
 
 New evidence: the saved September 29 Cal Poly update; the saved Tulsa edge-anchor geometry package; merged NASA python_cmr #119, OpenMDAO Aviary #1262, and OpenC3 COSMOS #3720. Replotted charts are labeled. Tulsa is explicitly a synthetic geometry check with no experimental data. No meeting slides, private correspondence, or certificates are published.
 
-## Content flow pass
+## Content flow pass (reverted on Home)
 
 | Before | After | Why |
 | --- | --- | --- |
@@ -50,3 +50,16 @@ New evidence: the saved September 29 Cal Poly update; the saved Tulsa edge-ancho
 | Community and experience were independent full-width tables | Persistent section titles beside the entries | Keep context while moving through the details |
 
 The flow uses ordinary document scrolling and native CSS sticky positioning. No scroll locking, snapping between projects, synthetic counter totals, or fabricated project pictures are introduced. Touch layouts remain ordinary vertical content. Keyboard focus changes the result immediately; reduced motion changes the result without a transition.
+
+## Homepage restoration
+
+The user rejected the new sticky layout. Home is restored from the version preceding the content-flow pass: original introduction, full-width lead project rows and hover previews, More work button, two opposing three-image evidence galleries, recognition figures, and curved footer. Interior pages retain their content-flow improvements and complete results.
+
+| Before | After | Why |
+| --- | --- | --- |
+| Sticky project panel and text-heavy split rows | Previous large project rows and cursor-following preview rail | Restore the explicitly requested reference-inspired composition |
+| Reworked gallery proportions and order | Original two three-image rows with opposing 4vw travel | Restore the previous scrolling character |
+| Pointer hit-testing on pointer, window scroll and Lenis events | At most one hit-test on the shared animation tick | Avoid redundant layout reads while scrolling |
+| Fixed hover images trigger a full scroll refresh when loaded | Only in-flow media requests a frame-batched refresh | Prevent unnecessary recalculation during movement |
+| Scroll and magnetic tweens could move the same button | Original placement, with scroll targeting a wrapper | Keep motion continuous without changing its appearance |
+| Scroll smoothing lingers at lerp .1 | Lerp .12, retaining direct scrubs | Respond slightly sooner without adding a second easing layer |

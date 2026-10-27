@@ -20,19 +20,25 @@
         </svg>
       </span>
     </div>
-    <div class="hero-role"><svg class="hero-arrow" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M6 6L26 26M26 6V26H6" stroke="currentColor" stroke-width="1.5"></path></svg><p>Student &amp;<br>researcher</p></div>
+    <div class="hero-role"><svg class="hero-arrow" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="M6 6L26 26M26 6V26H6" stroke="currentColor" stroke-width="1.5"></path></svg><p>Student &amp;<br>aspiring engineer</p></div>
     <h1 class="sr-only">Suhas Beemineni</h1>
     <div class="name-marquee" aria-hidden="true"><div class="name-track"><span>Suhas Beemineni —&nbsp;</span><span>Suhas Beemineni —&nbsp;</span></div></div>
     <a class="hero-scroll" href="#work" aria-label="View work">↓</a>
   </section>
 
   <section class="introduction wrap" id="about" aria-labelledby="about-title">
-    <h2 id="about-title" class="flow-heading" data-flow-heading><span class="flow-line"><span>I work on AI,</span></span> <span class="flow-line"><span>robots, and navigation.</span></span></h2>
-    <div class="intro-side"><p>Sophomore at River Islands High School in California.</p><div class="intro-circle-wrap"><a class="circle-button liquid magnetic" href="about.html" data-transition-title="About"><span class="button-fill" aria-hidden="true"></span><span class="button-label">About me</span></a></div></div>
+    <h2 id="about-title" class="reveal">I'm Suhas. I learn by building things, testing them, and figuring out why they don't work.</h2>
+    <div class="intro-side"><p>I'm a sophomore at River Islands High School, interested in electrical engineering, AI, and robotics.</p><div class="intro-circle-wrap"><a class="circle-button liquid magnetic" href="about.html" data-transition-title="About"><span class="button-fill" aria-hidden="true"></span><span class="button-label">About me</span></a></div></div>
   </section>
 
-  {{featured_work}}
+  <section class="work-section wrap" id="work" aria-labelledby="work-title">
+    <span id="all-work"></span><span id="current-work"></span>
+    <h2 id="work-title" class="small-heading">Selected work</h2>
+    <div class="work-list">{{work_rows}}</div>
+  </section>
+
+  <div class="more-work wrap"><a class="more-work-link liquid magnetic" href="work.html" data-transition-title="Work"><span class="button-fill" aria-hidden="true"></span><span class="button-label">More work<sup>{{work_count}}</sup></span></a></div>
   {{evidence_gallery}}
-  <div class="more-work wrap"><a class="more-work-link liquid magnetic" href="work.html" data-transition-title="Work"><span class="button-fill" aria-hidden="true"></span><span class="button-label">All work<sup>{{work_count}}</sup></span></a></div>
   {{recognition}}
 </main>
+

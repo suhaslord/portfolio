@@ -464,3 +464,9 @@ body{font-family:'DM Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-opti
 .recognition-section{scroll-margin-top:70px}
 html{scroll-padding-top:0}
 :where(main [id]){scroll-margin-top:65px}
+
+/* Scroll and pointer motion own separate elements; preserve the original placement. */
+.intro-circle-wrap{position:absolute;left:0;top:10.5vw;width:12vw;height:12vw;min-width:135px;min-height:135px;max-width:180px;max-height:180px}
+.intro-side .intro-circle-wrap .circle-button{position:relative;left:auto;top:auto;margin:0}
+@media(min-width:768px) and (max-width:1024px){.intro-circle-wrap{top:15vw}}
+@media(max-width:767px){.intro-circle-wrap{position:static;flex:0 0 110px;width:110px;height:110px;min-width:110px;min-height:110px}}

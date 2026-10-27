@@ -1,58 +1,14 @@
-/* A shared reading rhythm for the work, its evidence, and the person behind it. */
+/* Interior-page rhythm. Homepage proportions live in site.css. */
 .flow-line{display:block;overflow:clip;padding-bottom:.1em;margin-bottom:-.1em}
 .flow-line>span{display:block}
-.page-home .introduction{min-height:35vw;padding:10vw 0;align-items:start}
-.page-home .introduction h2{font-size:3vw;line-height:1.25;letter-spacing:-.015em}
-.intro-circle-wrap{position:absolute;left:0;top:8vw;width:12vw;height:12vw;min-width:135px;min-height:135px}
-.page-home .intro-side .intro-circle-wrap .circle-button{position:relative;left:auto;top:auto;margin:0}
-
-.featured-work{padding:1vw 0 5vw;scroll-margin-top:65px}
-.feature-heading{padding-bottom:2vw}
-.feature-heading .small-heading{margin:0}
-.feature-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:7vw;align-items:start}
-.feature-list{min-width:0}
-.feature-row{display:grid;grid-template-columns:24px minmax(0,1fr) 24px;gap:16px;align-items:start;min-height:22vw;padding:5vw 0;border-top:1px solid var(--line)}
-.feature-row:last-child{border-bottom:1px solid var(--line)}
-.feature-number{color:var(--muted);font-size:11px;line-height:1.5;padding-top:1vw}
-.feature-copy h3{font-size:3.8vw;line-height:1.12;letter-spacing:-.015em;color:#7d8083;transition:color .3s ease}
-.feature-row.is-active h3,.feature-row:hover h3,.feature-row:focus-visible h3{color:var(--ink)}
-.feature-copy p{font-size:1.2vw;line-height:1.55;margin-top:1.5vw;color:var(--ink);max-width:25em}
-.feature-outcome{display:block;font-size:.9vw;line-height:1.6;color:var(--muted);margin-top:.6vw}
-.feature-arrow{width:22px;height:22px;margin-top:1vw;opacity:.5;transition:transform .25s ease,opacity .25s ease}
-.feature-row.is-active .feature-arrow,.feature-row:hover .feature-arrow{opacity:1}
-.feature-row:hover .feature-arrow{transform:translate(3px,-3px)}
-.feature-thumb{display:none}
-.feature-display{position:sticky;top:calc(50svh - 17vw);align-self:start;margin:2vw 0 0;min-width:0}
-.feature-stage{position:relative;height:32vw;max-height:570px;background:#e7e8e9;overflow:hidden}
-.feature-panel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:2vw;background:#e7e8e9;visibility:hidden;opacity:0}
-.feature-panel.is-active{visibility:visible;opacity:1}
-.feature-panel img{display:block;width:100%;height:100%;object-fit:contain}
-.feature-panel.is-photo{padding:0;background:#b5b9b7}
-.feature-panel.is-photo img{object-fit:cover}
-.feature-panel.is-logo{background:#292631;padding:0}
-.feature-panel.is-logo img{width:32%;height:32%;object-fit:contain}
-.feature-display figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-top:16px;font-size:12px;color:var(--muted)}
-
-.evidence-gallery{padding:3vw 0 2vw;overflow:hidden}
-.evidence-heading{margin-bottom:5vw}
-.evidence-track{margin-left:8vw;margin-bottom:4vw;gap:2vw}
-.evidence-tile{flex-basis:26.6667vw;width:26.6667vw}
-.evidence-track.is-pair{gap:4vw}
-.evidence-track.is-pair .evidence-tile{flex-basis:40vw;width:40vw}
-.evidence-image{aspect-ratio:1.45;padding:1.7vw}
-.evidence-caption{padding-top:1.2vw;align-items:start}
-.evidence-caption>span:first-child{line-height:1.4}
-.evidence-caption>span:last-child{font-size:.85vw;line-height:1.65}
-.page-home .more-work{padding:0 0 8vw}
-
-.recognition-section,.recognition-section.is-compact{padding:7vw 0 9vw}
-.recognition-heading{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:end;margin-bottom:4.5vw}
-.recognition-heading .section-heading{margin:0}
-.recognition-note{justify-self:end;max-width:320px}
-.recognition-note p{font-size:1.2vw;line-height:1.65;margin-bottom:22px}
-.recognition-note .outline-link{font-size:1.1vw}
-.achievement{padding-top:1.8vw}
-.achievement-value{font-size:5.5vw;letter-spacing:-.045em;margin-bottom:1.8vw}
+.page-about .recognition-section{padding:7vw 0 9vw}
+.page-about .recognition-heading{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:end;margin-bottom:4.5vw}
+.page-about .recognition-heading .section-heading{margin:0}
+.page-about .recognition-note{justify-self:end;max-width:320px}
+.page-about .recognition-note p{font-size:1.2vw;line-height:1.65;margin-bottom:22px}
+.page-about .recognition-note .outline-link{font-size:1.1vw}
+.page-about .achievement{padding-top:1.8vw}
+.page-about .achievement-value{font-size:5.5vw;letter-spacing:-.045em;margin-bottom:1.8vw}
 
 .community-section,.experience-section{display:grid;grid-template-columns:28% minmax(0,1fr);gap:8%;align-items:start;padding-bottom:10vw}
 .community-section>.section-heading-row,.experience-section>.section-heading{position:sticky;top:18svh;margin:0}
@@ -77,68 +33,24 @@
 .case-primary .case-image{min-height:0}
 .case-page .case-content:has(+.case-figure){padding-bottom:5vw}
 
-@media(min-width:1600px){
- .featured-work.wide-wrap{max-width:1600px}
- .feature-copy h3{font-size:clamp(58px,3.8vw,78px)}
- .feature-copy p{font-size:18px}.feature-outcome{font-size:14px}
-}
+
 @media(min-width:768px) and (max-width:1100px){
- .feature-copy p,.recognition-note p{font-size:15px}.feature-outcome{font-size:12px}
- .feature-layout{gap:5vw}.feature-row{grid-template-columns:20px minmax(0,1fr) 20px;gap:10px}
- .feature-copy h3{font-size:3.65vw}.feature-arrow{width:20px;height:20px}
+ .page-about .recognition-note p{font-size:15px}.page-about .recognition-note .outline-link{font-size:14px}
  .community-section .experience-row p,.experience-section .experience-row p,.education-section p{font-size:15px}
  .community-section .experience-row div>span{font-size:13px}
- .recognition-note .outline-link{font-size:14px}
- .evidence-caption>span:last-child{font-size:12px}
  .case-body h2{font-size:26px}
  .case-page .case-meta{font-size:14px}.case-page .case-meta span{font-size:10px}
 }
-@media(max-width:959px){
- .feature-layout{display:block}
- .feature-display{display:none}
- .feature-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 4vw}
- .feature-row{min-height:0;padding:0 0 25px;border-top:0;grid-template-columns:22px minmax(0,1fr) 20px;gap:12px 8px}
- .feature-row .feature-thumb{display:flex;grid-column:1/-1;grid-row:1;align-items:center;justify-content:center;width:100%;aspect-ratio:1.35;background:#e7e8e9;padding:20px;margin-bottom:8px;overflow:hidden}
- .feature-thumb img{width:100%;height:100%;object-fit:contain}
- .feature-thumb.is-photo{padding:0}.feature-thumb.is-photo img{object-fit:cover}
- .feature-thumb.is-logo{padding:0;background:#292631}.feature-thumb.is-logo img{width:32%;height:32%}
- .feature-copy h3{font-size:29px;color:var(--ink)}
- .feature-copy p{font-size:14px;margin-top:15px}.feature-outcome{font-size:12px;margin-top:7px}
- .feature-number{padding-top:6px}.feature-arrow{margin-top:6px}
- .case-page .case-facts{position:static}
-}
+@media(max-width:959px){.case-page .case-facts{position:static}}
 @media(max-width:767px){
- .page-home .introduction{min-height:0;padding:80px 0 85px}
- .page-home .introduction h2{font-size:clamp(27px,7.3vw,41px);line-height:1.3}
- .intro-circle-wrap{position:static;flex:0 0 110px;width:110px;height:110px;min-width:110px;min-height:110px}
- .featured-work{padding-top:0;padding-bottom:55px}
- .feature-heading{padding-bottom:30px}
- .feature-list{display:block}
- .feature-row{margin-bottom:35px;padding-bottom:30px;border-bottom:1px solid var(--line);gap:12px 6px}
- .feature-row:last-child{margin-bottom:0}
- .feature-row .feature-thumb{padding:18px;margin-bottom:10px;aspect-ratio:1.35}
- .feature-row .feature-thumb.is-photo,.feature-row .feature-thumb.is-logo{padding:0}
- .feature-copy h3{font-size:clamp(26px,7vw,38px)}
- .feature-copy p{font-size:14px;line-height:1.5;margin-top:14px}
- .feature-outcome{font-size:12px;line-height:1.55;margin-top:8px}
- .feature-row .feature-arrow{width:20px;height:20px}
- .evidence-gallery{padding:15px 24px 0}
- .evidence-heading.wide-wrap{width:100%;margin-bottom:35px}
- .evidence-heading .section-heading{font-size:35px}
- .evidence-track,.evidence-track.is-pair{display:block;width:100%;margin:0;padding:0;overflow:visible;scroll-snap-type:none;will-change:auto}
- .evidence-tile,.evidence-track.is-pair .evidence-tile{display:grid;grid-template-columns:43% minmax(0,1fr);gap:20px;align-items:center;width:100%;padding:23px 0;border-top:1px solid var(--line)}
- .evidence-image{aspect-ratio:1.2;padding:10px}
- .evidence-caption{display:block;padding:0;font-size:18px;line-height:1.35}
- .evidence-caption>span:last-child{font-size:12px;line-height:1.6;margin-top:9px}
- .page-home .more-work{padding:35px 0 70px}
- .recognition-section,.recognition-section.is-compact{padding:35px 0 85px}
- .recognition-heading{display:block;margin-bottom:35px}
- .recognition-heading .section-heading{margin-bottom:26px}
- .recognition-note{max-width:none;display:flex;align-items:center;justify-content:space-between;gap:22px}
- .recognition-note p{font-size:14px;line-height:1.6;max-width:165px;margin:0}
- .recognition-note .outline-link{font-size:13px;min-height:54px;padding-inline:19px;flex:none}
- .achievement-grid{gap:32px 22px}
- .achievement{padding-top:18px}.achievement-value{font-size:13vw;margin-bottom:17px}
+ .page-about .recognition-section{padding:35px 0 85px}
+ .page-about .recognition-heading{display:block;margin-bottom:35px}
+ .page-about .recognition-heading .section-heading{margin-bottom:26px}
+ .page-about .recognition-note{max-width:none;display:flex;align-items:center;justify-content:space-between;gap:22px}
+ .page-about .recognition-note p{font-size:14px;line-height:1.6;max-width:165px;margin:0}
+ .page-about .recognition-note .outline-link{font-size:13px;min-height:54px;padding-inline:19px;flex:none}
+ .page-about .achievement-grid{gap:32px 22px}
+ .page-about .achievement{padding-top:18px}.page-about .achievement-value{font-size:13vw;margin-bottom:17px}
  .community-section,.experience-section{display:block;padding-bottom:75px}
  .community-section>.section-heading-row,.experience-section>.section-heading{position:static;margin-bottom:35px}
  .community-section .experience-row{grid-template-columns:24px minmax(0,1fr);gap:9px;padding:23px 0}
@@ -154,13 +66,4 @@
  .case-body>section{padding-top:28px;margin-bottom:38px}.case-body h2{font-size:23px}
  .case-page .case-content:has(+.case-figure){padding-bottom:40px}
 }
-@media(max-width:374px){
- .recognition-note{align-items:start;flex-direction:column;gap:18px}
- .recognition-note p{max-width:none}
- .evidence-tile,.evidence-track.is-pair .evidence-tile{gap:16px}.evidence-caption{font-size:16px}
-}
-@media(prefers-reduced-motion:reduce){
- .flow-line>span{transform:none!important;opacity:1!important}
- .feature-row,.feature-panel,.feature-arrow{transition:none!important}
- .feature-display,.evidence-track{transform:none!important}
-}
+@media(prefers-reduced-motion:reduce){.flow-line>span{transform:none!important;opacity:1!important}}
