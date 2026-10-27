@@ -2,7 +2,7 @@
 .flow-line{display:block;overflow:clip;padding-bottom:.1em;margin-bottom:-.1em}
 .flow-line>span{display:block}
 .page-home .introduction{min-height:35vw;padding:10vw 0;align-items:start}
-.page-home .introduction h2{font-size:3vw;line-height:1.25;letter-spacing:-.025em}
+.page-home .introduction h2{font-size:3vw;line-height:1.25;letter-spacing:-.015em}
 .intro-circle-wrap{position:absolute;left:0;top:8vw;width:12vw;height:12vw;min-width:135px;min-height:135px}
 .page-home .intro-side .intro-circle-wrap .circle-button{position:relative;left:auto;top:auto;margin:0}
 
@@ -14,7 +14,7 @@
 .feature-row{display:grid;grid-template-columns:24px minmax(0,1fr) 24px;gap:16px;align-items:start;min-height:22vw;padding:5vw 0;border-top:1px solid var(--line)}
 .feature-row:last-child{border-bottom:1px solid var(--line)}
 .feature-number{color:var(--muted);font-size:11px;line-height:1.5;padding-top:1vw}
-.feature-copy h3{font-size:3.8vw;line-height:1.12;letter-spacing:-.035em;color:#7d8083;transition:color .3s ease}
+.feature-copy h3{font-size:3.8vw;line-height:1.12;letter-spacing:-.015em;color:#7d8083;transition:color .3s ease}
 .feature-row.is-active h3,.feature-row:hover h3,.feature-row:focus-visible h3{color:var(--ink)}
 .feature-copy p{font-size:1.2vw;line-height:1.55;margin-top:1.5vw;color:var(--ink);max-width:25em}
 .feature-outcome{display:block;font-size:.9vw;line-height:1.6;color:var(--muted);margin-top:.6vw}

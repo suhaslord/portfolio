@@ -106,7 +106,7 @@ def work(projects):
 def recognition(compact=False):
     items = [('2nd', 'SkillsUSA regionals', '3D Visualization & Graphics'), ('Top 50', 'Math Kangaroo · California', 'Grade 7'), ('31h', 'Steel City Codes', 'Summer 2026 · CS instructor'), ('43h', 'STEM·E', 'Game-design volunteer')]
     cells = ''.join(f'<article class="achievement"><div class="achievement-value"><span>{E(value)}</span></div><h3>{E(name)}</h3><p>{E(detail)}</p></article>' for value, name, detail in items)
-    title = '<h2 id="recognition-title" class="section-heading flow-heading" data-flow-heading><span class="flow-line"><span>Teaching &amp;</span></span><span class="flow-line"><span>recognition.</span></span></h2>'
+    title = '<h2 id="recognition-title" class="section-heading flow-heading" data-flow-heading><span class="flow-line"><span>Teaching &amp;</span></span> <span class="flow-line"><span>recognition.</span></span></h2>'
     intro = '<div class="recognition-note"><p>I also teach, tutor, and coach soccer.</p>' + pill('about.html#community', 'Community work', title='About') + '</div>' if compact else ''
     return f'<section class="recognition-section{" is-compact" if compact else ""}" id="recognition" aria-labelledby="recognition-title"><div class="wide-wrap"><header class="recognition-heading">{title}{intro}</header><div class="achievement-grid">{cells}</div>' + '</div></section>'
 
@@ -120,7 +120,7 @@ def gallery(projects):
             p = by_slug[slug]
             cells.append(f'<a class="evidence-tile" href="work/{slug}.html" data-transition-title="{E(p["name"])}" data-cursor-only="View"><span class="evidence-image">{thumb(p, cls="evidence-media")}</span><span class="evidence-caption"><span>{E(p["name"])}</span><span>{E(p["type"])}</span></span></a>')
         rows.append('<div class="evidence-track' + (' is-pair' if len(slugs) == 2 else '') + '">' + ''.join(cells) + '</div>')
-    return '<section class="evidence-gallery" aria-labelledby="evidence-title"><header class="evidence-heading wide-wrap"><h2 id="evidence-title" class="section-heading flow-heading" data-flow-heading><span class="flow-line"><span>More of</span></span><span class="flow-line"><span>the work.</span></span></h2></header>' + ''.join(rows) + '</section>'
+    return '<section class="evidence-gallery" aria-labelledby="evidence-title"><header class="evidence-heading wide-wrap"><h2 id="evidence-title" class="section-heading flow-heading" data-flow-heading><span class="flow-line"><span>More of</span></span> <span class="flow-line"><span>the work.</span></span></h2></header>' + ''.join(rows) + '</section>'
 
 
 def about():

@@ -118,6 +118,7 @@ window.mountPortfolioFlow = ({scope, gsap, ST, reduce, on, cleanup}) => {
     };
     rows.forEach((row, i) => {
       listen(row,'pointerenter', event => {if(event.pointerType === 'touch')return;hovered=i;show(i);});
+      listen(row,'pointermove', event => {if(event.pointerType === 'touch'||hovered===i)return;hovered=i;show(i);});
       listen(row,'pointerleave', () => {hovered=null;if(focused===null)followReading();});
       listen(row,'focusin', () => {focused=i;show(i,true);});
       listen(row,'focusout', () => {
