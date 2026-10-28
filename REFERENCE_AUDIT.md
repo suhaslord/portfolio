@@ -129,3 +129,5 @@ Portrait request fulfilled with the image supplied directly by Suhas. The origin
 | Every in-flow image load can request a scroll refresh | Fixed portrait frames do not request one | Keep lazy avatar decoding from recalculating scroll positions mid-gesture |
 
 The page composition, project order, hero, hover physics, menu behavior and continuous gallery/footer scrubs remain in place. Verification covers forward and reverse browsing, portrait loading and cropping, page handoffs, and keyboard use. Reduced motion retains complete text and the same portrait frames.
+
+Mid-page reload verification exposed a ScrollTrigger initialization error when completed `once` triggers removed themselves during a later trigger's refresh. Entrance triggers now keep their scoped registration and use `play none none none`: they do not rewind or restart after completion, and route teardown removes them together. This avoids mutating the trigger list during initialization.

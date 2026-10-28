@@ -41,7 +41,7 @@
         heading.querySelectorAll('.word-mask').forEach(word=>{
           const top=word.offsetTop;if(!lines.has(top))lines.set(top,[]);lines.get(top).push(word.firstElementChild);
         });
-        const reveal=gsap.timeline({scrollTrigger:{trigger:heading,start:'top 94%',once:true}});
+        const reveal=gsap.timeline({scrollTrigger:{trigger:heading,start:'top 94%',toggleActions:'play none none none'}});
         [...lines.values()].forEach((words,index)=>reveal.from(words,{y:20,opacity:.7,duration:1.05,ease:'power3.out',clearProps:'transform,opacity'},index*.06));
       });
 
@@ -50,19 +50,19 @@
         motion.className='work-title-motion';title.replaceWith(motion);motion.append(title);
         cleanup(()=>motion.replaceWith(title));
         // The row stays fully readable. Its gentle first entrance does not rewind.
-        const reveal=gsap.timeline({scrollTrigger:{trigger:row,start:'top 97%',once:true}});
+        const reveal=gsap.timeline({scrollTrigger:{trigger:row,start:'top 97%',toggleActions:'play none none none'}});
         reveal.from(motion,{y:26,opacity:.8,duration:1.05,ease:'power3.out',clearProps:'transform,opacity'},0)
           .from(row.querySelector('p'),{y:12,opacity:.75,duration:.95,ease:'power3.out',clearProps:'opacity'},.045);
         if(!fine.matches){
           const image=row.querySelector('.work-thumb');
-          if(image)gsap.from(image,{y:22,opacity:.8,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:image,start:'top 97%',once:true}});
+          if(image)gsap.from(image,{y:22,opacity:.8,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:image,start:'top 97%',toggleActions:'play none none none'}});
         }
       });
 
       const gallery=$('.evidence-gallery');
       $$('.evidence-track').forEach((track,index)=>{
         if(fine.matches)gsap.fromTo(track,{x:index%2?'4vw':'-4vw'},{x:index%2?'-4vw':'4vw',ease:'none',scrollTrigger:{trigger:gallery,start:'top bottom',end:'bottom top',scrub:true}});
-        const sequence=gsap.timeline({scrollTrigger:{trigger:track,start:'top 97%',once:true}});
+        const sequence=gsap.timeline({scrollTrigger:{trigger:track,start:'top 97%',toggleActions:'play none none none'}});
         track.querySelectorAll('.evidence-tile').forEach((tile,i)=>{
           sequence.from(tile.querySelector('.evidence-image'),{y:28,opacity:.75,duration:1.2,ease:'power3.out'},i*.045)
             .from(tile.querySelector('img'),{scale:1.035,duration:1.4,ease:'power3.out'},i*.045)
@@ -72,7 +72,7 @@
 
       const achievements=$('.achievement-grid');
       if(achievements){
-        const sequence=gsap.timeline({scrollTrigger:{trigger:achievements,start:'top 94%',once:true}});
+        const sequence=gsap.timeline({scrollTrigger:{trigger:achievements,start:'top 94%',toggleActions:'play none none none'}});
         $$('.achievement').forEach((item,index)=>{
           const at=index*.06;
           sequence.from(item.querySelector('.achievement-value span'),{y:24,opacity:.7,duration:1.1,ease:'power3.out',clearProps:'transform,opacity'},at)
@@ -83,7 +83,7 @@
         const original=heading.innerHTML;
         heading.innerHTML=original.split(/<br\s*\/?>/i).map(line=>`<span class="heading-line"><span>${line}</span></span>`).join('');
         cleanup(()=>{heading.innerHTML=original;});
-        gsap.from(heading.querySelectorAll('.heading-line>span'),{y:22,opacity:.7,duration:1.1,stagger:.06,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:heading,start:'top 95%',once:true}});
+        gsap.from(heading.querySelectorAll('.heading-line>span'),{y:22,opacity:.7,duration:1.1,stagger:.06,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:heading,start:'top 95%',toggleActions:'play none none none'}});
       });
     }
 
@@ -93,7 +93,7 @@
     });
 
     const portrait=$('.about-image:has(.profile-photo)');
-    if(portrait)gsap.from(portrait,{y:24,opacity:.8,duration:1.2,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:portrait,start:'top 96%',once:true}});
+    if(portrait)gsap.from(portrait,{y:24,opacity:.8,duration:1.2,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:portrait,start:'top 96%',toggleActions:'play none none none'}});
 
     // Controls use the same physical follow as the result preview. One clock services
     // only the hovered control and controls that are still returning to rest.

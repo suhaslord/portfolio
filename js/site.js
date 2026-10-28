@@ -100,7 +100,7 @@
           gsap.to($('.hero-arrow'),{rotation:90,ease:'none',scrollTrigger:{trigger:hero,start:'bottom bottom',end:'bottom top',scrub:true}});
         }else ST.create({start:100,onEnter:()=>root.classList.add('has-scrolled'),onLeaveBack:()=>root.classList.remove('has-scrolled')});
         if($('.intro-side')){
-          gsap.from($('.intro-side'),{y:45,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:$('.introduction'),start:'top 95%',once:true}});
+          gsap.from($('.intro-side'),{y:45,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:$('.introduction'),start:'top 95%',toggleActions:'play none none none'}});
           if(fine.matches)gsap.from($('.intro-circle-wrap'),{y:80,ease:'none',scrollTrigger:{trigger:$('.introduction'),start:'top bottom',end:'bottom top',scrub:true}});
         }
         $$('[data-footer-reveal]').forEach(footer=>{
@@ -131,7 +131,7 @@
       refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;if(scope.isConnected){lenis?.resize();ST?.refresh();}});
     };
     cleanup(()=>cancelAnimationFrame(refreshFrame));
-    $$('img').filter(img=>!img.closest('.work-preview')&&!img.classList.contains('profile-photo')).forEach(img=>on(img,'load',refresh,{once:true}));document.fonts?.ready.then(refresh);
+    $$('img').filter(img=>!img.closest('.work-preview')&&!img.classList.contains('profile-photo')).forEach(img=>on(img,'load',refresh,{toggleActions:'play none none none'}));document.fonts?.ready.then(refresh);
     return {scope,closeMenu,destroy(){controller.abort();disposers.forEach(fn=>fn());context?.revert();gsap?.killTweensOf(scope.querySelectorAll('*'));}};
   }
 
