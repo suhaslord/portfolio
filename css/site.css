@@ -473,3 +473,5 @@ html{scroll-padding-top:0}
 
 /* GSAP promotes moving controls as needed; idle text and links need no layers. */
 .magnetic,.word-mask>span{will-change:auto}
+/* Lenis owns wheel easing; scripted anchors request their own smooth behavior. */
+html{scroll-behavior:auto}

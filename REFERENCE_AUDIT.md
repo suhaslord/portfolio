@@ -78,6 +78,7 @@ The user rejected the new sticky layout. Home is restored from the version prece
 | An old image decode can update a disposed page or hide a newer preview | Check the mount's abort signal and active row before resolving | Prevent asynchronous flicker during quick navigation |
 | Decorative previews can remain after switching to the keyboard | Keyboard clears them immediately; touch never starts them | Keep focus and content unobstructed |
 | Every word and magnetic link permanently requests a compositor layer | GSAP promotes moving controls only as needed | Reduce idle rendering layers without changing layout |
+| Idle Lenis leaves the root's CSS smooth scrolling active | Root scroll behavior is automatic; scripted anchors explicitly request smooth motion | Prevent native focus scrolling from competing with the scroll engine and moving click targets |
 
 Feel and timing: the reference's long curved page transitions, cursor bloom and direct opposing gallery scrubs are deliberately retained, as requested. These portfolio presentation effects have a different budget from repeated UI controls. No new sections, text, image sizes or project ordering are introduced. Keyboard routes and reduced-motion paths remain immediate.
 
