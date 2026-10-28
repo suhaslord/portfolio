@@ -104,6 +104,67 @@
       if(lines.length)gsap.from(lines,{yPercent:45,stagger:.08,ease:'none',scrollTrigger:{trigger:footer,start:'top 96%',end:'top 36%',scrub:true}});
     });
 
+    // Controls use the same physical follow as the result preview. One clock services
+    // only the hovered control and controls that are still returning to rest.
+    if(fine.matches){
+      const moving=new Set(),controls=[];
+      $$('.magnetic').forEach(element=>{
+        let surface=element;
+        if(element.closest('.menu-panel nav')){
+          surface=document.createElement('span');surface.className='menu-link-text';
+          while(element.firstChild)surface.append(element.firstChild);
+          element.append(surface);
+        }
+        const text=surface===element?(element.querySelector('.button-label')||element.querySelector('span:not(.brand-mark)')):null;
+        const state={element:surface,trigger:element,text,hovered:false,pointer:{x:0,y:0},x:spring(0,600,44),y:spring(0,600,44),tx:spring(0,460,38),ty:spring(0,460,38)};
+        state.setX=gsap.quickSetter(surface,'x','px');state.setY=gsap.quickSetter(surface,'y','px');
+        if(text){state.setTX=gsap.quickSetter(text,'x','px');state.setTY=gsap.quickSetter(text,'y','px');}
+        const aim=event=>{
+          if(event.pointerType==='touch')return;
+          state.hovered=true;state.pointer.x=event.clientX;state.pointer.y=event.clientY;moving.add(state);
+        };
+        on(element,'pointerenter',aim);on(element,'pointermove',aim);
+        on(element,'pointerleave',()=>{state.hovered=false;moving.add(state);});
+        controls.push(state);
+      });
+      const reset=()=>{
+        moving.forEach(state=>{
+          state.hovered=false;
+          [state.x,state.y,state.tx,state.ty].forEach(axis=>axis.snap(0));
+          state.setX(0);state.setY(0);state.setTX?.(0);state.setTY?.(0);
+        });
+        moving.clear();
+      };
+      const followControls=(_time,delta)=>{
+        if(!moving.size||document.hidden)return;
+        const dt=Math.min(delta,64)/1000;
+        moving.forEach(state=>{
+          let x=0,y=0;
+          if(state.hovered){
+            if(!state.trigger.matches(':hover'))state.hovered=false;
+            else{
+              const rect=state.trigger.getBoundingClientRect(),same=state.element===state.trigger;
+              const strength=state.trigger.dataset.magnet?Number(state.trigger.dataset.magnet)*rect.width:state.trigger.classList.contains('circle-button')?100:28;
+              x=clamp((state.pointer.x-rect.left+(same?state.x.value:0))/rect.width-.5,-.5,.5)*strength;
+              y=clamp((state.pointer.y-rect.top+(same?state.y.value:0))/rect.height-.5,-.5,.5)*strength;
+            }
+          }
+          state.setX(state.x.step(x,dt));state.setY(state.y.step(y,dt));
+          state.setTX?.(state.tx.step(x*.5,dt));state.setTY?.(state.ty.step(y*.5,dt));
+          if(!state.hovered&&[state.x,state.y,state.tx,state.ty].every(axis=>axis.value===0&&axis.velocity===0))moving.delete(state);
+        });
+      };
+      on(document,'keydown',reset);on(window,'blur',reset);
+      on(document,'pointerdown',event=>{if(event.pointerType==='touch')reset();});
+      gsap.ticker.add(followControls);
+      cleanup(()=>{
+        gsap.ticker.remove(followControls);moving.clear();
+        const elements=controls.flatMap(state=>state.text?[state.element,state.text]:[state.element]);
+        gsap.set(elements,{clearProps:'transform'});
+        controls.forEach(state=>{if(state.element!==state.trigger)state.trigger.replaceChildren(...state.element.childNodes);});
+      });
+    }
+
     const preview=$('.work-preview'),rail=$('.preview-rail'),badge=$('.work-preview-action');
     if(!fine.matches||!preview||!rail||!badge)return;
     const images=[...rail.querySelectorAll('img')];

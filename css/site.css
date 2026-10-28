@@ -479,6 +479,7 @@ html{scroll-behavior:auto}
 /* The same editorial layout, with depth and a coherent motion language. */
 .hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 62% 28%,#ffffff21,transparent 67%),linear-gradient(160deg,#ffffff09,transparent 48%,#14151710)}
 .name-track{transform-origin:50% 70%}
+.menu-link-text{display:block}
 .work-title-mask{display:block;overflow:clip;margin:-.08em -32px;padding:.08em 32px;min-width:0}
 .work-title-motion{display:block}
 .has-motion-rule{position:relative;border-top-color:transparent}

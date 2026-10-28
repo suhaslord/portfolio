@@ -101,3 +101,17 @@ Review decision: approve for the requested reference motion, subject to the live
 All result images, written content, project order, routes, large rows and gallery structure are retained. Touch scroll stays native; pointer tilt, hover zoom and rolling hover labels are gated to a fine pointer. Reduced motion keeps the untransformed content and original labels. Keyboard focus reveals titles immediately and clears the decorative preview.
 
 Physics verification passes at simulated 30, 60 and 120Hz, including retargeting, bounded overshoot and long-frame stability. These checks measure the spring calculation, not browser frame rate. The shared page teardown removes observers, scroll listeners and tickers before mounting the next route.
+
+## Consistent control movement
+
+| Before | After | Why |
+| --- | --- | --- |
+| Previews use springs while buttons repeatedly retarget duration-based tweens | Controls and their labels also preserve spring velocity | Make changes in pointer direction feel consistent across the page |
+| Magnetic geometry is read on every pointer event | The active control is measured once on the shared tick | Bound layout reads to rendered frames |
+| Each returning button starts a new elastic tween | The existing velocity settles continuously toward the resting position | Remove the restart when the pointer quickly leaves and re-enters |
+| Keyboard focus can inherit a magnetic offset | Keyboard, touch and window blur immediately reset active controls | Keep focus and tap targets stable |
+| Menu entry and magnetic follow can write to the same link transform | Menu entry moves the anchor; pointer motion moves its inner text | Keep the opening stagger and pointer movement independent |
+
+The control springs and label springs pass the same simulated 30/60/120Hz checks as the image preview, including returning to zero after movement. Route teardown removes the tick and clears the transforms.
+
+Portrait request: the confirmed profile is https://www.linkedin.com/in/suhasbe/. LinkedIn's current public flow redirects to sign-in, and no usable portrait was located among the previously shared image files. Placement is intended for About and the existing footer/contact avatar; the actual image file is still required.

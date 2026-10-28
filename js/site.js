@@ -118,20 +118,6 @@
 
       }else $$('.reveal').forEach(el=>el.classList.add('is-visible'));
 
-      if(canMove()&&fine.matches){
-        $$('.magnetic').forEach(el=>{
-          const text=el.querySelector('.button-label')||el.querySelector('span:not(.brand-mark)');
-          const strength=el.dataset.magnet?Number(el.dataset.magnet)*el.offsetWidth:el.classList.contains('circle-button')?100:28;
-          const x=gsap.quickTo(el,'x',{duration:.55,ease:'power3.out'}),y=gsap.quickTo(el,'y',{duration:.55,ease:'power3.out'});
-          const tx=text&&gsap.quickTo(text,'x',{duration:.55,ease:'power3.out'}),ty=text&&gsap.quickTo(text,'y',{duration:.55,ease:'power3.out'});
-          on(el,'pointermove',e=>{
-            if(reduce.matches||!fine.matches)return;
-            const r=el.getBoundingClientRect(),px=(e.clientX-r.left+Number(gsap.getProperty(el,'x')))/r.width-.5,py=(e.clientY-r.top+Number(gsap.getProperty(el,'y')))/r.height-.5;
-            x(px*strength);y(py*strength);if(text){tx(px*strength*.5);ty(py*strength*.5);}
-          });
-          on(el,'pointerleave',()=>gsap.to([el,...(text?[text]:[])],{x:0,y:0,duration:.75,ease:'elastic.out(1,.45)',overwrite:true}));
-        });
-      }
       window.mountPortfolioFlow?.({scope,gsap,ST,reduce,fine,on,cleanup});
       window.PortfolioMotion?.mount({scope,gsap,ST,reduce,fine,on,cleanup,scrollEngine:lenis,canPreview:()=>!changing});
       window.mountPortfolioPage?.({scope,gsap,ST,reduce,fine,on,cleanup});
