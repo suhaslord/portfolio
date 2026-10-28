@@ -470,3 +470,6 @@ html{scroll-padding-top:0}
 .intro-side .intro-circle-wrap .circle-button{position:relative;left:auto;top:auto;margin:0}
 @media(min-width:768px) and (max-width:1024px){.intro-circle-wrap{top:15vw}}
 @media(max-width:767px){.intro-circle-wrap{position:static;flex:0 0 110px;width:110px;height:110px;min-width:110px;min-height:110px}}
+
+/* GSAP promotes moving controls as needed; idle text and links need no layers. */
+.magnetic,.word-mask>span{will-change:auto}

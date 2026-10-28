@@ -63,3 +63,22 @@ The user rejected the new sticky layout. Home is restored from the version prece
 | Fixed hover images trigger a full scroll refresh when loaded | Only in-flow media requests a frame-batched refresh | Prevent unnecessary recalculation during movement |
 | Scroll and magnetic tweens could move the same button | Original placement, with scroll targeting a wrapper | Keep motion continuous without changing its appearance |
 | Scroll smoothing lingers at lerp .1 | Lerp .12, retaining direct scrubs | Respond slightly sooner without adding a second easing layer |
+
+## Motion polish of the approved homepage
+
+| Before | After | Why |
+| --- | --- | --- |
+| Wheel input finishes every entrance with `progress(1)` | Input accelerates the active timeline continuously to 1.6× | Avoid jumping a moving curtain or title to its final frame |
+| Scrolling runs underneath the initial closed curtain | Lenis resumes as the content starts entering | Keep the page aligned with the visible handoff |
+| Reopening a closing menu resets the curve and links with `fromTo` | Curve, panel and links retarget their current poses | Preserve continuity during a quick reversal |
+| Magnetic controls follow for 1.1 seconds and return for 1.2 | 0.55 second follow and 0.75 second subtle return | Remove the long tail while preserving the reference's fluid feel |
+| Liquid fills wait on a 0.6 second ease-in-out entrance | 0.4 second power3-out entrance and 0.45 second through-exit | Respond immediately and retain the travelling fill |
+| Work filters reintroduce rows over 0.85 seconds and 45px | 0.48 seconds and 22px, keeping the short stagger | Reduce the wait after a deliberate filter change |
+| Generic cursor badges hit-test on each pointer and scroll event | One sample on the shared animation tick, cleaned up on navigation | Bound hover work to the rendering rate |
+| An old image decode can update a disposed page or hide a newer preview | Check the mount's abort signal and active row before resolving | Prevent asynchronous flicker during quick navigation |
+| Decorative previews can remain after switching to the keyboard | Keyboard clears them immediately; touch never starts them | Keep focus and content unobstructed |
+| Every word and magnetic link permanently requests a compositor layer | GSAP promotes moving controls only as needed | Reduce idle rendering layers without changing layout |
+
+Feel and timing: the reference's long curved page transitions, cursor bloom and direct opposing gallery scrubs are deliberately retained, as requested. These portfolio presentation effects have a different budget from repeated UI controls. No new sections, text, image sizes or project ordering are introduced. Keyboard routes and reduced-motion paths remain immediate.
+
+Review decision: approve for the requested reference motion, subject to the live checks recorded with this release. Desktop browser checks cover Home → Work → Home, rapid menu reversal, hover selection while scrolling, filter changes and cursor removal on keyboard input. Native phone scrolling remains in place; this environment does not provide phone viewport emulation.

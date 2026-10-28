@@ -36,14 +36,18 @@
       const toggle=$('.menu-toggle'),panel=$('.menu-panel'),scrim=$('.menu-scrim'),curve=$('.menu-curve');
       const background=$$('.site-header,#main,[data-footer-reveal],.site-footer');
       let menuOpen=false,menuMotion,returnFocus;
-      if(panel&&canMove())gsap.set(panel,{x:0,xPercent:115});
+      const menuLinks=panel?.querySelectorAll('nav a');
+      if(panel&&canMove()){
+        gsap.set(panel,{x:0,xPercent:115});
+        gsap.set(curve,{scaleX:1});gsap.set(menuLinks,{x:75,rotate:4});
+      }
       closeMenu=({instant=false,restoreFocus=true}={})=>{
         if(!menuOpen)return;
         menuOpen=false;toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');
         panel.setAttribute('aria-hidden','true');panel.inert=true;menuMotion?.kill();
-        const finish=()=>{root.classList.remove('menu-open');background.forEach(el=>el.inert=false);lenis?.start();if(restoreFocus)returnFocus?.focus({preventScroll:true});};
+        const finish=()=>{root.classList.remove('menu-open');background.forEach(el=>el.inert=false);if(gsap){gsap.set(curve,{scaleX:1});gsap.set(menuLinks,{x:75,rotate:4});}lenis?.start();if(restoreFocus)returnFocus?.focus({preventScroll:true});};
         if(!canMove()||instant){if(gsap){gsap.set(panel,{x:0,xPercent:115});gsap.set(scrim,{opacity:0});}finish();}
-        else menuMotion=gsap.timeline({onComplete:finish}).to(panel,{xPercent:115,duration:.6,ease:'power3.inOut'},0).to(curve,{scaleX:1,duration:.6,ease:'power3.inOut'},0).to(scrim,{opacity:0,duration:.4},0);
+        else menuMotion=gsap.timeline({onComplete:finish}).to(panel,{xPercent:115,duration:.5,ease:'power3.inOut'},0).to(curve,{scaleX:1,duration:.5,ease:'power3.inOut'},0).to(scrim,{opacity:0,duration:.3},0);
       };
       const openMenu=instant=>{
         if(!panel)return;
@@ -51,12 +55,12 @@
         toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-label','Close navigation');panel.setAttribute('aria-hidden','false');panel.inert=false;
         background.forEach(el=>el.inert=true);lenis?.stop();menuMotion?.kill();
         const focus=()=>panel.querySelector('nav a')?.focus({preventScroll:true});
-        if(!canMove()||instant){if(gsap){gsap.set(panel,{x:0,xPercent:0});gsap.set(curve,{scaleX:0});gsap.set(scrim,{opacity:1});}focus();}
+        if(!canMove()||instant){if(gsap){gsap.set(panel,{x:0,xPercent:0});gsap.set(curve,{scaleX:0});gsap.set(menuLinks,{x:0,rotate:0});gsap.set(scrim,{opacity:1});}focus();}
         else menuMotion=gsap.timeline({onComplete:focus})
-          .to(panel,{xPercent:0,duration:.8,ease:'power4.out'},0)
-          .fromTo(curve,{scaleX:1},{scaleX:0,duration:.9,ease:'power4.out'},0)
-          .fromTo(panel.querySelectorAll('nav a'),{x:75,rotate:4},{x:0,rotate:0,duration:.9,stagger:.04,ease:'expo.out'},.06)
-          .to(scrim,{opacity:1,duration:.4},0);
+          .to(panel,{xPercent:0,duration:.7,ease:'power4.out'},0)
+          .to(curve,{scaleX:0,duration:.75,ease:'power4.out'},0)
+          .to(menuLinks,{x:0,rotate:0,duration:.75,stagger:.035,ease:'expo.out'},.04)
+          .to(scrim,{opacity:1,duration:.3},0);
       };
       on(toggle,'click',e=>menuOpen?closeMenu({instant:e.detail===0}):openMenu(e.detail===0));
       on(scrim,'click',()=>closeMenu());
@@ -135,21 +139,27 @@
         $$('.magnetic').forEach(el=>{
           const text=el.querySelector('.button-label')||el.querySelector('span:not(.brand-mark)');
           const strength=el.dataset.magnet?Number(el.dataset.magnet)*el.offsetWidth:el.classList.contains('circle-button')?100:28;
-          const x=gsap.quickTo(el,'x',{duration:1.1,ease:'power4.out'}),y=gsap.quickTo(el,'y',{duration:1.1,ease:'power4.out'});
-          const tx=text&&gsap.quickTo(text,'x',{duration:1.1,ease:'power4.out'}),ty=text&&gsap.quickTo(text,'y',{duration:1.1,ease:'power4.out'});
+          const x=gsap.quickTo(el,'x',{duration:.55,ease:'power3.out'}),y=gsap.quickTo(el,'y',{duration:.55,ease:'power3.out'});
+          const tx=text&&gsap.quickTo(text,'x',{duration:.55,ease:'power3.out'}),ty=text&&gsap.quickTo(text,'y',{duration:.55,ease:'power3.out'});
           on(el,'pointermove',e=>{
             if(reduce.matches||!fine.matches)return;
             const r=el.getBoundingClientRect(),px=(e.clientX-r.left+Number(gsap.getProperty(el,'x')))/r.width-.5,py=(e.clientY-r.top+Number(gsap.getProperty(el,'y')))/r.height-.5;
             x(px*strength);y(py*strength);if(text){tx(px*strength*.5);ty(py*strength*.5);}
           });
-          on(el,'pointerleave',()=>gsap.to([el,...(text?[text]:[])],{x:0,y:0,duration:1.2,ease:'elastic.out(1,.4)',overwrite:true}));
+          on(el,'pointerleave',()=>gsap.to([el,...(text?[text]:[])],{x:0,y:0,duration:.75,ease:'elastic.out(1,.45)',overwrite:true}));
         });
         const preview=$('.work-preview'),rail=$('.preview-rail'),badge=$('.work-preview-action');
         if(preview&&rail&&badge){
           gsap.set([preview,badge],{xPercent:-50,yPercent:-50,scale:0,autoAlpha:0});
           const images=[...rail.querySelectorAll('img')];images.forEach(img=>{if(!img.getAttribute('src'))img.src=img.dataset.src;});
           let active,known=false,sampleNeeded=false,pointer={x:0,y:0},imagePos={x:0,y:0},buttonPos={x:0,y:0};
-          const hide=()=>{if(!active)return;gsap.to(active.querySelectorAll('h3,p'),{x:0,duration:.6,ease:'power3.out',overwrite:'auto'});active=null;gsap.to([preview,badge],{scale:0,autoAlpha:0,duration:.4,ease:'power3.inOut',overwrite:'auto'});};
+          const hide=({instant=false}={})=>{
+            if(!active)return;
+            const text=active.querySelectorAll('h3,p');active=null;
+            if(instant){gsap.killTweensOf([preview,badge,...text]);gsap.set(text,{x:0});gsap.set([preview,badge],{scale:0,autoAlpha:0});return;}
+            gsap.to(text,{x:0,duration:.6,ease:'power3.out',overwrite:'auto'});
+            gsap.to([preview,badge],{scale:0,autoAlpha:0,duration:.4,ease:'power3.inOut',overwrite:'auto'});
+          };
           const activate=row=>{
             if(row===active)return;
             if(!row||row.closest('.work-browser.is-grid')||row.hidden||changing||reduce.matches){hide();return;}
@@ -158,18 +168,21 @@
             active=row;const index=Number(row.dataset.previewIndex);
             if(first){imagePos={...pointer};buttonPos={...pointer};gsap.set([preview,badge],{x:pointer.x,y:pointer.y});gsap.set(rail,{yPercent:-100*index});}
             else gsap.to(rail,{yPercent:-100*index,duration:.6,ease:'power2.inOut',overwrite:'auto'});
-            const reveal=()=>{if(active===row)gsap.to([preview,badge],{scale:1,autoAlpha:1,duration:.45,ease:'power4.out',overwrite:'auto'});};
-            const img=images[index];if(!img||img.complete&&img.naturalWidth)reveal();else img.decode().then(reveal).catch(hide);
+            const reveal=()=>{if(!controller.signal.aborted&&active===row)gsap.to([preview,badge],{scale:1,autoAlpha:1,duration:.45,ease:'power4.out',overwrite:'auto'});};
+            const img=images[index];if(!img||img.complete&&img.naturalWidth)reveal();else img.decode().then(reveal).catch(()=>{if(!controller.signal.aborted&&active===row)hide();});
             gsap.to(row.querySelector('h3'),{x:-25,duration:.6,ease:'power3.out',overwrite:'auto'});gsap.to(row.querySelector('p'),{x:25,duration:.6,ease:'power3.out',overwrite:'auto'});
           };
           const sample=()=>{if(known)activate(document.elementFromPoint(pointer.x,pointer.y)?.closest('.work-row[data-preview]'));};
           const requestSample=()=>{sampleNeeded=true;};
-          on(document,'pointermove',e=>{known=true;pointer={x:e.clientX,y:e.clientY};requestSample();});
+          on(document,'pointermove',e=>{if(e.pointerType==='touch'){known=false;hide();return;}known=true;pointer={x:e.clientX,y:e.clientY};requestSample();});
+          on(document,'keydown',()=>{known=false;hide({instant:true});});
+          on(document,'pointerout',e=>{if(!e.relatedTarget){known=false;hide();}});
           on(window,'scroll',requestSample,{passive:true});on(window,'blur',()=>{known=false;hide();});on(window,'work:change',hide);on(scope,'click',hide);
           const setX=gsap.quickSetter(preview,'x','px'),setY=gsap.quickSetter(preview,'y','px'),bx=gsap.quickSetter(badge,'x','px'),by=gsap.quickSetter(badge,'y','px');
           const tick=(_time,delta)=>{
+            if(document.hidden)return;
             if(sampleNeeded){sampleNeeded=false;sample();}
-            if(!active||document.hidden)return;
+            if(!active)return;
             const dt=Math.min(delta,50),a=1-Math.exp(-dt/100),b=1-Math.exp(-dt/55);
             imagePos.x+=(pointer.x-imagePos.x)*a;imagePos.y+=(pointer.y-imagePos.y)*a;buttonPos.x+=(pointer.x-buttonPos.x)*b;buttonPos.y+=(pointer.y-buttonPos.y)*b;
             setX(imagePos.x);setY(imagePos.y);bx(buttonPos.x);by(buttonPos.y);
@@ -199,6 +212,7 @@
     const home=scope.dataset.barbaNamespace==='home',greeting=initial&&home&&!location.hash;
     const covered=curtain&&(changing||initial&&!location.hash);let at=covered ? .08 : 0;
     entering=gsap.timeline();
+    if(covered)lenis?.stop();
     if(covered){
       gsap.set(curtain,{y:0,yPercent:0,visibility:'visible'});gsap.set(topCurve,{scaleY:0});gsap.set(bottomCurve,{scaleY:1});
       if(greeting){
@@ -214,7 +228,7 @@
     const primary=scope.querySelectorAll(home?'.hero-role,.location,.name-marquee':'.page-hero,.contact-heading,.work-browser,.about-intro,.contact-layout');
     entering.fromTo(primary,{y:home?110:fine.matches?140:70,opacity:1},{y:0,opacity:1,duration:1.15,stagger:.045,ease:'expo.out',clearProps:'transform,opacity'},contentAt)
       .fromTo(scope.querySelector('.site-header'),{y:-18,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out',clearProps:'transform,opacity'},contentAt+.1);
-    lenis?.start();
+    entering.call(()=>{if(!root.classList.contains('menu-open'))lenis?.start();},null,contentAt);
     // Navigation unlocks as the curtain clears; the softer content settle can continue.
     return new Promise(resolve=>entering.call(resolve,null,covered ? at+.8 : 0));
   }
@@ -277,7 +291,8 @@
   }]});
   // Validate browser-cached HTML after a deployment, while retaining Barba prefetching.
   window.barba?.headers?.set('Cache-Control','no-cache');
-  window.addEventListener('wheel',()=>{if(!changing&&entering?.isActive())entering.progress(1);},{passive:true});
+  // Wheel input can hurry the entrance, but never teleports its transforms to the end.
+  window.addEventListener('wheel',()=>{if(!changing&&entering?.isActive())entering.timeScale(1.6);},{passive:true});
   document.addEventListener('keydown',event=>{if(!changing&&['Tab','PageDown','PageUp','End','Home','ArrowDown','ArrowUp'].includes(event.key))entering?.progress(1);});
   reduce.addEventListener('change',()=>{entering?.progress(1);page.destroy();configureScroll();page=mount(document.querySelector('[data-barba="container"]'));ST?.refresh();});
   fine.addEventListener('change',()=>{if(changing)return;page.destroy();configureScroll();page=mount(document.querySelector('[data-barba="container"]'));ST?.refresh();});

@@ -19,3 +19,5 @@ Commit source and generated HTML together. GitHub Pages publishes `main` at the 
 The contact form validates fields and opens an email draft. It does not use a remote form service or claim to send mail from GitHub Pages. Mobile uses native touch scrolling, stacked project images and no pointer-follow effects. `REFERENCE_AUDIT.md` records the inspected reference pages and controls.
 
 Home keeps the reference-inspired large project rows with cursor-following result previews, opposing horizontal evidence galleries, animated recognition figures and the curved contact ending. Mobile puts real images directly above each project. A single animation clock drives smooth scrolling and pointer tracking; scroll and magnetic button motion target separate elements. `js/flow.js` owns interior-page content reveals and their route cleanup.
+
+Motion polish preserves this composition. Wheel input accelerates an unfinished entrance without jumping it to its final frame. The menu retargets its current pose when reversed; magnetic controls and liquid fills respond sooner. Cursor hit-testing is batched per animation frame, with touch and keyboard input clearing decorative previews.
