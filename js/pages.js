@@ -7,10 +7,17 @@ window.mountPortfolioPage=({scope,gsap,ST,reduce,fine,on,cleanup})=>{
 
   if(gsap)$$('.liquid').forEach(button=>{
     const fill=button.querySelector('.button-fill');if(!fill)return;
+    const label=button.querySelector('.button-label');
+    if(label&&!button.classList.contains('view-button')&&!label.querySelector('.button-label-main')){
+      const main=document.createElement('span');main.className='button-label-main';
+      while(label.firstChild)main.append(label.firstChild);
+      const copy=main.cloneNode(true);copy.className='button-label-copy';copy.setAttribute('aria-hidden','true');
+      label.append(main,copy);
+    }
     let exit;gsap.set(fill,{y:0,yPercent:110});
     on(button,'pointerenter',()=>{
       if(!canMove()||!fine.matches)return;
-      exit?.kill();gsap.to(fill,{yPercent:0,duration:.4,ease:'power3.out',overwrite:'auto'});
+      exit?.kill();gsap.to(fill,{yPercent:0,duration:.55,ease:'power3.out',overwrite:'auto'});
     });
     on(button,'pointerleave',()=>{
       if(!canMove()||!fine.matches)return;
@@ -52,16 +59,16 @@ window.mountPortfolioPage=({scope,gsap,ST,reduce,fine,on,cleanup})=>{
 
   const badge=$('.cursor-badge');
   if(badge&&canMove()&&fine.matches){
-    gsap.set(badge,{xPercent:-50,yPercent:-50,scale:0,autoAlpha:0});
+    gsap.set(badge,{xPercent:-50,yPercent:-50,scale:.85,autoAlpha:0});
     const x=gsap.quickTo(badge,'x',{duration:.35,ease:'power3.out'}),y=gsap.quickTo(badge,'y',{duration:.35,ease:'power3.out'});
     let active,known=false,sampleNeeded=false,pointer={x:0,y:0};
-    const hide=({instant=false}={})=>{if(!active)return;active=null;if(instant){gsap.killTweensOf(badge);gsap.set(badge,{scale:0,autoAlpha:0});return;}gsap.to(badge,{scale:0,autoAlpha:0,duration:.3,overwrite:'auto'});};
+    const hide=({instant=false}={})=>{if(!active)return;active=null;if(instant){gsap.killTweensOf(badge);gsap.set(badge,{scale:.85,autoAlpha:0});return;}gsap.to(badge,{scale:.85,autoAlpha:0,duration:.22,ease:'power2.out',overwrite:'auto'});};
     const sample=()=>{
       if(!known)return;
       const hovered=document.elementFromPoint(pointer.x,pointer.y);
       const link=hovered?.closest('[data-cursor-only],.work-browser.is-grid .work-item');
       if(!link||!scope.contains(link)||!canMove()||!fine.matches){hide();return;}
-      if(active!==link){active=link;badge.textContent=link.dataset.cursorOnly||'View';gsap.set(badge,{x:pointer.x,y:pointer.y});gsap.to(badge,{scale:1,autoAlpha:1,duration:.45,ease:'power4.out',overwrite:'auto'});}
+      if(active!==link){const first=!active;active=link;badge.textContent=link.dataset.cursorOnly||'View';if(first)gsap.set(badge,{x:pointer.x,y:pointer.y});gsap.to(badge,{scale:1,autoAlpha:1,duration:.4,ease:'power3.out',overwrite:'auto'});}
       x(pointer.x);y(pointer.y);
     };
     const requestSample=()=>{sampleNeeded=true;};

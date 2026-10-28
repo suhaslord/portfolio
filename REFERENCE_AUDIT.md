@@ -83,3 +83,21 @@ The user rejected the new sticky layout. Home is restored from the version prece
 Feel and timing: the reference's long curved page transitions, cursor bloom and direct opposing gallery scrubs are deliberately retained, as requested. These portfolio presentation effects have a different budget from repeated UI controls. No new sections, text, image sizes or project ordering are introduced. Keyboard routes and reduced-motion paths remain immediate.
 
 Review decision: approve for the requested reference motion, subject to the live checks recorded with this release. Desktop browser checks cover Home → Work → Home, rapid menu reversal, hover selection while scrolling, filter changes and cursor removal on keyboard input. Native phone scrolling remains in place; this environment does not provide phone viewport emulation.
+
+## Visible motion and finish
+
+| Before | After | Why |
+| --- | --- | --- |
+| Project titles remain static while the page moves | Masked titles, metadata and hairlines reveal directly from scroll position | Give the existing full-width rows a visible, continuous entrance |
+| Result previews use first-order pointer interpolation and grow from zero | Damped springs preserve velocity, a small tilt follows horizontal movement, and the frame opens from 90% scale | Give the result frame a physical follow and a softer landing |
+| A preview can clip against the viewport edge | The image frame stays within an 18px safe edge while its View button follows the pointer | Keep actual results fully in view |
+| Liquid fills move behind a static label | The original and an accessibility-hidden copy roll through a clipped label | Make the control's response visible while preserving its text and shape |
+| Gallery tiles share only opposing horizontal travel | Image, image scale and caption entrances overlap in short sequences | Keep the original gallery and add depth as it comes into view |
+| Recognition figures enter at once | Rules, values and labels enter in a short sequence | Give the achievements the same authored rhythm as the work |
+| The entire contact ending moves as one plane | Title lines move within the existing curved footer reveal | Connect the ending to the scroll motion above it |
+| Flat gray hero and rigid marquee | Soft neutral lighting and a capped 2.5-degree velocity skew | Add depth and response without changing the hero's content or layout |
+| Incoming curtain accelerates into a hard stop | A symmetric cover curve flows into a longer, eased outgoing curtain and overlapping content | Make page handoffs feel continuous |
+
+All result images, written content, project order, routes, large rows and gallery structure are retained. Touch scroll stays native; pointer tilt, hover zoom and rolling hover labels are gated to a fine pointer. Reduced motion keeps the untransformed content and original labels. Keyboard focus reveals titles immediately and clears the decorative preview.
+
+Physics verification passes at simulated 30, 60 and 120Hz, including retargeting, bounded overshoot and long-frame stability. These checks measure the spring calculation, not browser frame rate. The shared page teardown removes observers, scroll listeners and tickers before mounting the next route.

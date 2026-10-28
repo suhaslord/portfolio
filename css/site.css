@@ -475,3 +475,41 @@ html{scroll-padding-top:0}
 .magnetic,.word-mask>span{will-change:auto}
 /* Lenis owns wheel easing; scripted anchors request their own smooth behavior. */
 html{scroll-behavior:auto}
+
+/* The same editorial layout, with depth and a coherent motion language. */
+.hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 62% 28%,#ffffff21,transparent 67%),linear-gradient(160deg,#ffffff09,transparent 48%,#14151710)}
+.name-track{transform-origin:50% 70%}
+.work-title-mask{display:block;overflow:clip;margin:-.08em -32px;padding:.08em 32px;min-width:0}
+.work-title-motion{display:block}
+.has-motion-rule{position:relative;border-top-color:transparent}
+.motion-rule{position:absolute;inset:0 0 auto;height:1px;background:var(--line);transform-origin:left center;pointer-events:none}
+.heading-line{display:block;overflow:clip;padding-bottom:.1em;margin-bottom:-.1em}
+.heading-line>span{display:block}
+.work-preview{box-shadow:0 24px 65px #14151721;backface-visibility:hidden}
+.evidence-media{transition:transform .8s cubic-bezier(.23,1,.32,1)}
+.work-browser.is-grid .work-thumb img{transition:transform .8s cubic-bezier(.23,1,.32,1)}
+.evidence-caption{letter-spacing:-.012em}
+.evidence-caption>span:last-child{letter-spacing:0}
+.liquid>.button-label{overflow:clip;padding-block:.14em;margin-block:-.14em}
+.button-label-main,.button-label-copy{display:inline-flex;align-items:center;justify-content:center;gap:0;transition:transform .55s cubic-bezier(.23,1,.32,1)}
+.button-label-copy{position:absolute;inset:0;transform:translateY(120%)}
+.liquid:focus-visible .button-label-main{transform:none!important;transition:none}
+.liquid:focus-visible .button-label-copy{transform:translateY(120%)!important;transition:none}
+.work-row:focus-visible .work-title-motion,.work-row:focus-visible p{transform:none!important;opacity:1!important}
+@media(hover:hover) and (pointer:fine) and (min-width:768px){
+ .liquid:hover .button-label-main{transform:translateY(-120%)}
+ .liquid:hover .button-label-copy{transform:translateY(0)}
+ .evidence-tile:hover .evidence-media{transform:scale(1.035)}
+ .work-browser.is-grid .work-item:hover .work-thumb img{transform:scale(1.035)}
+}
+@media(max-width:767px){
+ .work-title-mask{margin:-.08em 0;padding:.08em 0}
+ .hero::before{opacity:.7}
+}
+@media(prefers-reduced-motion:reduce){
+ .work-title-motion,.heading-line>span{transform:none!important;opacity:1!important}
+ .motion-rule{transform:none!important}
+ .button-label-main{transform:none!important;transition:none!important}
+ .button-label-copy{display:none}
+ .evidence-media{transform:none!important;transition:none!important}
+}
