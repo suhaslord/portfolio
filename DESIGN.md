@@ -8,7 +8,7 @@ Live DOM evidence: hero background `rgb(153,157,158)`, body ink `rgb(28,29,32)`,
 
 Implementation: static HTML/CSS/JavaScript; self-hosted DM Sans variable typography, neutral backgrounds, blue circular interaction accent. DM Sans comes from the official Google Fonts repository under the bundled SIL Open Font License. All project images are saved results, the actual MARVIN lab photo, or the Seagulls team mark. No reference photographs, proprietary fonts, code or copy are reused.
 
-The reference's full-height portrait is not reproduced: no real portrait of Suhas was available. A simple typographic monogram holds that central space. The site uses a single name marquee, hover previews and magnetic circular links. Reduced motion removes continuous motion and pointer effects. Mobile shows result images directly in the stacked work list.
+The hero keeps the approved typographic monogram. Suhas's supplied portrait appears on About and in the small footer/contact avatars. The original PNG is preserved; CSS trims its surrounding screenshot border. The site uses a single name marquee, hover previews and magnetic circular links. Reduced motion removes continuous motion and pointer effects. Mobile shows result images directly in the stacked work list.
 
 Homepage scope: UCSC AIEA, SDSU lunar navigation, CPP AVL, Seagulls and Voyager. Smaller experiments are removed from the showcase; the résumé includes the broader verified history. Old experiment URLs return to selected work.
 
@@ -36,6 +36,6 @@ The reference audit is recorded in `REFERENCE_AUDIT.md`. Home now leads to a ded
 
 Page covers include the destination title and curved leading/trailing edges. A small pre-paint bootstrap preserves the cover during document navigation, avoiding a flash of the incoming content. Pointer or keyboard input can complete the entry immediately. Project previews wait for pointer intent and decoded media, then use a 460ms entrance; tracking stays responsive and adjacent images glide through the rail.
 
-The shared ending has a white rounded cover, opposing footer parallax, a title avatar made from initials until a portrait is supplied, a magnetic contact circle, rising button fills, and Version/California local time/Links groups. No phone number or social account is invented. The Contact page's form creates an email draft rather than pretending to have a mail backend.
+The shared ending has a white rounded cover, opposing footer parallax, a small portrait beside its title, a magnetic contact circle, rising button fills, and Version/California local time/Links groups. No phone number or social account is invented. The Contact page's form creates an email draft rather than pretending to have a mail backend.
 
 Mobile uses direct image cards, native touch scrolling, 48px filter targets, stacked case metadata, a single-column About/Contact layout, 18px form inputs and a scrollable full-height menu. Pointer effects and desktop preview downloads are omitted. The résumé, actual result images and their qualifications are retained.

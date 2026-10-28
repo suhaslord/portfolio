@@ -111,7 +111,7 @@
           if(cta)gsap.from(cta,{x:fine.matches?-55:-20,ease:'none',scrollTrigger:st});
           if(arrow)gsap.from(arrow,{rotation:15,ease:'none',scrollTrigger:st});
         });
-        const image=$('.about-image img');
+        const image=$('.about-image img:not(.profile-photo)');
         if(image)gsap.fromTo(image,{yPercent:-5,scale:1.12},{yPercent:5,scale:1.12,ease:'none',scrollTrigger:{trigger:image.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
         if($('.about-disciplines'))gsap.fromTo($('.about-disciplines'),{backgroundColor:'#fff'},{backgroundColor:'#e7e8e9',ease:'none',scrollTrigger:{trigger:$('.about-disciplines'),start:'top bottom',end:'bottom bottom',scrub:true}});
         const orb=$('.about-orb');if(orb)gsap.to(orb,{rotation:90,ease:'none',scrollTrigger:{trigger:$('.about-divider'),start:'top bottom',end:'top top',scrub:true}});
@@ -131,7 +131,7 @@
       refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;if(scope.isConnected){lenis?.resize();ST?.refresh();}});
     };
     cleanup(()=>cancelAnimationFrame(refreshFrame));
-    $$('img').filter(img=>!img.closest('.work-preview')).forEach(img=>on(img,'load',refresh,{once:true}));document.fonts?.ready.then(refresh);
+    $$('img').filter(img=>!img.closest('.work-preview')&&!img.classList.contains('profile-photo')).forEach(img=>on(img,'load',refresh,{once:true}));document.fonts?.ready.then(refresh);
     return {scope,closeMenu,destroy(){controller.abort();disposers.forEach(fn=>fn());context?.revert();gsap?.killTweensOf(scope.querySelectorAll('*'));}};
   }
 

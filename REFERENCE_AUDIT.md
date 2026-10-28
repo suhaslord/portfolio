@@ -114,4 +114,18 @@ Physics verification passes at simulated 30, 60 and 120Hz, including retargeting
 
 The control springs and label springs pass the same simulated 30/60/120Hz checks as the image preview, including returning to zero after movement. Route teardown removes the tick and clears the transforms.
 
-Portrait request: the confirmed profile is https://www.linkedin.com/in/suhasbe/. LinkedIn's current public flow redirects to sign-in, and no usable portrait was located among the previously shared image files. Placement is intended for About and the existing footer/contact avatar; the actual image file is still required.
+Portrait request fulfilled with the image supplied directly by Suhas. The original PNG is used on About and in the existing footer/contact avatars. Its surrounding screenshot border is trimmed through CSS; the file bytes and appearance of the photograph are preserved.
+
+## Freer scrolling and supplied portrait
+
+| Before | After | Why |
+| --- | --- | --- |
+| Project titles are clipped and scrubbed from 100% vertical offset | Complete, unmasked titles glide 26px once | Keep the work readable and avoid tying each row to a mechanical reveal gate |
+| Scrolling upward rewinds title visibility and partial divider widths | Completed entrances stay settled; full dividers are always present | Make returning through the work feel continuous |
+| Gallery images enter from 55px with strong fading and zoom | 28px travel, readable opacity, lighter zoom and shorter offsets | Keep the opposing drift without each tile feeling separately staged |
+| Introduction and recognition headings emerge through masks | Open text with small one-time movement | Preserve the editorial hierarchy with less clipping |
+| About shows a rover photo; contact avatars show initials | The supplied portrait appears in those personal positions | Give the site a real personal image while keeping result images with their projects |
+| The source portrait includes a narrow dark screenshot border | CSS presents its 400px square photo area inside reserved frames | Use the supplied photo naturally without rewriting the source image |
+| Every in-flow image load can request a scroll refresh | Fixed portrait frames do not request one | Keep lazy avatar decoding from recalculating scroll positions mid-gesture |
+
+The page composition, project order, hero, hover physics, menu behavior and continuous gallery/footer scrubs remain in place. Verification covers forward and reverse browsing, portrait loading and cropping, page handoffs, and keyboard use. Reduced motion retains complete text and the same portrait frames.

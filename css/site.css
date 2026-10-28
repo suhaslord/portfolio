@@ -480,10 +480,7 @@ html{scroll-behavior:auto}
 .hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 62% 28%,#ffffff21,transparent 67%),linear-gradient(160deg,#ffffff09,transparent 48%,#14151710)}
 .name-track{transform-origin:50% 70%}
 .menu-link-text{display:block}
-.work-title-mask{display:block;overflow:clip;margin:-.08em -32px;padding:.08em 32px;min-width:0}
-.work-title-motion{display:block}
-.has-motion-rule{position:relative;border-top-color:transparent}
-.motion-rule{position:absolute;inset:0 0 auto;height:1px;background:var(--line);transform-origin:left center;pointer-events:none}
+.work-title-motion{display:block;min-width:0}
 .heading-line{display:block;overflow:clip;padding-bottom:.1em;margin-bottom:-.1em}
 .heading-line>span{display:block}
 .work-preview{box-shadow:0 24px 65px #14151721;backface-visibility:hidden}
@@ -504,13 +501,20 @@ html{scroll-behavior:auto}
  .work-browser.is-grid .work-item:hover .work-thumb img{transform:scale(1.035)}
 }
 @media(max-width:767px){
- .work-title-mask{margin:-.08em 0;padding:.08em 0}
  .hero::before{opacity:.7}
 }
 @media(prefers-reduced-motion:reduce){
  .work-title-motion,.heading-line>span{transform:none!important;opacity:1!important}
- .motion-rule{transform:none!important}
  .button-label-main{transform:none!important;transition:none!important}
  .button-label-copy{display:none}
  .evidence-media{transform:none!important;transition:none!important}
 }
+
+/* Keep content open as it enters; reverse scrolling never masks it again. */
+.introduction .word-mask,.page-home .heading-line,.page-home .achievement-value{overflow:visible}
+
+/* Original uploaded portrait; the viewport trims only its surrounding screenshot border. */
+.contact-avatar{position:relative;overflow:hidden}
+.profile-crop{position:absolute;inset:0;display:block;overflow:hidden}
+.profile-crop>.profile-photo{position:absolute;left:-2.5%;top:-3.25%;width:110.5%;height:107%;max-width:none;object-fit:fill}
+.about-image-frame.is-portrait{position:relative;aspect-ratio:1;background:#d4dfb8}

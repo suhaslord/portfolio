@@ -26,14 +26,6 @@
     const $=selector=>scope.querySelector(selector),$$=selector=>[...scope.querySelectorAll(selector)];
     const home=scope.dataset.barbaNamespace==='home';
 
-    function rule(element){
-      const line=document.createElement('span');
-      line.className='motion-rule';line.setAttribute('aria-hidden','true');
-      element.classList.add('has-motion-rule');element.append(line);
-      cleanup(()=>{line.remove();element.classList.remove('has-motion-rule');});
-      return line;
-    }
-
     if(home){
       $$('.reveal').forEach(heading=>{
         if(!heading.querySelector('.word-mask')){
@@ -50,23 +42,20 @@
           const top=word.offsetTop;if(!lines.has(top))lines.set(top,[]);lines.get(top).push(word.firstElementChild);
         });
         const reveal=gsap.timeline({scrollTrigger:{trigger:heading,start:'top 94%',once:true}});
-        [...lines.values()].forEach((words,index)=>reveal.from(words,{yPercent:115,rotation:2,duration:1.1,ease:'expo.out'},index*.105));
+        [...lines.values()].forEach((words,index)=>reveal.from(words,{y:20,opacity:.7,duration:1.05,ease:'power3.out',clearProps:'transform,opacity'},index*.06));
       });
 
       $$('.work-section .work-row').forEach(row=>{
-        const title=row.querySelector('h3'),mask=document.createElement('span'),motion=document.createElement('span');
-        mask.className='work-title-mask';motion.className='work-title-motion';
-        title.replaceWith(mask);motion.append(title);mask.append(motion);
-        cleanup(()=>mask.replaceWith(title));
-        const line=rule(row);
-        // The scroll position owns the reveal, so there is no delayed entrance to wait for.
-        const reveal=gsap.timeline({scrollTrigger:{trigger:row,start:'top 98%',end:'top 64%',scrub:true}});
-        reveal.fromTo(motion,{yPercent:100},{yPercent:0,ease:'power2.out'},0)
-          .fromTo(row.querySelector('p'),{y:18,opacity:.35},{y:0,opacity:1,ease:'power2.out'},0)
-          .fromTo(line,{scaleX:.15},{scaleX:1,ease:'none'},0);
+        const title=row.querySelector('h3'),motion=document.createElement('span');
+        motion.className='work-title-motion';title.replaceWith(motion);motion.append(title);
+        cleanup(()=>motion.replaceWith(title));
+        // The row stays fully readable. Its gentle first entrance does not rewind.
+        const reveal=gsap.timeline({scrollTrigger:{trigger:row,start:'top 97%',once:true}});
+        reveal.from(motion,{y:26,opacity:.8,duration:1.05,ease:'power3.out',clearProps:'transform,opacity'},0)
+          .from(row.querySelector('p'),{y:12,opacity:.75,duration:.95,ease:'power3.out',clearProps:'opacity'},.045);
         if(!fine.matches){
           const image=row.querySelector('.work-thumb');
-          if(image)gsap.from(image,{y:28,opacity:.5,duration:1,ease:'power3.out',scrollTrigger:{trigger:image,start:'top 97%',once:true}});
+          if(image)gsap.from(image,{y:22,opacity:.8,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:image,start:'top 97%',once:true}});
         }
       });
 
@@ -75,9 +64,9 @@
         if(fine.matches)gsap.fromTo(track,{x:index%2?'4vw':'-4vw'},{x:index%2?'-4vw':'4vw',ease:'none',scrollTrigger:{trigger:gallery,start:'top bottom',end:'bottom top',scrub:true}});
         const sequence=gsap.timeline({scrollTrigger:{trigger:track,start:'top 97%',once:true}});
         track.querySelectorAll('.evidence-tile').forEach((tile,i)=>{
-          sequence.from(tile.querySelector('.evidence-image'),{y:55,opacity:.35,duration:1.1,ease:'expo.out'},i*.065)
-            .from(tile.querySelector('img'),{scale:1.06,duration:1.4,ease:'power3.out'},i*.065)
-            .from(tile.querySelector('.evidence-caption'),{y:18,opacity:0,duration:.8,ease:'power3.out'},i*.065+.12);
+          sequence.from(tile.querySelector('.evidence-image'),{y:28,opacity:.75,duration:1.2,ease:'power3.out'},i*.045)
+            .from(tile.querySelector('img'),{scale:1.035,duration:1.4,ease:'power3.out'},i*.045)
+            .from(tile.querySelector('.evidence-caption'),{y:12,opacity:.75,duration:1,ease:'power3.out'},i*.045+.04);
         });
       });
 
@@ -85,17 +74,16 @@
       if(achievements){
         const sequence=gsap.timeline({scrollTrigger:{trigger:achievements,start:'top 94%',once:true}});
         $$('.achievement').forEach((item,index)=>{
-          const at=index*.085;
-          sequence.from(rule(item),{scaleX:0,duration:1,ease:'power3.out'},at)
-            .from(item.querySelector('.achievement-value span'),{yPercent:115,rotation:3,duration:1.15,ease:'expo.out'},at+.04)
-            .from(item.querySelectorAll('h3,p'),{y:22,opacity:0,duration:.85,stagger:.045,ease:'power3.out'},at+.15);
+          const at=index*.06;
+          sequence.from(item.querySelector('.achievement-value span'),{y:24,opacity:.7,duration:1.1,ease:'power3.out',clearProps:'transform,opacity'},at)
+            .from(item.querySelectorAll('h3,p'),{y:12,opacity:.75,duration:1,stagger:.035,ease:'power3.out',clearProps:'transform,opacity'},at+.06);
         });
       }
       $$('.section-heading').forEach(heading=>{
         const original=heading.innerHTML;
         heading.innerHTML=original.split(/<br\s*\/?>/i).map(line=>`<span class="heading-line"><span>${line}</span></span>`).join('');
         cleanup(()=>{heading.innerHTML=original;});
-        gsap.from(heading.querySelectorAll('.heading-line>span'),{yPercent:110,duration:1.15,stagger:.09,ease:'expo.out',scrollTrigger:{trigger:heading,start:'top 95%',once:true}});
+        gsap.from(heading.querySelectorAll('.heading-line>span'),{y:22,opacity:.7,duration:1.1,stagger:.06,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:heading,start:'top 95%',once:true}});
       });
     }
 
@@ -103,6 +91,9 @@
       const lines=footer.querySelectorAll('.contact-title>span');
       if(lines.length)gsap.from(lines,{yPercent:45,stagger:.08,ease:'none',scrollTrigger:{trigger:footer,start:'top 96%',end:'top 36%',scrub:true}});
     });
+
+    const portrait=$('.about-image:has(.profile-photo)');
+    if(portrait)gsap.from(portrait,{y:24,opacity:.8,duration:1.2,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:portrait,start:'top 96%',once:true}});
 
     // Controls use the same physical follow as the result preview. One clock services
     // only the hovered control and controls that are still returning to rest.
