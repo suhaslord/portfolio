@@ -8,7 +8,7 @@ Live DOM evidence: hero background `rgb(153,157,158)`, body ink `rgb(28,29,32)`,
 
 Implementation: static HTML/CSS/JavaScript; self-hosted DM Sans variable typography, neutral backgrounds, blue circular interaction accent. DM Sans comes from the official Google Fonts repository under the bundled SIL Open Font License. All project images are saved results, the actual MARVIN lab photo, or the Seagulls team mark. No reference photographs, proprietary fonts, code or copy are reused.
 
-The hero keeps the approved typographic monogram. Suhas's supplied portrait appears on About and in the small footer/contact avatars. The original PNG is preserved; CSS trims its surrounding screenshot border. The site uses a single name marquee, hover previews and magnetic circular links. Reduced motion removes continuous motion and pointer effects. Mobile shows result images directly in the stacked work list.
+The hero keeps the typographic monogram and now places Suhas's real portrait in front of it, in a small paper-edged frame. The same original portrait appears on About and in the footer/contact avatars. CSS trims its surrounding screenshot border without editing the photograph. The site uses a single name marquee, hover previews and magnetic circular links. Reduced motion removes continuous motion and pointer effects. Mobile shows result images directly in the stacked work list.
 
 Homepage scope: UCSC AIEA, SDSU lunar navigation, CPP AVL, Seagulls and Voyager. Smaller experiments are removed from the showcase; the résumé includes the broader verified history. Old experiment URLs return to selected work.
 
@@ -39,3 +39,9 @@ Page covers include the destination title and curved leading/trailing edges. A s
 The shared ending has a white rounded cover, opposing footer parallax, a small portrait beside its title, a magnetic contact circle, rising button fills, and Version/California local time/Links groups. No phone number or social account is invented. The Contact page's form creates an email draft rather than pretending to have a mail backend.
 
 Mobile uses direct image cards, native touch scrolling, 48px filter targets, stacked case metadata, a single-column About/Contact layout, 18px form inputs and a scrollable full-height menu. Pointer effects and desktop preview downloads are omitted. The résumé, actual result images and their qualifications are retained.
+
+## Homepage quality finish
+
+Preserve the gray opening, oversized name, broad project rows, opposing image galleries and charcoal ending. The supplied portrait is the personal focal point in the opening, displayed below its native 400px photo resolution. Its small arrow links to About. A clear Selected work link sits inside the first viewport. Fine pointer movement adds restrained spring depth to the portrait; scroll travel uses a separate wrapper, and both stop or reset when out of view. Touch and reduced motion keep the image settled.
+
+Homepage titles use slightly tighter optical spacing. Each project has a quiet sequence number and a directional affordance; the broad row remains the link. Hover type retains readable contrast. Research captions and recognition labels have readable minimum font sizes. Portrait, location and role are separately positioned for narrow screens, including short portrait and landscape viewports. Real results, project order, achievements and résumé content are preserved.

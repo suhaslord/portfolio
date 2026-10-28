@@ -97,6 +97,8 @@
         if(hero){
           ST.create({trigger:hero,start:'top top',end:'42% top',onLeave:()=>root.classList.add('has-scrolled'),onEnterBack:()=>root.classList.remove('has-scrolled')});
           gsap.to($('.hero-monogram'),{yPercent:-65,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
+          const portrait=$('.hero-portrait');
+          if(portrait)gsap.to(portrait,{yPercent:-18,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
           gsap.to($('.hero-arrow'),{rotation:90,ease:'none',scrollTrigger:{trigger:hero,start:'bottom bottom',end:'bottom top',scrub:true}});
         }else ST.create({start:100,onEnter:()=>root.classList.add('has-scrolled'),onLeaveBack:()=>root.classList.remove('has-scrolled')});
         if($('.intro-side')){
@@ -157,7 +159,12 @@
     const primary=scope.querySelectorAll(home?'.hero-role,.location':'.page-hero,.contact-heading,.work-browser,.about-intro,.contact-layout');
     entering.fromTo(primary,{y:home?110:fine.matches?140:70,opacity:1},{y:0,opacity:1,duration:1.3,stagger:.055,ease:'expo.out',clearProps:'transform,opacity'},contentAt)
       .fromTo(scope.querySelector('.site-header'),{y:-18,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out',clearProps:'transform,opacity'},contentAt+.1);
-    if(home)entering.fromTo(scope.querySelector('.name-marquee'),{y:180},{y:0,duration:1.5,ease:'expo.out',clearProps:'transform'},contentAt+.04);
+    if(home){
+      const portrait=scope.querySelector('.hero-portrait-motion');
+      if(portrait)entering.fromTo(portrait,{y:75,rotation:5,scale:.96},{y:0,rotation:0,scale:1,duration:1.35,ease:'expo.out',clearProps:'transform'},contentAt+.02);
+      entering.fromTo(scope.querySelector('.name-marquee'),{y:180},{y:0,duration:1.5,ease:'expo.out',clearProps:'transform'},contentAt+.04);
+      entering.fromTo(scope.querySelector('.hero-scroll'),{y:12,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out',clearProps:'transform,opacity'},contentAt+.2);
+    }
     entering.call(()=>{if(!root.classList.contains('menu-open'))lenis?.start();},null,contentAt);
     // Navigation unlocks as the curtain clears; the softer content settle can continue.
     return new Promise(resolve=>entering.call(resolve,null,covered ? at+.95 : 0));
@@ -180,8 +187,8 @@
     if(normalize(url.pathname)!==normalize(location.pathname)){requestedURL=url;return;}
     const target=url.hash?document.getElementById(decodeURIComponent(url.hash.slice(1))):0;if(url.hash&&!target)return;
     event.preventDefault();event.stopPropagation();entering?.progress(1);page.closeMenu({instant:true,restoreFocus:false});
-    if(url.hash&&location.hash!==url.hash){
-      if(window.barba)window.barba.history.add(url.href,anchor,'push');else history.pushState(null,'',url.hash);
+    if(location.hash!==url.hash){
+      if(window.barba)window.barba.history.add(url.href,anchor,'push');else history.pushState(null,'',url.href);
     }
     moveScroll(target,!canMove()||keyboardRoute);
     if(keyboardRoute&&target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});}

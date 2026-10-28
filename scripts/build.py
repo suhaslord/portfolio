@@ -49,8 +49,8 @@ def home():
             if p.get('logo'):
                 preview += ' data-logo="true"'
         thumb = parts.thumb(p) if p.get('image') else ''
-        rows.append(f'''<a class="work-row" href="work/{p['slug']}.html" data-transition-title="{E(p['name'])}"{preview}>{thumb}<h3>{E(p['name'])}</h3><p>{E(p['type'])}</p><span class="work-arrow" aria-hidden="true">↗</span></a>''')
-    body = (ROOT / 'templates/home.html').read_text().replace('{{work_rows}}', '\n'.join(rows)).replace('{{work_count}}', str(len(DATA['projects']))).replace('{{evidence_gallery}}', parts.gallery(DATA['projects'])).replace('{{recognition}}', parts.home_recognition(True))
+        rows.append(f'''<a class="work-row" href="work/{p['slug']}.html" data-transition-title="{E(p['name'])}"{preview}><span class="work-index" aria-hidden="true">{i + 1:02d}</span>{thumb}<h3>{E(p['name'])}</h3><p>{E(p['type'])}</p><span class="work-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></span></a>''')
+    body = (ROOT / 'templates/home.html').read_text().replace('{{hero_portrait}}', parts.portrait(eager=True)).replace('{{work_rows}}', '\n'.join(rows)).replace('{{work_count}}', str(len(DATA['projects']))).replace('{{evidence_gallery}}', parts.gallery(DATA['projects'])).replace('{{recognition}}', parts.home_recognition(True))
     body += parts.previews(selected) + '<div class="cursor-badge" aria-hidden="true">View</div>'
     page('index.html', 'Suhas Beemineni | Engineering & Research', 'Student interested in electrical engineering, AI, and robotics. Selected research and engineering work.', body, True)
 

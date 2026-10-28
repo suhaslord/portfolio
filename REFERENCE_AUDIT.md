@@ -131,3 +131,16 @@ Portrait request fulfilled with the image supplied directly by Suhas. The origin
 The page composition, project order, hero, hover physics, menu behavior and continuous gallery/footer scrubs remain in place. Verification covers forward and reverse browsing, portrait loading and cropping, page handoffs, and keyboard use. Reduced motion retains complete text and the same portrait frames.
 
 Mid-page reload verification exposed a ScrollTrigger initialization error when completed `once` triggers removed themselves during a later trigger's refresh. Entrance triggers now keep their scoped registration and use `play none none none`: they do not rewind or restart after completion, and route teardown removes them together. This avoids mutating the trigger list during initialization.
+
+## Homepage quality pass
+
+| Before | After | Why |
+| --- | --- | --- |
+| Large initials are the only central hero image | The supplied real portrait sits in a small paper-edged frame over the initials | Make the opening personal while retaining the existing composition |
+| No visible route into the projects | Selected work is an explicit link in the first viewport | Make the main action clear |
+| The portrait exists only on interior pages and avatars | The hero portrait has a restrained spring follow and separate entrance/scroll wrappers | Add depth without competing transform ownership |
+| Large work titles have no sequence or directional cue | Quiet numbers and arrows refine the same broad links | Improve scanning without adding descriptive text |
+| Some labels scale below readable sizes | Homepage captions and achievement labels have minimum font sizes | Keep the real work legible on intermediate screen widths |
+| Globe meridians interpolate between manually scaled widths | Meridians rotate continuously around their vertical axes | Avoid the mechanical width changes |
+
+Validation: local desktop plus 390px and 320px responsive frames; work jump, direct result images, readable text, forward/reverse scroll, footer reload and route teardown. The image source remains the original supplied PNG.

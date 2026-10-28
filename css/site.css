@@ -518,3 +518,98 @@ html{scroll-behavior:auto}
 .profile-crop{position:absolute;inset:0;display:block;overflow:hidden}
 .profile-crop>.profile-photo{position:absolute;left:-2.5%;top:-3.25%;width:110.5%;height:107%;max-width:none;object-fit:fill}
 .about-image-frame.is-portrait{position:relative;aspect-ratio:1;background:#d4dfb8}
+
+/* Homepage finish: a personal opening, quieter type, and precise work navigation. */
+.page-home .hero-monogram{color:#8f9495;font-weight:300;text-shadow:0 1px 0 #ffffff12}
+.hero-portrait{position:absolute;z-index:1;left:50%;top:23svh;width:clamp(240px,23.5vw,350px);aspect-ratio:1;translate:-50% 0;perspective:1000px;outline-offset:16px}
+.hero-portrait-motion{position:absolute;inset:0;display:block}
+.hero-portrait-frame{position:absolute;inset:0;display:block;border:6px solid #e6e7e3;background:#d4dfb8;transform:rotate(-4deg);box-shadow:0 2px 3px #1c1d2012,0 18px 35px #1c1d202b;backface-visibility:hidden}
+.hero-portrait-link{position:absolute;right:-19px;bottom:-19px;display:grid;place-items:center;width:45px;height:45px;border-radius:50%;background:var(--blue);color:#fff;box-shadow:0 3px 10px #1c1d2015}
+.hero-portrait-link svg{width:20px;height:20px;transition:transform .3s var(--ease)}
+.page-home .location,.page-home .hero-role,.page-home .name-marquee{z-index:2}
+.page-home .name-track span{font-weight:400;letter-spacing:-.025em}
+.page-home .hero-role{font-weight:400;letter-spacing:-.025em}
+.page-home .hero-scroll{display:inline-flex;align-items:center;gap:17px;right:3vw;bottom:calc(15svh + 20px);min-height:48px;font-size:14px;line-height:1.4;letter-spacing:0;z-index:2;transition:opacity .25s}
+.hero-scroll-icon{display:grid;place-items:center;width:46px;height:46px;border:1px solid #ffffff60;border-radius:50%}
+.hero-scroll-icon svg{width:19px;height:19px;transition:transform .4s var(--ease)}
+.page-home .hero-scroll:hover{transform:none}
+.page-home .hero-scroll:focus-visible,.hero-portrait:focus-visible{outline-color:#fff}
+.page-home .introduction h2{font-size:clamp(28px,2.65vw,43px);line-height:1.4;letter-spacing:-.025em}
+.page-home .intro-side p{font-size:clamp(15px,1.2vw,18px);line-height:1.65}
+.page-home .work-row{color:var(--ink)}
+.page-home .work-row h3{letter-spacing:-.03em}
+.page-home .work-row p{font-size:clamp(14px,1.2vw,18px)}
+.page-home .work-index{position:absolute;left:2.5vw;top:50%;translate:0 -50%;font-size:12px;line-height:1;font-variant-numeric:tabular-nums;color:var(--muted)}
+.page-home .work-arrow{position:absolute;right:2vw;top:50%;translate:0 -50%;display:block;width:25px;height:25px;opacity:0;transform:translate(-7px,7px);transition:opacity .3s,transform .4s var(--ease)}
+.page-home .work-arrow svg{display:block;width:100%;height:100%}
+.page-home .work-row:focus-visible .work-arrow{opacity:1;transform:none}
+.page-home .evidence-caption{font-size:clamp(15px,1.2vw,19px)}
+.page-home .evidence-caption>span:last-child{font-size:clamp(12px,.85vw,15px)}
+.page-home .achievement h3{font-size:clamp(15px,1.2vw,19px)}
+.page-home .achievement p{font-size:clamp(12px,.95vw,15px)}
+.globe-sphere{animation:none;transform:rotate(-18deg);will-change:auto}
+.globe-meridian{animation:globe-rotation 5.4s linear infinite}
+.globe-meridian:nth-child(2){animation-delay:-1.8s}
+.globe-meridian:nth-child(3){animation-delay:-3.6s}
+@keyframes globe-rotation{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+@media(hover:hover) and (pointer:fine){
+ .hero-portrait:hover .hero-portrait-link svg{transform:translate(2px,-2px)}
+ .page-home .hero-scroll:hover .hero-scroll-icon svg{transform:translateY(3px)}
+ .page-home .work-row:hover{color:#626469}
+ .page-home .work-row:hover .work-arrow{opacity:1;transform:none}
+}
+@media(min-width:768px) and (max-width:1024px){
+ .hero-portrait{width:26vw;min-width:200px;top:26svh}
+ .page-home .hero-role{left:72%;max-width:26%;font-size:2.5vw}
+ .page-home .location{width:210px;font-size:13px;padding-left:28px}
+ .page-home .introduction h2{font-size:3.2vw}
+ .page-home .intro-side p{font-size:14px}
+}
+@media(max-width:767px){
+ .page-home .hero{min-height:560px}
+ .hero-portrait{top:18svh;width:56vw;max-width:280px;min-width:0}
+ .hero-portrait-frame{border-width:5px}
+ .hero-portrait-link{width:38px;height:38px;right:-12px;bottom:-12px}
+ .hero-portrait-link svg{width:17px;height:17px}
+ .page-home .hero-monogram{font-size:125vw;left:46%;top:38%;opacity:.8}
+ .page-home .location{top:58svh;width:174px;padding-left:24px;font-size:12px}
+ .page-home .hero-role{top:58svh;left:54%;max-width:43%;font-size:clamp(18px,4.7vw,25px)}
+ .page-home .hero-arrow{width:22px;height:22px;top:-42px}
+ .page-home .name-marquee{bottom:clamp(50px,7svh,70px);padding-bottom:4vw}
+ .page-home .hero-scroll{bottom:19px;right:24px;gap:12px;min-height:40px;font-size:12px}
+ .hero-scroll-icon{width:34px;height:34px}
+ .hero-scroll-icon svg{width:15px;height:15px}
+ .page-home .introduction h2{font-size:29px;line-height:1.35;letter-spacing:-.025em}
+ .page-home .intro-side p{font-size:14px}
+ .page-home .work-row{grid-template-columns:minmax(0,1fr) 30px;gap:0 14px;padding-bottom:30px;margin-bottom:38px}
+ .page-home .work-row .work-thumb{grid-column:1/-1;margin-bottom:22px;aspect-ratio:1.25}
+ .page-home .work-title-motion{grid-column:1;grid-row:2}
+ .page-home .work-row h3{font-size:29px;line-height:1.2}
+ .page-home .work-row p{grid-column:1;grid-row:3;margin-top:9px;font-size:13px}
+ .page-home .work-index{left:auto;right:0;top:auto;bottom:31px;translate:none;font-size:11px}
+ .page-home .work-arrow{position:static;grid-column:2;grid-row:2;align-self:center;opacity:1;width:21px;height:21px;translate:none;transform:none}
+ .page-home .evidence-caption{font-size:16px}
+ .page-home .evidence-caption>span:last-child{font-size:12px}
+ .page-home .achievement h3{font-size:14px}
+ .page-home .achievement p{font-size:12px}
+}
+@media(max-width:374px){
+ .page-home .location{width:162px;font-size:11px;padding-left:20px}
+ .page-home .hero-role{left:54%;font-size:18px}
+ .page-home .hero-scroll{bottom:16px}
+ .page-home .work-row h3{font-size:27px}
+}
+@media(max-width:767px) and (max-height:700px){
+ .hero-portrait{width:48vw;max-width:220px}
+}
+@media(max-width:767px) and (max-height:500px){
+ .hero-portrait{top:100px;width:180px}
+ .page-home .location,.page-home .hero-role{top:370px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-portrait-frame{transform:rotate(-4deg)!important;will-change:auto}
+ .hero-portrait-motion,.hero-portrait{transform:none!important}
+ .globe-meridian{animation:none}
+ .globe-meridian:nth-child(2){transform:scaleX(.72)}
+ .globe-meridian:nth-child(3){transform:scaleX(.32)}
+}

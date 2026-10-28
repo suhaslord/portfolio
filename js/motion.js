@@ -26,6 +26,31 @@
     const $=selector=>scope.querySelector(selector),$$=selector=>[...scope.querySelectorAll(selector)];
     const home=scope.dataset.barbaNamespace==='home';
 
+    const hero=$('.hero'),heroPhoto=$('.hero-portrait-frame');
+    if(hero&&heroPhoto&&fine.matches){
+      const x=spring(0,170,26),y=spring(0,170,26),rx=spring(0,170,26),ry=spring(0,170,26);
+      let pointer={x:0,y:0},visible=true,settled=true;
+      gsap.set(heroPhoto,{rotation:-4,transformPerspective:1000});
+      const setX=gsap.quickSetter(heroPhoto,'x','px'),setY=gsap.quickSetter(heroPhoto,'y','px');
+      const setRX=gsap.quickSetter(heroPhoto,'rotationX','deg'),setRY=gsap.quickSetter(heroPhoto,'rotationY','deg');
+      const reset=()=>{pointer={x:0,y:0};settled=false;};
+      on(hero,'pointermove',event=>{
+        if(event.pointerType==='touch')return;
+        pointer={x:clamp(event.clientX/innerWidth-.5,-.5,.5),y:clamp(event.clientY/innerHeight-.5,-.5,.5)};settled=false;
+      });
+      on(hero,'pointerleave',reset);on(document,'keydown',reset);on(window,'blur',reset);
+      const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(!visible)reset();});observer.observe(hero);
+      const follow=(_time,delta)=>{
+        if(!visible||settled||document.hidden)return;
+        const dt=Math.min(delta,64)/1000;
+        setX(x.step(pointer.x*14,dt));setY(y.step(pointer.y*10,dt));
+        setRX(rx.step(pointer.y*-5,dt));setRY(ry.step(pointer.x*5,dt));
+        settled=[x,y,rx,ry].every(axis=>axis.velocity===0);
+      };
+      gsap.ticker.add(follow);
+      cleanup(()=>{observer.disconnect();gsap.ticker.remove(follow);});
+    }
+
     if(home){
       $$('.reveal').forEach(heading=>{
         if(!heading.querySelector('.word-mask')){
