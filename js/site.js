@@ -131,7 +131,7 @@
       refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;if(scope.isConnected){lenis?.resize();ST?.refresh();}});
     };
     cleanup(()=>cancelAnimationFrame(refreshFrame));
-    $$('img').filter(img=>!img.closest('.work-preview')&&!img.classList.contains('profile-photo')).forEach(img=>on(img,'load',refresh,{toggleActions:'play none none none'}));document.fonts?.ready.then(refresh);
+    $$('img').filter(img=>!img.closest('.work-preview')&&!img.classList.contains('profile-photo')).forEach(img=>on(img,'load',refresh,{once:true}));document.fonts?.ready.then(refresh);
     return {scope,closeMenu,destroy(){controller.abort();disposers.forEach(fn=>fn());context?.revert();gsap?.killTweensOf(scope.querySelectorAll('*'));}};
   }
 
